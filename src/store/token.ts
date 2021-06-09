@@ -59,7 +59,8 @@ export class TokenStore {
   async loadPrivateData() {
     if (!this.god.currentNetwork.account) return;
     console.log(this.currentTokens);
-    console.log(this.currentCrossChain.tokenList);
+    console.log(this.currentCrossChain.tokens);
+    console.log(this.currentNetwork);
     await this.currentNetwork.multicall([
       ...this.currentTokens.filter((i) => !i.isEth()).map((i) =>
         i.preMulticall({

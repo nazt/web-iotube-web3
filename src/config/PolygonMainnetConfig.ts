@@ -3,6 +3,8 @@ import { TokenState } from '@/store/lib/TokenState';
 import { IotexMainnetConfig } from './IotexMainnetConfig';
 import { maitcToIotexTokens, iotexMaticTokens } from '@/constants/token/matic-iotex';
 import { CashierState } from '@/store/lib/CashierState';
+import { TokenListState } from '@/store/lib/TokenListState';
+import { iotexTokensForEth } from '@/constants/token/eth-iotex';
 
 export const PolygonMainnetConfig = new ChainState({
   name: 'Polygon',
@@ -29,6 +31,11 @@ export const polygonMainCrossChain = (network) => {
       chain: IotexMainnetConfig,
       cashier: new CashierState({
         address: iotexMaticTokens.cashier,
+        network: network
+      }),
+      tokenList: new TokenListState({
+        mintableAddress: maitcToIotexTokens.mintableTokenList,
+        standardAddress: maitcToIotexTokens.standardTokenList,
         network: network
       }),
       tokens: maitcToIotexTokens.tokens.map((i) => {

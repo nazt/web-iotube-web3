@@ -11,7 +11,7 @@ import { Network } from '@/store/god';
 import { TokenListState } from '@/store/lib/TokenListState';
 import { ethTokensForKovenBsc } from '@/constants/token/eth-bsc-koven';
 import { PolygonMainnetConfig } from './PolygonMainnetConfig';
-import { iotexMaticTokens } from '@/constants/token/matic-iotex';
+import { iotexMaticTokens, maitcToIotexTokens } from '@/constants/token/matic-iotex';
 
 export const IotexMainnetConfig = new ChainState({
   name: 'Iotex',
@@ -22,7 +22,7 @@ export const IotexMainnetConfig = new ChainState({
   explorerName: 'IotexScan',
   info: {
     blockPerSeconds: 5,
-    multicallAddr: 'io14n8zjjlh6f0733wxftj9r97ns78ksspmjgzh7e'
+    multicallAddr: '0xacce294bf7d25fe8c5c64ae45197d3878f68403b'
   },
   Coin: new TokenState({
     symbol: 'IOTX',
@@ -73,15 +73,15 @@ export const iotexMainCrossChain = (network) => {
       chain: PolygonMainnetConfig,
       // cashier: iotexTokensForEth.cashier,
       cashier: new CashierState({
-        address: iotexMaticTokens.cashier,
+        address: maitcToIotexTokens.cashier,
         network: network
       }),
       tokenList: new TokenListState({
-        mintableAddress: iotexMaticTokens.mintableTokenList,
-        standardAddress: iotexMaticTokens.standardTokenList,
+        mintableAddress: maitcToIotexTokens.mintableTokenList,
+        standardAddress: maitcToIotexTokens.standardTokenList,
         network: network
       }),
-      tokens: iotexMaticTokens.tokens.map((i) => {
+      tokens: maitcToIotexTokens.tokens.map((i) => {
         const token = new TokenState(i);
         token.network = network;
         return token;

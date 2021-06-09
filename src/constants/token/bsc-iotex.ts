@@ -33,26 +33,26 @@ export const bscToIotexTokens = {
 };
 
 export const iotexBscNetTokens = {
-  cashier: 'io1zjlng7je02kxyvjq4eavswp6uxvfvcnh2a0a3d',
-  mintableTokenList: 'io17r9ehjstwj4gfqzwpm08fjnd606h04h2m6r92f',
-  standardTokenList:'io1h2d3r0d20t58sv6h707ppc959kvs8wjsurrtnk',
+  cashier: '0x14bf347a597aac623240ae7ac8383ae198966277',
+  mintableTokenList: '0xf0cb9bca0b74aa84804e0ede74ca6dd3f577d6ea',
+  standardTokenList:'0xba9b11bdaa7ae8783357f3fc10e0b42d9903ba50',
   tokens: [
     {
-      address: 'io1jlnvfzr8lhper2xla8gknmxsqhgajq5ravu4wr',
+      address: '0x97e6c48867fdc391a8dfe9d169ecd005d1d90283',
       name: 'Binance Coin',
       decimals: 18,
       symbol: 'BNB-bsc',
       logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/7192.png'
     },
     {
-      address: 'io1sj4uk2pjhesxxsd9qy52avwmgw4qzazfrypm04',
+      address: '0x84abcb2832be606341a50128aeb1db43aa017449',
       name: 'ioBUSD',
       decimals: 18,
       symbol: 'BUSD-bsc',
       logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/4687.png'
     },
     {
-      address: 'io1f4acssp65t6s90egjkzpvrdsrjjyysnvxgqjrh',
+      address: '0x4d7b88403aa2f502bf289584160db01ca442426c',
       name: 'Cyclone Protocol',
       decimals: 18,
       symbol: 'CYC',

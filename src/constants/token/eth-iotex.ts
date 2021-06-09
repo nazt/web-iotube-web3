@@ -46,27 +46,28 @@ export const ethTokensForIotex = {
   ]
 };
 
+//iotex -> eth
 export const iotexTokensForEth = {
-  cashier: 'io1gsr52ahqzklaf7flqar8r0269f2utkw9349qg8',
-  mintableTokenList: 'io1dn8nqk3pmmll990xz6a94fpradtrljxmmx5p8j',
-  standardTokenList:'io1t89whrwyfr0supctsqcx9n7ex5dd8yusfqhyfz',
+  cashier: '0x44074576e015bfd4f93f074671bd5a2a55c5d9c5',
+  mintableTokenList: '0x6ccf305a21defff295e616ba5aa423eb563fc8db',
+  standardTokenList:'0x59caeb8dc448df0e070b803062cfd9351ad39390',
   tokens: [
     {
-      'address': 'io1qfvgvmk6lpxkpqwlzanqx4atyzs86ryqjnfuad',
+      'address': '0x0258866edaf84d6081df17660357ab20a07d0c80',
       'name': 'ioETH',
       'decimals': 18,
       'symbol': 'ioETH',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png'
     },
     {
-      'address': 'io15qr5fzpxsnp7garl4m7k355rafzqn8grrm0grz',
+      'address': '0xa00744882684c3e4747faefd68d283ea44099d03',
       'name': 'IoTeX Network',
       'decimals': 18,
       'symbol': 'IOTX',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/2777.png'
     },
     {
-      'address': 'io1c7unwg8h8vph89xwqru4f7zfa4yy5002wxvlrm',
+      'address': '0xc7b93720f73b037394ce00f954f849ed484a3dea',
       'name': 'ioWBTC',
       'decimals': 8,
       'symbol': 'ioWBTC',

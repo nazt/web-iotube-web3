@@ -29,8 +29,7 @@ export class GodStore {
     map: {
       eth: EthNetworkConfig,
       bsc: EthNetworkConfig,
-      // iotex: EthNetworkConfig
-      iotex: IotexNetworkConfig,
+      iotex: EthNetworkConfig,
       polygon: EthNetworkConfig,
     }
   });
@@ -43,12 +42,12 @@ export class GodStore {
       rootStore: false
     });
     EthNetworkConfig.god = this;
-    IotexNetworkConfig.god = this;
     EthNetworkConfig.init();
-    IotexNetworkConfig.init();
     BSCMainnetConfig.init();
     PolygonMainnetConfig.init();
+    IotexMainnetConfig.init();
     // IotexTestnetConfig.init();
+
     ETHMainnetConfig.crossChain = ethCrossChain(EthNetworkConfig);
     IotexMainnetConfig.crossChain = iotexMainCrossChain(IotexNetworkConfig);
     BSCMainnetConfig.crossChain = bscMainCrossChain(EthNetworkConfig);

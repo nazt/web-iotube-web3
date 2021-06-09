@@ -1,8 +1,9 @@
 import React from 'react';
-import { Stack, BoxProps, Text, Button, Box, Img } from '@chakra-ui/react';
+import { Stack, BoxProps, Button, Box, Avatar, useColorModeValue } from '@chakra-ui/react';
 import { observer, useObserver, useLocalStore } from 'mobx-react-lite';
 import { useStore } from '../../store/index';
 import { helper } from '../../lib/helper';
+import { ETH, BNB, IOTX } from 'ccy-icons';
 
 export const DesktopNav = observer((props: BoxProps) => {
   const { god, lang } = useStore();
@@ -16,6 +17,17 @@ export const DesktopNav = observer((props: BoxProps) => {
       god.currentNetwork.walletInfo.visible = true;
     }
   }));
+  const NetowrkIcon = useObserver(() => {
+    if (god.network.currentId.value == 'iotex') {
+      return <IOTX />;
+    }
+    if (god.network.currentId.value == 'eth') {
+      return <ETH />;
+    }
+    if (god.network.currentId.value == 'bsc') {
+      return <BNB />;
+    }
+  });
 
   const accountView = useObserver(() => {
     if (!god.currentNetwork.account) {
@@ -25,9 +37,13 @@ export const DesktopNav = observer((props: BoxProps) => {
   });
   return (
     <Stack direction={'row'} spacing={4} {...props}>
-      <Button onClick={store.showConnecter}>
-        <Img w={6} src={god.currentChain.logoUrl} />
-        <Box ml={2}>{god.currentChain.name}</Box>
+      <Button>
+        <Box minW={5}><Avatar css={{
+          backgroundColor: useColorModeValue('rgba(249, 249, 249, 0.5)', 'rgba(250, 250, 250, 1)')
+        }} size="xs" src={god.currentChain.logoUrl}/></Box>
+        <Box ml={2}>{god.currentChain.alias || god.currentChain.name}</Box>
+        <Box ml={3}>{god.currentNetwork.chain.current.Coin.balance.format}</Box>
+        <Box ml={1}>{god.currentNetwork.chain.current.Coin.symbol}</Box>
       </Button>
       {accountView}
     </Stack>

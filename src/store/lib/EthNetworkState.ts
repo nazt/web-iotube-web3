@@ -9,6 +9,7 @@ import { StorageState } from '../standard/StorageState';
 import BigNumber from 'bignumber.js';
 import { CallParams } from '../../../type';
 import { GodStore } from '../god';
+import { chain } from 'lodash';
 
 export class EthNetworkState implements NetworkState {
   god: GodStore;
@@ -33,11 +34,6 @@ export class EthNetworkState implements NetworkState {
     visible: false
   };
 
-  constructor(args: Partial<EthNetworkState>) {
-    Object.assign(this, args);
-    makeAutoObservable(this);
-  }
-
   get defaultEthers() {
     const provider = new JsonRpcProvider(this.chain.current.rpcUrl);
     return provider;
@@ -46,7 +42,20 @@ export class EthNetworkState implements NetworkState {
     return this.chain.current;
   }
 
+  constructor(args: Partial<EthNetworkState>) {
+    Object.assign(this, args);
+    makeAutoObservable(this);
+  }
+
+  init() {
+    Object.values(this.chain.map).forEach((chain) => {
+      chain.network = this;
+      chain.init();
+    });
+  }
+
   async loadBalance() {
+    console.log('---------> EthNetworkState loadBalance');
     if (!this.ethers || !this.account) return;
     const balance = await this.ethers.getBalance(this.account);
     this.currentChain.Coin.balance.setValue(new BigNumber(balance.toString()));

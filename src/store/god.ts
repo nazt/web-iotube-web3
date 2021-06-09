@@ -1,22 +1,37 @@
 import { NetworkState } from './lib/NetworkState';
 import { makeAutoObservable } from 'mobx';
-import { MappingState } from './standard/MappingState';
-import { EthNetworkConfig } from '../config/NetworkConfig';
+import { MappingStorageState, MappingState } from './standard/MappingState';
+import { EthNetworkConfig, IotexNetworkConfig } from '../config/NetworkConfig';
 import { ChainState } from './lib/ChainState';
 import { EthNetworkState } from './lib/EthNetworkState';
+import { IotexNetworkState } from './lib/IotexNetworkState';
 import { RootStore } from './root';
+import { StorageState } from './standard/StorageState';
 import { NumberState } from './standard/base';
+import { _ } from '@/lib/lodash';
+import { ethCrossChain, ETHMainnetConfig } from '../config/ETHMainnetConfig';
+import { iotexMainCrossChain, IotexMainnetConfig } from '../config/IotexMainnetConfig';
+import { bscMainCrossChain, BSCMainnetConfig } from '../config/BSCMainnetConfig';
+import { ETHKovanConfig, ethKovenCrossChain } from '../config/ETHKovanConfig';
+import { IotexTestnetConfig, iotexTestnetCrossChain } from '../config/IotexTestnetConfig';
+import { polygonMainCrossChain, PolygonMainnetConfig } from '../config/PolygonMainnetConfig';
 
-import { eventBus } from '../lib/event';
-
-export type Network = 'eth' | 'bsc' | 'iotex';
+export enum Network {
+  eth = 'eth',
+  bsc = 'bsc',
+  iotex = 'iotex'
+}
 
 export class GodStore {
   rootStore: RootStore;
   network: MappingState<NetworkState> = new MappingState({
-    currentId: 'eth',
+    currentId: Network.eth,
     map: {
-      eth: EthNetworkConfig
+      eth: EthNetworkConfig,
+      bsc: EthNetworkConfig,
+      // iotex: EthNetworkConfig
+      iotex: IotexNetworkConfig,
+      polygon: EthNetworkConfig,
     }
   });
 
@@ -28,17 +43,33 @@ export class GodStore {
       rootStore: false
     });
     EthNetworkConfig.god = this;
+    IotexNetworkConfig.god = this;
+    EthNetworkConfig.init();
+    IotexNetworkConfig.init();
+    BSCMainnetConfig.init();
+    PolygonMainnetConfig.init();
+    // IotexTestnetConfig.init();
+    ETHMainnetConfig.crossChain = ethCrossChain(EthNetworkConfig);
+    IotexMainnetConfig.crossChain = iotexMainCrossChain(IotexNetworkConfig);
+    BSCMainnetConfig.crossChain = bscMainCrossChain(EthNetworkConfig);
+    ETHKovanConfig.crossChain = ethKovenCrossChain(EthNetworkConfig);
+    PolygonMainnetConfig.crossChain = polygonMainCrossChain(EthNetworkConfig);
+    // IotexTestnetConfig.crossChain = iotexTestnetCrossChain(EthNetworkConfig);
   }
   get isIotxNetork() {
-    return this.network.currentId.value == 'iotex';
+    return this.network.currentId.value == Network.iotex;
   }
   get isETHNetwork() {
     //@ts-ignore
-    return ['eth', 'bsc'].includes(this.network.currentId.value);
+    return [Network.eth, Network.bsc].includes(this.network.currentId.value);
   }
 
   get eth(): EthNetworkState {
     return this.network.map.eth as EthNetworkState;
+  }
+
+  get iotex(): IotexNetworkState {
+    return this.network.map.iotex as IotexNetworkState;
   }
 
   get isConnect() {
@@ -50,8 +81,24 @@ export class GodStore {
   get currentChain(): ChainState {
     return this.currentNetwork.currentChain;
   }
+
   get Coin() {
     return this.currentChain.Coin;
+  }
+
+  findChain({ chainId }: { chainId: number }) {
+    let foundedChain: ChainState;
+    _.each(this.network.map, (network, k) => {
+      _.each(network.chain.map, (chain, netowrk) => {
+        if ((chainId = chain.chainId)) {
+          foundedChain = chain;
+        }
+      });
+    });
+    if (!foundedChain) {
+      throw new Error(`missing chain with chainID ${chainId}`);
+    }
+    return foundedChain;
   }
 
   setNetwork(val: Network) {
@@ -59,9 +106,9 @@ export class GodStore {
   }
   setChain(val: number) {
     this.currentNetwork.chain.setCurrentId(val);
-    eventBus.emit('chain.switch');
   }
   setShowConnecter(value: boolean) {
+    // this.currentNetwork.connector.showConnector = value;
     this.eth.connector.showConnector = value;
   }
 }

@@ -17,8 +17,9 @@ export interface NetworkState {
     [key: string]: any;
   };
 
+  init: Function;
   multicall(calls: Partial<CallParams>[]): Promise<any[]>;
-  loadBalance: Function;
-  execContract(call: { address: string; abi: any; method: string; params?: any[]; options?: any }): Promise<Partial<TransactionResponse>>;
+  loadBalance: () => Promise<void>;
+  execContract(call: { address: string; abi: any; method: string; params?: any[]; options?: any, read?: boolean}): Promise<Partial<TransactionResponse>>;
   isAddressaVailable(address: string): boolean;
 }

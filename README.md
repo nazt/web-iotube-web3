@@ -1,22 +1,10 @@
-# IoTeX dApp Sample V2
-
-![7121622212283_ pic](https://user-images.githubusercontent.com/448293/120024975-d2604b80-bfa4-11eb-969c-f6f581fe11bf.jpg)
-
-
-This is a boilerplate template for making your awesome dApp on IoTeX and ETH, BSC, and other possible chains ([request here](https://github.com/iotexproject/iotex-dapp-sample-v2/issues/new))
-
-
-Technology used in this template are
-
-- [Vite](https://github.com/vitejs/vite)
-- [React](https://reactjs.org/)
-- [Typescript](https://www.typescriptlang.org/)
-- [Chakra](https://chakra-ui.com/)
-- [Cypress](https://www.cypress.io/)
-
-## Intro
+# Vite + React + Typescript + Chakra + Cypress
 
 A starter for React with Typescript with the fast Vite and the beautiful Chakra, tested with the powerful Cypress.
+
+![Vite + React + Typescript + Chakra + Cypress Starter](/src/resources/images/screenshot.png)
+
+I found out about Vite and I wanted to have a boilerplate for the technologies that I use. You can find more about these in the following links: [Vite](https://github.com/vitejs/vite), [React](https://reactjs.org/), [Typescript](https://www.typescriptlang.org/), [Chakra](https://chakra-ui.com/), [Cypress](https://www.cypress.io/).
 
 ## Features
 
@@ -39,6 +27,12 @@ that generates the follow:
 }
 ```
 
+### Editorconfig
+
+I have decided to include my `.editorconfig` file to help spread this nice tool. This file defines coding styles mantaining it consistent between multiple developers and their various Text Editors and IDEs.
+
+Learn more about [Editorconfig](https://editorconfig.org/).
+
 ## Installation
 
 Clone the repo and run `yarn install`
@@ -50,3 +44,7 @@ After the successfull installation of the packages: `yarn start`
 ## Tests
 
 You can build tests with Cypress. I wrote a small test to see if it's enabled. You can run it with `yarn test`
+
+## Contact
+
+Feel free to contact me on [Twitter](https://twitter.com/dieman_) or [Discord](https://discordapp.com/users/160512379510194187)

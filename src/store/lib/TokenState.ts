@@ -3,31 +3,51 @@ import { NetworkState } from './NetworkState';
 import { BigNumberState } from '../standard/BigNumberState';
 import { CallParams } from '../../../type';
 import erc20Abi from '@/constants/abi/erc20.json';
-import { BooleanState } from '../standard/base';
+import tokenListAbi from '@/constants/abi/tokenlist.json';
 
 export class TokenState {
   abi = erc20Abi;
+  tokenListAbi = tokenListAbi;
   name: string;
   symbol: string;
   address: string;
   logoURI: string;
   chainId: number;
-  decimals: number;
-
+  decimals: number = 18;
   network: NetworkState;
   balance: BigNumberState;
-  info: {
-    loading: BooleanState;
+  allowanceForCashier: BigNumberState;
+  minAmountMintable: BigNumberState;
+  maxAmountMintable: BigNumberState;
+  minAmountStandard: BigNumberState;
+  maxAmountStandard: BigNumberState;
+  metas: {
+    isApprovingAllowance?: boolean;
     [key: string]: any;
-  } = {
-    loading: new BooleanState()
-  };
+  } = {};
   constructor(args: Partial<TokenState>) {
     Object.assign(this, args);
     this.balance = new BigNumberState({ decimals: this.decimals, loading: true });
+    this.allowanceForCashier = new BigNumberState({decimals: this.decimals, loading: false});
+    this.minAmountMintable = new BigNumberState({decimals: this.decimals, loading: false});
+    this.maxAmountMintable = new BigNumberState({decimals: this.decimals, loading: false});
+    this.minAmountStandard = new BigNumberState({decimals: this.decimals, loading: false});
+    this.maxAmountStandard = new BigNumberState({decimals: this.decimals, loading: false});
     makeObservable(this, {
-      info: observable
+      metas: observable
     });
+  }
+
+  get amountRange() {
+    console.log(this.address, this.minAmountStandard.format, this.minAmountMintable.format, this.maxAmountStandard.format, this.maxAmountMintable.format);
+    return {
+      minAmount: this.minAmountStandard.format === "0" ? this.minAmountMintable : this.minAmountStandard,
+      maxAmount: this.maxAmountStandard.format === "0" ? this.maxAmountMintable : this.maxAmountStandard
+    }
+  }
+
+  isEth() {
+    return this.network.info.token.tokenExample === this.address;
   }
 
   transfer(args: Partial<CallParams>) {
@@ -39,5 +59,9 @@ export class TokenState {
 
   preMulticall(args: Partial<CallParams>) {
     return Object.assign({ address: this.address, abi: this.abi }, args);
+  }
+
+  preMulticallTokenListAbi(args: Partial<CallParams>) {
+    return Object.assign({ address: this.address, abi: this.tokenListAbi }, args);
   }
 }

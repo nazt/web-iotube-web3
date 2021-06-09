@@ -1,0 +1,144 @@
+export const maitcToIotexTokens = {
+  cashier: '0xf72CFb704d49aC7BB7FFa420AE5f084C671A29be',
+  mintableTokenList: '0xC8DC8dCDFd94f9Cb953f379a7aD8Da5fdC303F3E',
+  standardTokenList: '0xDe9395d2f4940aA501f9a27B98592589D14Bb0f7',
+  tokens: [
+    {
+      address: '0x000000000000000000000000000000000000000',
+      name: 'Matic',
+      decimals: 18,
+      symbol: 'Matic',
+      logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/3890.png'
+    },
+    {
+      address: '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270',
+      name: 'Wrapped Matic',
+      decimals: 18,
+      symbol: 'WMATIC',
+      logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/3890.png'
+    },
+    {
+      address: '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619',
+      name: 'Wrapped Ether',
+      decimals: 18,
+      symbol: 'WETH',
+      logoURI: 'https://iotexscan.io/image/token/io1v5m9d7zrs852xkdzdresqf3phwc5cchc5crylc.png'
+    },
+    {
+      address: '0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6',
+      name: 'Wrapped BTC',
+      decimals: 8,
+      symbol: 'WBTC',
+      logoURI: 'https://iotexscan.io/image/token/io10u9dv0ys93nmr7smzyptpkhlhzylt4wtqzrvld.png'
+    },
+    {
+      address: '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063',
+      name: 'DAI Stablecoin',
+      decimals: 18,
+      symbol: 'DAI',
+      logoURI: 'https://iotexscan.io/image/token/io1v25anp7t7nz954gdam2m27eqp4arr93jly4maa.png'
+    }, {
+      address: '0xc2132D05D31c914a87C6611C10748AEb04B58e8F',
+      name: 'Tether USD',
+      decimals: 6,
+      symbol: 'USDT',
+      logoURI: 'https://iotexscan.io/image/token/io18ndhcj88pwz5a5h68yhzz6r4q8vykwhugq45ns.png'
+    },
+    {
+      address: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
+      name: 'USD Coin',
+      decimals: 6,
+      symbol: 'USDC',
+      logoURI: 'https://iotexscan.io/image/token/io1cpx682vazuf4s4amjd7jlwejr5akc65plgmdru.png'
+    }, {
+      address: '0x0b3F868E0BE5597D5DB7fEB59E1CADBb0fdDa50a',
+      name: 'SushiToken',
+      decimals: 18,
+      symbol: 'Sushi',
+      logoURI: 'https://iotexscan.io/image/token/io1990thrrc9cvxhjmsmx5pysznqs734h6uhxfxkq.png'
+    }, {
+      address: '0x831753DD7087CaC61aB5644b308642cc1c33Dc13',
+      name: 'Quickswap',
+      decimals: 18,
+      symbol: 'QUICK',
+      logoURI: 'https://iotexscan.io/image/token/io1u346nz58mj5cjuj7ng3cn96upwam37v9axtju2.png'
+    }, {
+      address: '0xD6DF932A45C0f255f85145f286eA0b292B21C90B',
+      name: 'Aave Token',
+      decimals: 18,
+      symbol: 'AAVE',
+      logoURI: 'https://iotexscan.io/image/token/io14tw8gyn3p8v5fcmvh4c0w8797ryjrlrvnsr6zf.png'
+    }
+  ]
+};
+
+export const iotexMaticTokens = {
+  cashier: 'io12s9f9hv4zsr7umy5hxt6g0k0xr4x6pxdp5w998',
+  mintableTokenList: 'io16at6mlcwcsrqutz2zhuhwam87h988r9fcdauk8',
+  standardTokenList: 'io197rk3nff9622pkncvuvhfwyms73esdtwph4rlq',
+  tokens: [
+    {
+      address: 'io13envp44hps9j85ulfvs6r6k99wagaky60pzl2c',
+      name: 'Wrapped Matic',
+      decimals: 18,
+      symbol: 'Matic',
+      logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/3890.png'
+    },
+    {
+      address: 'io1v5m9d7zrs852xkdzdresqf3phwc5cchc5crylc',
+      name: 'Wrapped Ether',
+      decimals: 18,
+      symbol: 'WETH-matic',
+      logoURI: 'https://iotexscan.io/image/token/io1v5m9d7zrs852xkdzdresqf3phwc5cchc5crylc.png'
+    },
+    {
+      address: 'io10u9dv0ys93nmr7smzyptpkhlhzylt4wtqzrvld',
+      name: 'Wrapped BTC',
+      decimals: 8,
+      symbol: 'WBTC-matic',
+      logoURI: 'https://iotexscan.io/image/token/io10u9dv0ys93nmr7smzyptpkhlhzylt4wtqzrvld.png'
+    },
+    {
+      address: 'io1v25anp7t7nz954gdam2m27eqp4arr93jly4maa',
+      name: 'DAI Stablecoin',
+      decimals: 18,
+      symbol: 'DAI-matic',
+      logoURI: 'https://iotexscan.io/image/token/io1v25anp7t7nz954gdam2m27eqp4arr93jly4maa.png'
+    },
+    {
+      address: 'io18ndhcj88pwz5a5h68yhzz6r4q8vykwhugq45ns',
+      name: 'Tether USD',
+      decimals: 6,
+      symbol: 'USDT-matic',
+      logoURI: 'https://iotexscan.io/image/token/io18ndhcj88pwz5a5h68yhzz6r4q8vykwhugq45ns.png'
+    },
+    {
+      address: 'io1cpx682vazuf4s4amjd7jlwejr5akc65plgmdru',
+      name: 'USD Coin',
+      decimals: 6,
+      symbol: 'USDC-matic',
+      logoURI: 'https://iotexscan.io/image/token/io1cpx682vazuf4s4amjd7jlwejr5akc65plgmdru.png'
+    },
+    {
+      address: 'io1990thrrc9cvxhjmsmx5pysznqs734h6uhxfxkq',
+      name: 'SushiToken',
+      decimals: 18,
+      symbol: 'Sushi-matic',
+      logoURI: 'https://iotexscan.io/image/token/io1990thrrc9cvxhjmsmx5pysznqs734h6uhxfxkq.png'
+    },
+    {
+      address: 'io1u346nz58mj5cjuj7ng3cn96upwam37v9axtju2',
+      name: 'Quickswap',
+      decimals: 18,
+      symbol: 'QUICK-matic',
+      logoURI: 'https://iotexscan.io/image/token/io1u346nz58mj5cjuj7ng3cn96upwam37v9axtju2.png'
+    },
+    {
+      address: 'io14tw8gyn3p8v5fcmvh4c0w8797ryjrlrvnsr6zf',
+      name: 'Aave Token',
+      decimals: 18,
+      symbol: 'AAVE-matic',
+      logoURI: 'https://iotexscan.io/image/token/io14tw8gyn3p8v5fcmvh4c0w8797ryjrlrvnsr6zf.png'
+    }
+  ]
+};

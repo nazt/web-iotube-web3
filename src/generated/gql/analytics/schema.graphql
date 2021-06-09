@@ -1,0 +1,68 @@
+type Action {
+  hash: String!
+  type: ActionType!
+  exchange: String!
+  account: String!
+  iotxAmount: String!
+  tokenAmount: String!
+  time: String!
+}
+
+enum ActionType {
+  ALL
+  BUY_COIN
+  BUY_TOKEN
+  ADD
+  REMOVE
+}
+
+type AmountInOneDay {
+  amount: String!
+  date: String!
+}
+
+type Exchange {
+  address: String!
+  token: Token!
+  supply: String!
+  volumeInPast24Hours: String!
+  volumeInPast48Hours: String!
+  volumeInPast7Days: String!
+  balanceOfToken: String!
+  balanceOfToken24HoursAgo: String!
+  balanceOfIOTX: String!
+  balanceOfIOTX24HoursAgo: String!
+}
+
+input Pagination {
+  skip: Int!
+  first: Int!
+}
+
+type Query {
+  exchange(exchange: String!): Exchange
+  exchanges(pagination: Pagination!): [Exchange]!
+  tipHeight: String!
+  volumes(days: Int!): [AmountInOneDay]!
+  liquidities(days: Int!): [AmountInOneDay]!
+  tokenBalances(days: Int!): [AmountInOneDay]!
+  volumesOfExchange(exchange: String!, days: Int!): [AmountInOneDay]!
+  liquiditiesOfExchange(exchange: String!, days: Int!): [AmountInOneDay]!
+  tokenBalancesOfExchange(exchange: String!, days: Int!): [AmountInOneDay]!
+  actionsOfExchange(exchange: String!, type: ActionType!, pagination: Pagination!): [Action]!
+  numOfPairs: Int!
+  stats(hours: Int!): Stats!
+  actions(type: ActionType!, pagination: Pagination!): [Action]!
+}
+
+type Stats {
+  numOfTransations: Int!
+  volume: String!
+}
+
+type Token {
+  address: String!
+  decimals: Int!
+  name: String!
+  symbol: String!
+}

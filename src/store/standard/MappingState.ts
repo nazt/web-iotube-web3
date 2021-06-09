@@ -30,7 +30,4 @@ export class MappingStorageState<T> {
   get current(): T {
     return this.map[this.currentId.value];
   }
-  setCurrentId(val: any) {
-    this.currentId.save(val);
-  }
 }

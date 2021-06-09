@@ -1,0 +1,938 @@
+"""
+meta data describing the account
+"""
+type AccountMeta {
+  """
+  iotex address
+  """
+  address: String!
+  balance: String!
+  nonce: Int!
+  pendingNonce: Int!
+  numActions: Int!
+}
+
+type Action {
+  core: ActionCore!
+  senderPubKey: Buffer!
+  signature: Buffer!
+}
+
+type ActionCore {
+  version: Int!
+  nonce: BigNumber!
+  gasLimit: BigNumber!
+  gasPrice: String!
+  transfer: Transfer
+  execution: Execution
+  startSubChain: StartSubChain
+  stopSubChain: StopSubChain
+  putBlock: PutBlock
+  createDeposit: CreateDeposit
+  settleDeposit: SettleDeposit
+  createPlumChain: CreatePlumChain
+  terminatePlumChain: TerminatePlumChain
+  plumPutBlock: PlumPutBlock
+  plumCreateDeposit: PlumCreateDeposit
+  plumStartExit: PlumStartExit
+  plumChallengeExit: PlumChallengeExit
+  plumResponseChallengeExit: PlumResponseChallengeExit
+  plumFinalizeExit: PlumFinalizeExit
+  plumSettleDeposit: PlumSettleDeposit
+  plumTransfer: PlumTransfer
+  depositToRewardingFund: DepositToRewardingFund
+  claimFromRewardingFund: ClaimFromRewardingFund
+  grantReward: GrantReward
+  putPollResult: PutPollResult
+  stakeCreate: StakeCreate
+  stakeUnstake: StakeReclaim
+  stakeWithdraw: StakeReclaim
+  stakeAddDeposit: StakeAddDeposit
+  stakeRestake: StakeRestake
+  stakeChangeCandidate: StakeChangeCandidate
+  stakeTransferOwnership: StakeTransferOwnership
+  candidateRegister: CandidateRegister
+  candidateUpdate: CandidateBasicInfo
+}
+
+input ActionCoreInput {
+  version: Int!
+  nonce: BigNumber!
+  gasLimit: BigNumber!
+  gasPrice: String!
+  transfer: TransferInput
+  execution: ExecutionInput
+  startSubChain: StartSubChainInput
+  stopSubChain: StopSubChainInput
+  putBlock: PutBlockInput
+  createDeposit: CreateDepositInput
+  settleDeposit: SettleDepositInput
+  createPlumChain: CreatePlumChainInput
+  terminatePlumChain: TerminatePlumChainInput
+  plumPutBlock: PlumPutBlockInput
+  plumCreateDeposit: PlumCreateDepositInput
+  plumStartExit: PlumStartExitInput
+  plumChallengeExit: PlumChallengeExitInput
+  plumResponseChallengeExit: PlumResponseChallengeExitInput
+  plumFinalizeExit: PlumFinalizeExitInput
+  plumSettleDeposit: PlumSettleDepositInput
+  plumTransfer: PlumTransferInput
+  depositToRewardingFund: DepositToRewardingFundInput
+  claimFromRewardingFund: ClaimFromRewardingFundInput
+  grantReward: GrantRewardInput
+  putPollResult: PutPollResultInput
+  stakeCreate: StakeCreateInput
+  stakeUnstake: StakeReclaimInput
+  stakeWithdraw: StakeReclaimInput
+  stakeAddDeposit: StakeAddDepositInput
+  stakeRestake: StakeRestakeInput
+  stakeChangeCandidate: StakeChangeCandidateInput
+  stakeTransferOwnership: StakeTransferOwnershipInput
+  candidateRegister: CandidateRegisterInput
+  candidateUpdate: CandidateBasicInfoInput
+}
+
+type ActionInfo {
+  action: Action!
+  actHash: String!
+  blkHash: String!
+  timestamp: Timestamp!
+}
+
+input ActionInput {
+  core: ActionCoreInput!
+  senderPubKey: Buffer!
+  signature: Buffer!
+}
+
+type AddressMeta {
+  name: String!
+}
+
+"""
+The BigNumber scalar type represents numeric values with precision as in https://github.com/MikeMcl/bignumber.js/
+"""
+scalar BigNumber
+
+"""
+Properties of an blockMeta
+"""
+type BlockMeta {
+  hash: String!
+  height: Int!
+  timestamp: Timestamp!
+  numActions: Int!
+  producerAddress: String!
+  transferAmount: String!
+  txRoot: String!
+  receiptRoot: String!
+  deltaStateDigest: String!
+}
+
+"""
+Properties of a BlockProducerInfo
+"""
+type BlockProducerInfo {
+  """
+  BlockProducerInfo address
+  """
+  address: String!
+
+  """
+  BlockProducerInfo votes
+  """
+  votes: String!
+
+  """
+  BlockProducerInfo active
+  """
+  active: Boolean!
+
+  """
+  BlockProducerInfo production
+  """
+  production: Int!
+}
+
+"""
+JS Buffer or Uint8Array
+"""
+scalar Buffer
+
+type Candidate {
+  address: String!
+  votes: Buffer
+  pubKey: Buffer
+  rewardAddress: String!
+}
+
+type CandidateBasicInfo {
+  name: String!
+  operatorAddress: String!
+  rewardAddress: String!
+}
+
+input CandidateBasicInfoInput {
+  name: String!
+  operatorAddress: String!
+  rewardAddress: String!
+}
+
+input CandidateInput {
+  address: String!
+  votes: Buffer
+  pubKey: Buffer
+  rewardAddress: String!
+}
+
+type CandidateList {
+  candidates: [Candidate!]!
+}
+
+input CandidateListInput {
+  candidates: [CandidateInput!]!
+}
+
+type CandidateRegister {
+  candidate: CandidateBasicInfo!
+  ownerAddress: String!
+  stakedAmount: String!
+  stakedDuration: Int!
+  autoStake: Boolean!
+  payload: Buffer!
+}
+
+input CandidateRegisterInput {
+  candidate: CandidateBasicInfoInput!
+  ownerAddress: String!
+  stakedAmount: String!
+  stakedDuration: Int!
+  autoStake: Boolean!
+  payload: Buffer!
+}
+
+type ChainMeta {
+  height: String!
+  numActions: String!
+  tps: String!
+  epoch: Epoch!
+}
+
+type ClaimFromRewardingFund {
+  amount: String!
+  data: Buffer!
+}
+
+input ClaimFromRewardingFundInput {
+  amount: String!
+  data: Buffer!
+}
+
+"""
+IOTX price information from coinmarketcap
+"""
+type CoinPrice {
+  priceUsd: String!
+  marketCapUsd: String!
+}
+
+type Contract {
+  name: String!
+  abi: String!
+  bytecode: String!
+}
+
+type CreateDeposit {
+  chainID: Int!
+  amount: Buffer!
+  recipient: String!
+}
+
+input CreateDepositInput {
+  chainID: Int!
+  amount: Buffer!
+  recipient: String!
+}
+
+type CreatePlumChain {
+  TBD: Boolean
+}
+
+input CreatePlumChainInput {
+  TBD: Boolean
+}
+
+type DepositToRewardingFund {
+  amount: String!
+  data: Buffer!
+}
+
+input DepositToRewardingFundInput {
+  amount: String!
+  data: Buffer!
+}
+
+type Epoch {
+  num: Int!
+  height: Int!
+  gravityChainStartHeight: Int!
+}
+
+"""
+Properties of a EstimateGasForActionResponse
+"""
+type EstimateGasForActionResponse {
+  gas: String!
+}
+
+type Execution {
+  amount: String!
+  contract: String!
+  data: Buffer!
+}
+
+input ExecutionInput {
+  amount: String!
+  contract: String!
+  data: Buffer!
+}
+
+type GetAccountResponse {
+  accountMeta: AccountMeta!
+}
+
+input GetActionsByAddressRequest {
+  """
+  iotex address
+  """
+  address: String!
+  start: BigNumber!
+  count: BigNumber!
+}
+
+input GetActionsByBlockRequest {
+  blkHash: String!
+  start: Int!
+  count: Int!
+}
+
+input GetActionsByHashRequest {
+  actionHash: String!
+  checkingPending: Boolean!
+}
+
+input GetActionsByIndexRequest {
+  start: BigNumber!
+  count: BigNumber!
+}
+
+type GetActionsResponse {
+  actionInfo: [ActionInfo!]
+}
+
+input GetBlockMetasByHashRequest {
+  blkHash: String!
+}
+
+input GetBlockMetasByIndexRequest {
+  start: Int!
+  count: Int!
+}
+
+type GetBlockMetasResponse {
+  blkMetas: [BlockMeta!]!
+}
+
+"""
+Properties of a GetEpochMetaResponse
+"""
+type GetEpochMetaResponse {
+  """
+  GetEpochMetaResponse epochData
+  """
+  epochData: Epoch!
+
+  """
+  GetEpochMetaResponse totalBlocks
+  """
+  totalBlocks: Int!
+
+  """
+  GetEpochMetaResponse blockProducersInfo
+  """
+  blockProducersInfo: [BlockProducerInfo!]!
+}
+
+type GetReceiptByActionResponse {
+  receiptInfo: ReceiptInfo
+}
+
+type GetServerMetaResponse {
+  serverMeta: ServerMeta!
+}
+
+input GetUnconfirmedActionsByAddressRequest {
+  """
+  iotex address
+  """
+  address: String!
+  start: Int!
+  count: Int!
+}
+
+type GrantReward {
+  type: RewardType!
+  height: String!
+}
+
+input GrantRewardInput {
+  type: RewardType!
+  height: String!
+}
+
+"""
+Properties of an Log
+"""
+type Log {
+  """
+  iotex address
+  """
+  contractAddress: String!
+  topics: [Buffer!]!
+  data: Buffer!
+  blkHeight: Int!
+  actHash: Buffer!
+  index: Int!
+}
+
+"""
+scalar type of map buffer
+"""
+scalar Map
+
+type MerkleRoot {
+  name: String!
+  value: Buffer!
+}
+
+input MerkleRootInput {
+  name: String!
+  value: Buffer!
+}
+
+type Mutation {
+  addSubscription(email: String!): SendGridInfo!
+}
+
+type PlumChallengeExit {
+  subChainAddress: String!
+  coinID: Int!
+  challengeTransfer: Buffer!
+  challengeTransferBlockProof: Buffer!
+  challengeTransferBlockHeight: Int!
+}
+
+input PlumChallengeExitInput {
+  subChainAddress: String!
+  coinID: Int!
+  challengeTransfer: Buffer!
+  challengeTransferBlockProof: Buffer!
+  challengeTransferBlockHeight: Int!
+}
+
+type PlumCreateDeposit {
+  subChainAddress: String!
+  amount: Buffer!
+  recipient: String!
+}
+
+input PlumCreateDepositInput {
+  subChainAddress: String!
+  amount: Buffer!
+  recipient: String!
+}
+
+type PlumFinalizeExit {
+  subChainAddress: String!
+  coinID: Int!
+}
+
+input PlumFinalizeExitInput {
+  subChainAddress: String!
+  coinID: Int!
+}
+
+type PlumPutBlock {
+  subChainAddress: String!
+  height: Int!
+  roots: Map!
+}
+
+input PlumPutBlockInput {
+  subChainAddress: String!
+  height: Int!
+  roots: Map!
+}
+
+type PlumResponseChallengeExit {
+  subChainAddress: String!
+  coinID: Int!
+  challengeTransfer: Buffer!
+  responseTransfer: Buffer!
+  responseTransferBlockProof: Buffer!
+  previousTransferBlockHeight: Int!
+}
+
+input PlumResponseChallengeExitInput {
+  subChainAddress: String!
+  coinID: Int!
+  challengeTransfer: Buffer!
+  responseTransfer: Buffer!
+  responseTransferBlockProof: Buffer!
+  previousTransferBlockHeight: Int!
+}
+
+type PlumSettleDeposit {
+  coinID: Int!
+}
+
+input PlumSettleDepositInput {
+  coinID: Int!
+}
+
+type PlumStartExit {
+  subChainAddress: String!
+  previousTransfer: Buffer!
+  previousTransferBlockProof: Buffer!
+  previousTransferBlockHeight: Int!
+  exitTransfer: Buffer!
+  exitTransferBlockProof: Buffer!
+  exitTransferBlockHeight: Int!
+}
+
+input PlumStartExitInput {
+  subChainAddress: String!
+  previousTransfer: Buffer!
+  previousTransferBlockProof: Buffer!
+  previousTransferBlockHeight: Int!
+  exitTransfer: Buffer!
+  exitTransferBlockProof: Buffer!
+  exitTransferBlockHeight: Int!
+}
+
+type PlumTransfer {
+  coinID: Int!
+  denomination: Buffer!
+  owner: String!
+  recipient: String!
+}
+
+input PlumTransferInput {
+  coinID: Int!
+  denomination: Buffer!
+  owner: String!
+  recipient: String!
+}
+
+enum ProviderType {
+  mainnet
+  testnet
+}
+
+type PutBlock {
+  subChainAddress: String!
+  height: Int!
+  roots: [MerkleRoot!]!
+}
+
+input PutBlockInput {
+  subChainAddress: String!
+  height: Int!
+  roots: [MerkleRootInput!]!
+}
+
+type PutPollResult {
+  height: String!
+  candidates: CandidateList
+}
+
+input PutPollResultInput {
+  height: String!
+  candidates: CandidateListInput
+}
+
+type Query {
+  """
+  get chain metadata
+  """
+  chainMeta: ChainMeta!
+
+  """
+  get the address detail of an address
+  """
+  getAccount(
+    """
+    iotex address
+    """
+    address: String!
+  ): GetAccountResponse!
+
+  """
+  get block metadata(s) by:
+  """
+  getBlockMetas(
+    """
+    start index and block count
+    """
+    byIndex: GetBlockMetasByIndexRequest
+
+    """
+    block hash
+    """
+    byHash: GetBlockMetasByHashRequest
+  ): GetBlockMetasResponse!
+
+  """
+  get server meta data by:
+  """
+  getServerMeta: GetServerMetaResponse!
+
+  """
+  suggest gas price
+  """
+  suggestGasPrice: SuggestGasPriceResponse!
+
+  """
+  get receipt by action Hash
+  """
+  getReceiptByAction(
+    """
+    action Hash
+    """
+    actionHash: String!
+  ): GetReceiptByActionResponse!
+
+  """
+  get action(s) by:
+  """
+  getActions(
+    """
+    start index and action count
+    """
+    byIndex: GetActionsByIndexRequest
+
+    """
+    address with start index and action count
+    """
+    byAddr: GetActionsByAddressRequest
+
+    """
+    action hash
+    """
+    byHash: GetActionsByHashRequest
+    byBlk: GetActionsByBlockRequest
+  ): GetActionsResponse!
+
+  """
+  read contract
+  """
+  readContract(execution: ExecutionInput!, callerAddress: String!): ReadContractResponse!
+
+  """
+  sendAction
+  """
+  sendAction(action: ActionInput!): SendActionResponse!
+
+  """
+  read state
+  """
+  readState(protocolID: Buffer!, methodName: Buffer!, arguments: [Buffer!]!, height: String!): ReadStateResponse!
+
+  """
+  estimate gas for action
+  """
+  estimateGasForAction(action: ActionInput!): EstimateGasForActionResponse!
+
+  """
+  get epoch meta
+  """
+  getEpochMeta(epochNumber: Int!): GetEpochMetaResponse!
+  health: String!
+
+  """
+  Total supply for the native IOTX token
+  """
+  totalSupply: String!
+  fetchCoinPrice: CoinPrice!
+  fetchVersionInfo: VersionInfo!
+  getSolcVersions: [SolcVersion!]!
+  compileSolidity(source: String!, version: String!): [Contract!]!
+  addressMeta(address: String!): AddressMeta!
+  addressMetas: [AddressMeta!]!
+  tokenMetadata(provider: ProviderType!, type: TokenType): [TokenMetadata!]!
+}
+
+type ReadContractResponse {
+  data: String!
+}
+
+type ReadStateResponse {
+  data: Buffer!
+}
+
+"""
+Properties of an Receipt
+"""
+type Receipt {
+  status: ReceiptStatus!
+  blkHeight: Int!
+  actHash: Buffer!
+  gasConsumed: Int!
+  contractAddress: String!
+  logs: [Log!]
+}
+
+type ReceiptInfo {
+  receipt: Receipt
+  blkHash: String!
+}
+
+enum ReceiptStatus {
+  Failure
+  Success
+  ErrUnknown
+  ErrOutOfGas
+  ErrCodeStoreOutOfGas
+  ErrDepth
+  ErrContractAddressCollision
+  ErrNoCompatibleInterpreter
+  ErrExecutionReverted
+  ErrMaxCodeSizeExceeded
+  ErrWriteProtection
+  ErrLoadAccount
+  ErrNotEnoughBalance
+  ErrInvalidBucketIndex
+  ErrUnauthorizedOperator
+  ErrInvalidBucketType
+  ErrCandidateNotExist
+  ErrReduceDurationBeforeMaturity
+  ErrUnstakeBeforeMaturity
+  ErrWithdrawBeforeUnstake
+  ErrWithdrawBeforeMaturity
+  ErrCandidateAlreadyExist
+  ErrCandidateConflict
+}
+
+enum RewardType {
+  BlockReward
+  EpochReward
+}
+
+type SendActionResponse {
+  actionHash: Boolean
+}
+
+type SendGridInfo {
+  isSubscribeSuccess: Boolean!
+}
+
+"""
+Server meta data
+"""
+type ServerMeta {
+  packageVersion: String!
+  packageCommitID: String!
+  gitStatus: String!
+  goVersion: String!
+  buildTime: String!
+}
+
+type SetReward {
+  amount: Buffer!
+  data: Buffer!
+  type: Int!
+}
+
+input SetRewardInput {
+  amount: Buffer!
+  data: Buffer!
+  type: Int!
+}
+
+type SettleDeposit {
+  amount: Buffer!
+  recipient: String!
+  index: Int!
+}
+
+input SettleDepositInput {
+  amount: Buffer!
+  recipient: String!
+  index: Int!
+}
+
+type SolcResult {
+  contracts: [Contract!]!
+}
+
+type SolcVersion {
+  name: String!
+  version: String!
+}
+
+type StakeAddDeposit {
+  amount: String!
+  bucketIndex: Int!
+  payload: Buffer!
+}
+
+input StakeAddDepositInput {
+  amount: String!
+  bucketIndex: Int!
+  payload: Buffer!
+}
+
+type StakeChangeCandidate {
+  bucketIndex: Int!
+  candidateName: String!
+  payload: Buffer!
+}
+
+input StakeChangeCandidateInput {
+  bucketIndex: Int!
+  candidateName: String!
+  payload: Buffer!
+}
+
+type StakeCreate {
+  candidateName: String!
+  stakedAmount: String!
+  stakedDuration: Int!
+  autoStake: Boolean!
+  payload: Buffer!
+}
+
+input StakeCreateInput {
+  candidateName: String!
+  stakedAmount: String!
+  stakedDuration: Int!
+  autoStake: Boolean!
+  payload: Buffer!
+}
+
+type StakeReclaim {
+  bucketIndex: Int!
+  payload: Buffer!
+}
+
+input StakeReclaimInput {
+  bucketIndex: Int!
+  payload: Buffer!
+}
+
+type StakeRestake {
+  bucketIndex: Int!
+  stakedDuration: Int!
+  autoStake: Boolean!
+  payload: Buffer!
+}
+
+input StakeRestakeInput {
+  bucketIndex: Int!
+  stakedDuration: Int!
+  autoStake: Boolean!
+  payload: Buffer!
+}
+
+type StakeTransferOwnership {
+  bucketIndex: Int!
+  voterAddress: String!
+  payload: Buffer!
+}
+
+input StakeTransferOwnershipInput {
+  bucketIndex: Int!
+  voterAddress: String!
+  payload: Buffer!
+}
+
+type StartSubChain {
+  chainID: Int!
+  securityDeposit: Buffer!
+  operationDeposit: Buffer!
+  startHeight: Int!
+  parentHeightOffset: Int!
+}
+
+input StartSubChainInput {
+  chainID: Int!
+  securityDeposit: Buffer!
+  operationDeposit: Buffer!
+  startHeight: Int!
+  parentHeightOffset: Int!
+}
+
+type StopSubChain {
+  chainID: Int!
+  stopHeight: Int!
+  subChainAddress: String!
+}
+
+input StopSubChainInput {
+  chainID: Int!
+  stopHeight: Int!
+  subChainAddress: String!
+}
+
+type SuggestGasPriceResponse {
+  gasPrice: Int!
+}
+
+type TerminatePlumChain {
+  subChainAddress: String!
+}
+
+input TerminatePlumChainInput {
+  subChainAddress: String!
+}
+
+type Timestamp {
+  seconds: Int!
+  nanos: Int!
+}
+
+input TimestampInput {
+  seconds: Int!
+  nanos: Int!
+}
+
+type TokenMetadata {
+  name: String!
+  address: String!
+  logo: String!
+  type: String!
+  symbol: String
+  image_urls: [String!]
+}
+
+enum TokenType {
+  xrc20
+  xrc721
+}
+
+type Transfer {
+  amount: String!
+  recipient: String!
+  payload: Buffer!
+}
+
+input TransferInput {
+  amount: String!
+  recipient: String!
+  payload: Buffer!
+}
+
+type VersionInfo {
+  explorerVersion: String!
+  iotexCoreVersion: String
+}

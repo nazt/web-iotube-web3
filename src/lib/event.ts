@@ -2,9 +2,14 @@ import { EventEmitter } from 'events';
 import TypedEmitter from 'typed-emitter';
 
 interface MessageEvents {
-  'wallet.onAccount': () => void;
+  'amount.refetch': () => void;
+  'loading.confirm': () => void;
+  'loading.cancel': () => void;
   'wallet.logout': () => void;
-  'chain.switch': () => void;
+  'pendingPool.confirm': () => void;
+  'pendingPool.cacel': () => void;
+  'modal.confirm': () => void;
+  'modal.cancel': () => void;
 }
 
 export const eventBus = new EventEmitter() as TypedEmitter<MessageEvents>;

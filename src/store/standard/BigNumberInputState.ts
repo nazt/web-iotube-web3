@@ -12,6 +12,10 @@ export class BigNumberInputState {
     makeAutoObservable(this);
   }
 
+  setDecimals(val: number) {
+    this.decimals = val;
+  }
+
   setValue(value: BigNumber) {
     this.value = value;
     this.format = helper.number.toPrecisionFloor(new BigNumber(this.value).dividedBy(10 ** this.decimals).toFixed());
@@ -21,6 +25,7 @@ export class BigNumberInputState {
     this.format = val;
     this.value = new BigNumber(val).multipliedBy(10 ** this.decimals);
   }
+
   setLoading(val: boolean) {
     this.loading = val;
   }

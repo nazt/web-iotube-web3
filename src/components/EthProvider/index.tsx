@@ -10,6 +10,11 @@ import { Provider as MulticallProvider } from 'ethers-multicall';
 import { injected } from '@/lib/web3-react';
 import { eventBus } from '../../lib/event';
 import { _ } from '@/lib/lodash';
+import { BSCMainnetConfig } from '../../config/BSCMainnetConfig';
+import { BSCTestnetConfig } from '../../config/BSCTestnetConfig';
+import { ETHKovanConfig } from '../../config/ETHKovanConfig';
+import { IotexTestnetConfig } from '../../config/IotexTestnetConfig';
+import { Network } from '@/store/god';
 
 export const ETHProvider = observer(({ children }) => {
   const { god, base, lang } = useStore();
@@ -34,6 +39,15 @@ export const ETHProvider = observer(({ children }) => {
       if (god.currentNetwork.allowChains.includes(chainId)) {
         god.setChain(chainId);
       }
+      if ([ETHMainnetConfig.chainId, ETHKovanConfig.chainId].includes(chainId)) {
+        god.setNetwork(Network.eth);
+      }
+      if ([BSCMainnetConfig.chainId, BSCTestnetConfig.chainId].includes(chainId)) {
+        god.setNetwork(Network.bsc);
+      }
+      if ([IotexTestnetConfig.chainId].includes(chainId)) {
+        god.setNetwork(Network.iotex);
+      }
     } else {
       // god.currentNetwork.chain.setCurrentId(BSCMainnetConfig.chainId);
       // store.wrongNetwork();
@@ -50,6 +64,8 @@ export const ETHProvider = observer(({ children }) => {
       god.eth.multiCall._multicallAddress = god.currentChain.info.multicallAddr;
     }
 
+    //@ts-ignore
+    console.log(god.eth.multiCall._multicallAddress);
     if (account) {
       god.setShowConnecter(false);
       god.currentNetwork.loadBalance();

@@ -1,20 +1,28 @@
-import { ERC20 } from '../pages/ERC20';
-
+import { Home } from '../pages/Home/index';
+import { Vault } from '../pages/Vault/index';
 class Tool {
   name: string;
   path: string;
   component: any;
   tags: string[];
+
   constructor(args: Partial<Tool>) {
     Object.assign(this, args);
   }
 }
 
 export const ToolConfig = [
-  new Tool({
-    name: 'ERC20 Toolbox',
-    path: '/erc20',
-    component: ERC20,
-    tags: ['ERC20']
-  })
+  {
+    name: 'Home',
+    path: '/',
+    component: Home
+  }, {
+    name: 'Swap',
+    path: '/swap',
+    component: Home
+  }, {
+    name: 'Vault',
+    path: '/vault',
+    component: Vault
+  }
 ];

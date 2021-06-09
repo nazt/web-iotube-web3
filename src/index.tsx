@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { useStore } from '@/store/index';
 import { Header } from '@/components/Header/index';
-import { ChakraProvider, Button, Container, Center, CSSReset } from '@chakra-ui/react';
+import { ChakraProvider, Button, Container, Center, CSSReset, Alert, AlertIcon } from '@chakra-ui/react';
 import { theme } from '@/lib/theme';
 import { ETHProvider } from './components/EthProvider';
 import { Home } from './pages/Home/index';
@@ -14,6 +14,10 @@ import { Box, Text } from '@chakra-ui/layout';
 import { Toaster } from 'react-hot-toast';
 import { ToolConfig } from './config/ToolConfig';
 import { WalletSelecter } from './components/WalletSelecter/index';
+import { IotexProvider } from './components/IotexProvider';
+import './app.css';
+// import 'antd/dist/antd.css';
+import { SiderMenu } from '@/components/SiderMenu';
 
 const ErrorFallback = ({ error, resetErrorBoundary }) => {
   return (
@@ -30,7 +34,7 @@ const ErrorFallback = ({ error, resetErrorBoundary }) => {
 };
 
 export const App = observer(() => {
-  const { lang, god } = useStore();
+  const { lang, god, token } = useStore();
   useEffect(() => {
     lang.init();
   }, []);
@@ -42,13 +46,18 @@ export const App = observer(() => {
         <Web3ReactProvider getLibrary={getLibrary}>
           <WalletSelecter />
           <ETHProvider />
+          <IotexProvider />
           <Toaster />
           <Router>
             <Header />
+            <SiderMenu />
+            {token.actionHash && (
+              <Alert status="success">
+                <AlertIcon/>
+                Your action Hash is {token.actionHash}
+              </Alert>
+            )}
             <Switch>
-              <Route path="/" exact>
-                <Home key={god.network.currentId.value} />
-              </Route>
               {ToolConfig.map((item) => (
                 <Route exact path={item.path} key={item.path} component={item.component} />
               ))}

@@ -6,3 +6,5 @@ dist-ssr
 .vscode
 yarn-error.log
 .env*
+.idea
+src/generated

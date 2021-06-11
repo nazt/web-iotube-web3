@@ -2,8 +2,8 @@ import { ChainState } from '@/store/lib/ChainState';
 import { TokenState } from '@/store/lib/TokenState';
 import { IotexMainnetConfig } from './IotexMainnetConfig';
 import { bscToIotexTokens, iotexBscNetTokens } from '@/constants/token/bsc-iotex';
-import { ethTokensForIotex, iotexTokensForEth } from '@/constants/token/eth-iotex';
 import { CashierState } from '@/store/lib/CashierState';
+import { TokenListState } from '@/store/lib/TokenListState';
 
 export const BSCMainnetConfig = new ChainState({
   name: 'BSC',
@@ -35,9 +35,13 @@ export const bscMainCrossChain = (network) => {
   return {
     [IotexMainnetConfig.chainId]: {
       chain: IotexMainnetConfig,
-      // cashier: iotexBscNetTokens.cashier,
       cashier: new CashierState({
         address: iotexBscNetTokens.cashier,
+        network: network
+      }),
+      tokenList: new TokenListState({
+        mintableAddress: bscToIotexTokens.mintableTokenList,
+        standardAddress: bscToIotexTokens.standardTokenList,
         network: network
       }),
       tokens: bscToIotexTokens.tokens.map((i) => {

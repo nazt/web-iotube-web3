@@ -2,16 +2,12 @@ import { TokenState } from '@/store/lib/TokenState';
 import { ChainState } from '../store/lib/ChainState';
 import { iotexBscNetTokens } from '@/constants/token/bsc-iotex';
 import { iotexTokensForEth } from '@/constants/token/eth-iotex';
-import { MappingState } from '@/store/standard/MappingState';
 import { ETHMainnetConfig } from './ETHMainnetConfig';
-import { ETHKovanConfig } from './ETHKovanConfig';
 import { CashierState } from '@/store/lib/CashierState';
 import { BSCMainnetConfig } from './BSCMainnetConfig';
-import { Network } from '@/store/god';
 import { TokenListState } from '@/store/lib/TokenListState';
-import { ethTokensForKovenBsc } from '@/constants/token/eth-bsc-koven';
 import { PolygonMainnetConfig } from './PolygonMainnetConfig';
-import { iotexMaticTokens, maitcToIotexTokens } from '@/constants/token/matic-iotex';
+import { iotexPolygonTokens } from '@/constants/token/matic-iotex';
 
 export const IotexMainnetConfig = new ChainState({
   name: 'Iotex',
@@ -78,17 +74,16 @@ export const iotexMainCrossChain = (network) => {
     },
     [PolygonMainnetConfig.chainId]: {
       chain: PolygonMainnetConfig,
-      // cashier: iotexTokensForEth.cashier,
       cashier: new CashierState({
-        address: maitcToIotexTokens.cashier,
+        address: iotexPolygonTokens.cashier,
         network: network
       }),
       tokenList: new TokenListState({
-        mintableAddress: maitcToIotexTokens.mintableTokenList,
-        standardAddress: maitcToIotexTokens.standardTokenList,
+        mintableAddress: iotexPolygonTokens.mintableTokenList,
+        standardAddress: iotexPolygonTokens.standardTokenList,
         network: network
       }),
-      tokens: maitcToIotexTokens.tokens.map((i) => {
+      tokens: iotexPolygonTokens.tokens.map((i) => {
         const token = new TokenState(i);
         token.network = network;
         return token;

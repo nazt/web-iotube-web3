@@ -1,10 +1,9 @@
 import { ChainState } from '@/store/lib/ChainState';
 import { TokenState } from '@/store/lib/TokenState';
 import { IotexMainnetConfig } from './IotexMainnetConfig';
-import { maitcToIotexTokens, iotexMaticTokens } from '@/constants/token/matic-iotex';
+import { polygonToIotexTokens } from '@/constants/token/matic-iotex';
 import { CashierState } from '@/store/lib/CashierState';
 import { TokenListState } from '@/store/lib/TokenListState';
-import { iotexTokensForEth } from '@/constants/token/eth-iotex';
 
 export const PolygonMainnetConfig = new ChainState({
   name: 'Polygon',
@@ -18,8 +17,8 @@ export const PolygonMainnetConfig = new ChainState({
     decimals: 18
   }),
   nativeCurrency: new TokenState({
-    id: 'matic-network',
-    name: 'MATIC',
+    id: 'polygon',
+    name: 'Polygon',
     symbol: 'MATIC',
     decimals: 18,
     logoURI: 'https://assets.coingecko.com/coins/images/4713/large/matic___polygon.jpg?1612939050',
@@ -37,15 +36,15 @@ export const polygonMainCrossChain = (network) => {
     [IotexMainnetConfig.chainId]: {
       chain: IotexMainnetConfig,
       cashier: new CashierState({
-        address: iotexMaticTokens.cashier,
+        address: polygonToIotexTokens.cashier,
         network: network
       }),
       tokenList: new TokenListState({
-        mintableAddress: maitcToIotexTokens.mintableTokenList,
-        standardAddress: maitcToIotexTokens.standardTokenList,
+        mintableAddress: polygonToIotexTokens.mintableTokenList,
+        standardAddress: polygonToIotexTokens.standardTokenList,
         network: network
       }),
-      tokens: maitcToIotexTokens.tokens.map((i) => {
+      tokens: polygonToIotexTokens.tokens.map((i) => {
         const token = new TokenState(i);
         token.network = network;
         return token;

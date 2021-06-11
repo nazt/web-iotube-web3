@@ -37,8 +37,7 @@ const NetworkHeader = observer((props: ISwitchProps) => {
   const store = useLocalObservable(() => ({
     tipsVisible: false,
     toggle() {
-      // swap.toggleSwap()
-
+      store.setChain(token.currentCrossChain?.chain.chainId);
     },
     get networks() {
       return [BSCMainnetConfig, ETHMainnetConfig, IotexMainnetConfig, PolygonMainnetConfig];
@@ -105,7 +104,7 @@ const NetworkHeader = observer((props: ISwitchProps) => {
       <Menu>
         <MenuButton css={{
           backgroundColor: useColorModeValue('#fff', 'rgba(26, 32, 44, 0.8)')
-        }} isActive={false} as={Button} pl={[5, 3]} pr={[5, 3]} pt={10} pb={10} rightIcon={<ChevronDownIcon/>}>
+        }} isActive={false} as={Button} pl={[5, 3]} pr={[5, 3]} pt={10} pb={10} rightIcon={(Object.values(god.currentChain.crossChain).length > 1) &&<ChevronDownIcon/>}>
           <Flex>
             <img width={36} height={36} src={token.currentCrossChain?.chain.logoUrl}/>
             <Box p={2}><Text fontSize="xl">{token.currentCrossChain?.chain.name}</Text></Box>

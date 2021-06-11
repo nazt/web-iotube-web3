@@ -1,4 +1,4 @@
-export const maitcToIotexTokens = {
+export const polygonToIotexTokens = {
   cashier: '0xf72CFb704d49aC7BB7FFa420AE5f084C671A29be',
   mintableTokenList: '0xC8DC8dCDFd94f9Cb953f379a7aD8Da5fdC303F3E',
   standardTokenList: '0xDe9395d2f4940aA501f9a27B98592589D14Bb0f7',
@@ -73,7 +73,7 @@ export const maitcToIotexTokens = {
 };
 
 //from iotex-> matic
-export const iotexMaticTokens = {
+export const iotexPolygonTokens = {
   cashier: '0x540a92dd951407ee6c94b997a43ecf30ea6d04cd',
   mintableTokenList: '0xd757adff0ec4060e2c4a15f9777767f5ca738ca9',
   standardTokenList: '0x2f8768cd292e94a0da78671974b89b87a398356e',

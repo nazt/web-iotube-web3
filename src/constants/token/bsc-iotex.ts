@@ -1,5 +1,7 @@
 export const bscToIotexTokens = {
-  cashier: 'io1zjlng7je02kxyvjq4eavswp6uxvfvcnh2a0a3d',
+  cashier: '0x797f1465796fd89ea7135e76dbc7cdb136bba1ca',
+  mintableTokenList: '0xa6ae9312D0AA3CC74d969Fcd4806d7729A321EE3',
+  standardTokenList: '0x0d793F4D4287265B9bdA86b7a4083193E8743b34',
   tokens: [
     {
       address: '0x000000000000000000000000000000000000000',

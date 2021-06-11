@@ -2,10 +2,9 @@ import { publicCOnfig } from './public';
 import { ChainState } from '@/store/lib/ChainState';
 import { TokenState } from '@/store/lib/TokenState';
 import { ethTokensForIotex, iotexTokensForEth } from '@/constants/token/eth-iotex';
-import { BSCMainnetConfig } from './BSCMainnetConfig';
-import { bscToIotexTokens, iotexBscNetTokens } from '@/constants/token/bsc-iotex';
 import { IotexMainnetConfig } from './IotexMainnetConfig';
 import { CashierState } from '@/store/lib/CashierState';
+import { TokenListState } from '@/store/lib/TokenListState';
 
 export const ETHMainnetConfig = new ChainState({
   name: 'ETH',
@@ -40,24 +39,17 @@ export const ethCrossChain = (network) => {
         address: ethTokensForIotex.cashier,
         network: network
       }),
+      tokenList: new TokenListState({
+        mintableAddress: ethTokensForIotex.mintableTokenList,
+        standardAddress: ethTokensForIotex.standardTokenList,
+        network: network
+      }),
       tokens: ethTokensForIotex.tokens.map((i) => {
         const token = new TokenState(i);
         token.network = network;
         return token;
       })
-    },
-    // [BSCMainnetConfig.chainId]: {
-    //   chain: BSCMainnetConfig,
-    //   cashier: new CashierState({
-    //     address: bscToIotexTokens.cashier,
-    //     network: network
-    //   }),
-    //   tokens: bscToIotexTokens.tokens.map((i) => {
-    //     const token = new TokenState(i);
-    //     token.network = network;
-    //     return token;
-    //   })
-    // }
+    }
   }
 };
 

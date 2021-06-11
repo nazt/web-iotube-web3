@@ -12,6 +12,13 @@ export const BSCMainnetConfig = new ChainState({
   rpcUrl: 'https://bsc-dataseed.binance.org',
   explorerURL: 'https://bscscan.com',
   explorerName: 'BscScan',
+  nativeCurrency: new TokenState({
+    id: 'binancecoin',
+    name: 'BNB',
+    symbol: 'BNB',
+    decimals: 18,
+    logoURI: 'https://exchange.pancakeswap.finance/images/coins/0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c.png',
+  }),
   Coin: new TokenState({
     symbol: 'BNB',
     decimals: 18

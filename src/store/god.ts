@@ -15,6 +15,7 @@ import { bscMainCrossChain, BSCMainnetConfig } from '../config/BSCMainnetConfig'
 import { ETHKovanConfig, ethKovenCrossChain } from '../config/ETHKovanConfig';
 import { IotexTestnetConfig, iotexTestnetCrossChain } from '../config/IotexTestnetConfig';
 import { polygonMainCrossChain, PolygonMainnetConfig } from '../config/PolygonMainnetConfig';
+import { metamaskUtils } from '@/lib/metaskUtils';
 
 export enum Network {
   eth = 'eth',

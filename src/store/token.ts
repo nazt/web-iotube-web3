@@ -45,6 +45,7 @@ export class TokenStore {
   }
 
   async depositTo(args, opts) {
+    console.log(this.currentCrossChain.cashier.address);
     if (!this.currentCrossChain.cashier.address) return;
     return await this.currentCrossChain.cashier.depositTo({ params: args, options: opts });
   }

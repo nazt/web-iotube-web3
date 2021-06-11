@@ -15,6 +15,7 @@ export class ChainState {
   explorerName: string;
   explorerURL: string;
   Coin: TokenState;
+  nativeCurrency: TokenState;
   info: {
     blockPerSeconds: number;
     multicallAddr?: string;

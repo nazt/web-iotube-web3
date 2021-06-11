@@ -20,6 +20,13 @@ export const ETHKovanConfig = new ChainState({
     symbol: 'ETH',
     decimals: 18
   }),
+  nativeCurrency: new TokenState({
+    id: 'ethereum',
+    name: 'ETH',
+    symbol: 'ETH',
+    decimals: 18,
+    logoURI: 'https://exchange.pancakeswap.finance/images/coins/0x2170ed0880ac9a755fd29b2688956bd959f933f8.png',
+  }),
   info: {
     blockPerSeconds: 13,
     multicallAddr: '0x2cc8688c5f75e365aaeeb4ea8d6a480405a48d2a'

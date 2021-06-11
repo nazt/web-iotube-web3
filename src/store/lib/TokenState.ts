@@ -7,6 +7,7 @@ import tokenListAbi from '@/constants/abi/tokenlist.json';
 
 export class TokenState {
   abi = erc20Abi;
+  id = "";
   tokenListAbi = tokenListAbi;
   name: string;
   symbol: string;

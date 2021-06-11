@@ -14,6 +14,13 @@ export const ETHMainnetConfig = new ChainState({
   rpcUrl: `https://mainnet.infura.io/v3/${publicCOnfig.infuraId}`,
   explorerURL: 'https://etherscan.io',
   explorerName: 'EtherScan',
+  nativeCurrency: new TokenState({
+    id: 'ethereum',
+    name: 'ETH',
+    symbol: 'ETH',
+    decimals: 18,
+    logoURI: 'https://exchange.pancakeswap.finance/images/coins/0x2170ed0880ac9a755fd29b2688956bd959f933f8.png',
+  }),
   Coin: new TokenState({
     symbol: 'ETH',
     decimals: 18

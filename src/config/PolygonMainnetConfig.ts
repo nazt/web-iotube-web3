@@ -17,6 +17,13 @@ export const PolygonMainnetConfig = new ChainState({
     symbol: 'MATIC',
     decimals: 18
   }),
+  nativeCurrency: new TokenState({
+    id: 'matic-network',
+    name: 'MATIC',
+    symbol: 'MATIC',
+    decimals: 18,
+    logoURI: 'https://assets.coingecko.com/coins/images/4713/large/matic___polygon.jpg?1612939050',
+  }),
   info: {
     blockPerSeconds: 3,
     multicallAddr: '0xa0FD7430852361931b23a31F84374BA3314e1682'

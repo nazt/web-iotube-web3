@@ -24,5 +24,6 @@
   "fee.network": "Network Fee",
   "relay_to_chain": "Relay to ${chain}",
   "confirm": "Confirm",
-  "you_are_going_to_deposit": "You are going to deposit"
+  "you_are_going_to_deposit": "You are going to deposit",
+  "change_network_eth_warning": "Metamask does not allow us switch to Ethereum for you.  Please switch inside Metamask."
 }

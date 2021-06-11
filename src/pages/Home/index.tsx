@@ -128,6 +128,7 @@ export const Home = observer(() => {
       let res = await token.depositTo([fromAddress, receiverAddress, amountVal], options);
       const receipt = await res.wait();
       console.log(receipt);
+      store.isOpenConfirmModal.setValue(false);
       if (receipt.status == 1) {
         store.actionHash = receipt.blockHash;
         message.success(`Ethereum transaction broadcasted successfully.`);

@@ -97,7 +97,7 @@ export const Home = observer(() => {
         console.log("try to approve --->", store.amount.value.toFixed(0));
         const approvedRes = await token.approve(store.amount.value, store.curToken);
         console.log(`approve response:`, approvedRes);
-        store.curToken.allowanceForCashier.setValue(new BigNumber(approvedRes.value.toString()));
+        store.curToken.allowanceForCashier.setValue(store.amount.value);
         console.log('allowance Cashier new ---->', store.curToken.allowanceForCashier.format);
       } catch (e) {
         message.error(`tokenContract.approve error ${e}`);

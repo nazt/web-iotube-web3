@@ -26,6 +26,9 @@ import { IotexTestnetConfig } from '../../config/IotexTestnetConfig';
 import { ETHMainnetConfig } from '../../config/ETHMainnetConfig';
 import { PolygonMainnetConfig } from '../../config/PolygonMainnetConfig';
 import { IotexMainnetConfig } from '../../config/IotexMainnetConfig';
+import { injected } from '@/lib/web3-react';
+import { useWeb3React } from '@web3-react/core';
+import { Network } from '@/store/god';
 
 interface ISwitchProps {
   tokens?: Array<TokenState>;
@@ -33,6 +36,7 @@ interface ISwitchProps {
 
 const NetworkHeader = observer((props: ISwitchProps) => {
   const { god, token, lang } = useStore();
+  const { activate } = useWeb3React();
   const toast = createStandaloneToast();
   const store = useLocalObservable(() => ({
     tipsVisible: false,
@@ -57,9 +61,15 @@ const NetworkHeader = observer((props: ISwitchProps) => {
           rpcUrls: [chain.rpcUrl]
         });
         god.setChain(val);
+        store.connectInejct();
       } else {
         toast({ title: lang.t('change_network_eth_warning'), position: 'top', status: 'warning' });
       }
+    },
+    connectInejct() {
+      god.setNetwork(Network.eth);
+      activate(injected);
+      god.eth.connector.latestProvider.save('inject');
     },
     onSelectDest(chain: ChainState) {
       token.toNetwork.setValue(chain.chainId);

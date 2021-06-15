@@ -50,7 +50,7 @@ export class GodStore {
     // IotexTestnetConfig.init();
 
     ETHMainnetConfig.crossChain = ethCrossChain(EthNetworkConfig);
-    IotexMainnetConfig.crossChain = iotexMainCrossChain(IotexNetworkConfig);
+    IotexMainnetConfig.crossChain = iotexMainCrossChain(EthNetworkConfig);
     BSCMainnetConfig.crossChain = bscMainCrossChain(EthNetworkConfig);
     ETHKovanConfig.crossChain = ethKovenCrossChain(EthNetworkConfig);
     PolygonMainnetConfig.crossChain = polygonMainCrossChain(EthNetworkConfig);

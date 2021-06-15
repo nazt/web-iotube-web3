@@ -40,7 +40,7 @@ export const Home = observer(() => {
     receiverAddress: new AddressState(),
     isOpenTokenList: new BooleanState(),
     isOpenConfirmModal: new BooleanState(),
-    depositeFee: new BigNumberState({decimals: 18, loading: false}),
+    depositeFee: new BigNumberState({ decimals: 18, loading: false }),
     actionHash: '',
     showConnector() {
       god.setShowConnecter(true);
@@ -85,10 +85,9 @@ export const Home = observer(() => {
     onSelectToken(t: TokenState) {
       store.curToken = t;
       store.amount.setDecimals(t.decimals);
-      token.depositFee().then((i) =>
-      {
+      token.depositFee().then((i) => {
         // @ts-ignore
-        store.depositeFee.setValue(new BigNumber(i))
+        store.depositeFee.setValue(new BigNumber(i));
       });
     },
     get shouldApprove() {
@@ -109,29 +108,23 @@ export const Home = observer(() => {
       const amountVal = store.amount.value.toFixed(0);
       console.log(store.amount.value);
       console.log(store.amount.value.toFixed(0));
-      let options = {};
+      let options = { value: amountVal };
       let receiverAddress = store.receiverAddress.value;
       let fromAddress = store.curToken.address;
-      console.log(token.currentChain.name);
-      if(token.currentChain.name == "Iotex") {
-        receiverAddress = store.receiverAddress.getIoAddress();
-        options = {
-          amount: await token.depositFee(),
-          gasLimit: 1000000,
-          gasPrice: toRau('1', 'Qev')
-        };
-      }else {
-        options = {
-          value: amountVal
-        };
-      }
-      let res = await token.depositTo([fromAddress, receiverAddress, amountVal], options);
-      const receipt = await res.wait();
-      console.log(receipt);
-      store.isOpenConfirmModal.setValue(false);
-      if (receipt.status == 1) {
-        store.actionHash = receipt.blockHash;
-        message.success(`Ethereum transaction broadcasted successfully.`);
+      try {
+        let res = await token.depositTo([fromAddress, receiverAddress, amountVal], options);
+        const receipt = await res.wait();
+        store.isOpenConfirmModal.setValue(false);
+        console.log(receipt);
+        if (receipt.status == 1) {
+          store.actionHash = receipt.blockHash;
+          message.success(`Ethereum transaction broadcasted successfully.`);
+        } else {
+
+        }
+      } catch (e) {
+        store.isOpenConfirmModal.setValue(false);
+        message.error(e.data.message);
       }
     }
   }));
@@ -178,7 +171,7 @@ export const Home = observer(() => {
             <InputRightElement onClick={store.openTokenList} width="4rem" cursor="pointer" flexDir="column">
               {/* {store.curToken && <Text fontSize="sm">Balance: {store.curToken.balance.format}</Text>} */}
               <Flex alignItems="center" pr={2} w="100%">
-                <Image borderRadius="full" boxSize="24px"  src={store.curToken?.logoURI}
+                <Image borderRadius="full" boxSize="24px" src={store.curToken?.logoURI}
                        fallbackSrc="https://via.placeholder.com/150"/>
                 <Icon as={ChevronDownIcon} ml={1}/>
               </Flex>

@@ -4,7 +4,7 @@ export const ethTokensForIotex = {
   'standardTokenList': '0x7c0bef36e1b1cbeb1f1a5541300786a7b608aede',
   'tokens': [
     {
-      'address': '0x000000000000000000000000000000000000000',
+      'address': '0x0000000000000000000000000000000000000000',
       'name': 'ETH',
       'decimals': 18,
       'symbol': 'ETH',

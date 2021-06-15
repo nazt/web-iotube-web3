@@ -4,7 +4,7 @@ export const polygonToIotexTokens = {
   standardTokenList: '0xDe9395d2f4940aA501f9a27B98592589D14Bb0f7',
   tokens: [
     {
-      address: '0x000000000000000000000000000000000000000',
+      address: '0x0000000000000000000000000000000000000000',
       name: 'Matic',
       decimals: 18,
       symbol: 'Matic',
@@ -82,7 +82,7 @@ export const iotexPolygonTokens = {
       address: '0x8e66c0d6b70c0b23d39f4b21a1eac52bba8ed89a',
       name: 'Wrapped Matic',
       decimals: 18,
-      symbol: 'Matic',
+      symbol: 'WMatic',
       logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/3890.png'
     },
     {

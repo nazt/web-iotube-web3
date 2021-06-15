@@ -4,7 +4,7 @@ export const bscToIotexTokens = {
   standardTokenList: '0x0d793F4D4287265B9bdA86b7a4083193E8743b34',
   tokens: [
     {
-      address: '0x000000000000000000000000000000000000000',
+      address: '0x0000000000000000000000000000000000000000',
       name: 'Binance Coin',
       decimals: 18,
       symbol: 'BNB',

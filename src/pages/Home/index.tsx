@@ -85,10 +85,10 @@ export const Home = observer(() => {
     onSelectToken(t: TokenState) {
       store.curToken = t;
       store.amount.setDecimals(t.decimals);
-      token.depositFee().then((i) => {
-        // @ts-ignore
-        store.depositeFee.setValue(new BigNumber(i));
-      });
+      // token.depositFee.then((i) => {
+      //   // @ts-ignore
+      //   store.depositeFee.setValue(new BigNumber(i));
+      // });
     },
     get shouldApprove() {
       if (!store.curToken || store.curToken.isEth) return;

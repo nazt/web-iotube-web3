@@ -39,11 +39,6 @@ export class TokenStore {
     return this.currentCrossChain.tokens;
   }
 
-  async depositFee() {
-    if (!this.currentCrossChain.cashier.address) return;
-    return await this.currentCrossChain.cashier.depositFee();
-  }
-
   async depositTo(args, opts) {
     if (!this.currentCrossChain.cashier.address) return;
     return await this.currentCrossChain.cashier.depositTo({ params: args, options: opts });
@@ -58,9 +53,7 @@ export class TokenStore {
 
   async loadPrivateData() {
     if (!this.god.currentNetwork.account) return;
-    console.log(this.currentTokens);
-    console.log(this.currentCrossChain.tokens);
-    console.log(this.currentNetwork);
+    console.log(Object.values(this.currentChain.crossChain).map(i => i.cashier));
     await this.currentNetwork.multicall([
       ...this.currentTokens.filter((i) => !i.isEth()).map((i) =>
         i.preMulticall({
@@ -93,7 +86,14 @@ export class TokenStore {
         method: 'maxAmount',
         params: [i.address],
         handler: i.maxAmountStandard
-      }))
+      })),
+
+      ...Object.values(this.currentChain.crossChain).map((i) =>
+        i.cashier.preMulticall({
+          method: 'depositFee',
+          handler: i.cashier.depositFee
+        })
+      ),
     ]);
 
     this.currentTokens.filter((i) => i.isEth()).map((i) => {
@@ -106,7 +106,7 @@ export class TokenStore {
     if (!this.god.currentNetwork.account) return;
     await this.currentNetwork.multicall([
       ...Object.values(this.currentChain.crossChain).map((i) =>
-        i.cashier.preMulticall({ method: 'depositeFee', params: [this.currentNetwork.account], handler: i, read: true })
+        i.cashier.preMulticall({ method: 'depositFee', params: [this.currentNetwork.account], handler: i, read: true })
       )
     ]);
   }

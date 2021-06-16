@@ -13,7 +13,7 @@ import { TokenListState } from '@/store/lib/TokenListState';
 import { ETHKovanConfig } from './ETHKovanConfig';
 
 export const IotexTestnetConfig = new ChainState({
-  name: 'IoTex',
+  name: 'IoTeX',
   chainId: 4690,
   logoUrl: '/images/iotex.svg',
   rpcUrl: `https://babel-api.testnet.iotex.io`,

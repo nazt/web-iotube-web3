@@ -12,17 +12,25 @@ class Tool {
 }
 
 export const ToolConfig = [
+  // {
+  //   name: 'Home',
+  //   path: '/',
+  //   component: Home,
+  //   icon:'home.svg',
+  //   iconActive:'home_active.svg'
+  // },
   {
-    name: 'Home',
-    path: '/',
-    component: Home,
-    icon:'home.svg',
-    iconActive:'home_active.svg'
-  }, {
-    name: 'Swap',
-    path: '/swap',
+    name: 'Deposit',
+    path: '/deposit',
     component: Home,
     icon:'swap.svg',
     iconActive:'swap_active.svg'
+  },
+  {
+    name: 'Transactions',
+    path: '/transactions',
+    component: Vault,
+    icon: 'Governance.svg',
+    iconActive:'Governance_active.svg'
   }
 ];

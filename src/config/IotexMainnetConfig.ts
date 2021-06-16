@@ -10,7 +10,7 @@ import { PolygonMainnetConfig } from './PolygonMainnetConfig';
 import { iotexPolygonTokens } from '@/constants/token/matic-iotex';
 
 export const IotexMainnetConfig = new ChainState({
-  name: 'Iotex',
+  name: 'IoTeX',
   chainId: 4689,
   logoUrl: '/images/iotex.svg',
   rpcUrl: 'https://api.iotex.one:443',

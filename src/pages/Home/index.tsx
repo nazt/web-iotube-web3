@@ -12,7 +12,7 @@ import {
   Image,
   Icon,
   Button,
-  Alert,
+  Stack,
   AlertIcon,
   useColorModeValue
 } from '@chakra-ui/react';
@@ -30,9 +30,16 @@ import BigNumber from 'bignumber.js';
 import { ConfirmModal } from '@/components/ConfirmModal';
 import { message } from 'antd';
 import { BigNumberState } from '@/store/standard/BigNumberState';
+import { theme } from '@/lib/theme';
 
 export const Home = observer(() => {
   const { god, token, lang } = useStore();
+
+  const home = useColorModeValue('white', theme.colors.gray.bg);
+  const homeShadow = useColorModeValue(theme.shadows.lightShadow, theme.shadows.darkShadow);
+  const inputBg = useColorModeValue(theme.colors.gray[5], theme.colors.gray[8]);
+  const inputColor = useColorModeValue(theme.colors.gray[6], theme.colors.gray[2]);
+
 
   const store = useLocalStore(() => ({
     curToken: null as TokenState,
@@ -94,7 +101,7 @@ export const Home = observer(() => {
     },
     async onCashierApprove() {
       try {
-        console.log("try to approve --->", store.amount.value.toFixed(0));
+        console.log('try to approve --->', store.amount.value.toFixed(0));
         const approvedRes = await token.approve(store.amount.value, store.curToken);
         console.log(`approve response:`, approvedRes);
         store.curToken.allowanceForCashier.setValue(store.amount.value);
@@ -109,7 +116,7 @@ export const Home = observer(() => {
       console.log(store.amount.value.toFixed(0));
       let options = { value: token.currentCrossChain.cashier.depositFee.value.toFixed(0) };
       if (store.curToken.isEth()) {
-         options = { value: new BigNumber(amountVal).plus(token.currentCrossChain.cashier.depositFee.value).toString() };
+        options = { value: new BigNumber(amountVal).plus(token.currentCrossChain.cashier.depositFee.value).toString() };
       }
       let receiverAddress = store.receiverAddress.value;
       let fromAddress = store.curToken.address;
@@ -142,74 +149,74 @@ export const Home = observer(() => {
       maxW="md"
       mt={10}
       p={30}
-      css={{
-        backdropFilter: 'saturate(180%) blur(5px)',
-        backgroundColor: useColorModeValue('#fff', 'rgba(26, 32, 44, 0.8)'),
-        borderRadius: '30px',
-        boxShadow: '0px 3px 20px 0px rgba(214, 214, 214, 0.5)'
-      }}
+      bg={home}
+      borderRadius={theme.borderRadius.sm}
+      boxShadow={homeShadow}
     >
       <NetworkHeader/>
-      <FormControl mt={10}>
+      <FormControl mt={8}>
         <Box
-          border="1px solid"
-          borderRadius="md"
-          css={{
-            backgroundColor: useColorModeValue('rgba(248, 248, 250, 1)', '')
-          }}
-          borderColor="rgba(248, 248, 250, 1)"
+          bg={inputBg}
+          borderRadius={theme.borderRadius.sm}
+          color={inputColor}
         >
-          <Flex justify="space-between" p={2}>
-            <Text fontSize="sm">Token Amount</Text>
-            <Text fontSize="sm">{store.curToken ? `Balance ${store.curToken.balance.format} ` : '...'}</Text>
+          <Flex borderRadius="md" justify="space-between" px={4} pt={4}>
+            <Text fontSize="md">Token Amount</Text>
+            <Center>
+              {store.curToken && <Text fontSize="sm">Balance: {store.curToken.balance.format}</Text>}
+            </Center>
           </Flex>
           <InputGroup>
             <Input
-              border="none"
+              variant="unstyled"
               placeholder="0.0"
               type="number"
+              ml={4}
+              mr="8rem"
+              py={2}
               value={store.amount.format || ''}
               onChange={(e) => store.amount.setFormat(e.target.value)}
             />
-            <InputRightElement onClick={store.openTokenList} width="4rem" cursor="pointer" flexDir="column">
-              {/* {store.curToken && <Text fontSize="sm">Balance: {store.curToken.balance.format}</Text>} */}
-              <Flex alignItems="center" pr={2} w="100%">
-                <Image borderRadius="full" boxSize="24px" src={store.curToken?.logoURI}
+            <InputRightElement onClick={store.openTokenList} float={'right'} width="10rem" cursor="pointer">
+              <Stack width="100%" direction="row-reverse" maxW="12rem" alignContent="flex-end">
+                <Center mr={3}>
+                  <Icon as={ChevronDownIcon}/>
+                </Center>
+                {store.curToken?.symbol && <Text>{store.curToken.symbol}</Text>}
+                <Image borderRadius="full" boxSize={theme.iconSize.md} src={store.curToken?.logoURI}
                        fallbackSrc="https://via.placeholder.com/150"/>
-                <Icon as={ChevronDownIcon} ml={1}/>
-              </Flex>
+              </Stack>
             </InputRightElement>
           </InputGroup>
         </Box>
 
         <Box
-          border="1px solid"
-          borderRadius="md"
-          css={{
-            backgroundColor: useColorModeValue('rgba(248, 248, 250, 1)', '')
-          }}
-          borderColor="rgba(248, 248, 250, 1)"
-          mt={4}
+          borderRadius={theme.borderRadius.sm}
+          bg={inputBg}
+          mt={8}
+          color={inputColor}
         >
-          <Flex justify="space-between" p={2}>
-            <Text fontSize="sm">Receiver Address</Text>
+          <Flex justify="space-between" px={4} pt={4}>
+            <Text fontSize="md">Receiver Address</Text>
           </Flex>
           <InputGroup>
             <Input
-              border="none"
+              variant="unstyled"
+              mx={4}
+              py={2}
               placeholder={token.currentCrossChain && token.currentCrossChain.chain.network.info.token.tokenExample}
               value={store.receiverAddress.value}
               onChange={(e) => store.receiverAddress.setValue(e.target.value)}
             />
           </InputGroup>
         </Box>
-        <Center>
+        <Center mt={5}>
           {!Boolean(god.currentNetwork.account) ? (
             <Button
-              mt="10"
-              mb={10}
-              w="100%"
-              p={8}
+              my={10}
+              size="block"
+              color={theme.colors.gray[4]}
+              bg={theme.colors.lightGreen}
               title={lang.t('connect.wallet')}
               leftIcon={<img src="images/logo.svg" className="h-6 mr-4"/>}
               onClick={store.showConnector}
@@ -220,30 +227,19 @@ export const Home = observer(() => {
             <>
               {!store.state && Boolean(store.shouldApprove) ?
                 <Button
+                  my={10}
                   onClick={store.onCashierApprove}
-                  mt="10"
-                  mb={10}
-                  w="100%"
-                  p={8}
+                  size="block"
                   disabled={!!store.state}
-                  css={{
-                    backgroundColor: useColorModeValue('#182532', ''),
-                    color: useColorModeValue('#fff', '')
-                  }}
+                  borderRadius={theme.borderRadius.sm}
                 >
                   {lang.t('approve')}
                 </Button> :
                 <Button
                   onClick={() => store.isOpenConfirmModal.setValue(true)}
-                  mt="10"
-                  mb={10}
-                  w="100%"
-                  p={8}
+                  size="block"
+                  my={10}
                   disabled={!!store.state}
-                  css={{
-                    backgroundColor: useColorModeValue('#182532', ''),
-                    color: useColorModeValue('#fff', '')
-                  }}
                 >
                   {store.state || lang.t('deposit')}
                 </Button>}

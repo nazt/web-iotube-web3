@@ -23,6 +23,13 @@ export const IotexTestnetConfig = new ChainState({
     symbol: 'IOTX',
     decimals: 18
   }),
+  nativeCurrency: new TokenState({
+    id: 'iotex',
+    name: 'IOTX',
+    symbol: 'IOTX',
+    decimals: 18,
+    logoURI: 'https://githubproxy.b-cdn.net/iotexproject/iotex-token-metadata/master/images/io15qr5fzpxsnp7garl4m7k355rafzqn8grrm0grz.png',
+  }),
   info: {
     blockPerSeconds: 5,
     multicallAddr: '0xe980c6BC4ff99e3E8431b680a58344B8e0170bE0'

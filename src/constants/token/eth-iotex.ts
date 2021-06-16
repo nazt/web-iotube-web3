@@ -1,8 +1,10 @@
 export const ethTokensForIotex = {
   'cashier': '0xa0fd7430852361931b23a31f84374ba3314e1682',
+  'mintableTokenList': '0x73ffdfc98983ad59fb441fc5fe855c1589e35b3e',
+  'standardTokenList': '0x7c0bef36e1b1cbeb1f1a5541300786a7b608aede',
   'tokens': [
     {
-      'address': '0x000000000000000000000000000000000000000',
+      'address': '0x0000000000000000000000000000000000000000',
       'name': 'ETH',
       'decimals': 18,
       'symbol': 'ETH',

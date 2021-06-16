@@ -13,7 +13,7 @@ export const EthNetworkConfig = new EthNetworkState({
   allowChains: [BSCMainnetConfig.chainId, BSCTestnetConfig.chainId, ETHMainnetConfig.chainId, ETHKovanConfig.chainId, IotexMainnetConfig.chainId, PolygonMainnetConfig.chainId],
   info: {
     token: {
-      tokenExample: '0x000000000000000000000000000000000000000'
+      tokenExample: '0x0000000000000000000000000000000000000000'
     }
   },
   chain: new MappingState({

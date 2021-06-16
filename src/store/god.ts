@@ -15,6 +15,7 @@ import { bscMainCrossChain, BSCMainnetConfig } from '../config/BSCMainnetConfig'
 import { ETHKovanConfig, ethKovenCrossChain } from '../config/ETHKovanConfig';
 import { IotexTestnetConfig, iotexTestnetCrossChain } from '../config/IotexTestnetConfig';
 import { polygonMainCrossChain, PolygonMainnetConfig } from '../config/PolygonMainnetConfig';
+import { metamaskUtils } from '@/lib/metaskUtils';
 
 export enum Network {
   eth = 'eth',
@@ -49,7 +50,7 @@ export class GodStore {
     // IotexTestnetConfig.init();
 
     ETHMainnetConfig.crossChain = ethCrossChain(EthNetworkConfig);
-    IotexMainnetConfig.crossChain = iotexMainCrossChain(IotexNetworkConfig);
+    IotexMainnetConfig.crossChain = iotexMainCrossChain(EthNetworkConfig);
     BSCMainnetConfig.crossChain = bscMainCrossChain(EthNetworkConfig);
     ETHKovanConfig.crossChain = ethKovenCrossChain(EthNetworkConfig);
     PolygonMainnetConfig.crossChain = polygonMainCrossChain(EthNetworkConfig);

@@ -52,10 +52,6 @@ export const WalletSelecter = observer(() => {
           <Text>TokenPocket</Text>
           <Image src="/images/tokenpocket.svg" />
         </Button>
-        <Button onClick={store.connectIopay} size="lg" justifyContent="space-between" alignItems="center" mt="2">
-          <Text>Iopay</Text>
-          <Image src="/images/iotex.svg" />
-        </Button>
       </ModalContent>
     </Modal>
   );

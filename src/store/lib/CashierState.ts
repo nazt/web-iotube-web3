@@ -2,11 +2,13 @@ import { makeAutoObservable } from 'mobx';
 import { NetworkState } from './NetworkState';
 import { CallParams } from '../../../type';
 import cashierAbi from '../../constants/abi/cashierAbi.json';
+import { BigNumberState } from '@/store/standard/BigNumberState';
 
 export class CashierState {
   address: Partial<string>;
   network: NetworkState;
-  abi = cashierAbi; // TO-DO: cashier ABi should to match un-metamask networks
+  depositFee: BigNumberState = new BigNumberState({decimals: 18, loading: false});
+  abi = cashierAbi;
 
   constructor(args: Partial<CashierState>) {
     Object.assign(this, args);
@@ -24,15 +26,6 @@ export class CashierState {
       abi: this.abi,
       method: 'depositTo'
     }, args));
-  }
-
-  depositFee() {
-    return this.network.execContract(Object.assign({
-      address: this.address,
-      abi: this.abi,
-      method: 'depositFee',
-      read: true
-    }));
   }
 
   transfer(args: Partial<CallParams>) {

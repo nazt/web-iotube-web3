@@ -4,6 +4,7 @@ import { NumberState, StringState } from './standard/base';
 import { CrossChain } from '../../type';
 import { TokenState } from '@/store/lib/TokenState';
 import BigNumber from 'bignumber.js';
+import { IotexMainnetConfig } from '../config/IotexMainnetConfig';
 
 
 export class TokenStore {
@@ -23,7 +24,6 @@ export class TokenStore {
   }
 
   get currentCrossChain(): CrossChain {
-    console.log(this.currentChain.crossChain[Object.keys(this.currentChain.crossChain)[0]]);
     return this.currentChain.crossChain[this.toNetwork.value] || this.currentChain.crossChain[Object.keys(this.currentChain.crossChain)[0]];
   }
 
@@ -39,11 +39,6 @@ export class TokenStore {
     return this.currentCrossChain.tokens;
   }
 
-  async depositFee() {
-    if (!this.currentCrossChain.cashier.address) return;
-    return await this.currentCrossChain.cashier.depositFee();
-  }
-
   async depositTo(args, opts) {
     if (!this.currentCrossChain.cashier.address) return;
     return await this.currentCrossChain.cashier.depositTo({ params: args, options: opts });
@@ -51,16 +46,12 @@ export class TokenStore {
 
   async approve(amountVal: BigNumber, curToken: TokenState) {
     if (!this.god.currentNetwork.account) return;
-    console.log(curToken);
-    return await curToken.approve({ params: [this.currentNetwork.account, amountVal.toFixed()] });
+    return await curToken.approve({ params: [this.currentCrossChain.cashier.address, amountVal.toFixed()] });
   }
 
 
   async loadPrivateData() {
     if (!this.god.currentNetwork.account) return;
-    console.log(this.currentTokens);
-    console.log(this.currentCrossChain.tokens);
-    console.log(this.currentNetwork);
     await this.currentNetwork.multicall([
       ...this.currentTokens.filter((i) => !i.isEth()).map((i) =>
         i.preMulticall({
@@ -93,21 +84,24 @@ export class TokenStore {
         method: 'maxAmount',
         params: [i.address],
         handler: i.maxAmountStandard
-      }))
+      })),
     ]);
 
     this.currentTokens.filter((i) => i.isEth()).map((i) => {
       i.balance = this.god.currentNetwork.chain.current.Coin.balance;
     });
+    this.loadIotexDepositFee();
   }
 
-  async loadDepositFee() {
-    if (!this.god.isIotxNetork) return;
-    if (!this.god.currentNetwork.account) return;
+  async loadIotexDepositFee() {
+    if (this.currentChain.name !== IotexMainnetConfig.name) return false;
     await this.currentNetwork.multicall([
       ...Object.values(this.currentChain.crossChain).map((i) =>
-        i.cashier.preMulticall({ method: 'depositeFee', params: [this.currentNetwork.account], handler: i, read: true })
-      )
+        i.cashier.preMulticall({
+          method: 'depositFee',
+          handler: i.cashier.depositFee
+        })
+      ),
     ]);
   }
 }

@@ -24,7 +24,7 @@ export const ethTokensForKovenBsc = {
   'standardTokenList':'0x92a9a7E1119d8890aeE5096CA5ddef8E677a25F7',
   'tokens': [
     {
-      'address': '0x000000000000000000000000000000000000000',
+      'address': '0x0000000000000000000000000000000000000000',
       'name': 'ETH',
       'decimals': 18,
       'symbol': 'ETH',

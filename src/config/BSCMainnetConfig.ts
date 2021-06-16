@@ -2,8 +2,8 @@ import { ChainState } from '@/store/lib/ChainState';
 import { TokenState } from '@/store/lib/TokenState';
 import { IotexMainnetConfig } from './IotexMainnetConfig';
 import { bscToIotexTokens, iotexBscNetTokens } from '@/constants/token/bsc-iotex';
-import { ethTokensForIotex, iotexTokensForEth } from '@/constants/token/eth-iotex';
 import { CashierState } from '@/store/lib/CashierState';
+import { TokenListState } from '@/store/lib/TokenListState';
 
 export const BSCMainnetConfig = new ChainState({
   name: 'BSC',
@@ -12,6 +12,13 @@ export const BSCMainnetConfig = new ChainState({
   rpcUrl: 'https://bsc-dataseed.binance.org',
   explorerURL: 'https://bscscan.com',
   explorerName: 'BscScan',
+  nativeCurrency: new TokenState({
+    id: 'binancecoin',
+    name: 'BNB',
+    symbol: 'BNB',
+    decimals: 18,
+    logoURI: 'https://exchange.pancakeswap.finance/images/coins/0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c.png',
+  }),
   Coin: new TokenState({
     symbol: 'BNB',
     decimals: 18
@@ -28,9 +35,13 @@ export const bscMainCrossChain = (network) => {
   return {
     [IotexMainnetConfig.chainId]: {
       chain: IotexMainnetConfig,
-      // cashier: iotexBscNetTokens.cashier,
       cashier: new CashierState({
         address: iotexBscNetTokens.cashier,
+        network: network
+      }),
+      tokenList: new TokenListState({
+        mintableAddress: bscToIotexTokens.mintableTokenList,
+        standardAddress: bscToIotexTokens.standardTokenList,
         network: network
       }),
       tokens: bscToIotexTokens.tokens.map((i) => {

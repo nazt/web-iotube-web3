@@ -11,7 +11,7 @@ export const ethTokensForKovenIotex = {
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/2777.png'
     },
     {
-      'address': '0x000000000000000000000000000000000000000',
+      'address': '0x0000000000000000000000000000000000000000',
       'name': 'ETH',
       'decimals': 18,
       'symbol': 'ETH',
@@ -102,7 +102,7 @@ export const iotexTokensForKovenWeb3 = {
   'standardTokenList':'0x1c3b076f7b3c0303c678e6d70ca44fb981eecc7e',
   'tokens': [
     {
-      'address': '0x000000000000000000000000000000000000000',
+      'address': '0x0000000000000000000000000000000000000000',
       'name': 'IoTeX',
       'decimals': 18,
       'symbol': 'IOTX',

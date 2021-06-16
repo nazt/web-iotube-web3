@@ -7,6 +7,7 @@ import tokenListAbi from '@/constants/abi/tokenlist.json';
 
 export class TokenState {
   abi = erc20Abi;
+  id = "";
   tokenListAbi = tokenListAbi;
   name: string;
   symbol: string;
@@ -39,7 +40,6 @@ export class TokenState {
   }
 
   get amountRange() {
-    console.log(this.address, this.minAmountStandard.format, this.minAmountMintable.format, this.maxAmountStandard.format, this.maxAmountMintable.format);
     return {
       minAmount: this.minAmountStandard.format === "0" ? this.minAmountMintable : this.minAmountStandard,
       maxAmount: this.maxAmountStandard.format === "0" ? this.maxAmountMintable : this.maxAmountStandard

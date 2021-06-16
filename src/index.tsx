@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { useStore } from '@/store/index';
 import { Header } from '@/components/Header/index';
-import { ChakraProvider, Button, Container, Center, CSSReset, Alert, AlertIcon } from '@chakra-ui/react';
+import { ChakraProvider, Button, Container, Center, CSSReset, Alert, AlertIcon,Flex } from '@chakra-ui/react';
 import { theme } from '@/lib/theme';
 import { ETHProvider } from './components/EthProvider';
 import { Web3ReactProvider } from '@web3-react/core';
@@ -14,7 +14,8 @@ import { Toaster } from 'react-hot-toast';
 import { ToolConfig } from './config/ToolConfig';
 import { WalletSelecter } from './components/WalletSelecter/index';
 import './app.css';
-import { SiderMenu } from '@/components/SiderMenu';
+import SiderMenu  from '@/components/SiderMenu';
+
 
 const ErrorFallback = ({ error, resetErrorBoundary }) => {
   return (
@@ -29,6 +30,17 @@ const ErrorFallback = ({ error, resetErrorBoundary }) => {
     </Container>
   );
 };
+
+const BodyWrapper=({children})=>{
+  return (
+    <Box
+      marginLeft={'200px'}
+      maxWidth={'calc(100%-200px)'}
+    >
+      {children}
+    </Box>
+  )
+}
 
 export const App = observer(() => {
   const { lang, god, token } = useStore();
@@ -53,11 +65,13 @@ export const App = observer(() => {
                 Your action Hash is {token.actionHash}
               </Alert>
             )}
-            <Switch>
-              {ToolConfig.map((item) => (
-                <Route exact path={item.path} key={item.path} component={item.component} />
-              ))}
-            </Switch>
+            <BodyWrapper>
+              <Switch>
+                {ToolConfig.map((item) => (
+                  <Route exact path={item.path} key={item.path} component={item.component} />
+                ))}
+              </Switch>
+            </BodyWrapper>
           </Router>
         </Web3ReactProvider>
       </ErrorBoundary>

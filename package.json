@@ -25,6 +25,7 @@
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@ethersproject/providers": "5.0.23",
+    "@fontsource/dm-mono": "^4.4.5",
     "@hookform/resolvers": "^2.4.0",
     "@stitches/react": "^0.1.5",
     "@web3-react/core": "^6.1.9",

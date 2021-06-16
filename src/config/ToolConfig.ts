@@ -15,14 +15,14 @@ export const ToolConfig = [
   {
     name: 'Home',
     path: '/',
-    component: Home
+    component: Home,
+    icon:'home.svg',
+    iconActive:'home_active.svg'
   }, {
     name: 'Swap',
     path: '/swap',
-    component: Home
-  }, {
-    name: 'Vault',
-    path: '/vault',
-    component: Vault
+    component: Home,
+    icon:'swap.svg',
+    iconActive:'swap_active.svg'
   }
 ];

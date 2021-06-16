@@ -2,12 +2,23 @@ import { extendTheme } from '@chakra-ui/react';
 
 export const theme = extendTheme({
   fonts: {
-    body: 'Inter, system-ui, sans-serif',
-    heading: 'Work Sans, system-ui, sans-serif'
+    body: 'DM Mono, system-ui, sans-serif',
+    heading: 'DM Mono, system-ui, sans-serif'
   },
   colors: {
     discord: '#7289da',
-    white: 'rgba(249, 249, 249, 1)'
+    white: '#F9F9F9',
+    sideBar: {
+      bg:'#2C2D30',
+      itemActive:'rgba(199, 207, 214, 0.08)'
+    },
+    header:{
+      bg:'rgba(199, 207, 214, 0.1)'
+    },
+    gray:{
+      800:'#212024'
+    },
+    lightGreen:'#33FF99'
   },
   shadows: {
     largeSoft: 'rgba(60, 64, 67, 0.15) 0px 2px 10px 6px;'

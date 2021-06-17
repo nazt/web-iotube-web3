@@ -36,7 +36,7 @@ export const bscMainCrossChain = (network) => {
     [IotexMainnetConfig.chainId]: {
       chain: IotexMainnetConfig,
       cashier: new CashierState({
-        address: iotexBscNetTokens.cashier,
+        address: bscToIotexTokens.cashier,
         network: network
       }),
       tokenList: new TokenListState({

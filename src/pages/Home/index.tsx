@@ -70,6 +70,10 @@ export const Home = observer(() => {
         return lang.t('input.cashier.invalid');
       }
 
+      if (token.currentCrossChain?.cashier.depositFee.value.comparedTo(god.currentNetwork.chain.current.Coin.balance.value) > 0) {
+        return lang.t('input.insufficient.depositFee');
+      }
+
       if (isNaN(Number(store.amount.value)) || store.amount.format <= 0 || store.amount.value.comparedTo(store.curToken.balance.value) >= 0) {
         return lang.t('input.amount.invalid');
       }
@@ -163,13 +167,13 @@ export const Home = observer(() => {
     store.curToken = null;
     store.amount = new BigNumberInputState({});
     store.receiverAddress.setValue("");
-  }, [token.currentCrossChain?.chain, token.currentChain.chainId]);
-  useEffect(() => {
-
+    store.approveLoading.setValue(false);
+    store.confirmIsLoading.setValue(false);
     if (god.currentNetwork.account) {
       token.loadPrivateData();
     }
-  }, [god.currentNetwork.account]);
+  }, [token.currentCrossChain?.chain, token.currentChain.chainId, god.currentNetwork.account]);
+
   return (
     <Container
       maxW="md"
@@ -241,10 +245,9 @@ export const Home = observer(() => {
             <Button
               my={10}
               size="block"
-              color={theme.colors.gray[4]}
-              bg={theme.colors.lightGreen}
+              variant="green"
               title={lang.t('connect.wallet')}
-              leftIcon={<img src="images/logo.svg" className="h-6 mr-4"/>}
+              // leftIcon={<Image size={theme.iconSize.md} src="images/swap.svg"/>}
               onClick={store.showConnector}
             >
               {lang.t('connect.wallet')}
@@ -259,7 +262,7 @@ export const Home = observer(() => {
                   onClick={store.onCashierApprove}
                   size="block"
                   variant="black"
-                  disabled={!!store.state && !!store.approveLoading.value}
+                  disabled={store.approveLoading.value}
                 >
                   {lang.t('approve')}
                 </Button> :

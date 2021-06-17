@@ -15,6 +15,10 @@ const Button = {
   },
   // variants: outline and solid
   variants: {
+    "green": {
+      bg:"lightGreen",
+      color: "gray.4"
+    },
     "black": (props) => ({
       bg: props.colorMode === "dark" ? "#182532" : "gray.800",
       color: "gray.100",

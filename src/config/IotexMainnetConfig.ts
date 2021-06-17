@@ -12,7 +12,7 @@ import { iotexPolygonTokens } from '@/constants/token/matic-iotex';
 export const IotexMainnetConfig = new ChainState({
   name: 'IoTeX',
   chainId: 4689,
-  logoUrl: '/images/iotex.svg',
+  logoUrl: '/images/chain/iotex.svg',
   rpcUrl: 'https://api.iotex.one:443',
   explorerURL: 'https://iotexscan.com',
   explorerName: 'IotexScan',

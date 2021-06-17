@@ -45,7 +45,7 @@ const NetworkHeader = observer((props: ISwitchProps) => {
   const store = useLocalObservable(() => ({
     tipsVisible: false,
     toggle() {
-      store.setChain(token.currentCrossChain?.chain.chainId);
+      store.setChain(token.currentCrossChain.chain.chainId);
     },
     get networks() {
       return [BSCMainnetConfig, ETHMainnetConfig, IotexMainnetConfig, PolygonMainnetConfig];
@@ -64,8 +64,6 @@ const NetworkHeader = observer((props: ISwitchProps) => {
           },
           rpcUrls: [chain.rpcUrl]
         });
-        god.setChain(val);
-        store.connectInejct();
       } else {
         toast({ title: lang.t('change_network_eth_warning'), position: 'top', status: 'warning' });
       }
@@ -108,7 +106,7 @@ const NetworkHeader = observer((props: ISwitchProps) => {
         </MenuList>
       </Menu>
       <Spacer/>
-      <Center w={50}>
+      <Center w={50} cursor="pointer">
         <Image src={'images/icon_arrow_r_green.svg'} onClick={store.toggle}/>
       </Center>
       <Spacer/>

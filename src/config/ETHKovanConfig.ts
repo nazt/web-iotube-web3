@@ -11,7 +11,7 @@ import { TokenListState } from '@/store/lib/TokenListState';
 export const ETHKovanConfig = new ChainState({
   name: 'ETH',
   alias: 'Kovan',
-  logoUrl: '/images/eth_logo.svg',
+  logoUrl: '/images/chain/eth.svg',
   chainId: 42,
   rpcUrl: `https://kovan.infura.io/v3/${publicCOnfig.infuraId}`,
   explorerURL: 'https://kovan.etherscan.io',

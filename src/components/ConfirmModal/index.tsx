@@ -9,22 +9,16 @@ import {
   Center,
   Box,
   Flex,
-  InputGroup,
-  Input,
-  InputRightElement,
   Image,
-  Icon,
   Button,
-  Alert,
-  AlertIcon,
-  useColorModeValue,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalCloseButton,
-  ModalBody
+  ModalBody,
+  useTheme
 } from '@chakra-ui/react';
 import { BigNumberState } from '@/store/standard/BigNumberState';
 
@@ -36,10 +30,13 @@ interface PropsType {
   curToken: TokenState | null;
   receiverAddress: AddressState;
   depositeFee: BigNumberState;
+  confirmLoadingText: string;
+  confirmIsLoading: boolean;
 }
 
 export const ConfirmModal = observer((props: PropsType) => {
   const { token, lang } = useStore();
+  const theme = useTheme();
   const store = useLocalObservable(() => ({
     onClose() {
       props.onClose();
@@ -49,35 +46,43 @@ export const ConfirmModal = observer((props: PropsType) => {
   return (
     <Modal isOpen={props.isOpen} onClose={store.onClose} closeOnEsc closeOnOverlayClick>
       <ModalOverlay/>
-      <ModalContent>
+      <ModalContent borderRadius={theme.borderRadius.sm}>
         <ModalHeader>{lang.t('you_are_going_to_deposit')}</ModalHeader>
         <ModalCloseButton/>
         <ModalBody>
           <Flex>
             <Text fontSize="3xl" mr={4}>{props.amount.format}</Text>
             <Center>
-              <Image borderRadius="full" boxSize="24px" src={props.curToken?.logoURI}
+              <Image borderRadius="full" boxSize={theme.iconSize.md} src={props.curToken?.logoURI}
                      fallbackSrc="https://via.placeholder.com/150"/>
               <Text fontSize="2xl" ml={2}>{props.curToken?.symbol}</Text>
             </Center>
           </Flex>
-          <Text>on {token.currentCrossChain.chain.name} </Text>
+          <Text>on {token.currentCrossChain?.chain.name} </Text>
           <Text>at {props.receiverAddress.value}</Text>
-          <Box my={4}>
-            <Text mb={2} className="font-normal text-base mb-3">{lang.t('fee')}</Text>
-            <Flex className="font-light text-sm flex items-center justify-between">
-              <span>{lang.t('fee.tube')}</span>
-              <span>0 ({lang.t('fee')})</span>
+          <Box my={6}>
+            <Text mb={2}>{lang.t('fee')}</Text>
+            <Flex justifyContent="space-between">
+              <Box>{lang.t('fee.tube')}</Box>
+              <Box>0 ({lang.t('fee')})</Box>
             </Flex>
-            <div className="font-light text-sm flex items-center justify-between">
-              {<span>{lang.t('relay_to_chain', { chain: token.currentChain.name })}</span>}
-              <span>{props.depositeFee?.format}</span>
-              <span> ({lang.t("fee")})</span>
-            </div>
+            <Flex justifyContent="space-between">
+              <Box>{<span>{lang.t('relay_to_chain', { chain: token.currentChain.name })}</span>}</Box>
+              <Box>
+                <span>{props.depositeFee?.format}</span>
+                <span> {`IOTX (${lang.t("fee")})`}</span>
+              </Box>
+            </Flex>
           </Box>
         </ModalBody>
         <ModalFooter>
-          <Button onClick={props.onConfirm()}>
+          <Button
+            mb="10px"
+            isLoading={props.confirmIsLoading}
+            loadingText={props.confirmLoadingText}
+            variant="black"
+            size="block"
+            onClick={props.onConfirm()}>
             {lang.t('confirm')}
           </Button>
         </ModalFooter>

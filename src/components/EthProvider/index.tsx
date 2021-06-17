@@ -21,6 +21,7 @@ export const ETHProvider = observer(({ children }) => {
   const { chainId, account, activate, active, library, deactivate, error } = useWeb3React<Web3Provider>();
 
   const store = useLocalStore(() => ({
+    toastConnectId: "",
     get defaultChain() {
       return ETHMainnetConfig;
     },
@@ -36,21 +37,21 @@ export const ETHProvider = observer(({ children }) => {
   useEffect(() => {
     console.log({ chainId });
     if (chainId) {
+      store.toastConnectId = toast.loading("Auto connecting.");
       if (god.currentNetwork.allowChains.includes(chainId)) {
         god.setChain(chainId);
       }
-      if ([ETHMainnetConfig.chainId, ETHKovanConfig.chainId].includes(chainId)) {
+      if ([ETHMainnetConfig.chainId].includes(chainId)) {
         god.setNetwork(Network.eth);
       }
-      if ([BSCMainnetConfig.chainId, BSCTestnetConfig.chainId].includes(chainId)) {
+      if ([BSCMainnetConfig.chainId].includes(chainId)) {
         god.setNetwork(Network.bsc);
       }
       if ([IotexTestnetConfig.chainId].includes(chainId)) {
         god.setNetwork(Network.iotex);
       }
     } else {
-      // god.currentNetwork.chain.setCurrentId(BSCMainnetConfig.chainId);
-      // store.wrongNetwork();
+      god.currentNetwork.chain.setCurrentId(BSCMainnetConfig.chainId);
     }
 
     god.currentNetwork.account = account;
@@ -68,7 +69,7 @@ export const ETHProvider = observer(({ children }) => {
     console.log(god.eth.multiCall._multicallAddress);
     if (account) {
       god.setShowConnecter(false);
-      god.currentNetwork.loadBalance();
+      god.currentNetwork.loadBalance().then(r => toast.remove());
     }
     god.updateTicker.setValue(god.updateTicker.value + 1);
   }, [god, library, chainId, account, active, error]);

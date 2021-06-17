@@ -8,7 +8,7 @@ import { TokenListState } from '@/store/lib/TokenListState';
 export const BSCMainnetConfig = new ChainState({
   name: 'BSC',
   chainId: 56,
-  logoUrl: '/images/bsc_logo.svg',
+  logoUrl: '/images/chain/bsc.svg',
   rpcUrl: 'https://bsc-dataseed.binance.org',
   explorerURL: 'https://bscscan.com',
   explorerName: 'BscScan',

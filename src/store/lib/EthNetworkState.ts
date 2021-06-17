@@ -55,8 +55,8 @@ export class EthNetworkState implements NetworkState {
   }
 
   async loadBalance() {
-    console.log('---------> EthNetworkState loadBalance');
     if (!this.ethers || !this.account) return;
+    console.log('---------> EthNetworkState loadBalance');
     const balance = await this.ethers.getBalance(this.account);
     this.currentChain.Coin.balance.setValue(new BigNumber(balance.toString()));
   }

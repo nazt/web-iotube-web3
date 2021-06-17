@@ -36,7 +36,7 @@ export class TokenStore {
   }
 
   get currentTokens() {
-    return this.currentCrossChain.tokens;
+    return this.currentCrossChain?.tokens;
   }
 
   async depositTo(args, opts) {

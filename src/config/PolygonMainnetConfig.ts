@@ -8,7 +8,7 @@ import { TokenListState } from '@/store/lib/TokenListState';
 export const PolygonMainnetConfig = new ChainState({
   name: 'Polygon',
   chainId: 137,
-  logoUrl: '/images/polygon_logo.png',
+  logoUrl: '/images/chain/polygon.svg',
   rpcUrl: 'https://rpc-mainnet.maticvigil.com/',
   explorerURL: 'https://polygon-explorer-mainnet.chainstacklabs.com',
   explorerName: 'Polygon Explorer',

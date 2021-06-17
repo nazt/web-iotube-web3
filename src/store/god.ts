@@ -1,21 +1,18 @@
 import { NetworkState } from './lib/NetworkState';
 import { makeAutoObservable } from 'mobx';
-import { MappingStorageState, MappingState } from './standard/MappingState';
-import { EthNetworkConfig, IotexNetworkConfig } from '../config/NetworkConfig';
+import { MappingState } from './standard/MappingState';
+import { EthNetworkConfig } from '../config/NetworkConfig';
 import { ChainState } from './lib/ChainState';
 import { EthNetworkState } from './lib/EthNetworkState';
 import { IotexNetworkState } from './lib/IotexNetworkState';
 import { RootStore } from './root';
-import { StorageState } from './standard/StorageState';
 import { NumberState } from './standard/base';
 import { _ } from '@/lib/lodash';
 import { ethCrossChain, ETHMainnetConfig } from '../config/ETHMainnetConfig';
 import { iotexMainCrossChain, IotexMainnetConfig } from '../config/IotexMainnetConfig';
 import { bscMainCrossChain, BSCMainnetConfig } from '../config/BSCMainnetConfig';
-import { ETHKovanConfig, ethKovenCrossChain } from '../config/ETHKovanConfig';
-import { IotexTestnetConfig, iotexTestnetCrossChain } from '../config/IotexTestnetConfig';
 import { polygonMainCrossChain, PolygonMainnetConfig } from '../config/PolygonMainnetConfig';
-import { metamaskUtils } from '@/lib/metaskUtils';
+import { ETHKovanConfig, ethKovenCrossChain } from '../config/ETHKovanConfig';
 
 export enum Network {
   eth = 'eth',
@@ -52,7 +49,7 @@ export class GodStore {
     ETHMainnetConfig.crossChain = ethCrossChain(EthNetworkConfig);
     IotexMainnetConfig.crossChain = iotexMainCrossChain(EthNetworkConfig);
     BSCMainnetConfig.crossChain = bscMainCrossChain(EthNetworkConfig);
-    ETHKovanConfig.crossChain = ethKovenCrossChain(EthNetworkConfig);
+    // ETHKovanConfig.crossChain = ethKovenCrossChain(EthNetworkConfig);
     PolygonMainnetConfig.crossChain = polygonMainCrossChain(EthNetworkConfig);
     // IotexTestnetConfig.crossChain = iotexTestnetCrossChain(EthNetworkConfig);
   }

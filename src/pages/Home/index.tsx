@@ -13,18 +13,18 @@ import {
   Icon,
   Button,
   Stack,
-  AlertIcon,
-  useColorModeValue
+  useColorModeValue,
+  useTheme
 } from '@chakra-ui/react';
 import { Text, Center } from '@chakra-ui/layout';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import { TokenListModal } from '@/components/TokenListModal';
 import { useStore } from '@/store/index';
 import { BigNumberInputState } from '@/store/standard/BigNumberInputState';
-import { BooleanState, StringState } from '@/store/standard/base';
+import { BooleanState } from '@/store/standard/base';
 import { TokenState } from '@/store/lib/TokenState';
 import NetworkHeader from '@/components/NetworkHeader';
-import { toRau, validateAddress } from 'iotex-antenna/lib/account/utils';
+import { validateAddress } from 'iotex-antenna/lib/account/utils';
 import { AddressState } from '@/store/standard/AddressState';
 import BigNumber from 'bignumber.js';
 import { ConfirmModal } from '@/components/ConfirmModal';
@@ -35,11 +35,11 @@ import { theme } from '@/lib/theme';
 export const Home = observer(() => {
   const { god, token, lang } = useStore();
 
+  const theme = useTheme();
   const home = useColorModeValue('white', theme.colors.gray.bg);
   const homeShadow = useColorModeValue(theme.shadows.lightShadow, theme.shadows.darkShadow);
   const inputBg = useColorModeValue(theme.colors.gray[5], theme.colors.gray[8]);
   const inputColor = useColorModeValue(theme.colors.gray[6], theme.colors.gray[2]);
-
 
   const store = useLocalStore(() => ({
     curToken: null as TokenState,
@@ -49,6 +49,10 @@ export const Home = observer(() => {
     isOpenConfirmModal: new BooleanState(),
     depositeFee: new BigNumberState({ decimals: 18, loading: false }),
     actionHash: '',
+    approveLoading: new BooleanState(),
+    approveLoadingContent: lang.t("deposit.approving"),
+    confirmIsLoading: new BooleanState(),
+    confirmLoadingText: lang.t("button.confirming"),
     maxAllowance: new BigNumber(1.157920892373162e59),
     showConnector() {
       god.setShowConnecter(true);
@@ -62,7 +66,7 @@ export const Home = observer(() => {
         return lang.t('input.token.unselected');
       }
 
-      if (!token.currentCrossChain.cashier.address) {
+      if (!token.currentCrossChain?.cashier.address) {
         return lang.t('input.cashier.invalid');
       }
 
@@ -101,36 +105,53 @@ export const Home = observer(() => {
     },
     async onCashierApprove() {
       try {
-        console.log('try to approve --->', store.amount.value.toFixed(0));
-        const approvedRes = await token.approve(store.amount.value, store.curToken);
-        console.log(`approve response:`, approvedRes);
-        store.curToken.allowanceForCashier.setValue(store.amount.value);
+        store.approveLoading.setValue(true);
+        const approvedRes = await token.approve(store.maxAllowance, store.curToken);
+        if(approvedRes) {
+          store.approveLoadingContent = lang.t("button.waiting");
+        }
+        const receipt = await approvedRes.wait();
+        console.log(`approve receipt:`, receipt);
+        if (receipt.status == 1) {
+          store.approveLoading.setValue(false);
+          store.curToken.allowanceForCashier.setValue(store.maxAllowance);
+        }
         console.log('allowance Cashier new ---->', store.curToken.allowanceForCashier.format);
       } catch (e) {
-        message.error(`tokenContract.approve error ${e}`);
+        message.error(`tokenContract.approve error ${e.message}`);
+        store.approveLoading.setValue(false);
       }
     },
     async onSubmit() {
       const amountVal = store.amount.value.toFixed(0);
       console.log(store.amount.value);
       console.log(store.amount.value.toFixed(0));
-      let options = { value: token.currentCrossChain.cashier.depositFee.value.toFixed(0) };
+      let options = { value: token.currentCrossChain?.cashier.depositFee.value.toFixed(0) };
       if (store.curToken.isEth()) {
-        options = { value: new BigNumber(amountVal).plus(token.currentCrossChain.cashier.depositFee.value).toString() };
+        options = { value: new BigNumber(amountVal).plus(token.currentCrossChain?.cashier.depositFee.value).toString() };
       }
       let receiverAddress = store.receiverAddress.value;
       let fromAddress = store.curToken.address;
       try {
+        store.confirmIsLoading.setValue(true);
         let res = await token.depositTo([fromAddress, receiverAddress, amountVal], options);
+        if (res) {
+          store.confirmLoadingText = lang.t("button.waiting");
+        }
         const receipt = await res.wait();
         store.isOpenConfirmModal.setValue(false);
+        store.confirmIsLoading.setValue(false);
         console.log(receipt);
         if (receipt.status == 1) {
           store.actionHash = receipt.blockHash;
           message.success(`Ethereum transaction broadcasted successfully.`);
         }
       } catch (e) {
+        store.confirmIsLoading.setValue(false);
         console.log(e);
+        if (e.message) {
+          message.error(e.message);
+        }
         store.isOpenConfirmModal.setValue(false);
         if (e && e.data && e.data.message) {
           message.error(e.data.message);
@@ -138,8 +159,13 @@ export const Home = observer(() => {
       }
     }
   }));
-
   useEffect(() => {
+    store.curToken = null;
+    store.amount = new BigNumberInputState({});
+    store.receiverAddress.setValue("");
+  }, [token.currentCrossChain?.chain, token.currentChain.chainId]);
+  useEffect(() => {
+
     if (god.currentNetwork.account) {
       token.loadPrivateData();
     }
@@ -228,16 +254,19 @@ export const Home = observer(() => {
               {!store.state && Boolean(store.shouldApprove) ?
                 <Button
                   my={10}
+                  isLoading={store.approveLoading.value}
+                  loadingText={store.approveLoadingContent}
                   onClick={store.onCashierApprove}
                   size="block"
-                  disabled={!!store.state}
-                  borderRadius={theme.borderRadius.sm}
+                  variant="black"
+                  disabled={!!store.state && !!store.approveLoading.value}
                 >
                   {lang.t('approve')}
                 </Button> :
                 <Button
                   onClick={() => store.isOpenConfirmModal.setValue(true)}
                   size="block"
+                  variant="black"
                   my={10}
                   disabled={!!store.state}
                 >
@@ -253,10 +282,12 @@ export const Home = observer(() => {
         onConfirm={() => store.onSubmit}
         amount={store.amount}
         curToken={store.curToken}
-        depositeFee={token.currentCrossChain.cashier.depositFee}
+        depositeFee={token.currentCrossChain?.cashier?.depositFee}
         isOpen={store.isOpenConfirmModal.value}
         onClose={() => store.isOpenConfirmModal.setValue(false)}
         receiverAddress={store.receiverAddress}
+        confirmIsLoading={store.confirmIsLoading.value}
+        confirmLoadingText={store.confirmLoadingText}
       />
     </Container>
   );

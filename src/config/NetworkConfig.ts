@@ -6,11 +6,10 @@ import { ETHMainnetConfig } from './ETHMainnetConfig';
 import { BSCTestnetConfig } from './BSCTestnetConfig';
 import { IotexNetworkState } from '../store/lib/IotexNetworkState';
 import { IotexMainnetConfig } from './IotexMainnetConfig';
-import { IotexTestnetConfig } from './IotexTestnetConfig';
 import { PolygonMainnetConfig } from './PolygonMainnetConfig';
 
 export const EthNetworkConfig = new EthNetworkState({
-  allowChains: [BSCMainnetConfig.chainId, BSCTestnetConfig.chainId, ETHMainnetConfig.chainId, ETHKovanConfig.chainId, IotexMainnetConfig.chainId, PolygonMainnetConfig.chainId],
+  allowChains: [BSCMainnetConfig.chainId, ETHMainnetConfig.chainId, IotexMainnetConfig.chainId, PolygonMainnetConfig.chainId],
   info: {
     token: {
       tokenExample: '0x0000000000000000000000000000000000000000'

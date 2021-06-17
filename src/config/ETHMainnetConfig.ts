@@ -9,7 +9,7 @@ import { TokenListState } from '@/store/lib/TokenListState';
 export const ETHMainnetConfig = new ChainState({
   name: 'ETH',
   chainId: 1,
-  logoUrl: '/images/eth_logo.svg',
+  logoUrl: '/images/chain/eth.svg',
   rpcUrl: `https://mainnet.infura.io/v3/${publicCOnfig.infuraId}`,
   explorerURL: 'https://etherscan.io',
   explorerName: 'EtherScan',

@@ -7,11 +7,11 @@ import { Modal, ModalContent, ModalOverlay } from '@chakra-ui/modal';
 import { Box, Flex, Text } from '@chakra-ui/layout';
 import { Image, Button } from '@chakra-ui/react';
 import { Network } from '@/store/god';
-import { IotexConnector } from '../../store/lib/IotexNetworkState';
+import { useEffect } from 'react';
 
 export const WalletSelecter = observer(() => {
   const { god } = useStore();
-  const { activate } = useWeb3React();
+  const { active, error, activate } = useWeb3React();
 
   const store = useLocalStore(() => ({
     get visible() {
@@ -24,13 +24,35 @@ export const WalletSelecter = observer(() => {
       god.setNetwork(Network.eth);
       activate(injected);
       god.eth.connector.latestProvider.save('inject');
-    },
-    connectIopay() {
-      god.setNetwork(Network.iotex);
-      god.iotex.activeConnector();
-      god.iotex.connector.latestProvider.save(IotexConnector.IopayDesktop);
     }
   }));
+
+  useEffect(() => {
+    //@ts-ignore
+    const { ethereum } = window;
+    if (ethereum && ethereum.on && !active && !error) {
+      const handleChainChanged = () => {
+        store.connectInejct();
+      };
+      const handleAccountsChanged = (accounts: string[]) => {
+        if (accounts.length > 0) {
+          store.connectInejct();
+        }
+      };
+      ethereum.on('networkChanged', handleChainChanged);
+      ethereum.on('close', handleChainChanged);
+      ethereum.on('chainChanged', handleChainChanged);
+      ethereum.on('accountsChanged', handleAccountsChanged);
+      return () => {
+        if (ethereum.removeListener) {
+          ethereum.removeListener('networkChanged', handleChainChanged);
+          ethereum.removeListener('close', handleChainChanged);
+          ethereum.removeListener('chainChanged', handleChainChanged);
+          ethereum.removeListener('accountsChanged', handleAccountsChanged);
+        }
+      };
+    }
+  }, [active, error, activate]);
 
   return (
     <Modal isOpen={store.visible} onClose={store.close} isCentered>

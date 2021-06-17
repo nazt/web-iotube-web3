@@ -1,6 +1,6 @@
 {
   "hello": "hello ${msg}",
-  "wrong.network": "Wrong Network",
+  "wrong.network": "Unsupported Metamask network",
   "connect.wallet": "Connect Wallet",
   "address.copied": "The address is copied.",
   "invalid.input": "Invalid Input",
@@ -25,5 +25,8 @@
   "relay_to_chain": "Relay to ${chain}",
   "confirm": "Confirm",
   "you_are_going_to_deposit": "You are going to deposit",
-  "change_network_eth_warning": "Metamask does not allow us switch to Ethereum for you.  Please switch inside Metamask."
+  "change_network_eth_warning": "Metamask does not allow us switch to Ethereum for you.  Please switch inside Metamask.",
+  "deposit.approving": "Approving",
+  "button.waiting": "Waiting",
+  "button.confirming": "Confirming"
 }

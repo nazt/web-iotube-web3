@@ -1,4 +1,4 @@
-import { extendTheme, useColorModeValue } from '@chakra-ui/react';
+import { extendTheme } from '@chakra-ui/react';
 
 const Button = {
   // The styles all button have in common
@@ -10,11 +10,22 @@ const Button = {
   sizes: {
     block: {
       height: "60px",
-      width: "100%"
+      width: "100%",
     }
   },
   // variants: outline and solid
-  variants: {},
+  variants: {
+    "black": (props) => ({
+      bg: props.colorMode === "dark" ? "#182532" : "gray.800",
+      color: "gray.100",
+      _hover:{
+        opacity: 0.8,
+        _disabled: {
+          background: "gray"
+        }
+      }
+    }),
+  },
   // The default size and variant values
   defaultProps: {
     size: "md",

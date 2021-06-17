@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useStore } from '@/store/index';
 import { Header } from '@/components/Header/index';
-import { ChakraProvider, Button, Container, Center, CSSReset, Alert, AlertIcon,Flex } from '@chakra-ui/react';
+import { ChakraProvider, Button, Container, Center, CSSReset } from '@chakra-ui/react';
 import { theme } from '@/lib/theme';
 import { ETHProvider } from './components/EthProvider';
 import { Web3ReactProvider } from '@web3-react/core';
@@ -13,7 +13,6 @@ import { Box, Text } from '@chakra-ui/layout';
 import { Toaster } from 'react-hot-toast';
 import { ToolConfig } from './config/ToolConfig';
 import { WalletSelecter } from './components/WalletSelecter/index';
-import './app.css';
 import SiderMenu  from '@/components/SiderMenu';
 
 
@@ -59,12 +58,6 @@ export const App = observer(() => {
           <Router>
             <Header />
             <SiderMenu />
-            {token.actionHash && (
-              <Alert status="success">
-                <AlertIcon/>
-                Your action Hash is {token.actionHash}
-              </Alert>
-            )}
             <BodyWrapper>
               <Switch>
                 {ToolConfig.map((item) => (

@@ -21,7 +21,7 @@ export const ToolConfig = [
   // },
   {
     name: 'Deposit',
-    path: '/deposit',
+    path: '/',
     component: Home,
     icon:'swap.svg',
     iconActive:'swap_active.svg'

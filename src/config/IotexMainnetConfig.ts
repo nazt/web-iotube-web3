@@ -14,8 +14,8 @@ export const IotexMainnetConfig = new ChainState({
   chainId: 4689,
   logoUrl: '/images/chain/iotex.svg',
   rpcUrl: 'https://api.iotex.one:443',
-  explorerURL: 'https://iotexscan.com',
-  explorerName: 'IotexScan',
+  explorerURL: 'https://iotexscan.io',
+  explorerName: 'IoTeX Scan',
   info: {
     blockPerSeconds: 5,
     multicallAddr: '0xacce294bf7d25fe8c5c64ae45197d3878f68403b'

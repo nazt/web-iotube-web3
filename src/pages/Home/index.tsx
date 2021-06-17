@@ -31,6 +31,7 @@ import { ConfirmModal } from '@/components/ConfirmModal';
 import { message } from 'antd';
 import { BigNumberState } from '@/store/standard/BigNumberState';
 import { theme } from '@/lib/theme';
+import { CompleteModal } from '@/components/CompleteModal';
 
 export const Home = observer(() => {
   const { god, token, lang } = useStore();
@@ -50,10 +51,11 @@ export const Home = observer(() => {
     depositeFee: new BigNumberState({ decimals: 18, loading: false }),
     actionHash: '',
     approveLoading: new BooleanState(),
-    approveLoadingContent: lang.t("deposit.approving"),
+    approveLoadingContent: lang.t('deposit.approving'),
     confirmIsLoading: new BooleanState(),
-    confirmLoadingText: lang.t("button.confirming"),
+    confirmLoadingText: lang.t('button.confirming'),
     maxAllowance: new BigNumber(1.157920892373162e59),
+    isOpenCompleteModal: new BooleanState(),
     showConnector() {
       god.setShowConnecter(true);
     },
@@ -111,8 +113,8 @@ export const Home = observer(() => {
       try {
         store.approveLoading.setValue(true);
         const approvedRes = await token.approve(store.maxAllowance, store.curToken);
-        if(approvedRes) {
-          store.approveLoadingContent = lang.t("button.waiting");
+        if (approvedRes) {
+          store.approveLoadingContent = lang.t('button.waiting');
         }
         const receipt = await approvedRes.wait();
         console.log(`approve receipt:`, receipt);
@@ -139,17 +141,21 @@ export const Home = observer(() => {
       try {
         store.confirmIsLoading.setValue(true);
         let res = await token.depositTo([fromAddress, receiverAddress, amountVal], options);
-        if (res) {
-          store.confirmLoadingText = lang.t("button.waiting");
-        }
-        const receipt = await res.wait();
         store.isOpenConfirmModal.setValue(false);
         store.confirmIsLoading.setValue(false);
-        console.log(receipt);
-        if (receipt.status == 1) {
-          store.actionHash = receipt.blockHash;
-          message.success(`Ethereum transaction broadcasted successfully.`);
+        console.log("res--->", res);
+        if (res) {
+          token.actionHash.setValue(res.hash);
+          store.isOpenCompleteModal.setValue(true);
         }
+        const receipt = await res.wait();
+        // store.isOpenConfirmModal.setValue(false);
+        // store.confirmIsLoading.setValue(false);
+        console.log("receipt--->", receipt);
+        // if (receipt.status == 1) {
+        //   token.actionHash.setValue(receipt.blockHash);
+        //   store.isOpenCompleteModal.setValue(true);
+        // }
       } catch (e) {
         store.confirmIsLoading.setValue(false);
         console.log(e);
@@ -166,7 +172,7 @@ export const Home = observer(() => {
   useEffect(() => {
     store.curToken = null;
     store.amount = new BigNumberInputState({});
-    store.receiverAddress.setValue("");
+    store.receiverAddress.setValue('');
     store.approveLoading.setValue(false);
     store.confirmIsLoading.setValue(false);
     if (god.currentNetwork.account) {
@@ -291,6 +297,13 @@ export const Home = observer(() => {
         receiverAddress={store.receiverAddress}
         confirmIsLoading={store.confirmIsLoading.value}
         confirmLoadingText={store.confirmLoadingText}
+      />
+      <CompleteModal
+        amount={store.amount}
+        curToken={store.curToken}
+        receiverAddress={store.receiverAddress}
+        isOpen={store.isOpenCompleteModal.value}
+        onClose={() => store.isOpenCompleteModal.setValue(false)}
       />
     </Container>
   );

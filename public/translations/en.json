@@ -29,5 +29,18 @@
   "change_network_eth_warning": "Metamask does not allow us switch to Ethereum for you.  Please switch inside Metamask.",
   "deposit.approving": "Approving",
   "button.waiting": "Waiting",
-  "button.confirming": "Confirming"
+  "button.confirming": "Confirming",
+  "complete.broadcast_transaction_successfully": "Action submitted successfully",
+  "complete.tx_broadcast_network": "After 12 confirmations of ${network} network and 2/3 + 1 confirmations from witnesses, ${amount} ${token} will be minted and sent to your address:",
+  "complete.your_tx_chain": "Your ${chain} TX hash",
+  "complete.check_status_comment": "You can check the status right now by clicking the link.",
+  "eta": "ETA",
+  "network_confirmations": "${network} confirmations",
+  "iotex_confirmations": "IoTeX confirmations",
+  "witness_confirmation": "Witness confirmations",
+  "min": "min",
+  "sec": "sec",
+  "may_delay_comment": "* may delay due to ${network} network congestion.",
+  "address_copied": "Address Copied!",
+  "transaction_link_copied": "Transaction Link Copied!"
 }

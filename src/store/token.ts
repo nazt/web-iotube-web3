@@ -10,7 +10,7 @@ import { IotexMainnetConfig } from '../config/IotexMainnetConfig';
 export class TokenStore {
   rootStore: RootStore;
   toNetwork = new NumberState({ value: 56 });
-  actionHash: StringState;
+  actionHash: StringState = new StringState();
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;

@@ -1,4 +1,4 @@
-import { publicCOnfig } from './public';
+import { publicConfig } from './public';
 import { ChainState } from '@/store/lib/ChainState';
 import { TokenState } from '@/store/lib/TokenState';
 import { BSCTestnetConfig } from './BSCTestnetConfig';
@@ -13,7 +13,7 @@ export const ETHKovanConfig = new ChainState({
   alias: 'Kovan',
   logoUrl: '/images/chain/eth.svg',
   chainId: 42,
-  rpcUrl: `https://kovan.infura.io/v3/${publicCOnfig.infuraId}`,
+  rpcUrl: `https://kovan.infura.io/v3/${publicConfig.infuraId}`,
   explorerURL: 'https://kovan.etherscan.io',
   explorerName: 'EtherScan',
   Coin: new TokenState({

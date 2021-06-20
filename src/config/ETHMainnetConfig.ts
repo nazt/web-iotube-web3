@@ -1,4 +1,4 @@
-import { publicCOnfig } from './public';
+import { publicConfig } from './public';
 import { ChainState } from '@/store/lib/ChainState';
 import { TokenState } from '@/store/lib/TokenState';
 import { ethTokensForIotex, iotexTokensForEth } from '@/constants/token/eth-iotex';
@@ -10,7 +10,7 @@ export const ETHMainnetConfig = new ChainState({
   name: 'ETH',
   chainId: 1,
   logoUrl: '/images/chain/eth.svg',
-  rpcUrl: `https://mainnet.infura.io/v3/${publicCOnfig.infuraId}`,
+  rpcUrl: `https://mainnet.infura.io/v3/${publicConfig.infuraId}`,
   explorerURL: 'https://etherscan.io',
   explorerName: 'EtherScan',
   nativeCurrency: new TokenState({

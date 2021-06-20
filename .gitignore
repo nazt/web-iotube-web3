@@ -5,6 +5,6 @@ dist-ssr
 *.local
 .vscode
 yarn-error.log
-.env*
+.env.local
 .idea
 yarn.lock

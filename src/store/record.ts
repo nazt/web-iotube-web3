@@ -18,14 +18,21 @@ export class RecordStore {
     this.actionLists = [
       new ActionListState({
         name: 'IoTeX -> Eth',
+        key: 'eth',
         requestApi: publicConfig.ETH_ACTIONS_ENDPOINT
       }),
-      new ActionListState({ name: 'IoTeX -> BSC', requestApi: publicConfig.IOTEX_ACTIONS_ENDPOINT }),
+      new ActionListState({ name: 'IoTeX -> BSC',
+        key: 'bsc',
+        requestApi: publicConfig.IOTEX_ACTIONS_ENDPOINT
+      }),
       new ActionListState({
         name: 'IoTeX -> Polygon',
+        key: 'polygon',
         requestApi: publicConfig.PLOYGON_ACTIONS_ENDPOINT
       }),
-      new ActionListState({ name: 'IoTex', requestApi: publicConfig.BSC_ACTIONS_ENDPOINT })
+      new ActionListState({ name: 'IoTex',
+        key: 'iotex',
+        requestApi: publicConfig.BSC_ACTIONS_ENDPOINT })
     ];
   }
 

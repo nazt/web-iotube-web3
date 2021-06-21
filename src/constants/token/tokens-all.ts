@@ -1,4 +1,30 @@
 export const TOKENS = {
+  '0x0000000000000000000000000000000000000000-bsc': {
+    address: '',
+    name: 'Binance Coin',
+    decimals: 18,
+    symbol: 'BNB',
+    logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1839.png'
+  },
+  '0x0000000000000000000000000000000000000000-eth': {
+    address: '0x0000000000000000000000000000000000000000',
+    name: 'ETH',
+    decimals: 18,
+    symbol: 'ETH',
+    logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png'
+  },
+  '0x0000000000000000000000000000000000000000-polygon': {
+    name: 'Matic',
+    decimals: 18,
+    symbol: 'Matic',
+    logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/3890.png'
+  },
+  '0x0000000000000000000000000000000000000000-iotex': {
+    name: 'IoTeX',
+    decimals: 18,
+    symbol: 'IoTeX',
+    logoURI: 'https://githubproxy.b-cdn.net/iotexproject/iotex-token-metadata/master/images/io15qr5fzpxsnp7garl4m7k355rafzqn8grrm0grz.png'
+  },
   '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c': {
     name: 'Wrapped BSC',
     decimals: 18,

@@ -8,6 +8,7 @@ import { NumberState } from '@/store/standard/base';
 
 export class ActionListState {
   requestApi: string;
+  key: string;
   name: string;
   first: NumberState = new NumberState({value:10});
   skip: NumberState = new NumberState({value:0});
@@ -65,17 +66,21 @@ export class ActionListState {
       //   ]
       // };
       this.actions = data.transfers.map((item, i) => {
+        let tokenAddress = this.decodeBase64toHexAddress(item.token);
+        if (tokenAddress === '0x0000000000000000000000000000000000000000') {
+          tokenAddress = `${tokenAddress}-${this.key}`
+        }
         return {
           ...item,
           ...data.statuses[i],
           token: {
-            ...TOKENS[this.decodeBase64toHexAddress(item.token)],
+            ...TOKENS[tokenAddress],
             address: this.decodeBase64toHexAddress(item.token)
           },
           amount: new BigNumberState({
             value: new BigNumber(item.amount),
             loading: false,
-            decimals: TOKENS[this.decodeBase64toHexAddress(item.token)].decimals
+            decimals: TOKENS[tokenAddress]?.decimals
           })
         } as unknown as ActionState;
       });

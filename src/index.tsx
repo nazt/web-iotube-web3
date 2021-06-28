@@ -33,6 +33,7 @@ const ErrorFallback = ({ error, resetErrorBoundary }) => {
 const BodyWrapper=({children})=>{
   return (
     <Box
+      className="body"
       marginLeft={'200px'}
       maxWidth={'calc(100%-200px)'}
     >

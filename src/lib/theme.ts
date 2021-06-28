@@ -3,55 +3,78 @@ import { extendTheme } from '@chakra-ui/react';
 const Button = {
   // The styles all button have in common
   baseStyle: {
-    fontWeight: "500",
-    fontSize: "18px",
-    borderRadius: "15px", // <-- border radius is same for all variants and sizes
+    fontWeight: '500',
+    fontSize: '18px',
+    borderRadius: '15px' // <-- border radius is same for all variants and sizes
   },
   sizes: {
     block: {
-      height: "60px",
-      width: "100%",
+      height: '60px',
+      width: '100%'
     }
   },
   // variants: outline and solid
   variants: {
-    "green": {
-      bg:"lightGreen",
-      color: "gray.4"
+    'green': {
+      bg: 'lightGreen',
+      color: 'gray.4'
     },
-    "black": (props) => ({
-      bg: props.colorMode === "dark" ? "#182532" : "gray.800",
-      color: "gray.100",
-      _hover:{
+    'black': (props) => ({
+      bg: props.colorMode === 'dark' ? '#182532' : 'gray.800',
+      color: 'gray.100',
+      _hover: {
         opacity: 0.8,
         _disabled: {
-          background: "gray"
+          background: 'gray'
         }
       }
-    }),
+    })
   },
   // The default size and variant values
   defaultProps: {
-    size: "md",
-    variant: "solid",
-  },
-}
+    size: 'md',
+    variant: 'solid'
+  }
+};
 
 export const theme = extendTheme({
   fonts: {
     body: 'DM Mono',
     heading: 'DM Mono'
   },
+  header: {
+    height: '64px'
+  },
+  content: {
+    height: 'calc(100vh - 64px)'
+  },
+  sideBar: {
+    width: '200px',
+    bg: {
+      light: 'white',
+      dark: '#2C2D30'
+    },
+    itemActive: 'rgba(199, 207, 214, 0.08)'
+  },
+  faq: {
+    collapseHeight: '60px',
+    titleBg: {
+      dark: '#3F3F44',
+    },
+    contentBg: {
+      dark: '#2E2E32'
+    }
+  },
   colors: {
     discord: '#7289da',
     sideBar: {
-      bg:'#2C2D30',
-      itemActive:'rgba(199, 207, 214, 0.08)'
+      bg: '#2C2D30',
+      itemActive: 'rgba(199, 207, 214, 0.08)'
     },
-    header:{
-      bg:'rgba(199, 207, 214, 0.1)'
+    header: {
+      bg: '#2C2D2F'
     },
-    gray:{
+    gray: {
       bg: '#3F3F44',
       2: '#999999',
       3: '#cccccc',
@@ -59,10 +82,11 @@ export const theme = extendTheme({
       5: '#F8F8FA',
       6: '#666666',
       7: '#F8F8FA',
-      8:'#212024',
-      9:'#9398A2',
+      8: '#212024',
+      9: '#9398A2',
+      10: '#8D9399'
     },
-    lightGreen:'#33FF99'
+    lightGreen: '#33FF99'
   },
   shadows: {
     lightShadow: '0px 3px 20px 0px rgba(214, 214, 214, 0.5)',
@@ -71,19 +95,25 @@ export const theme = extendTheme({
   },
   iconSize: {
     sm: '15px',
-    md: '24px',
+    md: '24px'
   },
   borderRadius: {
-    sm: '15px',
+    sm: '15px'
   },
   styles: {
     global: {
       'html, #__next': {
-        height: '100%',
+        height: '100%'
       },
       '#__next': {
         display: 'flex',
         flexDirection: 'column'
+      },
+      'body.chakra-ui-light': {
+        background: ' #F9F9F9'
+      },
+      'body.chakra-ui-dark': {
+        background: ' #212024'
       },
       '.body': {
         overflowY: 'scroll' // Always show scrollbar to avoid flickering
@@ -103,6 +133,9 @@ export const theme = extendTheme({
         left: 0,
         width: '100%',
         height: '2px'
+      },
+      'a': {
+        color: 'lightGreen!important'
       }
     }
   },

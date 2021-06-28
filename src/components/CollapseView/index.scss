@@ -1,0 +1,33 @@
+.collapse__view {
+  border-bottom: 1px solid rgba(147, 152, 162, 0.2);
+
+  .collapse__view__title {
+    cursor: pointer;
+  }
+
+  blockquote {
+    position: relative;
+    font-size: 1.125rem;
+    line-height: 2.22;
+    p {
+      margin: 0;
+    }
+    a {
+      color: rgb(51, 254, 153);
+      word-break: break-word;
+    }
+    ul {
+      list-style-type: circle;
+      list-style-position: inside;
+    }
+  }
+
+  blockquote::before {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    left: -1.25rem;
+    background-color: rgb(51, 254, 153);
+  }
+}

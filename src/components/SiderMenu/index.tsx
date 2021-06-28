@@ -1,19 +1,19 @@
 import {
   Flex,
   Button,
-  Image, useColorMode, Heading, Link, Stack, IconButton, Box
+  Image, useColorMode, IconButton, useTheme
 } from '@chakra-ui/react';
 import React from 'react';
 import { Text } from '@chakra-ui/layout';
 import { observer, useLocalObservable } from 'mobx-react-lite';
 import { useHistory } from 'react-router-dom';
 import { ToolConfig } from '../../config/ToolConfig';
-import { theme } from '@/lib/theme';
 import { SunnyIcon, SunnyDarkIcon, MoonLightIcon, MoonDarkIcon } from '@/components/Icon';
 
 export const SiderMenu = () => {
   const history = useHistory();
   const { colorMode, toggleColorMode } = useColorMode();
+  const theme = useTheme();
 
   const store = useLocalObservable(() => ({
     activeMenu: history.location.pathname,
@@ -33,30 +33,21 @@ export const SiderMenu = () => {
   };
   return (
     <Flex
-      position='fixed'
-      top={0}
+      position='absolute'
+      top="4.5rem"
       left={0}
       align='center'
       flexDirection={'column'}
-      h='100vh'
+      h={theme.content.height}
       width={'200px'}
-      bgColor={theme.colors.sideBar.bg}
+      bgColor={colorMode === 'light' ? theme.sideBar.bg.light : theme.sideBar.bg.dark}
       px={2}
+      zIndex={1}
     >
-      <Box align='center' justify={{ base: 'center', md: 'start' }} mt={'21px'}>
-        <Link to={'/'}>
-          <Stack direction={'row'} alignItems={'center'} spacing={{ base: 2, sm: 4 }}>
-            <Image src={'/images/logo_iotube.svg'}/>
-            <Heading as={'h1'} fontSize={'xl'} display={{ base: 'none', md: 'block' }}>
-            </Heading>
-          </Stack>
-        </Link>
-      </Box>
-      <Flex flexDirection={'column'} justifyContent={'space-between'} mt={10} w={'100%'} h={'100%'}>
+      <Flex flexDirection={'column'} justifyContent={'space-between'} w={'100%'} h={'100%'}>
         <Flex
           flexDirection={'column'}
-          width={'100%'}
-          pw={'10px'}
+          pw={2}
         >
           {
             ToolConfig.map((config) => {
@@ -79,7 +70,7 @@ export const SiderMenu = () => {
                   <Image
                     src={store.activeMenu === config.path ? `images/${config.iconActive}` : `images/${config.icon}`}/>
                   <Text marginLeft={'15px'}
-                        color={store.activeMenu === config.path ? '#33FF99' : 'white'}>{config.name}</Text>
+                        color={store.activeMenu === config.path ? theme.colors.lightGreen: ''}>{config.name}</Text>
                 </Button>
               );
             })

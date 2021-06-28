@@ -6,7 +6,7 @@ import React from 'react';
 const Logo = (props)=>{
   return(
     <Box {...props}>
-      <Image src='images/logo_iotube.png'/>
+      <Image src='images/logo_iotube.svg'/>
     </Box>
   )
 }

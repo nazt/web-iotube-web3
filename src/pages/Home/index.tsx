@@ -46,7 +46,7 @@ export const Home = observer(() => {
               history.push('/deposit');
               sideBar.setActiveMenu('/deposit');
             }} my={20} w="20rem" size="lg" variant="green">
-              Enter App
+              {lang.t('enter_app')}
             </Button>
           </Center>
         </Flex>

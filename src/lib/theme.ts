@@ -1,4 +1,4 @@
-import { extendTheme } from '@chakra-ui/react';
+import { extendTheme, useColorModeValue } from '@chakra-ui/react';
 
 const Button = {
   // The styles all button have in common
@@ -44,6 +44,9 @@ export const theme = extendTheme({
   },
   header: {
     height: '64px'
+  },
+  shadow: {
+    light: '0px 3px 20px 0px #D6D6D680'
   },
   content: {
     height: 'calc(100vh - 64px)'

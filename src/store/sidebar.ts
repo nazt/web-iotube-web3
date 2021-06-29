@@ -4,7 +4,7 @@ import { theme } from '@/lib/theme';
 import { RootStore } from '@/store/root';
 export class SidebarStore {
   isOpen = true;
-  activeMenu='/';
+  activeMenu = '/deposit';
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this);
@@ -25,7 +25,12 @@ export class SidebarStore {
     return menu === pathname;
   }
 
+  get isHome() {
+    return this.activeMenu == '/';
+  }
+
   get width() {
+    if(this.isHome) return theme.sideBar.none;
     return this.isOpen ? theme.sideBar.width : theme.sideBar.widthWithOutText;
   }
 

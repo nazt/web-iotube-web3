@@ -34,6 +34,7 @@ export const DesktopNav = observer((props: BoxProps) => {
   const NavButton = ({children,...props}:ButtonProps)=>{
     return (
       <Button
+        _hover={{}}
         bgColor={theme.colors.header.bg}
         color={theme.colors.lightGreen}
         borderRadius={theme.borderRadius.sm}
@@ -49,6 +50,7 @@ export const DesktopNav = observer((props: BoxProps) => {
       return <NavButton onClick={store.showConnecter}>{lang.t('connect.wallet')}</NavButton>;
     }
     return <NavButton
+      bgColor={theme.colors.sideBar.itemActive}
       onClick={store.showWalletInfo}>{helper.string.truncate(god.currentNetwork.account, 12, '...')}</NavButton>;
   });
   return (

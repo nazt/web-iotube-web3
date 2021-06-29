@@ -8,16 +8,17 @@ import {
   Flex,
   Text,
   useTheme,
-  Link,
   Stat,
   StatLabel,
   StatNumber,
   StatGroup,
   Button
 } from '@chakra-ui/react';
+import { useHistory } from 'react-router-dom';
 
 export const Home = observer(() => {
-  const { lang } = useStore();
+  const { lang, sideBar } = useStore();
+  const history = useHistory();
   const theme = useTheme();
   return (
     <Box h={theme.content.height} bgImage={'/images/home_bg.png'}>
@@ -41,7 +42,10 @@ export const Home = observer(() => {
             </Stat>
           </StatGroup>
           <Center>
-            <Button my={20} w="20rem" size="lg" variant="green">
+            <Button onClick={() => {
+              history.push('/deposit');
+              sideBar.setActiveMenu('/deposit');
+            }} my={20} w="20rem" size="lg" variant="green">
               Enter App
             </Button>
           </Center>

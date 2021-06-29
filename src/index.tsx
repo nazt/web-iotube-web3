@@ -34,9 +34,9 @@ const BodyWrapper = observer(({ children }) => {
   return (
     <Box
       className='body'
-      marginLeft={{ base: null, md: sideBar.isOpen ? theme.sideBar.width : theme.sideBar.widthWithOutText }}
+      marginLeft={sideBar.width}
       maxWidth={{
-        base: '90%',
+        base: '100%',
         md: sideBar.isOpen ? theme.content.maxWidthWithIconText : theme.content.maxWidthWithIcon
       }}
     >

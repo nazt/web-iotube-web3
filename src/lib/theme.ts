@@ -56,6 +56,7 @@ export const theme = extendTheme({
     maxWidthWithIcon:'calc(100%-80px)'
   },
   sideBar: {
+    none: '0px',
     width: '200px',
     widthWithOutText:'80px',
     bg: {

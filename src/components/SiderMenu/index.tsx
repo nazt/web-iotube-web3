@@ -3,7 +3,7 @@ import {
   Button,
   Image, useColorMode, IconButton, useTheme, useBreakpointValue
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text } from '@chakra-ui/layout';
 import { observer } from 'mobx-react-lite';
 import { useHistory } from 'react-router-dom';
@@ -32,7 +32,7 @@ export const SiderMenu = () => {
         fontSize={theme.iconSize.md}
         aria-label={'Toggle Dark Mode'}
         onClick={() => sideBar.isOpen = !sideBar.isOpen}
-        icon={sideBar.isOpen ? <ToggleLeftIcon /> : <ToggleRightIcon />}
+        icon={sideBar.isOpen ? <ToggleLeftIcon/> : <ToggleRightIcon/>}
       />
     );
   };
@@ -73,6 +73,7 @@ export const SiderMenu = () => {
   const renderSideBar = () => {
     return (
       <Flex
+        hidden={sideBar.isHome}
         position='absolute'
         top='4.5rem'
         left={0}
@@ -83,7 +84,7 @@ export const SiderMenu = () => {
         bgColor={colorMode === 'light' ? theme.sideBar.bg.light : theme.sideBar.bg.dark}
         px={2}
         zIndex={1}
-        shadow={colorMode==='light'?theme.shadows.lightShadow:theme.shadows.darkShadow}
+        shadow={colorMode === 'light' ? theme.shadows.lightShadow : theme.shadows.darkShadow}
       >
         <Flex flexDirection={'column'} justifyContent={'space-between'} mt={10} w={'100%'} h={'100%'}>
           <Flex
@@ -108,7 +109,7 @@ export const SiderMenu = () => {
               fontSize={theme.iconSize.md}
               aria-label={'Toggle Light Mode'}
               onClick={toggleColorMode}
-              icon={colorMode === 'light' ? <SunnyIcon /> : <SunnyDarkIcon />}
+              icon={colorMode === 'light' ? <SunnyIcon/> : <SunnyDarkIcon/>}
             />
             <IconButton
               _focus={{}}
@@ -116,7 +117,7 @@ export const SiderMenu = () => {
               fontSize={theme.iconSize.md}
               aria-label={'Toggle Dark Mode'}
               onClick={toggleColorMode}
-              icon={colorMode === 'light' ? <MoonLightIcon /> : <MoonDarkIcon />}
+              icon={colorMode === 'light' ? <MoonLightIcon/> : <MoonDarkIcon/>}
             />
             {renderToggleButton()}
           </Flex>
@@ -124,6 +125,14 @@ export const SiderMenu = () => {
       </Flex>
     );
   };
+
+  useEffect(() => {
+    console.log('====>', history.location);
+    if (history.location) {
+      sideBar.activeMenu = history.location.pathname;
+    }
+  }, [history]);
+
   return (
     isShowSideBar ? renderSideBar() : null
   );

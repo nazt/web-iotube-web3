@@ -16,7 +16,7 @@ class Tool {
 export const ToolConfig = [
   {
     name: 'Home',
-    path: '/home',
+    path: '/',
     component: Home,
     icon:'home.svg',
     iconActive:'home_active.svg',
@@ -24,7 +24,7 @@ export const ToolConfig = [
   },
   {
     name: 'Deposit',
-    path: '/',
+    path: '/deposit',
     component: Deposit,
     icon:'swap.svg',
     iconActive:'swap_active.svg',

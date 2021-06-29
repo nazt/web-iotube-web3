@@ -11,6 +11,7 @@ export class TokenStore {
   rootStore: RootStore;
   toNetwork = new NumberState({ value: 56 });
   actionHash: StringState = new StringState();
+  curToken: TokenState;
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;

@@ -169,7 +169,7 @@ export const Deposit = observer(() => {
     }
   }));
   useEffect(() => {
-    store.curToken = null;
+    store.curToken = token.currentCrossChain?.tokens[0];
     store.amount = new BigNumberInputState({});
     store.receiverAddress.setValue('');
     store.approveLoading.setValue(false);
@@ -177,7 +177,7 @@ export const Deposit = observer(() => {
     if (god.currentNetwork.account) {
       token.loadPrivateData();
     }
-  }, [token.currentCrossChain?.chain, token.currentChain.chainId, god.currentNetwork.account]);
+  }, [token.currentCrossChain?.chain, token.currentCrossChain?.tokens[0], token.currentChain.chainId, god.currentNetwork.account]);
 
   return (
     <Container

@@ -1,11 +1,12 @@
 import { ToolConfig } from '../config/ToolConfig';
 import { makeAutoObservable } from 'mobx';
 import { theme } from '@/lib/theme';
+import { RootStore } from '@/store/root';
 export class SidebarStore {
   isOpen = true;
   activeMenu='/';
 
-  constructor() {
+  constructor(rootStore: RootStore) {
     makeAutoObservable(this);
   }
 

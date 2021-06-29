@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useStore } from '@/store/index';
 import { Header } from '@/components/Header/index';
-import { ChakraProvider, Button, Container, Center, CSSReset, useMediaQuery } from '@chakra-ui/react';
+import { ChakraProvider, Button, Container, Center, CSSReset } from '@chakra-ui/react';
 import { theme } from '@/lib/theme';
 import { ETHProvider } from './components/EthProvider';
 import { Web3ReactProvider } from '@web3-react/core';
@@ -14,7 +14,6 @@ import { Toaster } from 'react-hot-toast';
 import { ToolConfig } from './config/ToolConfig';
 import { WalletSelecter } from '@/components/WalletSelecter';
 import SiderMenu from '@/components/SiderMenu';
-import { useTheme } from '@emotion/react';
 
 const ErrorFallback = ({ error, resetErrorBoundary }) => {
   return (
@@ -35,8 +34,11 @@ const BodyWrapper = observer(({ children }) => {
   return (
     <Box
       className='body'
-      marginLeft={{base:null,md:sideBar.isOpen?theme.sideBar.width:theme.sideBar.widthWithOutText}}
-      maxWidth={{base:'90%',md:sideBar.isOpen?theme.content.maxWidthWithIconText:theme.content.maxWidthWithIcon}}
+      marginLeft={{ base: null, md: sideBar.isOpen ? theme.sideBar.width : theme.sideBar.widthWithOutText }}
+      maxWidth={{
+        base: '90%',
+        md: sideBar.isOpen ? theme.content.maxWidthWithIconText : theme.content.maxWidthWithIcon
+      }}
     >
       {children}
     </Box>
@@ -51,19 +53,19 @@ export const App = observer(() => {
 
   return (
     <ChakraProvider theme={theme}>
-      <CSSReset />
+      <CSSReset/>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <Web3ReactProvider getLibrary={getLibrary}>
-          <WalletSelecter />
-          <ETHProvider />
-          <Toaster />
+          <WalletSelecter/>
+          <ETHProvider/>
+          <Toaster/>
           <Router>
-            <Header />
-            <SiderMenu />
+            <Header/>
+            <SiderMenu/>
             <BodyWrapper>
               <Switch>
                 {ToolConfig.map((item) => (
-                  <Route exact path={item.path} key={item.path} component={item.component} />
+                  <Route exact path={item.path} key={item.path} component={item.component}/>
                 ))}
               </Switch>
             </BodyWrapper>

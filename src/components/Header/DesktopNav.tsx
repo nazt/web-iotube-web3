@@ -36,7 +36,7 @@ export const DesktopNav = observer((props: BoxProps) => {
       <Button
         bgColor={theme.colors.header.bg}
         color={theme.colors.lightGreen}
-        borderRadius={'15px'}
+        borderRadius={theme.borderRadius.sm}
         {...props}
       >
         {children}

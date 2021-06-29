@@ -66,6 +66,7 @@ export const Header = observer(() => {
       shadow="sm"
     >
       <CloseButton
+        color='white'
         aria-label="Close menu"
         justifySelf="self-start"
         onClick={mobileNav.onClose}
@@ -88,11 +89,11 @@ export const Header = observer(() => {
               alignItems={'center'}
               justifyContent={'flex-start'}
               marginTop={'30px'}
+              color={store.activeMenu === config.path ? 'lightGreen' : 'white'}
             >
               <Image
                 src={store.activeMenu === config.path ? `images/${config.iconActive}` : `images/${config.icon}`}/>
-              <Text marginLeft={'15px'}
-                    color={store.activeMenu === config.path ? '#33FF99' : 'white'}>{config.name}</Text>
+              <Text marginLeft={'15px'}>{config.name}</Text>
             </Button>
           );
         })
@@ -131,8 +132,8 @@ export const Header = observer(() => {
               <IconButton
                 display={{ base: "flex", md: "none" }}
                 aria-label="Open menu"
-                fontSize="20px"
-                color={useColorModeValue("gray.800", "inherit")}
+                fontSize="lg"
+                color='lightGreen'
                 variant="ghost"
                 icon={<AiOutlineMenu />}
                 onClick={mobileNav.onOpen}

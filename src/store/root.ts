@@ -11,5 +11,5 @@ export class RootStore {
   god = new GodStore(this);
   token = new TokenStore(this);
   record = new RecordStore(this);
-  sideBar = new SidebarStore();
+  sideBar = new SidebarStore(this);
 }

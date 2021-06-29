@@ -29,7 +29,7 @@ export const CollapseView = (props: IComponentProps) => {
           <Icon as={isOpen ? MinusIcon : AddIcon} onClick={() => setOpen(!isOpen)}/>
         </Center>
         <Center>
-        <span className="c-white-10 text-2xl mb-0" onClick={() => setOpen(!isOpen)}>
+        <span onClick={() => setOpen(!isOpen)}>
           {title}
         </span>
         </Center>

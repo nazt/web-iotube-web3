@@ -42,8 +42,8 @@ export const ToolConfig = [
     name: 'Faqs',
     path: '/faq',
     component: Faq,
-    icon: 'Governance.svg',
-    iconActive:'Governance_active.svg',
+    icon: 'faq.svg',
+    iconActive:'faq_active.svg',
     isActive:false
   }
 ];

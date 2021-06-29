@@ -5,11 +5,11 @@ import { useStore } from '../../store/index';
 import { eventBus } from '../../lib/event';
 import copy from 'copy-to-clipboard';
 import toast from 'react-hot-toast';
-import { Button, Text, Flex } from '@chakra-ui/react';
+import { Button, Text, Flex, ModalHeader, ModalCloseButton, useColorModeValue } from '@chakra-ui/react';
+import { theme } from '@/lib/theme';
 
 export const WalletInfo = observer(() => {
   const { god, lang } = useStore();
-
   const store = useLocalStore(() => ({
     get visible() {
       return god.currentNetwork.walletInfo.visible;
@@ -29,9 +29,14 @@ export const WalletInfo = observer(() => {
   return (
     <Modal isOpen={store.visible} onClose={store.close} isCentered>
       <ModalOverlay />
-      <ModalContent padding="10">
-        <Button onClick={store.logout} size="md">
-          <Text>Logout</Text>
+      <ModalContent style={{padding:'15px 30px'}} bgColor={useColorModeValue(theme.colors.white,theme.colors.gray.bg)}>
+        <Flex justifyContent={'space-between'} alignContent={'flex-start'}>
+          <ModalHeader color={useColorModeValue('black',theme.colors.gray['3'])} padding={0} fontSize={'2xl'}>Logout</ModalHeader>
+          <ModalCloseButton position={'relative'} top={'0'} right={'0'} _hover={{}} _focus={{}}/>
+        </Flex>
+        <Text color={useColorModeValue('black',theme.colors.gray['3'])} mt={50} fontSize={'lg'}>{god.currentNetwork.account}</Text>
+        <Button onClick={store.logout} size="md" variant={'green'} mt={100}>
+          <Text fontSize={'xl'}>Logout</Text>
         </Button>
       </ModalContent>
     </Modal>

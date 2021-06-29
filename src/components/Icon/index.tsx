@@ -5,7 +5,7 @@ export const SunnyIcon = createIcon({
   displayName: "SunnyIcon",
   viewBox: "0 0 24 24",
   path: (
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12.5" cy="12.5" r="5.5" stroke="#33FF99" strokeWidth="2"/>
       <path d="M12.5 2V3.5M12.5 21.5V23" stroke="#33FF99" strokeWidth="2"/>
       <path d="M2 12.5L3.5 12.5M21.5 12.5L23 12.5" stroke="#33FF99" strokeWidth="2"/>
@@ -19,7 +19,7 @@ export const SunnyDarkIcon = createIcon({
   displayName: "SunnyDarkIcon",
   viewBox: "0 0 24 24",
   path: (
-    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g opacity="0.5">
         <circle cx="12.8457" cy="12.5" r="5.5" stroke="#C7CFD6" strokeWidth="2"/>
         <path d="M12.8457 2V3.5M12.8457 21.5V23" stroke="#C7CFD6" strokeWidth="2"/>
@@ -35,7 +35,7 @@ export const MoonLightIcon=createIcon({
   displayName: "MoonLightIcon",
   viewBox: "0 0 24 24",
   path: (
-    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <mask id="path-1-inside-1" fill="white">
         <path fillRule="evenodd" clipRule="evenodd" d="M22.1697 13.878C21.6568 13.9688 21.1289 14.0162 20.5899 14.0162C15.6194 14.0162 11.5899 9.98672 11.5899 5.01616C11.5899 3.95931 11.7721 2.945 12.1067 2.00293C6.69429 2.12985 2.3457 6.55716 2.3457 12.0001C2.3457 17.523 6.82285 22.0001 12.3457 22.0001C17.2267 22.0001 21.2909 18.5032 22.1697 13.878Z"/>
       </mask>
@@ -53,6 +53,26 @@ export const MoonDarkIcon=createIcon({
         <path fillRule="evenodd" clipRule="evenodd" d="M19.824 11.878C19.3111 11.9688 18.7832 12.0162 18.2442 12.0162C13.2737 12.0162 9.24423 7.98672 9.24423 3.01616C9.24423 1.95931 9.4264 0.945002 9.76104 0.00292969C4.34858 0.129853 0 4.55716 0 10.0001C0 15.523 4.47715 20.0001 10 20.0001C14.881 20.0001 18.9452 16.5032 19.824 11.878Z"/>
       </mask>
       <path d="M19.824 11.878L21.7888 12.2513L22.3299 9.40316L19.4753 9.90861L19.824 11.878ZM9.76104 0.00292969L11.6457 0.672385L12.6179 -2.06461L9.71415 -1.99652L9.76104 0.00292969ZM19.4753 9.90861C19.077 9.97913 18.6658 10.0162 18.2442 10.0162V14.0162C18.9006 14.0162 19.5452 13.9584 20.1727 13.8473L19.4753 9.90861ZM18.2442 10.0162C14.3782 10.0162 11.2442 6.88215 11.2442 3.01616H7.24423C7.24423 9.09129 12.1691 14.0162 18.2442 14.0162V10.0162ZM11.2442 3.01616C11.2442 2.19058 11.3863 1.40253 11.6457 0.672385L7.87641 -0.666525C7.46649 0.487474 7.24423 1.72803 7.24423 3.01616H11.2442ZM2 10.0001C2 5.64602 5.47891 2.1039 9.80792 2.00238L9.71415 -1.99652C3.21826 -1.84419 -2 3.46829 -2 10.0001H2ZM10 18.0001C5.58172 18.0001 2 14.4184 2 10.0001H-2C-2 16.6275 3.37258 22.0001 10 22.0001V18.0001ZM17.8591 11.5047C17.1563 15.2037 13.9026 18.0001 10 18.0001V22.0001C15.8594 22.0001 20.7341 17.8026 21.7888 12.2513L17.8591 11.5047Z" fill="#33FF99" mask="url(#path-1-inside-1)"/>
+    </svg>
+  ),
+})
+
+export const ToggleRightIcon=createIcon({
+  displayName: "ToggleRightIcon",
+  viewBox: "0 0 24 24",
+  path: (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12.5534 4.22197C12.2458 3.94759 11.7918 4.19422 11.7918 4.63815V19.3649C11.7918 19.8058 12.2428 20.0524 12.5534 19.7811L20.823 12.4162C21.059 12.2035 21.059 11.7965 20.823 11.5869L12.5534 4.22197ZM6.44894 4H4V20H6.44894V4Z" fill="#999999"/>
+    </svg>
+  ),
+})
+
+export const ToggleLeftIcon=createIcon({
+  displayName: "ToggleLeftIcon",
+  viewBox: "0 0 24 24",
+  path: (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12.4466 4.22197C12.7542 3.94759 13.2082 4.19422 13.2082 4.63815V19.3649C13.2082 19.8058 12.7572 20.0524 12.4466 19.7811L4.17695 12.4162C3.94102 12.2035 3.94102 11.7965 4.17695 11.5869L12.4466 4.22197ZM18.5511 4H21V20H18.5511V4Z" fill="#999999"/>
     </svg>
   ),
 })

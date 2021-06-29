@@ -19,27 +19,31 @@ export const ToolConfig = [
     path: '/home',
     component: Home,
     icon:'home.svg',
-    iconActive:'home_active.svg'
+    iconActive:'home_active.svg',
+    isActive:false
   },
   {
     name: 'Deposit',
     path: '/',
     component: Deposit,
     icon:'swap.svg',
-    iconActive:'swap_active.svg'
+    iconActive:'swap_active.svg',
+    isActive:false
   },
   {
     name: 'Transactions',
     path: '/transactions',
     component: Vault,
     icon: 'Governance.svg',
-    iconActive:'Governance_active.svg'
+    iconActive:'Governance_active.svg',
+    isActive:false
   },
   {
     name: 'Faqs',
     path: '/faq',
     component: Faq,
     icon: 'Governance.svg',
-    iconActive:'Governance_active.svg'
+    iconActive:'Governance_active.svg',
+    isActive:false
   }
 ];

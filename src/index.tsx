@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useStore } from '@/store/index';
 import { Header } from '@/components/Header/index';
-import { ChakraProvider, Button, Container, Center, CSSReset } from '@chakra-ui/react';
+import { ChakraProvider, Button, Container, Center, CSSReset, useMediaQuery } from '@chakra-ui/react';
 import { theme } from '@/lib/theme';
 import { ETHProvider } from './components/EthProvider';
 import { Web3ReactProvider } from '@web3-react/core';
@@ -12,17 +12,17 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { Box, Text } from '@chakra-ui/layout';
 import { Toaster } from 'react-hot-toast';
 import { ToolConfig } from './config/ToolConfig';
-import { WalletSelecter } from './components/WalletSelecter/index';
-import SiderMenu  from '@/components/SiderMenu';
-
+import { WalletSelecter } from '@/components/WalletSelecter';
+import SiderMenu from '@/components/SiderMenu';
+import { useTheme } from '@emotion/react';
 
 const ErrorFallback = ({ error, resetErrorBoundary }) => {
   return (
-    <Container role="alert">
-      <Center h="500px">
+    <Container role='alert'>
+      <Center h='500px'>
         <Box>
           <p>Something went wrong:</p>
-          <Text color="red.500">{error.message}</Text>
+          <Text color='red.500'>{error.message}</Text>
           <Button onClick={resetErrorBoundary}>Try again</Button>
         </Box>
       </Center>
@@ -30,17 +30,18 @@ const ErrorFallback = ({ error, resetErrorBoundary }) => {
   );
 };
 
-const BodyWrapper=({children})=>{
+const BodyWrapper = observer(({ children }) => {
+  const { sideBar } = useStore();
   return (
     <Box
-      className="body"
-      marginLeft={'200px'}
-      maxWidth={'calc(100%-200px)'}
+      className='body'
+      marginLeft={{base:null,md:sideBar.isOpen?theme.sideBar.width:theme.sideBar.widthWithOutText}}
+      maxWidth={{base:'90%',md:sideBar.isOpen?theme.content.maxWidthWithIconText:theme.content.maxWidthWithIcon}}
     >
       {children}
     </Box>
-  )
-}
+  );
+});
 
 export const App = observer(() => {
   const { lang, god, token } = useStore();

@@ -1,102 +1,131 @@
 import {
   Flex,
   Button,
-  Image, useColorMode, IconButton, useTheme
+  Image, useColorMode, IconButton, useTheme, useBreakpointValue
 } from '@chakra-ui/react';
 import React from 'react';
 import { Text } from '@chakra-ui/layout';
-import { observer, useLocalObservable } from 'mobx-react-lite';
+import { observer } from 'mobx-react-lite';
 import { useHistory } from 'react-router-dom';
-import { ToolConfig } from '../../config/ToolConfig';
-import { SunnyIcon, SunnyDarkIcon, MoonLightIcon, MoonDarkIcon } from '@/components/Icon';
+import {
+  SunnyIcon,
+  SunnyDarkIcon,
+  MoonLightIcon,
+  MoonDarkIcon,
+  ToggleRightIcon,
+  ToggleLeftIcon
+} from '@/components/Icon';
+import { useStore } from '@/store/index';
 
 export const SiderMenu = () => {
   const history = useHistory();
   const { colorMode, toggleColorMode } = useColorMode();
   const theme = useTheme();
+  const { sideBar } = useStore();
 
-  const store = useLocalObservable(() => ({
-    activeMenu: history.location.pathname,
-    switchToRoute(path) {
-      history.push(path);
-      this.activeMenu = path;
-    }
-  }));
-
-  const getItemActiveStyle = (path) => {
-    if (store.activeMenu === path) {
-      return {
-        bgColor: theme.colors.sideBar.itemActive,
-        borderRadius: '15px'
-      };
-    }
+  const isShowSideBar = useBreakpointValue({ base: false, md: true });
+  const renderToggleButton = () => {
+    return (
+      <IconButton
+        _focus={{}}
+        variant={'unstyled'}
+        fontSize={theme.iconSize.md}
+        aria-label={'Toggle Dark Mode'}
+        onClick={() => sideBar.isOpen = !sideBar.isOpen}
+        icon={sideBar.isOpen ? <ToggleLeftIcon /> : <ToggleRightIcon />}
+      />
+    );
   };
-  return (
-    <Flex
-      position='absolute'
-      top="4.5rem"
-      left={0}
-      align='center'
-      flexDirection={'column'}
-      h={theme.content.height}
-      width={'200px'}
-      bgColor={colorMode === 'light' ? theme.sideBar.bg.light : theme.sideBar.bg.dark}
-      px={2}
-      zIndex={1}
-    >
-      <Flex flexDirection={'column'} justifyContent={'space-between'} w={'100%'} h={'100%'}>
-        <Flex
-          flexDirection={'column'}
-          pw={2}
-        >
-          {
-            ToolConfig.map((config) => {
-              return (
-                <Button
-                  fontSize={'15px'}
-                  variant='ghost'
-                  aria-label='Home'
-                  _hover={{ bg: theme.colors.sideBar.itemActive }}
-                  minHeight={'50px'}
-                  display={'flex'}
-                  fontWeight={400}
-                  onClick={() => store.switchToRoute(config.path)}
-                  key={config.name}
-                  {...getItemActiveStyle(config.path)}
-                  alignItems={'center'}
-                  justifyContent={'flex-start'}
-                  marginTop={'30px'}
-                >
-                  <Image
-                    src={store.activeMenu === config.path ? `images/${config.iconActive}` : `images/${config.icon}`}/>
-                  <Text marginLeft={'15px'}
-                        color={store.activeMenu === config.path ? theme.colors.lightGreen: ''}>{config.name}</Text>
-                </Button>
-              );
-            })
-          }
-        </Flex>
-        <Flex flexDirection={'row'}
-              width={'100%'}
-              p={'12px'}>
-          <IconButton
-            isActive={false}
-            variant={'unstyled'}
-            fontSize={theme.iconSize.md}
-            aria-label={'Toggle Light Mode'}
-            onClick={toggleColorMode}
-            icon={colorMode === 'light' ? <SunnyIcon/> : <SunnyDarkIcon/>}
-          />
-          <IconButton
-            variant={'unstyled'}
-            fontSize={theme.iconSize.md}
-            aria-label={'Toggle Dark Mode'}
-            onClick={toggleColorMode}
-            icon={colorMode === 'light' ? <MoonLightIcon/> : <MoonDarkIcon/>}
-          />
+
+  const renderSideBarItem = (menu) => {
+    return (
+      <Button
+        fontSize={'15px'}
+        variant='ghost'
+        aria-label='Home'
+        _hover={{ bg: theme.colors.sideBar.itemActive }}
+        _focus={{}}
+        fontWeight={400}
+        onClick={() => {
+          history.push(menu.path);
+          sideBar.setActiveMenu(menu.path);
+        }}
+        key={menu.name}
+        bgColor={menu.isActive ? theme.colors.sideBar.itemActive : 'none'}
+        borderRadius={'15px'}
+        justifyContent={sideBar.isOpen ? 'flex-start' : 'center'}
+        mt={30}
+      >
+        <Image
+          src={`images/${menu.iconActive}`}
+          display={sideBar.activeMenu === menu.path ? 'block' : 'none'}
+        />
+        <Image
+          src={`images/${menu.icon}`}
+          display={sideBar.activeMenu !== menu.path ? 'block' : 'none'}
+        />
+        {sideBar.isOpen ? <Text marginLeft={'15px'}
+                                color={sideBar.activeMenu === menu.path ? theme.colors.lightGreen : ''}>{menu.name}</Text> : null}
+      </Button>
+    );
+  };
+
+  const renderSideBar = () => {
+    return (
+      <Flex
+        position='absolute'
+        top='4.5rem'
+        left={0}
+        align='center'
+        flexDirection={'column'}
+        h={theme.content.height}
+        width={sideBar.width}
+        bgColor={colorMode === 'light' ? theme.sideBar.bg.light : theme.sideBar.bg.dark}
+        px={2}
+        zIndex={1}
+        shadow={colorMode==='light'?theme.shadows.lightShadow:theme.shadows.darkShadow}
+      >
+        <Flex flexDirection={'column'} justifyContent={'space-between'} mt={10} w={'100%'} h={'100%'}>
+          <Flex
+            flexDirection={'column'}
+            pw={2}
+          >
+            {
+              sideBar.menus.map((menu) => {
+                return (
+                  renderSideBarItem(menu)
+                );
+              })
+            }
+          </Flex>
+          <Flex flexDirection={sideBar.isOpen ? 'row' : 'column'}
+                width={'100%'}
+                p={'12px'}>
+            <IconButton
+              _focus={{}}
+              isActive={false}
+              variant={'unstyled'}
+              fontSize={theme.iconSize.md}
+              aria-label={'Toggle Light Mode'}
+              onClick={toggleColorMode}
+              icon={colorMode === 'light' ? <SunnyIcon /> : <SunnyDarkIcon />}
+            />
+            <IconButton
+              _focus={{}}
+              variant={'unstyled'}
+              fontSize={theme.iconSize.md}
+              aria-label={'Toggle Dark Mode'}
+              onClick={toggleColorMode}
+              icon={colorMode === 'light' ? <MoonLightIcon /> : <MoonDarkIcon />}
+            />
+            {renderToggleButton()}
+          </Flex>
         </Flex>
       </Flex>
-    </Flex>
+    );
+  };
+  return (
+    isShowSideBar ? renderSideBar() : null
   );
 };
 export default observer(SiderMenu);

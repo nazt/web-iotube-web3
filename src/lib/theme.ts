@@ -5,7 +5,9 @@ const Button = {
   baseStyle: {
     fontWeight: '500',
     fontSize: '18px',
-    borderRadius: '15px' // <-- border radius is same for all variants and sizes
+    borderRadius: '15px', // <-- border radius is same for all variants and sizes
+    minHeight:'50px',
+    display: 'flex'
   },
   sizes: {
     block: {
@@ -49,10 +51,13 @@ export const theme = extendTheme({
     light: '0px 3px 20px 0px #D6D6D680'
   },
   content: {
-    height: 'calc(100vh - 64px)'
+    height: 'calc(100vh - 64px)',
+    maxWidthWithIconText:'calc(100%-200px)',
+    maxWidthWithIcon:'calc(100%-80px)'
   },
   sideBar: {
     width: '200px',
+    widthWithOutText:'80px',
     bg: {
       light: 'white',
       dark: '#2C2D30'
@@ -119,7 +124,8 @@ export const theme = extendTheme({
         background: ' #212024'
       },
       '.body': {
-        overflowY: 'scroll' // Always show scrollbar to avoid flickering
+        overflowY: 'scroll', // Always show scrollbar to avoid flickering
+        margin:'auto'
       },
       html: {
         scrollBehavior: 'smooth',

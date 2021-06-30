@@ -19,10 +19,12 @@ export class AddressState {
     }
   }
 
-  getEthAddress() {
-    if (this.loading) return '...';
+  get ethAddress() {
     if (validateAddress(this.value)) {
       return fromString(this.value).stringEth();
+    }
+    if (isEthAddress(this.value)) {
+      return this.value;
     }
   }
 

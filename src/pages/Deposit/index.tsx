@@ -29,8 +29,8 @@ import { AddressState } from '@/store/standard/AddressState';
 import BigNumber from 'bignumber.js';
 import { ConfirmModal } from '@/components/ConfirmModal';
 import { BigNumberState } from '@/store/standard/BigNumberState';
-import { theme } from '@/lib/theme';
 import { CompleteModal } from '@/components/CompleteModal';
+import { toast } from 'react-hot-toast';
 
 export const Deposit = observer(() => {
   const { god, token, lang } = useStore();
@@ -87,11 +87,7 @@ export const Deposit = observer(() => {
         return `Amount must >= ${store.curToken.amountRange.minAmount.format}`;
       }
 
-      if (!god.isETHNetwork && !isEthAddress(store.receiverAddress.value)) {
-        return lang.t('input.crossschainaddress.invalid', { chain: token.currentCrossChain.chain.name });
-      }
-
-      if (god.isETHNetwork && !validateAddress(store.receiverAddress.value)) {
+      if (!isEthAddress(store.receiverAddress.ethAddress)) {
         return lang.t('input.crossschainaddress.invalid', { chain: token.currentCrossChain.chain.name });
       }
       return '';
@@ -135,7 +131,7 @@ export const Deposit = observer(() => {
       if (store.curToken.isEth()) {
         options = { value: new BigNumber(amountVal).plus(token.currentCrossChain?.cashier.depositFee.value).toString() };
       }
-      let receiverAddress = store.receiverAddress.value;
+      let receiverAddress = store.receiverAddress.ethAddress;
       let fromAddress = store.curToken.address;
       try {
         store.confirmIsLoading.setValue(true);
@@ -148,22 +144,16 @@ export const Deposit = observer(() => {
           store.isOpenCompleteModal.setValue(true);
         }
         const receipt = await res.wait();
-        // store.isOpenConfirmModal.setValue(false);
-        // store.confirmIsLoading.setValue(false);
         console.log("receipt--->", receipt);
-        // if (receipt.status == 1) {
-        //   token.actionHash.setValue(receipt.blockHash);
-        //   store.isOpenCompleteModal.setValue(true);
-        // }
       } catch (e) {
         store.confirmIsLoading.setValue(false);
         console.log(e);
         if (e.message) {
-          // message.error(e.message);
+          toast.error(e.message);
         }
         store.isOpenConfirmModal.setValue(false);
         if (e && e.data && e.data.message) {
-          // message.error(e.data.message);
+          toast.error(e.data.message);
         }
       }
     }
@@ -239,7 +229,6 @@ export const Deposit = observer(() => {
               variant="unstyled"
               mx={4}
               py={2}
-              placeholder={token.currentCrossChain && token.currentCrossChain.chain.network.info.token.tokenExample}
               value={store.receiverAddress.value}
               onChange={(e) => store.receiverAddress.setValue(e.target.value)}
             />

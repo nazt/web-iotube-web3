@@ -5,13 +5,14 @@ import { useWeb3React } from '@web3-react/core';
 import { injected } from '../../lib/web3-react';
 import { Modal, ModalContent, ModalOverlay } from '@chakra-ui/modal';
 import { Box, Flex, Text } from '@chakra-ui/layout';
-import { Image, Button } from '@chakra-ui/react';
+import { AvatarGroup, Avatar, useColorModeValue, useTheme } from '@chakra-ui/react';
 import { Network } from '@/store/god';
 import { useEffect } from 'react';
 
 export const WalletSelecter = observer(() => {
   const { god } = useStore();
   const { active, error, activate } = useWeb3React();
+  const theme = useTheme();
 
   const store = useLocalStore(() => ({
     get visible() {
@@ -54,26 +55,60 @@ export const WalletSelecter = observer(() => {
     }
   }, [active, error, activate]);
 
+  const config = [
+    {
+      title: 'Metamask',
+      icon: '/images/metamask.svg'
+    },
+    {
+      title: 'ioPay',
+      icon: '/images/iopay.svg'
+    },
+    {
+      title: 'Trust',
+      icon: '/images/trustwallet.svg'
+    },
+    {
+      title: 'Math',
+      icon: '/images/mathwallet.svg'
+    },
+    {
+      title: 'imToken',
+      icon: '/images/imtoken.svg'
+    }
+  ];
+  const names = config.map(item => item.title).join(', ');
+
   return (
     <Modal isOpen={store.visible} onClose={store.close} isCentered>
-      <ModalOverlay />
-      <ModalContent padding="10">
-        <Button onClick={store.connectInejct} size="lg" justifyContent="space-between" alignItems="center">
-          <Text>Metamask</Text>
-          <Image src="/images/metamask.svg" />
-        </Button>
-        <Button onClick={store.connectInejct} size="lg" justifyContent="space-between" alignItems="center" mt="2">
-          <Text>TrustWallet</Text>
-          <Image src="/images/trustwallet.svg" />
-        </Button>
-        <Button onClick={store.connectInejct} size="lg" justifyContent="space-between" alignItems="center" mt="2">
-          <Text>MathWallet</Text>
-          <Image src="/images/mathwallet.svg" />
-        </Button>
-        <Button onClick={store.connectInejct} size="lg" justifyContent="space-between" alignItems="center" mt="2">
-          <Text>TokenPocket</Text>
-          <Image src="/images/tokenpocket.svg" />
-        </Button>
+      <ModalOverlay/>
+      <ModalContent p={6} borderRadius={theme.radii.xl}
+                    bg={useColorModeValue(theme.sideBar.bg.light, theme.sideBar.bg.dark)}>
+        {!god.currentNetwork.account && (
+          <Box>
+            <Box onClick={store.connectInejct} my={4} cursor='pointer' borderRadius={theme.radii.xl}
+                 p={4} bg={useColorModeValue(theme.colors.gray[100], theme.colors.gray.bg)}
+                 _hover={{ opacity: '0.8' }}>
+              <Flex>
+                <Flex direction='column'>
+                  <Text fontSize='lg' fontWeight='500'>Broswer
+                    Wallet</Text>
+                  <Text mt={1} color={theme.colors.gray[2]} fontSize='xs'
+                        fontWeight='500'>({names})</Text>
+                </Flex>
+                <Flex>
+                  <AvatarGroup size='sm' border='none'>
+                    {
+                      config.map((item, index) => {
+                        return <Avatar name={item.title} key={item.title} src={item.icon}/>;
+                      })
+                    }
+                  </AvatarGroup>
+                </Flex>
+              </Flex>
+            </Box>
+          </Box>
+        )}
       </ModalContent>
     </Modal>
   );

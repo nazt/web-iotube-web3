@@ -2,13 +2,15 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { useStore } from '@/store/index';
 import { CollapseView } from '@/components/CollapseView';
-import { Box } from '@chakra-ui/react';
+import { Box, Heading } from '@chakra-ui/react';
 
 
 export const Faq = observer(() => {
   const { lang, god } = useStore();
   return (
-    <Box pt={6}>
+    <Box pt={20}>
+      <Heading mx={10} pb={3} fontSize={'xx-large'}>FAQ</Heading>
+
       <CollapseView
         title={lang.t('faq.what_is_iotube_bridge')}
         body={

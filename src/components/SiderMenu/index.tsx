@@ -73,17 +73,16 @@ export const SiderMenu = () => {
   const renderSideBar = () => {
     return (
       <Flex
-        hidden={sideBar.isHome}
-        position='absolute'
-        top='4.5rem'
+        hidden={!sideBar.isShow}
+        position='fixed'
+        top='0'
         left={0}
         align='center'
         flexDirection={'column'}
-        h={theme.content.height}
+        h={'100vh'}
         width={sideBar.width}
         bgColor={colorMode === 'light' ? theme.sideBar.bg.light : theme.sideBar.bg.dark}
         px={2}
-        zIndex={1}
         shadow={colorMode === 'light' ? theme.shadows.lightShadow : theme.shadows.darkShadow}
       >
         <Flex flexDirection={'column'} justifyContent={'space-between'} mt={10} w={'100%'} h={'100%'}>
@@ -127,7 +126,6 @@ export const SiderMenu = () => {
   };
 
   useEffect(() => {
-    console.log('====>', history.location);
     if (history.location) {
       sideBar.activeMenu = history.location.pathname;
     }

@@ -1,4 +1,4 @@
-import { Flex, Box, useTheme, Icon, Center, useColorModeValue } from '@chakra-ui/react';
+import { Flex, Box, useTheme, Icon, Center, useColorModeValue, Divider, Stack, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { Collapse } from 'react-collapse';
 import { AddIcon, MinusIcon } from '@chakra-ui/icons';
@@ -15,31 +15,41 @@ export const CollapseView = (props: IComponentProps) => {
 
   return (
     <Box mx={10}
-         my={4}
-         bg={useColorModeValue(theme.sideBar.bg.light, theme.sideBar.bg.dark)}
-         borderRadius={theme.borderRadius.sm}>
-      <Flex flexDirection="row"
+         borderBottomWidth={1}
+         py={5}
+    >
+      <Flex flexDirection='row'
             color={isOpen ? 'lightGreen' : ''}
             h={theme.faq.collapseHeight}
-            bg={useColorModeValue(theme.sideBar.bg.light, theme.sideBar.bg.dark)}
-            boxShadow={useColorModeValue(theme.shadow.light, '')}
-            borderRadius={theme.borderRadius.sm}
-            cursor="pointer">
-        <Center mx={4}>
-          <Icon as={isOpen ? MinusIcon : AddIcon} onClick={() => setOpen(!isOpen)}/>
+            cursor='pointer'>
+        <Center mr={6}>
+          <Icon as={isOpen ? MinusIcon : AddIcon} onClick={() => setOpen(!isOpen)} color={theme.colors.lightGreen} />
         </Center>
         <Center>
-        <span onClick={() => setOpen(!isOpen)}>
-          {title}
-        </span>
+          <Text onClick={() => setOpen(!isOpen)} fontSize={'2xl'}>
+            {title}
+          </Text>
         </Center>
       </Flex>
-      <Collapse isOpened={isOpen}>
-        <Box bg={useColorModeValue(theme.sideBar.bg.light, theme.sideBar.bg.dark)}
-             p={4}
-             borderBottomRadius={theme.borderRadius.sm}
-             color={theme.colors.gray[10]}>
-          <blockquote>{body}</blockquote>
+      <Collapse isOpened={isOpen} offsetX={10}>
+        <Box p={4} >
+          <Box
+            position={'relative'}
+            _after={{
+              content: `""`,
+              position: 'absolute',
+              left: 0,
+              top: 'calc(10%)',
+              height: '80%',
+              borderLeftWidth:2 ,
+              borderColor:theme.colors.lightGreen
+            }}
+            px={7}
+            ml={20}
+            fontSize={'lg'}
+            color={theme.colors.gray[10]}>
+            <blockquote>{body}</blockquote>
+          </Box>
         </Box>
       </Collapse>
     </Box>

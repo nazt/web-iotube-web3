@@ -39,7 +39,7 @@ export const ToolConfig = [
     isActive:false
   },
   {
-    name: 'Faqs',
+    name: 'Faq',
     path: '/faq',
     component: Faq,
     icon: 'faq.svg',

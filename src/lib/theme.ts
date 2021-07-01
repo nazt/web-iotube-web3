@@ -96,6 +96,7 @@ export const theme = extendTheme({
       10: '#8D9399'
     },
     lightGreen: '#33FF99',
+    lightGreen20:'rgba(51, 255, 153, 0.2)',
     white:'#FFFFFF'
   },
   shadows: {

@@ -18,12 +18,10 @@ import Logo from '../SiderMenu/Logo';
 import { WalletInfo } from '../WalletInfo';
 import { DesktopNav } from '@/components/Header/DesktopNav';
 import { ToolConfig } from '../../config/ToolConfig';
-import { theme } from '@/lib/theme';
 import { Text } from '@chakra-ui/layout';
 import { useHistory } from 'react-router-dom';
 import { useStore } from '@/store/index';
-import { helper } from '@/lib/helper';
-
+import { Nav } from '@/components/Header/Nav';
 export const Header = observer(() => {
   const { sideBar, lang } = useStore();
   const mobileNav = useDisclosure();
@@ -53,30 +51,30 @@ export const Header = observer(() => {
 
   const MobileNavContent = (
     <VStack
-      pos="absolute"
+      pos='absolute'
       zIndex={10000}
       top={0}
       left={0}
       right={0}
       display={mobileNav.isOpen ? 'flex' : 'none'}
-      flexDirection="column"
+      flexDirection='column'
       p={2}
       pb={4}
       m={2}
       bg={theme.colors.header.bg}
       spacing={3}
-      rounded="sm"
-      shadow="sm"
+      rounded='sm'
+      shadow='sm'
     >
       <CloseButton
         color='white'
-        aria-label="Close menu"
-        justifySelf="self-start"
+        aria-label='Close menu'
+        justifySelf='self-start'
         onClick={mobileNav.onClose}
       />
 
       {
-        ToolConfig.map((config) => {
+        sideBar.menus.map((config) => {
           return (
             <Button
               fontSize={'15px'}
@@ -95,7 +93,7 @@ export const Header = observer(() => {
               color={store.activeMenu === config.path ? 'lightGreen' : 'white'}
             >
               <Image
-                src={store.activeMenu === config.path ? `images/${config.iconActive}` : `images/${config.icon}`}/>
+                src={store.activeMenu === config.path ? `images/${config.iconActive}` : `images/${config.icon}`} />
               <Text marginLeft={'15px'}>{config.name}</Text>
             </Button>
           );
@@ -104,61 +102,68 @@ export const Header = observer(() => {
     </VStack>
   );
   return (
-    <Box pos="relative">
+    <Box pos='relative' zIndex={1}>
       <chakra.header
-        transition="box-shadow 0.2s"
+        transition='box-shadow 0.2s'
         bg={theme.colors.header.bg}
-        w="full"
-        overflowY="hidden"
+        w='full'
+        overflowY='hidden'
       >
-        <chakra.div h="4.5rem" mx={6}>
-          <Flex w="full" h="full" align="center" justify="space-between">
-            <Flex align="center">
-              <Link href="/">
+        <chakra.div h='4.5rem' mx={6}>
+          <Flex w='full' h='full' align='center' justify='space-between'>
+            <Flex align='center'>
+              <Link href='/'>
                 <HStack>
-                  <Logo/>
+                  <Logo />
                 </HStack>
               </Link>
             </Flex>
 
             <Flex
-              justify="flex-end"
-              w="full"
-              maxW="824px"
-              align="center"
-              color="gray.400"
+              justify='flex-end'
+              w='full'
+              maxW='824px'
+              align='center'
+              color='gray.400'
+              height={'100%'}
             >
-              {sideBar.isHome ? <Button
-                  _hover={{}}
-                  bgColor={theme.colors.sideBar.itemActive}
-                  color={theme.colors.lightGreen}
-                  borderRadius='full'
-                  size='md'
-                  onClick={() => {
-                    history.push('/deposit');
-                    sideBar.setActiveMenu('/deposit');
-                  }}
-                >
-                  {lang.t('enter_app')}
-                </Button> :
+              {sideBar.isShowHeadNav ? (
+                  <Flex w={72} justifyContent={'space-between'} display={{base:'none',md:'flex'}}>
+                    <Nav/>
+                    <Button
+                      _hover={{}}
+                      display={{base:'none',md:'block'}}
+                      bgColor={theme.colors.sideBar.itemActive}
+                      color={theme.colors.lightGreen}
+                      borderRadius='full'
+                      size='md'
+                      onClick={() => {
+                        history.push('/deposit');
+                        sideBar.setActiveMenu('/deposit');
+                      }}
+                    >
+                      {lang.t('enter_app')}
+                    </Button>
+                  </Flex>
+                ) :
                 <>
                   <Stack direction={'row'} align={'center'} spacing={8} flex={{
                     base: 1,
                     md: 'auto'
                   }} justify={'flex-end'}>
-                    <DesktopNav display={{ base: 'none', md: 'flex' }}/>
+                    <DesktopNav display={{ base: 'none', md: 'flex' }} />
                   </Stack>
 
-                  <WalletInfo/>
+                  <WalletInfo />
                 </>
               }
               <IconButton
                 display={{ base: 'flex', md: 'none' }}
-                aria-label="Open menu"
-                fontSize="lg"
+                aria-label='Open menu'
+                fontSize='lg'
                 color='lightGreen'
-                variant="ghost"
-                icon={<AiOutlineMenu/>}
+                variant='ghost'
+                icon={<AiOutlineMenu />}
                 onClick={mobileNav.onOpen}
               />
             </Flex>

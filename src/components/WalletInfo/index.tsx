@@ -29,7 +29,7 @@ export const WalletInfo = observer(() => {
   return (
     <Modal isOpen={store.visible} onClose={store.close} isCentered>
       <ModalOverlay />
-      <ModalContent style={{padding:'15px 30px'}} bgColor={useColorModeValue(theme.colors.white,theme.colors.gray.bg)}>
+      <ModalContent style={{padding:'2rem 2rem'}} bgColor={useColorModeValue(theme.colors.white,theme.colors.gray.bg)}>
         <Flex justifyContent={'space-between'} alignContent={'flex-start'}>
           <ModalHeader color={useColorModeValue('black',theme.colors.gray['3'])} padding={0} fontSize={'2xl'}>Logout</ModalHeader>
           <ModalCloseButton position={'relative'} top={'0'} right={'0'} _hover={{}} _focus={{}}/>

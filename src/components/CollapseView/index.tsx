@@ -26,7 +26,7 @@ export const CollapseView = (props: IComponentProps) => {
           <Icon as={isOpen ? MinusIcon : AddIcon} onClick={() => setOpen(!isOpen)} color={useColorModeValue(theme.colors.darkLightGreen,theme.colors.lightGreen)} />
         </Center>
         <Center>
-          <Text onClick={() => setOpen(!isOpen)} fontSize={'2xl'}>
+          <Text onClick={() => setOpen(!isOpen)} fontSize={{ md: '2xl', base: 'lg' }}>
             {title}
           </Text>
         </Center>

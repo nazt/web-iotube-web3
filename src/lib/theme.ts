@@ -93,7 +93,8 @@ export const theme = extendTheme({
       7: '#F8F8FA',
       8: '#212024',
       9: '#9398A2',
-      10: '#8D9399'
+      10: '#8D9399',
+      11:'#c7cfd614'
     },
     lightGreen: '#33FF99',
     darkLightGreen:'#21CE99',

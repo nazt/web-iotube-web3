@@ -202,7 +202,7 @@ export const Deposit = observer(() => {
               value={store.amount.format || ''}
               onChange={(e) => store.amount.setFormat(e.target.value)}
             />
-            <InputRightElement onClick={store.openTokenList} float={'right'} width="10rem" cursor="pointer">
+            <InputRightElement onClick={store.openTokenList} float={'right'} width="10rem" cursor="pointer" zIndex={0}>
               <Stack width="100%" direction="row-reverse" maxW="12rem" alignContent="flex-end">
                 <Center mr={3}>
                   <Icon as={ChevronDownIcon}/>

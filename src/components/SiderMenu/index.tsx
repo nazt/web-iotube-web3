@@ -16,6 +16,7 @@ import {
   ToggleLeftIcon
 } from '@/components/Icon';
 import { useStore } from '@/store/index';
+import { SideItem } from '@/components/SiderMenu/SideItem';
 
 export const SiderMenu = () => {
   const history = useHistory();
@@ -23,7 +24,6 @@ export const SiderMenu = () => {
   const theme = useTheme();
   const { sideBar } = useStore();
   const activeColor= useColorModeValue(theme.colors.darkLightGreen,theme.colors.lightGreen)
-
   useEffect(() => {
     if (history.location) {
       sideBar.activeMenu = history.location.pathname;
@@ -40,32 +40,6 @@ export const SiderMenu = () => {
         onClick={() => sideBar.isOpen = !sideBar.isOpen}
         icon={sideBar.isOpen ? <ToggleLeftIcon /> : <ToggleRightIcon />}
       />
-    );
-  };
-
-  const renderSideBarItem = (menu) => {
-    return (
-      <Button
-        fontSize={'15px'}
-        variant='ghost'
-        aria-label='Home'
-        _hover={{ bg: theme.colors.sideBar.itemActive }}
-        _focus={{}}
-        fontWeight={400}
-        onClick={() => {
-          history.push(menu.path);
-          sideBar.setActiveMenu(menu.path);
-        }}
-        key={menu.name}
-        bgColor={menu.isActive ? theme.colors.sideBar.itemActive : 'none'}
-        borderRadius={'15px'}
-        justifyContent={sideBar.isOpen ? 'flex-start' : 'center'}
-        mt={30}
-      >
-        <Icon as={menu.icon} color={sideBar.activeMenu!==menu.path?theme.colors.gray:activeColor}/>
-        {sideBar.isOpen ? <Text marginLeft={'15px'}
-                                color={sideBar.activeMenu===menu.path?activeColor:''}>{menu.name}</Text> : null}
-      </Button>
     );
   };
 
@@ -90,11 +64,11 @@ export const SiderMenu = () => {
             pw={2}
           >
             {
-              sideBar.menus.map((menu) => {
+             activeColor? sideBar.menus.map((menu) => {
                 return (
-                  renderSideBarItem(menu)
+                  <SideItem menu={menu} key={menu.name} activeColor={activeColor}/>
                 );
-              })
+              }):null
             }
           </Flex>
           <Flex flexDirection={sideBar.isOpen ? 'row' : 'column'}

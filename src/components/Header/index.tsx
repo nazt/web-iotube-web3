@@ -1,47 +1,56 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { AiOutlineMenu } from 'react-icons/all';
+import { observer, useLocalObservable, useLocalStore } from 'mobx-react-lite';
 import {
-  AiFillHome,
-  AiOutlineInbox,
-  AiOutlineMenu,
-  BsFillCameraVideoFill,
-  FaHeart,
-  FaMoon,
-  FaSun
-} from 'react-icons/all';
-import { observer, useLocalObservable } from 'mobx-react-lite';
-import {
-  Box, Button, chakra, CloseButton, Flex, Icon,
-  IconButton, useColorModeValue, useDisclosure, VStack, HStack, Link, Stack, useTheme,
+  Box, Button, chakra, Flex,
+  IconButton, useColorMode, useDisclosure, HStack, Link, Stack, useTheme, Text, Image, useColorModeValue
 } from '@chakra-ui/react';
 import { useViewportScroll } from 'framer-motion';
 import Logo from '../SiderMenu/Logo';
 import { WalletInfo } from '../WalletInfo';
 import { DesktopNav } from '@/components/Header/DesktopNav';
-import { Text } from '@chakra-ui/layout';
 import { useHistory } from 'react-router-dom';
 import { useStore } from '@/store/index';
 import { Nav } from '@/components/Header/Nav';
+import { SideItem } from '@/components/SiderMenu/SideItem';
+import { MoonDarkIcon, MoonLightIcon, SunnyDarkIcon, SunnyIcon } from '@/components/Icon';
+import { eventBus } from '@/lib/event';
+import { helper } from '@/lib/helper';
+
 export const Header = observer(() => {
-  const { sideBar, lang } = useStore();
+  const { sideBar, lang, god } = useStore();
   const mobileNav = useDisclosure();
   const history = useHistory();
   const theme = useTheme();
   const [y, setY] = React.useState(0);
-  const store = useLocalObservable(() => ({
-    activeMenu: history.location.pathname,
-    switchToRoute(path) {
-      history.push(path);
-      this.activeMenu = path;
-    }
-  }));
-  const getItemActiveStyle = (path) => {
-    if (store.activeMenu === path) {
-      return {
-        bgColor: theme.colors.sideBar.itemActive,
-        borderRadius: '15px'
-      };
+  const { colorMode, toggleColorMode } = useColorMode();
+  const activeColor = useColorModeValue(theme.colors.darkLightGreen, theme.colors.lightGreen);
+  const ref = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (ref.current && !ref.current.contains(event.target)) {
+      mobileNav.isOpen?mobileNav.onClose():null;
     }
   };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside, true);
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true);
+    };
+  });
+
+  const store = useLocalStore(() => ({
+
+    close() {
+      god.currentNetwork.walletInfo.visible = false;
+    },
+
+    logout() {
+      eventBus.emit('wallet.logout');
+      store.close();
+    }
+  }));
 
   const { scrollY } = useViewportScroll();
   React.useEffect(() => {
@@ -49,56 +58,55 @@ export const Header = observer(() => {
   }, [scrollY]);
 
   const MobileNavContent = (
-    <VStack
-      pos='absolute'
-      zIndex={10000}
-      top={0}
-      left={0}
-      right={0}
+    <Flex
+      ref={ref}
       display={mobileNav.isOpen ? 'flex' : 'none'}
-      flexDirection='column'
-      p={2}
-      pb={4}
-      m={2}
-      bg={theme.colors.header.bg}
-      spacing={3}
-      rounded='sm'
-      shadow='sm'
+      position='fixed'
+      top={'0'}
+      right={0}
+      align='center'
+      flexDirection={'column'}
+      h={'100vh'}
+      width={'fix-content'}
+      bgColor={colorMode === 'light' ? theme.sideBar.bg.light : theme.sideBar.bg.dark}
+      px={2}
+      shadow={colorMode === 'light' ? theme.shadows.lightShadow : theme.shadows.darkShadow}
+      zIndex={-1}
+      pt={'4.5rem'}
     >
-      <CloseButton
-        color='white'
-        aria-label='Close menu'
-        justifySelf='self-start'
-        onClick={mobileNav.onClose}
-      />
 
       {
-        sideBar.menus.map((config) => {
+        sideBar.menus.map((menu) => {
           return (
-            <Button
-              fontSize={'15px'}
-              variant='ghost'
-              aria-label='Home'
-              _hover={{ bg: theme.colors.sideBar.itemActive }}
-              minHeight={'50px'}
-              display={'flex'}
-              fontWeight={400}
-              onClick={() => store.switchToRoute(config.path)}
-              key={config.name}
-              {...getItemActiveStyle(config.path)}
-              alignItems={'center'}
-              justifyContent={'flex-start'}
-              marginTop={'30px'}
-              color={store.activeMenu === config.path ? 'lightGreen' : 'white'}
-            >
-              <Icon as={config.icon} color={sideBar.activeMenu!==config.path?theme.colors.gray:useColorModeValue(theme.colors.darkLightGreen,theme.colors.lightGreen)}/>
-
-              <Text marginLeft={'15px'}>{config.name}</Text>
-            </Button>
+            <SideItem menu={menu} key={menu.name} activeColor={activeColor} />
           );
         })
+
       }
-    </VStack>
+      <Flex justifyContent={'flex-start'} w={'100%'} p={1} mt={30}
+      >
+        <IconButton
+          _focus={{}}
+          isActive={false}
+          variant={'unstyled'}
+          fontSize={theme.iconSize.md}
+          aria-label={'Toggle Light Mode'}
+          onClick={toggleColorMode}
+          icon={colorMode === 'light' ? <SunnyIcon /> : <SunnyDarkIcon />}
+        />
+        <IconButton
+          _focus={{}}
+          variant={'unstyled'}
+          fontSize={theme.iconSize.md}
+          aria-label={'Toggle Dark Mode'}
+          onClick={toggleColorMode}
+          icon={colorMode === 'light' ? <MoonLightIcon /> : <MoonDarkIcon />}
+        />
+      </Flex>
+      <Button onClick={store.logout} size='md' mt={100} w={'100%'} bg={theme.colors.gray['11']}>
+        <Text fontSize={'xl'} color={activeColor}>Logout</Text>
+      </Button>
+    </Flex>
   );
   return (
     <Box pos='relative' zIndex={1}>
@@ -127,11 +135,11 @@ export const Header = observer(() => {
               height={'100%'}
             >
               {sideBar.isShowHeadNav ? (
-                  <Flex w={72} justifyContent={'space-between'} display={{base:'none',md:'flex'}}>
-                    <Nav/>
+                  <Flex w={72} justifyContent={'space-between'} display={{ base: 'none', md: 'flex' }}>
+                    <Nav />
                     <Button
                       _hover={{}}
-                      display={{base:'none',md:'block'}}
+                      display={{ base: 'none', md: 'block' }}
                       bgColor={theme.colors.sideBar.itemActive}
                       color={theme.colors.lightGreen}
                       borderRadius='full'
@@ -156,15 +164,29 @@ export const Header = observer(() => {
                   <WalletInfo />
                 </>
               }
-              <IconButton
-                display={{ base: 'flex', md: 'none' }}
-                aria-label='Open menu'
-                fontSize='lg'
-                color='lightGreen'
-                variant='ghost'
-                icon={<AiOutlineMenu />}
-                onClick={mobileNav.onOpen}
-              />
+              <Flex display={{ base: 'flex', md: 'none' }}>
+                <Button
+                  _hover={{}}
+                  variant={'unstyled'}
+                  color={theme.colors.lightGreen}
+                  display={'flex'}
+                >
+                  <Image src={'images/icon_vita.png'} mr={2} />
+                  {god.currentNetwork.account ? helper.string.truncate(god.currentNetwork.account, 12, '...') : null}
+                </Button>
+                <IconButton
+                  aria-label='Open menu'
+                  fontSize='lg'
+                  color='lightGreen'
+                  variant='ghost'
+                  icon={<AiOutlineMenu />}
+                  _hover={{}}
+                  _active={{}}
+                  _focus={{}}
+                  ref={ref}
+                  onClick={mobileNav.isOpen ? mobileNav.onClose : mobileNav.onOpen}
+                />
+              </Flex>
             </Flex>
           </Flex>
           {MobileNavContent}

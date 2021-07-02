@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { useStore } from '@/store/index';
-import { Button } from '@chakra-ui/react';
+import { Button, useColorModeValue } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { theme } from '@/lib/theme';
@@ -8,6 +8,8 @@ import { theme } from '@/lib/theme';
 export const Nav = () => {
   const { sideBar } = useStore();
   const history = useHistory();
+  const activeColor= useColorModeValue(theme.colors.darkLightGreen,theme.colors.lightGreen)
+
   useEffect(() => {
     if (history.location) {
       sideBar.activeMenu = history.location.pathname;
@@ -24,7 +26,7 @@ export const Nav = () => {
               _focus={{}}
               _hover={{}}
               variant={'none'}
-              color={sideBar.activeMenu===nav.path?theme.colors.lightGreen:theme.colors.gray}
+              color={sideBar.activeMenu===nav.path?activeColor:theme.colors.gray}
               height={'100%'}
               position={'relative'}
               onClick={()=>{
@@ -37,7 +39,7 @@ export const Nav = () => {
                 bottom: 0,
                 width: '50%',
                 borderBottomWidth: 2,
-                borderColor: theme.colors.lightGreen
+                borderColor: activeColor
               }:{}}
             >
               {nav.name}

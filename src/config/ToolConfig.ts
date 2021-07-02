@@ -1,7 +1,8 @@
-import { Home } from '../pages/Home/index';
-import { Vault } from '../pages/Vault/index';
-import { Deposit } from '../pages/Deposit/index';
-import { Faq } from '../pages/Faq/index';
+import { Home } from '../pages/Home';
+import { Vault } from '../pages/Vault';
+import { Deposit } from '../pages/Deposit';
+import { Faq } from '../pages/Faq';
+import { FaqIcon, HomeIcon, SwapIcon, TransactionsIcon } from '@/components/Icon';
 class Tool {
   name: string;
   path: string;
@@ -18,32 +19,28 @@ export const ToolConfig = [
     name: 'Home',
     path: '/',
     component: Home,
-    icon:'home.svg',
-    iconActive:'home_active.svg',
+    icon:HomeIcon,
     isActive:false
   },
   {
     name: 'Deposit',
     path: '/deposit',
     component: Deposit,
-    icon:'swap.svg',
-    iconActive:'swap_active.svg',
+    icon:SwapIcon,
     isActive:false
   },
   {
     name: 'Transactions',
     path: '/transactions',
     component: Vault,
-    icon: 'Governance.svg',
-    iconActive:'Governance_active.svg',
+    icon: TransactionsIcon,
     isActive:false
   },
   {
     name: 'Faq',
     path: '/faq',
     component: Faq,
-    icon: 'faq.svg',
-    iconActive:'faq_active.svg',
+    icon: FaqIcon,
     isActive:false
   }
 ];

@@ -2,11 +2,12 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { useStore } from '@/store/index';
 import { CollapseView } from '@/components/CollapseView';
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Heading, Link } from '@chakra-ui/react';
 
 
 export const Faq = observer(() => {
   const { lang, god } = useStore();
+
   return (
     <Box pt={20}>
       <Heading mx={10} pb={3} fontSize={'xx-large'}>FAQ</Heading>
@@ -19,9 +20,9 @@ export const Faq = observer(() => {
             <br/>
             <p>
               {`${lang.t('faq.iotube_ui')} `}
-              <a href="https://tube.iotex.io" target={'_blank'}>
+              <Link href="https://tube.iotex.io" target={'_blank'} variant={'green'} >
                 https://tube.iotex.io
-              </a>
+              </Link>
             </p>
           </>
         }
@@ -158,10 +159,11 @@ export const Faq = observer(() => {
           <>
             <p>
               {lang.t('faq.tutorial_community')}{' '}
-              <a target={'_blank'}
+              <Link target={'_blank'}
+                    variant={'green'}
                  href="https://community.iotex.io/t/using-iotube-to-move-erc20-tokens-from-ethereum-to-iotex/1452">
                 https://community.iotex.io/t/using-iotube-to-move-erc20-tokens-from-ethereum-to-iotex/1452
-              </a>
+              </Link>
             </p>
           </>
         }
@@ -172,9 +174,9 @@ export const Faq = observer(() => {
           <>
             <p>
               {lang.t('faq.iotube_github')}{' '}
-              <a target={'_blank'} href="https://github.com/iotexproject/ioTube">
+              <Link target={'_blank'} href="https://github.com/iotexproject/ioTube" variant={'green'}>
                 https://github.com/iotexproject/ioTube
-              </a>
+              </Link>
             </p>
           </>
         }

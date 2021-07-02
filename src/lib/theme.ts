@@ -17,10 +17,10 @@ const Button = {
   },
   // variants: outline and solid
   variants: {
-    'green': {
-      bg: 'lightGreen',
+    'green':(props)=>({
+      bg: props.colorMode === 'dark'?'lightGreen':'darkLightGreen',
       color: 'gray.4'
-    },
+    }),
     'black': (props) => ({
       bg: props.colorMode === 'dark' ? '#182532' : 'gray.800',
       color: 'gray.100',
@@ -96,7 +96,7 @@ export const theme = extendTheme({
       10: '#8D9399'
     },
     lightGreen: '#33FF99',
-    lightGreen20:'rgba(51, 255, 153, 0.2)',
+    darkLightGreen:'#21CE99',
     white:'#FFFFFF'
   },
   shadows: {
@@ -145,13 +145,17 @@ export const theme = extendTheme({
         left: 0,
         width: '100%',
         height: '2px'
-      },
-      'a': {
-        color: 'lightGreen!important'
       }
     }
   },
   components: {
-    Button
+    Button,
+    Link:{
+      variants: {
+        'green':(props)=>({
+          color: props.colorMode === 'dark'?'lightGreen':'darkLightGreen',
+        }),
+      }
+    }
   }
 });

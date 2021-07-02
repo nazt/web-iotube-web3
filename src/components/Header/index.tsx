@@ -11,13 +11,12 @@ import {
 import { observer, useLocalObservable } from 'mobx-react-lite';
 import {
   Box, Button, chakra, CloseButton, Flex, Icon,
-  IconButton, useColorMode, useColorModeValue, useDisclosure, VStack, HStack, Link, Stack, useTheme, Image
+  IconButton, useColorModeValue, useDisclosure, VStack, HStack, Link, Stack, useTheme,
 } from '@chakra-ui/react';
 import { useViewportScroll } from 'framer-motion';
 import Logo from '../SiderMenu/Logo';
 import { WalletInfo } from '../WalletInfo';
 import { DesktopNav } from '@/components/Header/DesktopNav';
-import { ToolConfig } from '../../config/ToolConfig';
 import { Text } from '@chakra-ui/layout';
 import { useHistory } from 'react-router-dom';
 import { useStore } from '@/store/index';
@@ -92,8 +91,8 @@ export const Header = observer(() => {
               marginTop={'30px'}
               color={store.activeMenu === config.path ? 'lightGreen' : 'white'}
             >
-              <Image
-                src={store.activeMenu === config.path ? `images/${config.iconActive}` : `images/${config.icon}`} />
+              <Icon as={config.icon} color={sideBar.activeMenu!==config.path?theme.colors.gray:useColorModeValue(theme.colors.darkLightGreen,theme.colors.lightGreen)}/>
+
               <Text marginLeft={'15px'}>{config.name}</Text>
             </Button>
           );

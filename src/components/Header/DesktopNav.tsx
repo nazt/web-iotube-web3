@@ -36,7 +36,7 @@ export const DesktopNav = observer((props: BoxProps) => {
       <Button
         _hover={{}}
         bgColor={theme.colors.header.bg}
-        color={theme.colors.lightGreen}
+        color={useColorModeValue(theme.colors.darkLightGreen,theme.colors.lightGreen)}
         borderRadius={theme.borderRadius.sm}
         {...props}
       >

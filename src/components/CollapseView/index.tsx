@@ -19,11 +19,11 @@ export const CollapseView = (props: IComponentProps) => {
          py={5}
     >
       <Flex flexDirection='row'
-            color={isOpen ? 'lightGreen' : ''}
+            color={isOpen ? useColorModeValue(theme.colors.darkLightGreen,theme.colors.lightGreen) : ''}
             h={theme.faq.collapseHeight}
             cursor='pointer'>
         <Center mr={6}>
-          <Icon as={isOpen ? MinusIcon : AddIcon} onClick={() => setOpen(!isOpen)} color={theme.colors.lightGreen} />
+          <Icon as={isOpen ? MinusIcon : AddIcon} onClick={() => setOpen(!isOpen)} color={useColorModeValue(theme.colors.darkLightGreen,theme.colors.lightGreen)} />
         </Center>
         <Center>
           <Text onClick={() => setOpen(!isOpen)} fontSize={'2xl'}>
@@ -42,7 +42,7 @@ export const CollapseView = (props: IComponentProps) => {
               top: 'calc(10%)',
               height: '80%',
               borderLeftWidth:2 ,
-              borderColor:theme.colors.lightGreen
+              borderColor:useColorModeValue(theme.colors.darkLightGreen,theme.colors.lightGreen)
             }}
             px={7}
             ml={20}

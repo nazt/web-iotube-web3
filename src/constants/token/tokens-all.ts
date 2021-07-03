@@ -164,3 +164,8 @@ export const TOKENS = {
     logoURI: 'https://iotexscan.io/image/token/io14tw8gyn3p8v5fcmvh4c0w8797ryjrlrvnsr6zf.png'
   }
 };
+export const NETWORK ={
+  '0x797f1465796fd89ea7135e76dbc7cdb136bba1ca': 'bsc',
+  '0xa0fd7430852361931b23a31f84374ba3314e1682': 'eth',
+  '0xf72CFb704d49aC7BB7FFa420AE5f084C671A29be': 'matic'
+};

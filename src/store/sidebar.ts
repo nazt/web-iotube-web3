@@ -6,6 +6,7 @@ import { RootStore } from '@/store/root';
 export class SidebarStore {
   isOpen = true;
   activeMenu = '/deposit';
+  activeChildMenu = '';
   NAV_SHOW_HEADER = ['/', '/faq'];
 
   constructor(rootStore: RootStore) {
@@ -25,6 +26,10 @@ export class SidebarStore {
 
   setActiveMenu(path) {
     this.activeMenu = path;
+  }
+
+  setActiveChildMenu(path){
+    this.activeChildMenu = path
   }
 
   isActiveMenu(menu, pathname) {

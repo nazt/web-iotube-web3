@@ -67,6 +67,7 @@ export class EthNetworkState implements NetworkState {
   }
 
   execContract({ address, abi, method, params = [], options = {} }: CallParams): Promise<Partial<TransactionResponse>> {
+    //@ts-ignore
     const contract = new Contract(address, abi, this.signer || this.ethers);
     return contract[method](...params, options);
   }

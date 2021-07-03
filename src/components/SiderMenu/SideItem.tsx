@@ -1,8 +1,21 @@
 import { useStore } from '@/store/index';
-import { Button, Icon, Image, useTheme } from '@chakra-ui/react';
+import {
+  Accordion,
+  AccordionButton,
+  AccordionItem,
+  AccordionPanel,
+  Button,
+  Icon,
+  Image,
+  Center,
+  HStack,
+  useTheme
+} from '@chakra-ui/react';
 import { Text } from '@chakra-ui/layout';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { ArrowDownIcon } from '@/components/Icon';
+import { observer } from 'mobx-react-lite';
 
 export const SideItem=({menu,activeColor})=>{
   const { sideBar } = useStore();
@@ -11,7 +24,7 @@ export const SideItem=({menu,activeColor})=>{
 
   return (
     <Button
-      fontSize={'15px'}
+      fontSize={'md'}
       variant='ghost'
       aria-label='Home'
       _hover={{ bg: theme.colors.sideBar.itemActive }}
@@ -35,3 +48,59 @@ export const SideItem=({menu,activeColor})=>{
     </Button>
   )
 }
+
+export const ChildrenMenu = observer(({ menu,activeColor }:{menu:any,activeColor:string}) => {
+  const theme = useTheme();
+  const { sideBar } = useStore();
+  const history = useHistory();
+
+  return(
+    <Accordion allowToggle mt='8' index={menu.isActive ? 0 : -1}>
+      <AccordionItem
+        border="none"
+        borderRadius='2xl'
+        bg={menu.isActive ? theme.colors.sideBar.itemActive : 'none'}
+        _hover={{ bg: theme.colors.sideBar.itemActive }}
+      >
+        <AccordionButton
+          minH='12'
+          _focus={{ shadow: 'none', }}
+          onClick={() => {
+            if (menu.children.length > 0) {
+              history.push(`${menu.path}${menu.children[0].path}`);
+              sideBar.setActiveMenu(menu.path);
+              sideBar.setActiveChildMenu(menu.children[0].path);
+            }
+          }}
+        >
+          <Center>
+            <Icon as={menu.icon} color={sideBar.activeMenu!==menu.path?theme.colors.gray:activeColor}/>
+            {sideBar.isOpen ? <Text marginLeft={'4'}
+                                    color={sideBar.activeMenu === menu.path ? theme.colors.lightGreen : ''}>{menu.name}</Text> : null}
+            <ArrowDownIcon color={sideBar.activeMenu !== menu.path ? theme.colors.gray : activeColor} boxSize="5"/>
+          </Center>
+        </AccordionButton>
+        <AccordionPanel>
+          {
+            menu.children.map(item => (
+              <HStack
+                key={item.name}
+                ml="10"
+                my="3"
+                cursor="pointer"
+                onClick={() => {
+                  history.push(`${menu.path}${item.path}`);
+                  sideBar.setActiveMenu(menu.path);
+                  sideBar.setActiveChildMenu(item.path);
+                }}
+              >
+                <Image srcSet={sideBar.activeChildMenu === item.path ? item.iconActive : item.icon} boxSize='5'/>
+                <Text ml='2.5' fontSize='md' color={sideBar.activeChildMenu === item.path ? theme.colors.lightGreen: ''}>{item.name}</Text>
+              </HStack>
+            ))
+          }
+        </AccordionPanel>
+      </AccordionItem>
+    </Accordion>
+  )
+});

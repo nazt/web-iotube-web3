@@ -39,7 +39,7 @@ const NetworkHeader = observer((props: ISwitchProps) => {
   const { god, token, lang } = useStore();
   const { activate } = useWeb3React();
   const toast = createStandaloneToast();
-  const home = useColorModeValue('white', theme.colors.gray.bg);
+  const home = useColorModeValue('white', theme.colors.bg.bg1);
   const iconBg = useColorModeValue(theme.colors.gray[7], 'white');
   const headerColor = useColorModeValue(theme.colors.gray[4], theme.colors.gray[3]);
   const store = useLocalObservable(() => ({

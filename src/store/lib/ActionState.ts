@@ -7,6 +7,9 @@ export class ActionState {
   status: string;
   recipient: string;
   sender: string;
+  gas: string;
+  gasPrice: string;
+  timestamp: string;
   token: {
     address: string;
     decimals: number;

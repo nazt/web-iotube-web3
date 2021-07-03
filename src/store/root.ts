@@ -4,6 +4,7 @@ import { GodStore } from './god';
 import { TokenStore } from './token';
 import { RecordStore } from '@/store/record';
 import { SidebarStore } from '@/store/sidebar';
+import { DepositStore } from '@/store/deposit';
 
 export class RootStore {
   base = new BaseStore();
@@ -12,4 +13,5 @@ export class RootStore {
   token = new TokenStore(this);
   record = new RecordStore(this);
   sideBar = new SidebarStore(this);
+  deposit = new DepositStore(this);
 }

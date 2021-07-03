@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { observer, useLocalStore } from 'mobx-react-lite';
-import { isAddress as isEthAddress } from '@ethersproject/address';
 import {
   Box,
   Container,
@@ -24,8 +23,6 @@ import { BigNumberInputState } from '@/store/standard/BigNumberInputState';
 import { BooleanState } from '@/store/standard/base';
 import { TokenState } from '@/store/lib/TokenState';
 import NetworkHeader from '@/components/NetworkHeader';
-import { validateAddress } from 'iotex-antenna/lib/account/utils';
-import { AddressState } from '@/store/standard/AddressState';
 import BigNumber from 'bignumber.js';
 import { ConfirmModal } from '@/components/ConfirmModal';
 import { BigNumberState } from '@/store/standard/BigNumberState';
@@ -33,81 +30,35 @@ import { CompleteModal } from '@/components/CompleteModal';
 import { toast } from 'react-hot-toast';
 
 export const Deposit = observer(() => {
-  const { god, token, lang } = useStore();
+  const { god, token, lang, deposit } = useStore();
 
   const theme = useTheme();
-  const home = useColorModeValue('white', theme.colors.gray.bg);
+  const home = useColorModeValue('white', theme.colors.bg.bg1);
   const homeShadow = useColorModeValue(theme.shadows.lightShadow, theme.shadows.darkShadow);
   const inputBg = useColorModeValue(theme.colors.gray[5], theme.colors.gray[8]);
   const inputColor = useColorModeValue(theme.colors.gray[6], theme.colors.gray[2]);
 
   const store = useLocalStore(() => ({
-    curToken: null as TokenState,
-    amount: new BigNumberInputState({}),
-    receiverAddress: new AddressState(),
     isOpenTokenList: new BooleanState(),
-    isOpenConfirmModal: new BooleanState(),
-    depositeFee: new BigNumberState({ decimals: 18, loading: false }),
-    actionHash: '',
     approveLoading: new BooleanState(),
     approveLoadingContent: lang.t('deposit.approving'),
     confirmIsLoading: new BooleanState(),
     confirmLoadingText: lang.t('button.confirming'),
     maxAllowance: new BigNumber(1.157920892373162e59),
-    isOpenCompleteModal: new BooleanState(),
     showConnector() {
       god.setShowConnecter(true);
-    },
-    get state() {
-      if (!god.currentNetwork.account) {
-        return lang.t('input.wallet.not_connected');
-      }
-
-      if (!store.curToken) {
-        return lang.t('input.token.unselected');
-      }
-
-      if (!token.currentCrossChain?.cashier.address) {
-        return lang.t('input.cashier.invalid');
-      }
-
-      if (token.currentCrossChain?.cashier.depositFee.value.comparedTo(god.currentNetwork.chain.current.Coin.balance.value) > 0) {
-        return lang.t('input.insufficient.depositFee');
-      }
-
-      if (isNaN(Number(store.amount.value)) || store.amount.format <= 0 || store.amount.value.comparedTo(store.curToken.balance.value) >= 0) {
-        return lang.t('input.amount.invalid');
-      }
-      console.log(store.curToken.amountRange);
-      if (!store.curToken.isEth() && store.amount.value.gt(store.curToken.amountRange.maxAmount.value)) {
-        return `Amount must <= ${store.curToken.amountRange.maxAmount.format}`;
-      }
-
-      if (!store.curToken.isEth() && store.amount.value.lt(store.curToken.amountRange.minAmount.value)) {
-        return `Amount must >= ${store.curToken.amountRange.minAmount.format}`;
-      }
-
-      if (!isEthAddress(store.receiverAddress.ethAddress)) {
-        return lang.t('input.crossschainaddress.invalid', { chain: token.currentCrossChain.chain.name });
-      }
-      return '';
     },
     openTokenList() {
       store.isOpenTokenList.setValue(true);
     },
     onSelectToken(t: TokenState) {
-      store.curToken = t;
-      store.amount.setDecimals(t.decimals);
-    },
-    get shouldApprove() {
-      if (!store.curToken || store.curToken.isEth()) return false;
-      console.log('allowance ForCashier ---->', store.curToken.allowanceForCashier.format);
-      return store.amount.value.comparedTo(store.curToken.allowanceForCashier.value) > 0;
+      deposit.curToken = t;
+      deposit.amount.setDecimals(t.decimals);
     },
     async onCashierApprove() {
       try {
         store.approveLoading.setValue(true);
-        const approvedRes = await token.approve(store.maxAllowance, store.curToken);
+        const approvedRes = await token.approve(store.maxAllowance, deposit.curToken);
         if (approvedRes) {
           store.approveLoadingContent = lang.t('button.waiting');
         }
@@ -115,43 +66,43 @@ export const Deposit = observer(() => {
         console.log(`approve receipt:`, receipt);
         if (receipt.status == 1) {
           store.approveLoading.setValue(false);
-          store.curToken.allowanceForCashier.setValue(store.maxAllowance);
+          deposit.curToken.allowanceForCashier.setValue(store.maxAllowance);
         }
-        console.log('allowance Cashier new ---->', store.curToken.allowanceForCashier.format);
+        console.log('allowance Cashier new ---->', deposit.curToken.allowanceForCashier.format);
       } catch (e) {
         // message.error(`tokenContract.approve error ${e.message}`);
         store.approveLoading.setValue(false);
       }
     },
     async onSubmit() {
-      const amountVal = store.amount.value.toFixed(0);
-      console.log(store.amount.value);
-      console.log(store.amount.value.toFixed(0));
+      const amountVal = deposit.amount.value.toFixed(0);
+      console.log(deposit.amount.value);
+      console.log(deposit.amount.value.toFixed(0));
       let options = { value: token.currentCrossChain?.cashier.depositFee.value.toFixed(0) };
-      if (store.curToken.isEth()) {
+      if (deposit.curToken.isEth()) {
         options = { value: new BigNumber(amountVal).plus(token.currentCrossChain?.cashier.depositFee.value).toString() };
       }
-      let receiverAddress = store.receiverAddress.ethAddress;
-      let fromAddress = store.curToken.address;
+      let receiverAddress = deposit.receiverAddress.ethAddress;
+      let fromAddress = deposit.curToken.address;
       try {
         store.confirmIsLoading.setValue(true);
         let res = await token.depositTo([fromAddress, receiverAddress, amountVal], options);
-        store.isOpenConfirmModal.setValue(false);
+        deposit.isOpenConfirmModal.setValue(false);
         store.confirmIsLoading.setValue(false);
-        console.log("res--->", res);
+        console.log('res--->', res);
         if (res) {
           token.actionHash.setValue(res.hash);
-          store.isOpenCompleteModal.setValue(true);
+          deposit.isOpenCompleteModal.setValue(true);
         }
         const receipt = await res.wait();
-        console.log("receipt--->", receipt);
+        console.log('receipt--->', receipt);
       } catch (e) {
         store.confirmIsLoading.setValue(false);
         console.log(e);
         if (e.message) {
           toast.error(e.message);
         }
-        store.isOpenConfirmModal.setValue(false);
+        deposit.isOpenConfirmModal.setValue(false);
         if (e && e.data && e.data.message) {
           toast.error(e.data.message);
         }
@@ -159,9 +110,9 @@ export const Deposit = observer(() => {
     }
   }));
   useEffect(() => {
-    store.curToken = token.currentCrossChain?.tokens[0];
-    store.amount = new BigNumberInputState({});
-    store.receiverAddress.setValue('');
+    deposit.curToken = token.currentCrossChain?.tokens[0];
+    deposit.amount = new BigNumberInputState({});
+    deposit.receiverAddress.setValue('');
     store.approveLoading.setValue(false);
     store.confirmIsLoading.setValue(false);
     if (god.currentNetwork.account) {
@@ -188,7 +139,7 @@ export const Deposit = observer(() => {
           <Flex borderRadius="md" justify="space-between" px={4} pt={4}>
             <Text fontSize="md">Token Amount</Text>
             <Center>
-              {store.curToken && <Text fontSize="sm">Balance: {store.curToken.balance.format}</Text>}
+              {deposit.curToken && <Text fontSize="sm">Balance: {deposit.curToken.balance.format}</Text>}
             </Center>
           </Flex>
           <InputGroup>
@@ -199,16 +150,16 @@ export const Deposit = observer(() => {
               ml={4}
               mr="8rem"
               py={2}
-              value={store.amount.format || ''}
-              onChange={(e) => store.amount.setFormat(e.target.value)}
+              value={deposit.amount.format || ''}
+              onChange={(e) => deposit.amount.setFormat(e.target.value)}
             />
             <InputRightElement onClick={store.openTokenList} float={'right'} width="10rem" cursor="pointer" zIndex={0}>
               <Stack width="100%" direction="row-reverse" maxW="12rem" alignContent="flex-end">
                 <Center mr={3}>
                   <Icon as={ChevronDownIcon}/>
                 </Center>
-                {store.curToken?.symbol && <Text>{store.curToken.symbol}</Text>}
-                <Image borderRadius="full" boxSize={theme.iconSize.md} src={store.curToken?.logoURI}
+                {deposit.curToken?.symbol && <Text>{deposit.curToken.symbol}</Text>}
+                <Image borderRadius="full" boxSize={theme.iconSize.md} src={deposit.curToken?.logoURI}
                        fallbackSrc="https://via.placeholder.com/150"/>
               </Stack>
             </InputRightElement>
@@ -229,8 +180,8 @@ export const Deposit = observer(() => {
               variant="unstyled"
               mx={4}
               py={2}
-              value={store.receiverAddress.value}
-              onChange={(e) => store.receiverAddress.setValue(e.target.value)}
+              value={deposit.receiverAddress.value}
+              onChange={(e) => deposit.receiverAddress.setValue(e.target.value)}
             />
           </InputGroup>
         </Box>
@@ -248,7 +199,7 @@ export const Deposit = observer(() => {
             </Button>
           ) : (
             <>
-              {!store.state && Boolean(store.shouldApprove) ?
+              {!deposit.state && Boolean(deposit.shouldApprove) ?
                 <Button
                   my={10}
                   isLoading={store.approveLoading.value}
@@ -261,13 +212,13 @@ export const Deposit = observer(() => {
                   {lang.t('approve')}
                 </Button> :
                 <Button
-                  onClick={() => store.isOpenConfirmModal.setValue(true)}
+                  onClick={() => deposit.isOpenConfirmModal.setValue(true)}
                   size="block"
                   variant="black"
                   my={10}
-                  disabled={!!store.state}
+                  disabled={!!deposit.state}
                 >
-                  {store.state || lang.t('deposit')}
+                  {deposit.state || lang.t('deposit')}
                 </Button>}
             </>
           )}
@@ -277,22 +228,10 @@ export const Deposit = observer(() => {
                       onSelect={store.onSelectToken}/>
       <ConfirmModal
         onConfirm={() => store.onSubmit}
-        amount={store.amount}
-        curToken={store.curToken}
-        depositeFee={token.currentCrossChain?.cashier?.depositFee}
-        isOpen={store.isOpenConfirmModal.value}
-        onClose={() => store.isOpenConfirmModal.setValue(false)}
-        receiverAddress={store.receiverAddress}
         confirmIsLoading={store.confirmIsLoading.value}
         confirmLoadingText={store.confirmLoadingText}
       />
-      <CompleteModal
-        amount={store.amount}
-        curToken={store.curToken}
-        receiverAddress={store.receiverAddress}
-        isOpen={store.isOpenCompleteModal.value}
-        onClose={() => store.isOpenCompleteModal.setValue(false)}
-      />
+      <CompleteModal/>
     </Container>
   );
 });

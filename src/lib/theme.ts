@@ -7,7 +7,11 @@ const Button = {
     fontSize: '18px',
     borderRadius: '15px', // <-- border radius is same for all variants and sizes
     minHeight:'50px',
-    display: 'flex'
+    display: 'flex',
+    shadow: 'none',
+    _focus: {
+      shadow: 'none',
+    }
   },
   sizes: {
     block: {
@@ -39,10 +43,97 @@ const Button = {
   }
 };
 
+const Table = {
+  parts: ["th", "tr", "td"],
+  baseStyle: {
+    th: {
+      display: 'inline-block',
+      fontFamily: 'dmSans',
+      fontWeight: '400',
+      textTransform: 'capitalize',
+      border: 'none',
+      paddingInlineStart: '0',
+      paddingInlineEnd: '0',
+      p: '0'
+    },
+    tr: {
+      border: 'none',
+      align: "center",
+      borderRadius: '2xl',
+      fontFamily: 'dmSans',
+      fontWeight: '400',
+    },
+    td: {
+      paddingInlineStart: '0',
+      paddingInlineEnd: '0',
+      paddingInline: '0'
+    }
+  },
+  sizes: {
+    md: {
+      th: {
+        fontSize: 'lg',
+      },
+      tr: {
+        mb: '4',
+        fontSize: 'md',
+        px: '5'
+      }
+    }
+  },
+  variants: {
+    unstyled: (props) => ({
+      color: props.colorMode === "dark" ? "gray.bg10" : "gray.6",
+      shadow: props.colorMode === "dark" ? "" : "lightShadow"
+    })
+  },
+  defaultProps: {
+    size: 'md',
+    variant: "unstyled",
+  },
+};
+
+const Link = {
+  baseStyle: {
+    target: "_blank"
+  },
+  variants: {
+    'green':(props)=>({
+      color: props.colorMode === 'dark'?'lightGreen':'darkLightGreen',
+    }),
+  },
+  defaultProps: {
+    size: 'md',
+    variant: "green",
+  },
+};
+
+const Accordion = {
+  parts: ['item', 'button', 'panel'],
+  baseStyle: {
+    border: 0,
+    borderRadius: '2xl',
+    item: {
+      border: 0,
+      borderRadius: '2xl'
+    },
+    button: {
+      _focus: {
+        shadow: 'none'
+      }
+    },
+    panel: {
+      px: 0,
+      py: 3
+    }
+  }
+};
+
 export const theme = extendTheme({
   fonts: {
     body: 'DM Mono',
-    heading: 'DM Mono'
+    heading: 'DM Mono',
+    dmSans: 'DM Sans, sans-serif'
   },
   header: {
     height: '64px'
@@ -52,12 +143,12 @@ export const theme = extendTheme({
   },
   content: {
     height: 'calc(100vh - 64px)',
-    maxWidthWithIconText:'calc(100%-200px)',
+    maxWidthWithIconText:'calc(100%-220px)',
     maxWidthWithIcon:'calc(100%-80px)'
   },
   sideBar: {
     none: '0px',
-    width: '200px',
+    width: '220px',
     widthWithOutText:'80px',
     bg: {
       light: 'white',
@@ -84,7 +175,6 @@ export const theme = extendTheme({
       bg: '#2C2D2F'
     },
     gray: {
-      bg: '#3F3F44',
       2: '#999999',
       3: '#cccccc',
       4: '#333333',
@@ -98,7 +188,16 @@ export const theme = extendTheme({
     },
     lightGreen: '#33FF99',
     darkLightGreen:'#21CE99',
-    white:'#FFFFFF'
+    white:'#FFFFFF',
+    bg: {
+      bg1: '#3F3F44',
+      bg1Alpha20: 'rgba(63, 63, 68, 0.2)',
+      bg2: '#CDCFD6',
+      bg2Alpha20: 'rgba(205, 207, 214, 0.2)'
+    }
+  },
+  space: {
+
   },
   shadows: {
     lightShadow: '0px 3px 20px 0px rgba(214, 214, 214, 0.5)',
@@ -151,12 +250,8 @@ export const theme = extendTheme({
   },
   components: {
     Button,
-    Link:{
-      variants: {
-        'green':(props)=>({
-          color: props.colorMode === 'dark'?'lightGreen':'darkLightGreen',
-        }),
-      }
-    }
+    Table,
+    Link,
+    Accordion
   }
 });

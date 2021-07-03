@@ -11,8 +11,6 @@ import { injected } from '@/lib/web3-react';
 import { eventBus } from '../../lib/event';
 import { _ } from '@/lib/lodash';
 import { BSCMainnetConfig } from '../../config/BSCMainnetConfig';
-import { BSCTestnetConfig } from '../../config/BSCTestnetConfig';
-import { ETHKovanConfig } from '../../config/ETHKovanConfig';
 import { IotexTestnetConfig } from '../../config/IotexTestnetConfig';
 import { Network } from '@/store/god';
 
@@ -57,7 +55,9 @@ export const ETHProvider = observer(({ children }) => {
     god.currentNetwork.account = account;
     //@ts-ignore
     god.eth.ethers = library ? library : god.eth.defaultEthers;
+    // @ts-ignore
     god.eth.signer = library ? library.getSigner() : null;
+    //@ts-ignore
     god.eth.multiCall = new MulticallProvider(god.eth.ethers);
     //@ts-ignore
     if (!god.eth.multiCall._multicallAddress) {

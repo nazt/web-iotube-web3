@@ -23,43 +23,37 @@ import {
 import { BigNumberState } from '@/store/standard/BigNumberState';
 
 interface PropsType {
-  isOpen: boolean;
-  onClose: () => void;
   onConfirm: Function;
-  amount: BigNumberInputState;
-  curToken: TokenState | null;
-  receiverAddress: AddressState;
-  depositeFee: BigNumberState;
   confirmLoadingText: string;
   confirmIsLoading: boolean;
 }
 
 export const ConfirmModal = observer((props: PropsType) => {
-  const { token, lang } = useStore();
+  const { token, lang, deposit } = useStore();
   const theme = useTheme();
   const store = useLocalObservable(() => ({
     onClose() {
-      props.onClose();
+      deposit.isOpenConfirmModal.setValue(false);
     }
   }));
 
   return (
-    <Modal isOpen={props.isOpen} onClose={store.onClose} closeOnEsc closeOnOverlayClick>
+    <Modal isOpen={deposit.isOpenConfirmModal.value} onClose={store.onClose} closeOnEsc closeOnOverlayClick>
       <ModalOverlay/>
       <ModalContent borderRadius={theme.borderRadius.sm}>
         <ModalHeader>{lang.t('you_are_going_to_deposit')}</ModalHeader>
         <ModalCloseButton/>
         <ModalBody>
           <Flex>
-            <Text fontSize="3xl" mr={4}>{props.amount.format}</Text>
+            <Text fontSize="3xl" mr={4}>{deposit.amount.format}</Text>
             <Center>
-              <Image borderRadius="full" boxSize={theme.iconSize.md} src={props.curToken?.logoURI}
+              <Image borderRadius="full" boxSize={theme.iconSize.md} src={deposit.curToken?.logoURI}
                      fallbackSrc="https://via.placeholder.com/150"/>
-              <Text fontSize="2xl" ml={2}>{props.curToken?.symbol}</Text>
+              <Text fontSize="2xl" ml={2}>{deposit.curToken?.symbol}</Text>
             </Center>
           </Flex>
           <Text>on {token.currentCrossChain?.chain.name} </Text>
-          <Text>at {props.receiverAddress.value}</Text>
+          <Text>at {deposit.receiverAddress.value}</Text>
           <Box my={6}>
             <Text mb={2}>{lang.t('fee')}</Text>
             <Flex justifyContent="space-between">
@@ -69,7 +63,7 @@ export const ConfirmModal = observer((props: PropsType) => {
             <Flex justifyContent="space-between">
               <Box>{<span>{lang.t('relay_to_chain', { chain: token.currentChain.name })}</span>}</Box>
               <Box>
-                <span>{props.depositeFee?.format}</span>
+                <span>{token.currentCrossChain?.cashier?.depositFee.format}</span>
                 <span> {`IOTX (${lang.t("fee")})`}</span>
               </Box>
             </Flex>
@@ -77,7 +71,7 @@ export const ConfirmModal = observer((props: PropsType) => {
         </ModalBody>
         <ModalFooter>
           <Button
-            mb="10px"
+            mb={4}
             isLoading={props.confirmIsLoading}
             loadingText={props.confirmLoadingText}
             variant="black"

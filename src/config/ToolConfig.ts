@@ -1,8 +1,10 @@
-import { Home } from '../pages/Home';
-import { Vault } from '../pages/Vault';
-import { Deposit } from '../pages/Deposit';
-import { Faq } from '../pages/Faq';
+import { Home } from '../pages/Home/index';
+import { Vault } from '../pages/Vault/index';
+import { Deposit } from '../pages/Deposit/index';
+import { Faq } from '../pages/Faq/index';
 import { FaqIcon, HomeIcon, SwapIcon, TransactionsIcon } from '@/components/Icon';
+import { Transaction } from '../pages/Transaction/index';
+
 class Tool {
   name: string;
   path: string;
@@ -32,9 +34,39 @@ export const ToolConfig = [
   {
     name: 'Transactions',
     path: '/transactions',
-    component: Vault,
+    component: Transaction,
     icon: TransactionsIcon,
-    isActive:false
+    isActive: false,
+    children: [
+      {
+        name: 'IoTeX',
+        path: '#iotex',
+        component: Transaction,
+        icon: '/images/chain/iotex_unactive.svg',
+        iconActive:'/images/chain/iotex.svg',
+      },
+      {
+        name: 'ETH',
+        path: '#eth',
+        component: Transaction,
+        icon: '/images/chain/eth_unactive.svg',
+        iconActive:'/images/chain/eth.svg',
+      },
+      {
+        name: 'BSC',
+        path: '#bsc',
+        component: Transaction,
+        icon: '/images/chain/bsc_unactive.svg',
+        iconActive:'/images/chain/bsc.svg',
+      },
+      {
+        name: 'Polygon',
+        path: '#polygon',
+        component: Transaction,
+        icon: '/images/chain/polygon_unactive.svg',
+        iconActive:'/images/chain/polygon.svg',
+      }
+    ]
   },
   {
     name: 'FAQ',

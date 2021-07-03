@@ -87,7 +87,7 @@ export const WalletSelecter = observer(() => {
         {!god.currentNetwork.account && (
           <Box>
             <Box onClick={store.connectInejct} my={4} cursor='pointer' borderRadius={theme.radii.xl}
-                 p={4} bg={useColorModeValue(theme.colors.gray[100], theme.colors.gray.bg)}
+                 p={4} bg={useColorModeValue(theme.colors.gray[100], theme.colors.bg.bg1)}
                  _hover={{ opacity: '0.8' }}>
               <Flex>
                 <Flex direction='column'>

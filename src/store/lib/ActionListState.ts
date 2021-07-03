@@ -2,26 +2,37 @@ import { makeAutoObservable, values } from 'mobx';
 import { ActionState } from '@/store/lib/ActionState';
 import axios from 'axios';
 import { BigNumberState } from '@/store/standard/BigNumberState';
-import { TOKENS } from '@/constants/token/tokens-all';
+import { NETWORK, TOKENS } from '@/constants/token/tokens-all';
 import BigNumber from 'bignumber.js';
 import { NumberState } from '@/store/standard/base';
 
 export class ActionListState {
   requestApi: string;
   key: string;
+  chainId: number;
   name: string;
   first: NumberState = new NumberState({value:10});
   skip: NumberState = new NumberState({value:0});
   actions: ActionState[] = [];
+  count: number = 0;
+  allTokens = {};
 
   constructor(args: Partial<ActionListState>) {
     Object.assign(this, args);
     makeAutoObservable(this);
     this.initActions();
+    Object.keys(TOKENS).map((item, i) => {
+      const itemLowerCase = item.toLowerCase();
+      this.allTokens[itemLowerCase] = Object.values(TOKENS)[i];
+    });
   }
 
   decodeBase64toHexAddress(content: string): string {
-    return '0x' + Buffer.from(String(content), 'base64').toString('hex');
+    return '0x' + this.decodeToHex(content);
+  }
+
+  decodeToHex(content: string): string {
+    return Buffer.from(String(content), 'base64').toString('hex');
   }
 
   async initActions() {
@@ -40,50 +51,31 @@ export class ActionListState {
         }
       }
     );
+
     if (status && data && data.transfers) {
-      // const data = {
-      //   'transfers': [
-      //     {
-      //       'cashier': 'eX8UZXlv2J6nE15228fNsTa7oco=',
-      //       'token': 'TXuIQDqi9QK/KJWEFg2wHKRCQmw=',
-      //       'index': '1609',
-      //       'sender': 'B5X+WEA+Q9JR0f/L98txa0zZea8=',
-      //       'recipient': 'XvquCQE2BZVN1nUvmjs66Nk8yyE=',
-      //       'amount': '3000000000000000000'
-      //     }
-      //   ],
-      //   'statuses': [
-      //     {
-      //       'key': 'ryp/r30fz7Au5CktTZpqP8kgCPOsJu925UeNPtpijoY=',
-      //       'witnesses': [
-      //         'Hq8u8XSSaB4ZPi4v2pl8fdjePgE=',
-      //         'e03qacEB8u8zk6P8welC8yzO7QE=',
-      //         '0yC4qX2fI6+TAcvRJ4vLoJb553Q='
-      //       ],
-      //       'txHash': 'X2anPy6n4iM+6mGI8AR070n6TV/wHy5OrwJk5ES57C8=',
-      //       'status': 'SETTLED'
-      //     }
-      //   ]
-      // };
       this.actions = data.transfers.map((item, i) => {
         let tokenAddress = this.decodeBase64toHexAddress(item.token);
-        if (tokenAddress === '0x0000000000000000000000000000000000000000') {
-          tokenAddress = `${tokenAddress}-${this.key}`
+        let network = NETWORK[this.decodeToHex(item.cashier)];
+        if (tokenAddress == '0x0000000000000000000000000000000000000000') {
+          tokenAddress = `${tokenAddress}-${network?network:item.key}`
         }
+        const token = this.allTokens[tokenAddress.toLowerCase()];
         return {
           ...item,
           ...data.statuses[i],
+          cashier: this.decodeToHex(item.cashier),
           token: {
-            ...TOKENS[tokenAddress],
-            address: this.decodeBase64toHexAddress(item.token)
+            ...token,
+            address: tokenAddress
           },
           amount: new BigNumberState({
             value: new BigNumber(item.amount),
             loading: false,
-            decimals: TOKENS[tokenAddress]?.decimals
+            decimals: token?.decimals
           })
         } as unknown as ActionState;
       });
+      this.count = data.count ? data.count : 0;
       console.log(`${this.name} actions===>`, this.actions);
     }
   }

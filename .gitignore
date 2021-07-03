@@ -7,4 +7,3 @@ dist-ssr
 yarn-error.log
 .env.local
 .idea
-yarn.lock

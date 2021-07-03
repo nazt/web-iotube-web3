@@ -1,16 +1,11 @@
 import React from 'react';
 import { observer, useLocalObservable } from 'mobx-react-lite';
 import { useStore } from '../../store/index';
-import { TokenState } from '../../store/lib/TokenState';
-import { AddressState } from '@/store/standard/AddressState';
-import { BigNumberInputState } from '@/store/standard/BigNumberInputState';
 import copy from 'copy-to-clipboard';
 import {
   Text,
-  Center,
   Box,
   Flex,
-  Image,
   Button,
   Modal,
   ModalOverlay,
@@ -25,23 +20,16 @@ import { CopyIcon } from '@chakra-ui/icons';
 import { IotexMainnetConfig } from '../../config/IotexMainnetConfig';
 import { toast } from 'react-hot-toast';
 
-interface PropsType {
-  isOpen: boolean;
-  onClose: () => void;
-  amount: BigNumberInputState;
-  curToken: TokenState | null;
-  receiverAddress: AddressState;
-}
 
-export const CompleteModal = observer((props: PropsType) => {
-  const { token, lang, god } = useStore();
+export const CompleteModal = observer(() => {
+  const { token, lang, god, deposit } = useStore();
   const theme = useTheme();
   const store = useLocalObservable(() => ({
     onClose() {
-      props.onClose();
+      deposit.isOpenCompleteModal.setValue(false);
     },
     onCopyAddress() {
-      copy(props.receiverAddress.value);
+      copy(deposit.receiverAddress.value);
       toast.success(lang.t('address_copied'));
     },
     onCopyTransactionId() {
@@ -51,7 +39,7 @@ export const CompleteModal = observer((props: PropsType) => {
   }));
 
   return (
-    <Modal isOpen={props.isOpen} onClose={store.onClose} closeOnEsc closeOnOverlayClick>
+    <Modal isOpen={deposit.isOpenCompleteModal.value} onClose={store.onClose} closeOnEsc closeOnOverlayClick>
       <ModalOverlay/>
       <ModalContent borderRadius={theme.borderRadius.sm}>
         <ModalHeader>{lang.t('complete.broadcast_transaction_successfully')}</ModalHeader>
@@ -59,12 +47,12 @@ export const CompleteModal = observer((props: PropsType) => {
         <ModalBody>
           <Text>{lang.t('complete.tx_broadcast_network', {
             network: god.currentNetwork.currentChain.name,
-            amount: props.amount.format,
-            token: props.curToken?.symbol
+            amount: deposit.amount.format,
+            token: deposit.curToken?.symbol
           })}
           </Text>
           <Box fontSize="md" my={2}>
-            {props.receiverAddress.value}
+            {deposit.receiverAddress.value}
             <CopyIcon ml={4} w={5} h={5} cursor="pointer" onClick={() => store.onCopyAddress()}/>
           </Box>
           <Text mb={2}>{lang.t('complete.your_tx_chain', { chain: token.currentChain.name })} </Text>

@@ -1,10 +1,8 @@
 import {
   Flex,
-  Button,
-  useColorMode, IconButton, useTheme, useBreakpointValue, useColorModeValue, Icon
+  useColorMode, IconButton, useTheme, useBreakpointValue, useColorModeValue
 } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
-import { Text } from '@chakra-ui/layout';
 import { observer } from 'mobx-react-lite';
 import { useHistory } from 'react-router-dom';
 import {
@@ -13,10 +11,10 @@ import {
   MoonLightIcon,
   MoonDarkIcon,
   ToggleRightIcon,
-  ToggleLeftIcon
+  ToggleLeftIcon,
 } from '@/components/Icon';
 import { useStore } from '@/store/index';
-import { SideItem } from '@/components/SiderMenu/SideItem';
+import { ChildrenMenu, SideItem } from '@/components/SiderMenu/SideItem';
 
 export const SiderMenu = () => {
   const history = useHistory();
@@ -24,12 +22,17 @@ export const SiderMenu = () => {
   const theme = useTheme();
   const { sideBar } = useStore();
   const activeColor= useColorModeValue(theme.colors.darkLightGreen,theme.colors.lightGreen)
+
   useEffect(() => {
     if (history.location) {
       sideBar.activeMenu = history.location.pathname;
+      sideBar.activeChildMenu = history.location.hash;
+
     }
   }, [history]);
+
   const isShowSideBar = useBreakpointValue({ base: false, md: true });
+
   const renderToggleButton = () => {
     return (
       <IconButton
@@ -65,6 +68,11 @@ export const SiderMenu = () => {
           >
             {
              activeColor? sideBar.menus.map((menu) => {
+               if (menu.children){
+                 return (
+                   <ChildrenMenu menu={menu} key={menu.name} activeColor={activeColor}/>
+                 )
+               }
                 return (
                   <SideItem menu={menu} key={menu.name} activeColor={activeColor}/>
                 );
@@ -73,7 +81,7 @@ export const SiderMenu = () => {
           </Flex>
           <Flex flexDirection={sideBar.isOpen ? 'row' : 'column'}
                 width={'100%'}
-                p={'12px'}>
+                p={'3'}>
             <IconButton
               _focus={{}}
               isActive={false}

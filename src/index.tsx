@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { useStore } from '@/store/index';
 import { Header } from '@/components/Header/index';
 import { ChakraProvider, Button, Container, Center, CSSReset } from '@chakra-ui/react';
@@ -33,10 +33,9 @@ const BodyWrapper = observer(({ children }) => {
   const { sideBar } = useStore();
   return (
     <Box
-      className='body'
-      marginLeft={{base:'0',md:sideBar.width}}
+      marginLeft={{ base: '0', md: sideBar.width }}
       maxWidth={{
-        base: '100%',
+        base: '90%',
         md: sideBar.isOpen ? theme.content.maxWidthWithIconText : theme.content.maxWidthWithIcon
       }}
     >
@@ -46,7 +45,7 @@ const BodyWrapper = observer(({ children }) => {
 });
 
 export const App = observer(() => {
-  const { lang, god, token } = useStore();
+  const { lang } = useStore();
   useEffect(() => {
     lang.init();
   }, []);

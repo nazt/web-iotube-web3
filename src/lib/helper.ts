@@ -1,5 +1,10 @@
 import numeral from 'numeral';
 import BN from 'bignumber.js';
+import dayjs from 'dayjs';
+import relativeTime from "dayjs/plugin/relativeTime";
+import utc from "dayjs/plugin/utc";
+dayjs.extend(relativeTime);
+dayjs.extend(utc);
 
 export const helper = {
   json: {
@@ -30,6 +35,9 @@ export const helper = {
         backChars = Math.floor(charsToShow / 2);
 
       return fullStr.substr(0, frontChars) + separator + fullStr.substr(fullStr.length - backChars);
+    },
+    decodeBase64toHexAddress(content: string): string {
+      return '0x' + Buffer.from(String(content), 'base64').toString('hex');
     }
   },
   number: {
@@ -74,6 +82,48 @@ export const helper = {
     },
     getBN: (value: number | string | BN) => {
       return value instanceof BN ? value : typeof value === 'string' ? new BN(Number(value)) : new BN(value);
+    }
+  },
+  time: {
+    fromNow(ts: string): string {
+      if (!ts) {
+        return "";
+      }
+      return dayjs.utc(ts).fromNow();
+    },
+
+    translateFn(ts: string): string {
+      const keyMessage = [
+        "years",
+        "year",
+        "months",
+        "month",
+        "days",
+        "day",
+        "hours",
+        "hour",
+        "minutes",
+        "minute",
+        "ago",
+        "just now"
+      ];
+      let text = this.fromNow(ts);
+      keyMessage.map(value => {
+        text = text.replace(value, (window as any)._store.lang.t(`${value.replace(" ", "")}`));
+      });
+      if (
+        text.includes((window as any)._store.lang.t(`hour`)) ||
+        text.includes((window as any)._store.lang.t(`hours`)) ||
+        text.includes((window as any)._store.lang.t(`day`)) ||
+        text.includes((window as any)._store.lang.t(`days`)) ||
+        text.includes((window as any)._store.lang.t(`month`)) ||
+        text.includes((window as any)._store.lang.t(`months`)) ||
+        text.includes((window as any)._store.lang.t(`year`)) ||
+        text.includes((window as any)._store.lang.t(`years`))
+      ) {
+        return text.replace(/^an?/, "1");
+      }
+      return text.replace(/^an?/, "a");
     }
   }
 };

@@ -4,6 +4,7 @@ import { Image, Flex, Text, Tabs, TabList, Tab, TabPanels, TabPanel, useDisclosu
 import { useStore } from '@/store/index';
 import { TransactionTable } from './Table/index';
 import { useHistory } from 'react-router-dom';
+import { helper } from '@/lib/helper';
 
 const tabSelectedStyle = {
   bg: 'sideBar.itemActive',
@@ -21,15 +22,16 @@ export const Transaction = observer(() => {
   }, [history.location?.hash]);
 
   return (
-    <Flex p={{ base: 4, md: 10 }}>
+    <Flex px={{ base: 3, md: 10 }} py={{ base: 6, md: 10 }}>
       <Tabs variant="unstyled" isLazy isFitted index={record.activeTab.value}
             onChange={(index) => {
-              history.push(`${sideBar.activeMenu}#${record.actionLists[index].key}`)
+              history.push(`${sideBar.activeMenu}#${record.actionLists[index].key}`);
               sideBar.setActiveChildMenu(`#${record.actionLists[index].key}`);
             }} width="100%">
         <TabList
           bg="sideBar.bg"
           borderRadius="2xl"
+          maxW="3xl"
         >
           {
             record.actionLists.map((item, index) => {
@@ -44,10 +46,10 @@ export const Transaction = observer(() => {
                   srcSet={index == record.activeTab.value ? `/images/arrow_right_active.svg` : `/images/arrow_right.svg`}
                   boxSize="3" mr={2}/>
                 <Image
-                  srcSet={index == record.activeTab.value ? `/images/chain/${item.key.toLowerCase()}.svg` : `/images/chain/${item.key.toLowerCase()}_unactive.svg`}
+                  srcSet={index == record.activeTab.value ? `/images/chain/${item.key.toLowerCase()}.svg` : `/images/chain/${item.key.toLowerCase()}_inactivated_light.svg`}
                   boxSize="6"/>
                 <Text
-                  display={{ base: 'none', md: 'flex' }}
+                  display={{ base: 'none', lg: 'flex' }}
                   color="white"
                   fontSize="xl"
                   ml="2"
@@ -56,10 +58,10 @@ export const Transaction = observer(() => {
             })
           }
         </TabList>
-        <TabPanels>
+        <TabPanels overflowX='auto'>
           {
             record.actionLists.map(() => {
-              return <TabPanel p="0" width='100%'>
+              return <TabPanel p="0" width='100%' minW='5xl'>
                 <TransactionTable />
               </TabPanel>;
             })

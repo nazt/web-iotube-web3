@@ -20,6 +20,7 @@ export class ActionState {
   cashier: string;
   amount: BigNumberState;
   witnesses: string[];
+  fee: BigNumberState;
 
   decodeBase64toHexAddress(content: string): string {
     return '0x' + this.decodeBase64toHex(content);

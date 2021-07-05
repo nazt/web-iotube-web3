@@ -9,7 +9,8 @@ import {
   Image,
   Center,
   HStack,
-  useTheme
+  useTheme,
+  useColorMode
 } from '@chakra-ui/react';
 import { Text } from '@chakra-ui/layout';
 import React from 'react';
@@ -53,6 +54,7 @@ export const ChildrenMenu = observer(({ menu,activeColor }:{menu:any,activeColor
   const theme = useTheme();
   const { sideBar } = useStore();
   const history = useHistory();
+  const colorMode = useColorMode();
 
   return(
     <Accordion allowToggle mt='8' index={menu.isActive ? 0 : -1}>
@@ -76,7 +78,7 @@ export const ChildrenMenu = observer(({ menu,activeColor }:{menu:any,activeColor
           <Center>
             <Icon as={menu.icon} color={sideBar.activeMenu!==menu.path?theme.colors.gray:activeColor}/>
             {sideBar.isOpen ? <Text marginLeft={'4'}
-                                    color={sideBar.activeMenu === menu.path ? theme.colors.lightGreen : ''}>{menu.name}</Text> : null}
+                                    color={sideBar.activeMenu === menu.path ? activeColor : ''}>{menu.name}</Text> : null}
             <ArrowDownIcon color={sideBar.activeMenu !== menu.path ? theme.colors.gray : activeColor} boxSize="5"/>
           </Center>
         </AccordionButton>
@@ -94,8 +96,15 @@ export const ChildrenMenu = observer(({ menu,activeColor }:{menu:any,activeColor
                   sideBar.setActiveChildMenu(item.path);
                 }}
               >
-                <Image srcSet={sideBar.activeChildMenu === item.path ? item.iconActive : item.icon} boxSize='5'/>
-                <Text ml='2.5' fontSize='md' color={sideBar.activeChildMenu === item.path ? theme.colors.lightGreen: ''}>{item.name}</Text>
+                <Image
+                  srcSet={
+                    sideBar.activeChildMenu === item.path
+                      ? item.icon
+                      : colorMode.colorMode === 'dark' ? item.iconInactivatedLight : item.iconInactivatedDark
+                  }
+                  boxSize='5'
+                />
+                <Text ml='2.5' fontSize='md' color={sideBar.activeChildMenu === item.path ? activeColor: ''}>{item.name}</Text>
               </HStack>
             ))
           }

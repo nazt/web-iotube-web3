@@ -35,9 +35,6 @@ export const helper = {
         backChars = Math.floor(charsToShow / 2);
 
       return fullStr.substr(0, frontChars) + separator + fullStr.substr(fullStr.length - backChars);
-    },
-    decodeBase64toHexAddress(content: string): string {
-      return '0x' + Buffer.from(String(content), 'base64').toString('hex');
     }
   },
   number: {

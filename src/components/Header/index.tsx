@@ -115,8 +115,9 @@ export const Header = observer(() => {
         bg={theme.colors.header.bg}
         w='full'
         overflowY='hidden'
+        pos='fixed'
       >
-        <chakra.div h='4.5rem' mx={6}>
+        <chakra.div h={theme.header.height} mx={6}>
           <Flex w='full' h='full' align='center' justify='space-between'>
             <Flex align='center'>
               <Link href='/'>

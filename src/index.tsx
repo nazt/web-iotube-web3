@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { useStore } from '@/store/index';
 import { Header } from '@/components/Header/index';
-import { ChakraProvider, Button, Container, Center, CSSReset } from '@chakra-ui/react';
+import { ChakraProvider, Button, Container, Center, CSSReset, useTheme } from '@chakra-ui/react';
 import { theme } from '@/lib/theme';
 import { ETHProvider } from './components/EthProvider';
 import { Web3ReactProvider } from '@web3-react/core';
@@ -30,12 +30,13 @@ const ErrorFallback = ({ error, resetErrorBoundary }) => {
 };
 
 const BodyWrapper = observer(({ children }) => {
+  const theme = useTheme();
   const { sideBar } = useStore();
   return (
     <Box
       marginLeft={{ base: '0', md: sideBar.width }}
+      paddingTop={theme.header.height}
       maxWidth={{
-        base: '90%',
         md: sideBar.isOpen ? theme.content.maxWidthWithIconText : theme.content.maxWidthWithIcon
       }}
     >

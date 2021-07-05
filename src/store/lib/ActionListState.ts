@@ -64,12 +64,20 @@ export class ActionListState {
           ...item,
           ...data.statuses[i],
           cashier: this.decodeToHex(item.cashier),
+          sender: this.decodeBase64toHexAddress(item.sender),
+          recipient: this.decodeBase64toHexAddress(item.recipient),
+          txHash: this.decodeToHex(item.txHash),
           token: {
             ...token,
             address: tokenAddress
           },
           amount: new BigNumberState({
             value: new BigNumber(item.amount),
+            loading: false,
+            decimals: token?.decimals
+          }),
+          fee: new BigNumberState({
+            value: new BigNumber(item.fee),
             loading: false,
             decimals: token?.decimals
           })

@@ -136,7 +136,7 @@ export const theme = extendTheme({
     dmSans: 'DM Sans, sans-serif'
   },
   header: {
-    height: '64px'
+    height: '4.5rem'
   },
   shadow: {
     light: '0px 3px 20px 0px #D6D6D680'
@@ -197,7 +197,7 @@ export const theme = extendTheme({
     }
   },
   space: {
-
+    18: '4.5rem'
   },
   shadows: {
     lightShadow: '0px 3px 20px 0px rgba(214, 214, 214, 0.5)',

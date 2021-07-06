@@ -32,6 +32,9 @@ export const SideItem=({menu,activeColor})=>{
       _focus={{}}
       fontWeight={400}
       onClick={() => {
+        if (menu._blank){
+          return window.open(menu.path)
+        }
         history.push(menu.path);
         sideBar.setActiveMenu(menu.path);
       }}

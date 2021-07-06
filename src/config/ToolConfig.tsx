@@ -1,9 +1,11 @@
 import { Home } from '../pages/Home/index';
-import { Vault } from '../pages/Vault/index';
 import { Deposit } from '../pages/Deposit/index';
 import { Faq } from '../pages/Faq/index';
 import { FaqIcon, HomeIcon, SwapIcon, TransactionsIcon } from '@/components/Icon';
 import { Transaction } from '../pages/Transaction/index';
+import { AiFillGithub } from 'react-icons/all';
+import React from 'react';
+import { Icon } from '@chakra-ui/react';
 
 class Tool {
   name: string;
@@ -78,5 +80,23 @@ export const ToolConfig = [
     component: Faq,
     icon: FaqIcon,
     isActive:false
+  },
+  {
+    name:'IoTube v4',
+    path:'https://tube.iotex.io/',
+    _blank:true,
+    icon:()=>{
+      return <></>
+    }
+  },
+  {
+    name:'Github',
+    path: 'https://github.com/iotexproject/web-iotube-web3',
+    icon:()=>{
+      return (
+        <Icon as={AiFillGithub} w={6} h={6}/>
+      )
+    },
+    _blank:true
   }
 ];

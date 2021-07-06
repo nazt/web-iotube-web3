@@ -2,9 +2,8 @@ import {
   Flex,
   useColorMode, IconButton, useTheme, useBreakpointValue, useColorModeValue
 } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
+import React  from 'react';
 import { observer } from 'mobx-react-lite';
-import { useHistory } from 'react-router-dom';
 import {
   SunnyIcon,
   SunnyDarkIcon,
@@ -15,21 +14,15 @@ import {
 } from '@/components/Icon';
 import { useStore } from '@/store/index';
 import { ChildrenMenu, SideItem } from '@/components/SiderMenu/SideItem';
-
-export const SiderMenu = () => {
-  const history = useHistory();
+import {withRouter} from 'react-router-dom'
+import ToggleModeButton from '@/components/SiderMenu/ToggleModeButton';
+export const SiderMenu = withRouter(({history}) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const theme = useTheme();
   const { sideBar } = useStore();
   const activeColor= useColorModeValue(theme.colors.darkLightGreen,theme.colors.lightGreen)
-
-  useEffect(() => {
-    if (history.location) {
-      sideBar.activeMenu = history.location.pathname;
-      sideBar.activeChildMenu = history.location.hash;
-
-    }
-  }, [history]);
+  sideBar.activeMenu = history.location.pathname;
+  sideBar.activeChildMenu = history.location.hash;
 
   const isShowSideBar = useBreakpointValue({ base: false, md: true });
 
@@ -67,12 +60,12 @@ export const SiderMenu = () => {
             pw={2}
           >
             {
-             activeColor? sideBar.menus.map((menu) => {
-               if (menu.children){
-                 return (
-                   <ChildrenMenu menu={menu} key={menu.name} activeColor={activeColor}/>
-                 )
-               }
+              activeColor? sideBar.menus.map((menu) => {
+                if (menu.children){
+                  return (
+                    <ChildrenMenu menu={menu} key={menu.name} activeColor={activeColor}/>
+                  )
+                }
                 return (
                   <SideItem menu={menu} key={menu.name} activeColor={activeColor}/>
                 );
@@ -82,23 +75,7 @@ export const SiderMenu = () => {
           <Flex flexDirection={sideBar.isOpen ? 'row' : 'column'}
                 width={'100%'}
                 p={'3'}>
-            <IconButton
-              _focus={{}}
-              isActive={false}
-              variant={'unstyled'}
-              fontSize={theme.iconSize.md}
-              aria-label={'Toggle Light Mode'}
-              onClick={toggleColorMode}
-              icon={colorMode === 'light' ? <SunnyIcon /> : <SunnyDarkIcon />}
-            />
-            <IconButton
-              _focus={{}}
-              variant={'unstyled'}
-              fontSize={theme.iconSize.md}
-              aria-label={'Toggle Dark Mode'}
-              onClick={toggleColorMode}
-              icon={colorMode === 'light' ? <MoonLightIcon /> : <MoonDarkIcon />}
-            />
+            <ToggleModeButton/>
             {renderToggleButton()}
           </Flex>
         </Flex>
@@ -110,5 +87,6 @@ export const SiderMenu = () => {
   return (
     isShowSideBar ? renderSideBar() : null
   );
-};
+});
+// @ts-ignore
 export default observer(SiderMenu);

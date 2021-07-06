@@ -17,7 +17,12 @@ export const Transaction = observer(() => {
 
   useEffect(() => {
     if (!!history.location.hash) {
-      record.activeTab.setValue(record.tabHashMap[history.location.hash]);
+      if (record.tabHashMap[history.location.hash]){
+        record.activeTab.setValue(record.tabHashMap[history.location.hash]);
+      }else {
+        // if not match , redirect to iotex.
+        history.push(`transactions#iotex`);
+      }
     }
   }, [history.location?.hash]);
 

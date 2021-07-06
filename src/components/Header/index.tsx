@@ -16,6 +16,7 @@ import { SideItem } from '@/components/SiderMenu/SideItem';
 import { MoonDarkIcon, MoonLightIcon, SunnyDarkIcon, SunnyIcon } from '@/components/Icon';
 import { eventBus } from '@/lib/event';
 import { helper } from '@/lib/helper';
+import ToggleModeButton from '@/components/SiderMenu/ToggleModeButton';
 
 export const Header = observer(() => {
   const { sideBar, lang, god } = useStore();
@@ -85,23 +86,7 @@ export const Header = observer(() => {
       }
       <Flex justifyContent={'flex-start'} w={'100%'} p={1} mt={30}
       >
-        <IconButton
-          _focus={{}}
-          isActive={false}
-          variant={'unstyled'}
-          fontSize={theme.iconSize.md}
-          aria-label={'Toggle Light Mode'}
-          onClick={toggleColorMode}
-          icon={colorMode === 'light' ? <SunnyIcon /> : <SunnyDarkIcon />}
-        />
-        <IconButton
-          _focus={{}}
-          variant={'unstyled'}
-          fontSize={theme.iconSize.md}
-          aria-label={'Toggle Dark Mode'}
-          onClick={toggleColorMode}
-          icon={colorMode === 'light' ? <MoonLightIcon /> : <MoonDarkIcon />}
-        />
+        <ToggleModeButton/>
       </Flex>
       <Button onClick={store.logout} size='md' mt={100} w={'100%'} bg={theme.colors.gray['11']}>
         <Text fontSize={'xl'} color={activeColor}>Logout</Text>

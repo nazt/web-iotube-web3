@@ -39,11 +39,12 @@ export const WalletInfo = observer(() => {
       eventBus.emit('wallet.logout');
       store.close();
     },
-    get isIotex(){
-      return god.currentChain.name.toLowerCase()==='iotex'
+    get isIotex() {
+      return god.currentChain.name.toLowerCase() === 'iotex';
     },
-    get ioAddress(){
-     return  fromBytes(Buffer.from(String(god.currentNetwork.account).replace(/^0x/, ""), "hex")).string();
+    get ioAddress() {
+      if(!god.currentNetwork.account) return null;
+      return fromBytes(Buffer.from(String(god.currentNetwork.account).replace(/^0x/, ''), 'hex')).string();
     }
   }));
   const color = useColorModeValue('darkLightGreen', 'lightGreen');
@@ -51,13 +52,13 @@ export const WalletInfo = observer(() => {
 
   return (
     <Modal isOpen={store.visible} onClose={store.close} isCentered>
-      <ModalOverlay />
+      <ModalOverlay/>
       <ModalContent style={{ padding: '2rem 2rem' }}
                     bgColor={useColorModeValue(theme.colors.white, theme.colors.bg.bg1)}>
         <Flex justifyContent={'space-between'} alignContent={'flex-start'}>
           <ModalHeader color={useColorModeValue('black', theme.colors.gray['3'])} padding={0}
                        fontSize={'2xl'}>Logout</ModalHeader>
-          <ModalCloseButton position={'relative'} top={'0'} right={'0'} _hover={{}} _focus={{}} />
+          <ModalCloseButton position={'relative'} top={'0'} right={'0'} _hover={{}} _focus={{}}/>
         </Flex>
         <CopyToClipboard text={god.currentNetwork.account}>
           <Text cursor='pointer'
@@ -66,27 +67,23 @@ export const WalletInfo = observer(() => {
           >
             {god.currentNetwork.account}
 
-            <CopyIcon ml={5} color={color} />
+            <CopyIcon ml={5} color={color}/>
           </Text>
         </CopyToClipboard>
-        {
-          store.isIotex && (
-            <Flex mt='8px' alignItems={'center'}>
-              <chakra.img w='1.2rem' h='1.2rem' src={EnterSvg} />
-              <CopyToClipboard text={store.ioAddress}>
-                <Text
-                  ml={2}
-                  cursor='pointer'
-                  wordBreak={'break-all'}
-                  color={'gray'}
-                >
-                  {god.currentNetwork?.account && store.ioAddress}
-                  <CopyIcon ml={5} color={color} />
-                </Text>
-              </CopyToClipboard>
-            </Flex>
-          )
-        }
+        <Flex mt='4' alignItems={'center'}>
+          <chakra.img w='4' h='4' src={EnterSvg}/>
+          <CopyToClipboard text={store.ioAddress}>
+            <Text
+              ml={2}
+              cursor='pointer'
+              wordBreak={'break-all'}
+              color={'gray'}
+            >
+              {god.currentNetwork?.account && store.ioAddress}
+              <CopyIcon ml={5} color={color}/>
+            </Text>
+          </CopyToClipboard>
+        </Flex>
         <Link href={`${god.currentChain.explorerURL}/address/${(god.currentNetwork as NetworkState).account}`} mt={5}
               target='_blank'>View on IoTeXScan</Link>
         <Button onClick={store.logout} size='md' variant={'green'} mt={100}>

@@ -1,7 +1,7 @@
 import { Home } from '../pages/Home/index';
 import { Deposit } from '../pages/Deposit/index';
 import { Faq } from '../pages/Faq/index';
-import { FaqIcon, HomeIcon, SwapIcon, TransactionsIcon } from '@/components/Icon';
+import { FaqIcon, HomeIcon, IotubeIcon, IotubeIconV4, SwapIcon, TransactionsIcon } from '@/components/Icon';
 import { Transaction } from '../pages/Transaction/index';
 import { AiFillGithub } from 'react-icons/all';
 import React from 'react';
@@ -24,7 +24,7 @@ export const ToolConfig = [
     path: '/',
     component: Home,
     icon:HomeIcon,
-    isActive:false
+    isActive:false,
   },
   {
     name: 'Deposit',
@@ -82,14 +82,6 @@ export const ToolConfig = [
     isActive:false
   },
   {
-    name:'IoTube v4',
-    path:'https://tube.iotex.io/',
-    _blank:true,
-    icon:()=>{
-      return <></>
-    }
-  },
-  {
     name:'Github',
     path: 'https://github.com/iotexproject/web-iotube-web3',
     icon:()=>{
@@ -98,5 +90,13 @@ export const ToolConfig = [
       )
     },
     _blank:true
-  }
+  },
+  {
+    name:'Tube v4',
+    path:'https://tube.iotex.io/',
+    _blank:true,
+    icon:()=>{
+      return <Icon as={IotubeIconV4} w={6} h={6}/>
+    }
+  },
 ];

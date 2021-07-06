@@ -8,20 +8,23 @@ export class SidebarStore {
   activeMenu = '/deposit';
   activeChildMenu = '';
   NAV_SHOW_HEADER = ['/', '/faq'];
-
+  SIDEBAR_NOT_SHOW=['/']
   constructor(rootStore: RootStore) {
     makeAutoObservable(this);
   }
 
   get menus() {
-    return ToolConfig.map(config => {
+    return ToolConfig.filter(config=>!this.SIDEBAR_NOT_SHOW.includes(config.path)).map(config => {
       config.isActive = this.isActiveMenu(config.path, this.activeMenu);
       return config;
     });
   }
 
   get headMenus(){
-    return this.menus.filter(menu=>this.NAV_SHOW_HEADER.includes(menu.path))
+    return ToolConfig.filter(menu=>this.NAV_SHOW_HEADER.includes(menu.path)).map(config=>{
+      config.isActive = this.isActiveMenu(config.path, this.activeMenu);
+      return config;
+    })
   }
 
   setActiveMenu(path) {

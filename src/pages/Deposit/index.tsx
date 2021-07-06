@@ -127,7 +127,7 @@ export const Deposit = observer(() => {
   return (
     <>
       <Center mt={16}>
-        <Link href="https://tube.iotex.io" target='_blank' size='sm' textDecoration='underline' isExternal>ioTube v5 only supports web3.js, tube v4 >></Link>
+        <Link href="https://tube.iotex.io" target='_blank' size='sm' textDecoration='underline' isExternal>{lang.t('view_transactions')}</Link>
       </Center>
       <Container
         maxW="md"

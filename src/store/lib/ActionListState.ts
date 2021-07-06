@@ -63,7 +63,7 @@ export class ActionListState {
         return {
           ...item,
           ...data.statuses[i],
-          cashier: this.decodeToHex(item.cashier),
+          cashier: this.decodeBase64toHexAddress(item.cashier),
           sender: this.decodeBase64toHexAddress(item.sender),
           recipient: this.decodeBase64toHexAddress(item.recipient),
           txHash: this.decodeToHex(item.txHash),

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, BoxProps, Button, Box, Avatar, useColorModeValue } from '@chakra-ui/react';
+import { Stack, BoxProps, Button, Box, useColorModeValue, Img } from '@chakra-ui/react';
 import { observer, useObserver, useLocalStore } from 'mobx-react-lite';
 import { useStore } from '../../store/index';
 import { helper } from '../../lib/helper';
@@ -57,9 +57,9 @@ export const DesktopNav = observer((props: BoxProps) => {
     <Stack direction={'row'} spacing={4} {...props}>
       <NavButton
       >
-        <Box minW={5}><Avatar css={{
-          backgroundColor: useColorModeValue('rgba(249, 249, 249, 0.5)', 'rgba(250, 250, 250, 1)')
-        }} size="xs" src={god.currentChain.logoUrl}/></Box>
+        <Box minW={5}>
+          <Img src={god.currentChain.logoUrl} boxSize='6' borderRadius='full'/>
+        </Box>
         <Box ml={2}>{god.currentChain.alias || god.currentChain.name}</Box>
         <Box ml={3}>{god.currentNetwork.chain.current.Coin.balance.format}</Box>
         <Box ml={1}>{god.currentNetwork.chain.current.Coin.symbol}</Box>

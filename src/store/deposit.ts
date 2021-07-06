@@ -61,4 +61,8 @@ export class DepositStore {
     console.log('allowance ForCashier ---->', this.curToken.allowanceForCashier.format);
     return this.amount.value.comparedTo(this.curToken.allowanceForCashier.value) > 0;
   }
+
+  cleanAddress() {
+    this.receiverAddress.setValue('');
+  }
 }

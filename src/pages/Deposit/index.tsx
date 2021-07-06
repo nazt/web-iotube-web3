@@ -16,7 +16,7 @@ import {
   useTheme
 } from '@chakra-ui/react';
 import { Text, Center } from '@chakra-ui/layout';
-import { ChevronDownIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon, SmallCloseIcon } from '@chakra-ui/icons';
 import { TokenListModal } from '@/components/TokenListModal';
 import { useStore } from '@/store/index';
 import { BigNumberInputState } from '@/store/standard/BigNumberInputState';
@@ -25,7 +25,6 @@ import { TokenState } from '@/store/lib/TokenState';
 import NetworkHeader from '@/components/NetworkHeader';
 import BigNumber from 'bignumber.js';
 import { ConfirmModal } from '@/components/ConfirmModal';
-import { BigNumberState } from '@/store/standard/BigNumberState';
 import { CompleteModal } from '@/components/CompleteModal';
 import { toast } from 'react-hot-toast';
 import { ETHProvider } from '@/components/EthProvider';
@@ -111,9 +110,11 @@ export const Deposit = observer(() => {
     }
   }));
   useEffect(() => {
+    if (!deposit.receiverAddress.value.length && god.currentNetwork.account) {
+      deposit.receiverAddress.setValue(god.currentNetwork.account);
+    }
     deposit.curToken = token.currentCrossChain?.tokens[0];
     deposit.amount = new BigNumberInputState({});
-    deposit.receiverAddress.setValue('');
     store.approveLoading.setValue(false);
     store.confirmIsLoading.setValue(false);
     if (god.currentNetwork.account) {
@@ -152,7 +153,7 @@ export const Deposit = observer(() => {
               ml={4}
               mr="8rem"
               py={2}
-              value={deposit.amount.format || ''}
+              value={deposit.amount.format}
               onChange={(e) => deposit.amount.setFormat(e.target.value)}
             />
             <InputRightElement onClick={store.openTokenList} float={'right'} width="10rem" cursor="pointer" zIndex={0}>
@@ -185,6 +186,7 @@ export const Deposit = observer(() => {
               value={deposit.receiverAddress.value}
               onChange={(e) => deposit.receiverAddress.setValue(e.target.value)}
             />
+            <InputRightElement cursor='pointer' onClick={() => deposit.cleanAddress()} children={<SmallCloseIcon/>}/>
           </InputGroup>
         </Box>
         <Center mt={5}>

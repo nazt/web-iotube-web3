@@ -28,6 +28,7 @@ import { ConfirmModal } from '@/components/ConfirmModal';
 import { BigNumberState } from '@/store/standard/BigNumberState';
 import { CompleteModal } from '@/components/CompleteModal';
 import { toast } from 'react-hot-toast';
+import { ETHProvider } from '@/components/EthProvider';
 
 export const Deposit = observer(() => {
   const { god, token, lang, deposit } = useStore();
@@ -129,6 +130,7 @@ export const Deposit = observer(() => {
       borderRadius={theme.borderRadius.sm}
       boxShadow={homeShadow}
     >
+      <ETHProvider/>
       <NetworkHeader/>
       <FormControl mt={8}>
         <Box

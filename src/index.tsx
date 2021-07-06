@@ -5,7 +5,6 @@ import { useStore } from '@/store/index';
 import { Header } from '@/components/Header/index';
 import { ChakraProvider, Button, Container, Center, CSSReset, useTheme } from '@chakra-ui/react';
 import { theme } from '@/lib/theme';
-import { ETHProvider } from './components/EthProvider';
 import { Web3ReactProvider } from '@web3-react/core';
 import { getLibrary } from './lib/web3-react';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -57,7 +56,6 @@ export const App = observer(() => {
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <Web3ReactProvider getLibrary={getLibrary}>
           <WalletSelecter/>
-          <ETHProvider/>
           <Toaster/>
           <Router>
             <Header/>

@@ -14,7 +14,8 @@ import {
   Stack,
   useColorModeValue,
   useTheme,
-  Link
+  Link,
+  Tag
 } from '@chakra-ui/react';
 import { Text, Center } from '@chakra-ui/layout';
 import { ChevronDownIcon, SmallCloseIcon } from '@chakra-ui/icons';
@@ -161,9 +162,10 @@ export const Deposit = observer(() => {
                 value={deposit.amount.format}
                 onChange={(e) => deposit.amount.setFormat(e.target.value)}
               />
-              <InputRightElement onClick={store.openTokenList} float={'right'} width="10rem" cursor="pointer"
+              <InputRightElement float={'right'} width="12rem" cursor="pointer"
                                  zIndex={0}>
-                <Stack width="100%" direction="row-reverse" maxW="12rem" alignContent="flex-end">
+                <Tag size='sm' variant="solid" bg={theme.colors.darkLightGreen} cursor='pointer' onClick={() => deposit.amount.setValue(deposit.curToken.balance.value)}>{'MAX'}</Tag>
+                <Stack onClick={store.openTokenList} width="100%" direction="row-reverse" maxW="12rem" alignContent="flex-end">
                   <Center mr={3}>
                     <Icon as={ChevronDownIcon}/>
                   </Center>
@@ -192,7 +194,8 @@ export const Deposit = observer(() => {
                 value={deposit.receiverAddress.value}
                 onChange={(e) => deposit.receiverAddress.setValue(e.target.value)}
               />
-              <InputRightElement cursor='pointer' onClick={() => deposit.cleanAddress()} children={<SmallCloseIcon/>}/>
+              {deposit.receiverAddress.value &&
+              <InputRightElement zIndex={0} cursor='pointer' onClick={() => deposit.cleanAddress()} children={<SmallCloseIcon/>}/>}
             </InputGroup>
           </Box>
           <Center mt={5}>

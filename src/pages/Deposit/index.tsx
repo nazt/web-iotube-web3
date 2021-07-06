@@ -13,7 +13,8 @@ import {
   Button,
   Stack,
   useColorModeValue,
-  useTheme
+  useTheme,
+  Link
 } from '@chakra-ui/react';
 import { Text, Center } from '@chakra-ui/layout';
 import { ChevronDownIcon, SmallCloseIcon } from '@chakra-ui/icons';
@@ -123,119 +124,125 @@ export const Deposit = observer(() => {
   }, [token.currentCrossChain?.chain, token.currentCrossChain?.tokens[0], token.currentChain.chainId, god.currentNetwork.account]);
 
   return (
-    <Container
-      maxW="md"
-      mt={10}
-      p={30}
-      bg={home}
-      borderRadius={theme.borderRadius.sm}
-      boxShadow={homeShadow}
-    >
-      <ETHProvider/>
-      <NetworkHeader/>
-      <FormControl mt={8}>
-        <Box
-          bg={inputBg}
-          borderRadius={theme.borderRadius.sm}
-          color={inputColor}
-        >
-          <Flex borderRadius="md" justify="space-between" px={4} pt={4}>
-            <Text fontSize="md">Token Amount</Text>
-            <Center>
-              {deposit.curToken && <Text fontSize="sm">Balance: {deposit.curToken.balance.format}</Text>}
-            </Center>
-          </Flex>
-          <InputGroup>
-            <Input
-              variant="unstyled"
-              placeholder="0.0"
-              type="number"
-              ml={4}
-              mr="8rem"
-              py={2}
-              value={deposit.amount.format}
-              onChange={(e) => deposit.amount.setFormat(e.target.value)}
-            />
-            <InputRightElement onClick={store.openTokenList} float={'right'} width="10rem" cursor="pointer" zIndex={0}>
-              <Stack width="100%" direction="row-reverse" maxW="12rem" alignContent="flex-end">
-                <Center mr={3}>
-                  <Icon as={ChevronDownIcon}/>
-                </Center>
-                {deposit.curToken?.symbol && <Text>{deposit.curToken.symbol}</Text>}
-                <Image borderRadius="full" boxSize={theme.iconSize.md} src={deposit.curToken?.logoURI}
-                       fallbackSrc="https://via.placeholder.com/150"/>
-              </Stack>
-            </InputRightElement>
-          </InputGroup>
-        </Box>
+    <>
+      <Center mt={16}>
+        <Link href="https://tube.iotex.io" target='_blank' size='sm' textDecoration='underline' isExternal>ioTube v5 only supports web3.js, tube v4 >></Link>
+      </Center>
+      <Container
+        maxW="md"
+        mt={4}
+        p={30}
+        bg={home}
+        borderRadius={theme.borderRadius.sm}
+        boxShadow={homeShadow}
+      >
+        <ETHProvider/>
+        <NetworkHeader/>
+        <FormControl mt={8}>
+          <Box
+            bg={inputBg}
+            borderRadius={theme.borderRadius.sm}
+            color={inputColor}
+          >
+            <Flex borderRadius="md" justify="space-between" px={4} pt={4}>
+              <Text fontSize="md">Token Amount</Text>
+              <Center>
+                {deposit.curToken && <Text fontSize="sm">Balance: {deposit.curToken.balance.format}</Text>}
+              </Center>
+            </Flex>
+            <InputGroup>
+              <Input
+                variant="unstyled"
+                placeholder="0.0"
+                type="number"
+                ml={4}
+                mr="8rem"
+                py={2}
+                value={deposit.amount.format}
+                onChange={(e) => deposit.amount.setFormat(e.target.value)}
+              />
+              <InputRightElement onClick={store.openTokenList} float={'right'} width="10rem" cursor="pointer"
+                                 zIndex={0}>
+                <Stack width="100%" direction="row-reverse" maxW="12rem" alignContent="flex-end">
+                  <Center mr={3}>
+                    <Icon as={ChevronDownIcon}/>
+                  </Center>
+                  {deposit.curToken?.symbol && <Text>{deposit.curToken.symbol}</Text>}
+                  <Image borderRadius="full" boxSize={theme.iconSize.md} src={deposit.curToken?.logoURI}
+                         fallbackSrc="https://via.placeholder.com/150"/>
+                </Stack>
+              </InputRightElement>
+            </InputGroup>
+          </Box>
 
-        <Box
-          borderRadius={theme.borderRadius.sm}
-          bg={inputBg}
-          mt={8}
-          color={inputColor}
-        >
-          <Flex justify="space-between" px={4} pt={4}>
-            <Text fontSize="md">Receiver Address</Text>
-          </Flex>
-          <InputGroup>
-            <Input
-              variant="unstyled"
-              mx={4}
-              py={2}
-              value={deposit.receiverAddress.value}
-              onChange={(e) => deposit.receiverAddress.setValue(e.target.value)}
-            />
-            <InputRightElement cursor='pointer' onClick={() => deposit.cleanAddress()} children={<SmallCloseIcon/>}/>
-          </InputGroup>
-        </Box>
-        <Center mt={5}>
-          {!Boolean(god.currentNetwork.account) ? (
-            <Button
-              my={10}
-              size="block"
-              variant="green"
-              title={lang.t('connect.wallet')}
-              // leftIcon={<Image size={theme.iconSize.md} src="images/swap.svg"/>}
-              onClick={store.showConnector}
-            >
-              {lang.t('connect.wallet')}
-            </Button>
-          ) : (
-            <>
-              {!deposit.state && Boolean(deposit.shouldApprove) ?
-                <Button
-                  my={10}
-                  isLoading={store.approveLoading.value}
-                  loadingText={store.approveLoadingContent}
-                  onClick={store.onCashierApprove}
-                  size="block"
-                  variant="black"
-                  disabled={store.approveLoading.value}
-                >
-                  {lang.t('approve')}
-                </Button> :
-                <Button
-                  onClick={() => deposit.isOpenConfirmModal.setValue(true)}
-                  size="block"
-                  variant="black"
-                  my={10}
-                  disabled={!!deposit.state}
-                >
-                  {deposit.state || lang.t('deposit')}
-                </Button>}
-            </>
-          )}
-        </Center>
-      </FormControl>
-      <TokenListModal isOpen={store.isOpenTokenList.value} onClose={() => store.isOpenTokenList.setValue(false)}
-                      onSelect={store.onSelectToken}/>
-      <ConfirmModal
-        onConfirm={() => store.onSubmit}
-        confirmIsLoading={store.confirmIsLoading.value}
-        confirmLoadingText={store.confirmLoadingText}
-      />
-      <CompleteModal/>
-    </Container>
+          <Box
+            borderRadius={theme.borderRadius.sm}
+            bg={inputBg}
+            mt={8}
+            color={inputColor}
+          >
+            <Flex justify="space-between" px={4} pt={4}>
+              <Text fontSize="md">Receiver Address</Text>
+            </Flex>
+            <InputGroup>
+              <Input
+                variant="unstyled"
+                mx={4}
+                py={2}
+                value={deposit.receiverAddress.value}
+                onChange={(e) => deposit.receiverAddress.setValue(e.target.value)}
+              />
+              <InputRightElement cursor='pointer' onClick={() => deposit.cleanAddress()} children={<SmallCloseIcon/>}/>
+            </InputGroup>
+          </Box>
+          <Center mt={5}>
+            {!Boolean(god.currentNetwork.account) ? (
+              <Button
+                my={10}
+                size="block"
+                variant="green"
+                title={lang.t('connect.wallet')}
+                // leftIcon={<Image size={theme.iconSize.md} src="images/swap.svg"/>}
+                onClick={store.showConnector}
+              >
+                {lang.t('connect.wallet')}
+              </Button>
+            ) : (
+              <>
+                {!deposit.state && Boolean(deposit.shouldApprove) ?
+                  <Button
+                    my={10}
+                    isLoading={store.approveLoading.value}
+                    loadingText={store.approveLoadingContent}
+                    onClick={store.onCashierApprove}
+                    size="block"
+                    variant="black"
+                    disabled={store.approveLoading.value}
+                  >
+                    {lang.t('approve')}
+                  </Button> :
+                  <Button
+                    onClick={() => deposit.isOpenConfirmModal.setValue(true)}
+                    size="block"
+                    variant="black"
+                    my={10}
+                    disabled={!!deposit.state}
+                  >
+                    {deposit.state || lang.t('deposit')}
+                  </Button>}
+              </>
+            )}
+          </Center>
+        </FormControl>
+        <TokenListModal isOpen={store.isOpenTokenList.value} onClose={() => store.isOpenTokenList.setValue(false)}
+                        onSelect={store.onSelectToken}/>
+        <ConfirmModal
+          onConfirm={() => store.onSubmit}
+          confirmIsLoading={store.confirmIsLoading.value}
+          confirmLoadingText={store.confirmLoadingText}
+        />
+        <CompleteModal/>
+      </Container>
+    </>
   );
 });

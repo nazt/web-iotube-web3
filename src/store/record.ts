@@ -3,12 +3,22 @@ import { makeAutoObservable } from 'mobx';
 import { ActionListState } from '@/store/lib/ActionListState';
 import { publicConfig } from '../config/public';
 import { NumberState } from '@/store/standard/base';
+import { ETHMainnetConfig } from '../config/ETHMainnetConfig';
+import { BSCMainnetConfig } from '../config/BSCMainnetConfig';
+import { PolygonMainnetConfig } from '../config/PolygonMainnetConfig';
+import { IotexMainnetConfig } from '../config/IotexMainnetConfig';
 
 export class RecordStore {
   rootStore: RootStore;
   actionLists: ActionListState[];
   activeTab: NumberState = new NumberState({value :0});
   tabHashMap =  {'#iotex': 0, '#eth': 1, '#bsc': 2, '#polygon': 3};
+
+  cashierMap = {
+    '0x797f1465796fd89ea7135e76dbc7cdb136bba1ca': BSCMainnetConfig,
+    '0xa0fd7430852361931b23a31f84374ba3314e1682': ETHMainnetConfig,
+    '0xf72CFb704d49aC7BB7FFa420AE5f084C671A29be': PolygonMainnetConfig
+  };
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
@@ -22,7 +32,7 @@ export class RecordStore {
         chainId: 4689,
         requestApi: publicConfig.IOTEX_ACTIONS_ENDPOINT }),
       new ActionListState({
-        name: 'Eth',
+        name: 'ETH',
         key: 'eth',
         chainId: 1,
         requestApi: publicConfig.ETH_ACTIONS_ENDPOINT
@@ -52,10 +62,20 @@ export class RecordStore {
 
   get activeTabRecords() {
     const actionListState = this.actionLists[this.activeTab.value];
+
     const actions = this.actionLists[this.activeTab.value].actions.map(action => {
+
+      if (actionListState.key === 'iotex') {
+        return {
+          fromNetwork: this.cashierMap[action.cashier],
+          toNetwork: IotexMainnetConfig,
+          action: action
+        }
+      }
+
       return {
-        fromNetwork: this.rootStore.god.network.map[actionListState.key].chain.map[actionListState.chainId],
-        toNetwork: this.rootStore.god.network.map['iotex'].chain.map[actionListState.chainId],
+        fromNetwork: IotexMainnetConfig,
+        toNetwork: this.rootStore.god.network.map[actionListState.key].chain.map[actionListState.chainId],
         action: action
       }
     });

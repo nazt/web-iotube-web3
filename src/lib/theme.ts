@@ -1,4 +1,4 @@
-import { extendTheme, useColorModeValue } from '@chakra-ui/react';
+import { extendTheme } from '@chakra-ui/react';
 
 const Button = {
   // The styles all button have in common
@@ -129,6 +129,17 @@ const Accordion = {
   }
 };
 
+const Tooltip = {
+  baseStyle: {
+    px: '2',
+    py: '1',
+    color: 'white',
+    borderRadius: 'md',
+    fontSize: 'md',
+    fontFamily: 'dmSans',
+  }
+};
+
 export const theme = extendTheme({
   fonts: {
     body: 'DM Mono',
@@ -189,6 +200,9 @@ export const theme = extendTheme({
     lightGreen: '#33FF99',
     darkLightGreen:'#21CE99',
     white:'#FFFFFF',
+    yellow: '#F2C94C',
+    red: '#EB5757',
+    blue: '#56CCF2',
     bg: {
       bg1: '#3F3F44',
       bg1Alpha20: 'rgba(63, 63, 68, 0.2)',
@@ -252,6 +266,7 @@ export const theme = extendTheme({
     Button,
     Table,
     Link,
-    Accordion
+    Accordion,
+    Tooltip
   }
 });

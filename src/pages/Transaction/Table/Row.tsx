@@ -1,4 +1,4 @@
-import { observer, useLocalStore } from 'mobx-react-lite';
+import { observer } from 'mobx-react-lite';
 import React from 'react';
 import {
   Text,
@@ -9,11 +9,14 @@ import {
   Td,
   Link,
   Center,
+  Tooltip,
   useColorModeValue,
 } from '@chakra-ui/react';
 import { helper } from '@/lib/helper';
 import { ChainState } from '@/store/lib/ChainState';
 import { ActionState } from '@/store/lib/ActionState';
+import { IotexMainnetConfig } from '../../../config/IotexMainnetConfig';
+import { useStore } from '@/store/index';
 
 interface RowProps{
   record?: {
@@ -25,25 +28,53 @@ interface RowProps{
 
 export const Row = observer((props: RowProps) => {
 
+  const { lang } = useStore();
+
   const bg = useColorModeValue("white", "bg.bg1Alpha20");
   const textColor = useColorModeValue("gray.4", "white");
   const statusColor = useColorModeValue("darkLightGreen", "lightGreen");
 
-  const store = useLocalStore(() => ({
-
-    get hashLink() {
-      return `${props.record.fromNetwork.explorerURL}/tx/${props.record.action.txHash}`
-    },
-
-    get fromAddressLink() {
-      return `${props.record.fromNetwork.explorerURL}/address/${props.record.action.sender}`
-    },
-
-    get toAddressLink() {
-      return `${props.record.toNetwork.explorerURL}/address/${props.record.action.recipient}`
+  const renderStatus = () => {
+    let color = statusColor;
+    let tips = lang.t('transaction.status.tips.unknown');
+    switch (props.record.action.status) {
+      case 'UNKNOWN':
+        color = 'red';
+        tips = lang.t('transaction.status.tips.unknown');
+        break;
+      case 'CREATED':
+        color = statusColor;
+        tips = lang.t('transaction.status.tips.created');
+        break;
+      case 'SUBMITTED':
+        color = 'blue';
+        tips = lang.t('transaction.status.tips.submitted');
+        break;
+      case 'SETTLED':
+        color = 'yellow';
+        tips = lang.t('transaction.status.tips.settled');
+        break
     }
 
-  }));
+    return <Tooltip
+      label={tips}
+      placement='right'
+      hasArrow
+      bg='bg.bg1'
+    >
+        <Text
+          bg="bg.bg2Alpha20"
+          h="6"
+          lineHeight="6"
+          borderRadius="full"
+          px="5"
+          display="inline-block"
+          color={color}
+        >
+          {props.record.action.status}
+        </Text>
+      </Tooltip>
+  };
 
   return(
     <Tr
@@ -60,19 +91,23 @@ export const Row = observer((props: RowProps) => {
         </Link>
       </Td>
       <Td as={HStack} spacing="2" flex="1.4" border="none">
-        <Link href={store.fromAddressLink}>
+        <Image src={props.record.fromNetwork.logoUrl} boxSize="5"/>
+        <Link
+          href={`${props.record.fromNetwork.explorerURL}/address/${props.record.action.sender}`}
+        >
           {helper.string.truncate(props.record.action.sender, 12, '...')}
         </Link>
       </Td>
       <Td as={HStack} spacing="2" flex="1.4" border="none">
-        <Link href={store.toAddressLink}>
+        <Image src={props.record.toNetwork.logoUrl} boxSize="5"/>
+        <Link
+          href={`${props.record.toNetwork.explorerURL}/address/${props.record.action.recipient}`}
+        >
           {helper.string.truncate(props.record.action.recipient, 12, '...')}
         </Link>
       </Td>
       <Td flex="1.35">
-        <Text bg="bg.bg2Alpha20" h="6" lineHeight="6" borderRadius="full" px="5" display="inline-block" color={statusColor}>
-          {props.record.action.status}
-        </Text>
+        {renderStatus()}
       </Td>
       <Td flex="1.1" as={HStack} spacing="2">
         {
@@ -89,7 +124,7 @@ export const Row = observer((props: RowProps) => {
         <Text>{helper.time.translateFn(props.record.action.timestamp)}</Text>
       </Td>
       <Td flex="1.15" as={VStack} alignItems="flex-end" spacing="0">
-        <Text>{`${props.record.action.fee.format} ${props.record.fromNetwork.nativeCurrency.symbol}`}</Text>
+        <Text>{`${props.record.action.fee.format} ${IotexMainnetConfig.nativeCurrency.symbol}`}</Text>
       </Td>
     </Tr>
   )

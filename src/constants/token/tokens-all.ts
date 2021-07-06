@@ -162,9 +162,27 @@ export const TOKENS = {
     decimals: 18,
     symbol: 'AAVE',
     logoURI: 'https://iotexscan.io/image/token/io14tw8gyn3p8v5fcmvh4c0w8797ryjrlrvnsr6zf.png'
+  },
+  '0xacee9b11cd4b3f57e58880277ac72c8c41abe4e4': {
+    name: 'Binance USD',
+    decimals: 18,
+    symbol: 'ioBUSD',
+    logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/4687.png'
+  },
+  '0xedeefaca6a1581fe2349cdfc3083d4efa8188e55': {
+    name: 'UNISWAP',
+    decimals: 18,
+    symbol: 'ioUNI',
+    logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/7083.png'
+  },
+  '0x2a6003e4b618ff3457a4a2080d028b0249b51c80': {
+    name: 'Paxos Gold',
+    decimals: 18,
+    symbol: 'ioPAXG',
+    logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/4705.png'
   }
 };
-export const NETWORK ={
+export const NETWORK = {
   '0x797f1465796fd89ea7135e76dbc7cdb136bba1ca': 'bsc',
   '0xa0fd7430852361931b23a31f84374ba3314e1682': 'eth',
   '0xf72CFb704d49aC7BB7FFa420AE5f084C671A29be': 'matic'

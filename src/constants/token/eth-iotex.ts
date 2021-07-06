@@ -74,6 +74,31 @@ export const iotexTokensForEth = {
       'decimals': 8,
       'symbol': 'ioWBTC',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/3717.png'
+    },{
+      "address": "0x4d7b88403aa2f502bf289584160db01ca442426c",
+      "name": "Cyclone Protocol",
+      "decimals": 18,
+      "symbol": "CYC",
+      "logoURI": "https://iotexscan.io/image/token/io1f4acssp65t6s90egjkzpvrdsrjjyysnvxgqjrh.png"
+    },{
+      "address": "0xacee9b11cd4b3f57e58880277ac72c8c41abe4e4",
+      "name": "Binance USD",
+      "decimals": 18,
+      "symbol": "ioBUSD",
+      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/4687.png"
+    },{
+      "address": "0xedeefaca6a1581fe2349cdfc3083d4efa8188e55",
+      "name": "UNISWAP",
+      "decimals": 18,
+      "symbol": "ioUNI",
+      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/7083.png"
+    },
+    {
+      "address": "0x2a6003e4b618ff3457a4a2080d028b0249b51c80",
+      "name": "Paxos Gold",
+      "decimals": 18,
+      "symbol": "ioPAXG",
+      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/4705.png"
     }
   ]
 };

@@ -44,6 +44,20 @@ export const ethTokensForIotex = {
       'decimals': 18,
       'symbol': 'BUSD',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/4687.png'
+    },
+    {
+      'address': '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
+      'name': 'UNISWAP',
+      'decimals': 18,
+      'symbol': 'UNI',
+      'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/7083.png'
+    },
+    {
+      'address': '0x45804880de22913dafe09f4980848ece6ecbaf78',
+      'name': 'Paxos Gold',
+      'decimals': 18,
+      'symbol': 'PAXG',
+      'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/4705.png'
     }
   ]
 };
@@ -52,8 +66,15 @@ export const ethTokensForIotex = {
 export const iotexTokensForEth = {
   cashier: '0x44074576e015bfd4f93f074671bd5a2a55c5d9c5',
   mintableTokenList: '0x6ccf305a21defff295e616ba5aa423eb563fc8db',
-  standardTokenList:'0x59caeb8dc448df0e070b803062cfd9351ad39390',
+  standardTokenList: '0x59caeb8dc448df0e070b803062cfd9351ad39390',
   tokens: [
+    {
+      'address': '0x0000000000000000000000000000000000000000',
+      'name': 'IoTeX Network',
+      'decimals': 18,
+      'symbol': 'IOTX',
+      'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png'
+    },
     {
       'address': '0x0258866edaf84d6081df17660357ab20a07d0c80',
       'name': 'ioETH',
@@ -63,9 +84,9 @@ export const iotexTokensForEth = {
     },
     {
       'address': '0xa00744882684c3e4747faefd68d283ea44099d03',
-      'name': 'IoTeX Network',
+      'name': 'Wrapped IOTX',
       'decimals': 18,
-      'symbol': 'IOTX',
+      'symbol': 'WIOTX',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/2777.png'
     },
     {
@@ -74,31 +95,31 @@ export const iotexTokensForEth = {
       'decimals': 8,
       'symbol': 'ioWBTC',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/3717.png'
-    },{
-      "address": "0x4d7b88403aa2f502bf289584160db01ca442426c",
-      "name": "Cyclone Protocol",
-      "decimals": 18,
-      "symbol": "CYC",
-      "logoURI": "https://iotexscan.io/image/token/io1f4acssp65t6s90egjkzpvrdsrjjyysnvxgqjrh.png"
-    },{
-      "address": "0xacee9b11cd4b3f57e58880277ac72c8c41abe4e4",
-      "name": "Binance USD",
-      "decimals": 18,
-      "symbol": "ioBUSD",
-      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/4687.png"
-    },{
-      "address": "0xedeefaca6a1581fe2349cdfc3083d4efa8188e55",
-      "name": "UNISWAP",
-      "decimals": 18,
-      "symbol": "ioUNI",
-      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/7083.png"
+    }, {
+      'address': '0x4d7b88403aa2f502bf289584160db01ca442426c',
+      'name': 'Cyclone Protocol',
+      'decimals': 18,
+      'symbol': 'CYC',
+      'logoURI': 'https://iotexscan.io/image/token/io1f4acssp65t6s90egjkzpvrdsrjjyysnvxgqjrh.png'
+    }, {
+      'address': '0xacee9b11cd4b3f57e58880277ac72c8c41abe4e4',
+      'name': 'Binance USD',
+      'decimals': 18,
+      'symbol': 'ioBUSD',
+      'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/4687.png'
+    }, {
+      'address': '0xedeefaca6a1581fe2349cdfc3083d4efa8188e55',
+      'name': 'UNISWAP',
+      'decimals': 18,
+      'symbol': 'ioUNI',
+      'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/7083.png'
     },
     {
-      "address": "0x2a6003e4b618ff3457a4a2080d028b0249b51c80",
-      "name": "Paxos Gold",
-      "decimals": 18,
-      "symbol": "ioPAXG",
-      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/4705.png"
+      'address': '0x2a6003e4b618ff3457a4a2080d028b0249b51c80',
+      'name': 'Paxos Gold',
+      'decimals': 18,
+      'symbol': 'ioPAXG',
+      'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/4705.png'
     }
   ]
 };

@@ -180,6 +180,20 @@ export const TOKENS = {
     decimals: 18,
     symbol: 'ioPAXG',
     logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/4705.png'
+  },
+  '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984': {
+    address: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
+    name: 'UNISWAP',
+    decimals: 18,
+    symbol: 'UNI',
+    logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/7083.png'
+  },
+  '0x45804880de22913dafe09f4980848ece6ecbaf78': {
+    address: '0x45804880de22913dafe09f4980848ece6ecbaf78',
+    name: 'Paxos Gold',
+    decimals: 18,
+    symbol: 'PAXG',
+    logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/4705.png'
   }
 };
 export const NETWORK = {

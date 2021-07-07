@@ -9,7 +9,6 @@ import {
   Td,
   Link,
   Center,
-  Tooltip,
   useColorModeValue,
 } from '@chakra-ui/react';
 import { helper } from '@/lib/helper';
@@ -36,44 +35,38 @@ export const Row = observer((props: RowProps) => {
 
   const renderStatus = () => {
     let color = statusColor;
-    let tips = lang.t('transaction.status.tips.unknown');
+    let status = lang.t('transaction.status.tips.unknown');
     switch (props.record.action.status) {
       case 'UNKNOWN':
         color = 'red';
-        tips = lang.t('transaction.status.tips.unknown');
+        status = lang.t('transaction.status.tips.unknown');
         break;
       case 'CREATED':
         color = statusColor;
-        tips = lang.t('transaction.status.tips.created');
+        status = lang.t('transaction.status.tips.created');
         break;
       case 'SUBMITTED':
         color = 'blue';
-        tips = lang.t('transaction.status.tips.submitted');
+        status = lang.t('transaction.status.tips.submitted');
         break;
       case 'SETTLED':
         color = 'yellow';
-        tips = lang.t('transaction.status.tips.settled');
+        status = lang.t('transaction.status.tips.settled');
         break
     }
 
-    return <Tooltip
-      label={tips}
-      placement='right'
-      hasArrow
-      bg='bg.bg1'
+    return <Text
+      bg="bg.bg2Alpha20"
+      h="6"
+      lineHeight="6"
+      borderRadius="full"
+      px="5"
+      display="inline-block"
+      color={color}
+      cursor='pointer'
     >
-        <Text
-          bg="bg.bg2Alpha20"
-          h="6"
-          lineHeight="6"
-          borderRadius="full"
-          px="5"
-          display="inline-block"
-          color={color}
-        >
-          {props.record.action.status}
-        </Text>
-      </Tooltip>
+      {status}
+    </Text>
   };
 
   return(
@@ -85,7 +78,11 @@ export const Row = observer((props: RowProps) => {
     >
       <Td flex="1.4">
         <Link
-          href={`${props.record.fromNetwork.explorerURL}/tx/${props.record.action.txHash}`}
+          href={
+            props.record.toNetwork.name.toLowerCase() === 'iotex'
+              ? `${props.record.toNetwork.explorerURL}/action/${props.record.action.txHash}`
+              : `${props.record.toNetwork.explorerURL}/tx/${props.record.action.txHash}`
+          }
         >
           {helper.string.truncate(props.record.action.txHash, 12, '...')}
         </Link>

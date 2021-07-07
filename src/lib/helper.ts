@@ -91,9 +91,10 @@ export const helper = {
   },
   time: {
     fromNow(ts: string): string {
-      if (!ts) {
-        return "";
+      if (!ts || dayjs.utc(ts).valueOf() <= 0) {
+        return "--";
       }
+
       return dayjs.utc(ts).fromNow();
     },
 

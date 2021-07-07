@@ -10,7 +10,7 @@ export const PolygonMainnetConfig = new ChainState({
   chainId: 137,
   logoUrl: '/images/chain/polygon.svg',
   rpcUrl: 'https://rpc-mainnet.maticvigil.com/',
-  explorerURL: 'https://polygon-explorer-mainnet.chainstacklabs.com',
+  explorerURL: 'https://polygonscan.com',
   explorerName: 'Polygon Explorer',
   Coin: new TokenState({
     symbol: 'MATIC',

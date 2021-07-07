@@ -55,6 +55,7 @@ export const DesktopNav = observer((props: BoxProps) => {
   });
   return (
     <Stack direction={'row'} spacing={4} {...props}>
+      {god.currentNetwork.account &&
       <NavButton
       >
         <Box minW={5}>
@@ -64,6 +65,7 @@ export const DesktopNav = observer((props: BoxProps) => {
         <Box ml={3}>{god.currentNetwork.chain.current.Coin.balance.format}</Box>
         <Box ml={1}>{god.currentNetwork.chain.current.Coin.symbol}</Box>
       </NavButton>
+      }
       {accountView}
     </Stack>
   );

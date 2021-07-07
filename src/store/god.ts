@@ -39,7 +39,7 @@ export class GodStore {
     makeAutoObservable(this, {
       rootStore: false
     });
-    EthNetworkConfig.god = this;
+    // EthNetworkConfig.god = this;
     EthNetworkConfig.init();
     BSCMainnetConfig.init();
     PolygonMainnetConfig.init();

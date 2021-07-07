@@ -115,6 +115,6 @@
   "year": "year",
   "years": "years",
   "enter_app": "Enter App",
-  "view_transactions": "view transactions >>"
-
+  "view_transactions": "view transactions >>",
+  "tube_v4": "ioTube v5 only supports web3.js, tube v4 >>"
 }

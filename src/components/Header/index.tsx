@@ -94,7 +94,7 @@ export const Header = observer(() => {
     </Flex>
   );
   return (
-    <Box pos='relative' zIndex={1}>
+    <Box pos='relative' zIndex='sticky'>
       <chakra.header
         transition='box-shadow 0.2s'
         bg={theme.colors.header.bg}

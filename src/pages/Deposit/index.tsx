@@ -125,17 +125,17 @@ export const Deposit = observer(() => {
   }, [token.currentCrossChain?.chain, token.currentCrossChain?.tokens[0], token.currentChain.chainId, god.currentNetwork.account]);
 
   return (
-    <>
-      <Center mt={16}>
+    <Box bgImage={'/images/home_bg.png'} pt={16}>
+      <Center>
         <Link href="https://tube.iotex.io" target='_blank' size='sm' textDecoration='underline' isExternal>{lang.t('tube_v4')}</Link>
       </Center>
       <Container
         maxW="md"
         mt={4}
         p={30}
-        bg={home}
         borderRadius={theme.borderRadius.sm}
         boxShadow={homeShadow}
+        bg={home}
       >
         <ETHProvider/>
         <NetworkHeader/>
@@ -246,6 +246,6 @@ export const Deposit = observer(() => {
         />
         <CompleteModal/>
       </Container>
-    </>
+    </Box>
   );
 });

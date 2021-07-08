@@ -34,7 +34,7 @@
   "complete.broadcast_transaction_successfully": "Action submitted successfully",
   "complete.tx_broadcast_network": "After 12 confirmations of ${network} network and 2/3 + 1 confirmations from witnesses, ${amount} ${token} will be minted and sent to your address:",
   "complete.your_tx_chain": "Your ${chain} TX hash",
-  "complete.check_status_comment": "You can check the status right now by clicking the link.",
+  "complete.check_status_comment": "You can check the status right now in",
   "eta": "ETA",
   "network_confirmations": "${network} confirmations",
   "iotex_confirmations": "IoTeX confirmations",
@@ -116,6 +116,6 @@
   "year": "year",
   "years": "years",
   "enter_app": "Enter App",
-  "view_transactions": "view transactions >>",
+  "view_transactions": "ioTube Explorer >>",
   "tube_v4": "ioTube v5 only works with Web3 wallets (like Metamask, ioPay mobile)."
 }

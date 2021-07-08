@@ -14,6 +14,7 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
+  Link,
   useTheme
 } from '@chakra-ui/react';
 import { CopyIcon } from '@chakra-ui/icons';
@@ -63,14 +64,8 @@ export const CompleteModal = observer(() => {
             </a>
             <CopyIcon ml={4} w={5} h={5} cursor="pointer" onClick={() => store.onCopyTransactionId()}/>
           </Box>
-          or
-          <Box mb={2}>
-            <a href={`/transaction#${token.currentCrossChain?.chain.name.toLowerCase()}`}
-               target="_blank">
-              <u>{lang.t('view_transactions')}</u>
-            </a>
-          </Box>
-          <Text>{lang.t('complete.check_status_comment')}</Text>
+          <Text>{lang.t('complete.check_status_comment')} <Link href={`/transaction#${token.currentCrossChain?.chain.name.toLowerCase()}`} textDecoration='underline'
+                                                             isExternal>{lang.t('view_transactions')}</Link></Text>
           <Box mt={6}>
             <Flex justifyContent="space-between">
               <span>{lang.t('eta')}</span>

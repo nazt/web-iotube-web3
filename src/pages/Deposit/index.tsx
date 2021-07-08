@@ -68,7 +68,7 @@ export const Deposit = observer(() => {
         if (receipt.status == 1) {
           store.approveLoading.setValue(false);
           // @ts-ignore
-          deposit.curToken.allowanceForCashier.setValue(new BigNumber(MaxUint256),);
+          deposit.curToken.allowanceForCashier.setValue(new BigNumber(MaxUint256));
         }
         console.log('allowance Cashier new ---->', deposit.curToken.allowanceForCashier.format);
       } catch (e) {

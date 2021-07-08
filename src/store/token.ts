@@ -3,8 +3,8 @@ import { RootStore } from './root';
 import { NumberState, StringState } from './standard/base';
 import { CrossChain } from '../../type';
 import { TokenState } from '@/store/lib/TokenState';
-import BigNumber from 'bignumber.js';
 import { IotexMainnetConfig } from '../config/IotexMainnetConfig';
+import { BigNumber } from 'ethers';
 
 
 export class TokenStore {

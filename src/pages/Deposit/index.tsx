@@ -29,6 +29,7 @@ import { ConfirmModal } from '@/components/ConfirmModal';
 import { CompleteModal } from '@/components/CompleteModal';
 import { toast } from 'react-hot-toast';
 import { ETHProvider } from '@/components/EthProvider';
+import { MaxUint256 } from '@ethersproject/constants';
 
 export const Deposit = observer(() => {
   const { god, token, lang, deposit } = useStore();
@@ -45,7 +46,6 @@ export const Deposit = observer(() => {
     approveLoadingContent: lang.t('deposit.approving'),
     confirmIsLoading: new BooleanState(),
     confirmLoadingText: lang.t('button.confirming'),
-    maxAllowance: new BigNumber(1.157920892373162e59),
     showConnector() {
       god.setShowConnecter(true);
     },
@@ -59,7 +59,7 @@ export const Deposit = observer(() => {
     async onCashierApprove() {
       try {
         store.approveLoading.setValue(true);
-        const approvedRes = await token.approve(store.maxAllowance, deposit.curToken);
+        const approvedRes = await token.approve(MaxUint256, deposit.curToken);
         if (approvedRes) {
           store.approveLoadingContent = lang.t('button.waiting');
         }
@@ -67,7 +67,8 @@ export const Deposit = observer(() => {
         console.log(`approve receipt:`, receipt);
         if (receipt.status == 1) {
           store.approveLoading.setValue(false);
-          deposit.curToken.allowanceForCashier.setValue(store.maxAllowance);
+          // @ts-ignore
+          deposit.curToken.allowanceForCashier.setValue(new BigNumber(MaxUint256),);
         }
         console.log('allowance Cashier new ---->', deposit.curToken.allowanceForCashier.format);
       } catch (e) {

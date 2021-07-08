@@ -15,8 +15,7 @@ import {
   Center,
   Image,
   Text,
-  Spacer, Avatar,
-  createStandaloneToast
+  Spacer, Avatar
 } from '@chakra-ui/react';
 import { CrossChain } from '../../../type';
 import { ChainState } from '@/store/lib/ChainState';
@@ -29,6 +28,7 @@ import { IotexMainnetConfig } from '../../config/IotexMainnetConfig';
 import { injected } from '@/lib/web3-react';
 import { useWeb3React } from '@web3-react/core';
 import { Network } from '@/store/god';
+import { toast } from 'react-hot-toast';
 import { theme } from '@/lib/theme';
 
 interface ISwitchProps {
@@ -38,7 +38,6 @@ interface ISwitchProps {
 const NetworkHeader = observer((props: ISwitchProps) => {
   const { god, token, lang } = useStore();
   const { activate } = useWeb3React();
-  const toast = createStandaloneToast();
   const home = useColorModeValue('white', theme.colors.bg.bg1);
   const iconBg = useColorModeValue(theme.colors.gray[7], 'white');
   const headerColor = useColorModeValue(theme.colors.gray[4], theme.colors.gray[3]);
@@ -65,7 +64,7 @@ const NetworkHeader = observer((props: ISwitchProps) => {
           rpcUrls: [chain.rpcUrl]
         });
       } else {
-        toast({ title: lang.t('change_network_eth_warning'), position: 'top', status: 'warning' });
+        toast(lang.t('change_network_eth_warning'));
       }
     },
     connectInejct() {

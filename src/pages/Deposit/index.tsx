@@ -14,7 +14,6 @@ import {
   Stack,
   useColorModeValue,
   useTheme,
-  Link,
   Tag
 } from '@chakra-ui/react';
 import { Text, Center } from '@chakra-ui/layout';
@@ -127,7 +126,9 @@ export const Deposit = observer(() => {
   return (
     <Box bgImage={'/images/home_bg.png'} pt={16}>
       <Center>
-        <Link href="https://tube.iotex.io" target='_blank' size='sm' textDecoration='underline' isExternal>{lang.t('tube_v4')}</Link>
+        <Box maxW="md" textAlign='center'>
+          <Text color={useColorModeValue(theme.colors.darkLightGreen,theme.colors.lightGreen)}><u>{lang.t('tube_v4')}</u></Text>
+        </Box>
       </Center>
       <Container
         maxW="md"

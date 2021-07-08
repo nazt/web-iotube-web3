@@ -26,6 +26,7 @@
   "relay_to_chain": "Relay to ${chain}",
   "confirm": "Confirm",
   "you_are_going_to_deposit": "You are going to deposit",
+  "to_iotube_and_mint": "to ioTube and mint",
   "change_network_eth_warning": "Metamask does not allow us switch to Ethereum for you.  Please switch inside Metamask.",
   "deposit.approving": "Approving",
   "button.waiting": "Waiting",
@@ -116,5 +117,5 @@
   "years": "years",
   "enter_app": "Enter App",
   "view_transactions": "view transactions >>",
-  "tube_v4": "ioTube v5 only supports web3.js, tube v4 >>"
+  "tube_v4": "ioTube v5 only works with Web3 wallets (like Metamask, ioPay mobile)."
 }

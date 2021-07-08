@@ -31,14 +31,9 @@ interface PropsType {
 export const ConfirmModal = observer((props: PropsType) => {
   const { token, lang, deposit } = useStore();
   const theme = useTheme();
-  const store = useLocalObservable(() => ({
-    onClose() {
-      deposit.isOpenConfirmModal.setValue(false);
-    }
-  }));
 
   return (
-    <Modal isOpen={deposit.isOpenConfirmModal.value} onClose={store.onClose} closeOnEsc closeOnOverlayClick>
+    <Modal isOpen={deposit.isOpenConfirmModal.value} onClose={() => deposit.isOpenConfirmModal.setValue(false)} closeOnEsc closeOnOverlayClick>
       <ModalOverlay/>
       <ModalContent borderRadius={theme.borderRadius.sm}>
         <ModalHeader>{lang.t('you_are_going_to_deposit')}</ModalHeader>
@@ -52,8 +47,17 @@ export const ConfirmModal = observer((props: PropsType) => {
               <Text fontSize="2xl" ml={2}>{deposit.curToken?.symbol}</Text>
             </Center>
           </Flex>
+          <Text>{lang.t('to_iotube_and_mint')}</Text>
+          <Flex>
+            <Text fontSize="3xl" mr={4}>{deposit.amount.format}</Text>
+            <Center>
+              <Image borderRadius="full" boxSize={theme.iconSize.md} src={deposit.curToken?.logoURI}
+                     fallbackSrc="https://via.placeholder.com/150"/>
+              <Text fontSize="2xl" ml={2}>{deposit.curToken?.symbol}</Text>
+            </Center>
+          </Flex>
           <Text>on {token.currentCrossChain?.chain.name} </Text>
-          <Text>at {deposit.receiverAddress.value}</Text>
+          <Text>at&nbsp;{deposit.receiverAddress.value}</Text>
           <Box my={6}>
             <Text mb={2}>{lang.t('fee')}</Text>
             <Flex justifyContent="space-between">
@@ -61,7 +65,7 @@ export const ConfirmModal = observer((props: PropsType) => {
               <Box>0 ({lang.t('fee')})</Box>
             </Flex>
             <Flex justifyContent="space-between">
-              <Box>{<span>{lang.t('relay_to_chain', { chain: token.currentChain.name })}</span>}</Box>
+              <Box>{<span>{lang.t('relay_to_chain', { chain: token.currentCrossChain?.chain.name })}</span>}</Box>
               <Box>
                 <span>{token.currentCrossChain?.cashier?.depositFee.format}</span>
                 <span> {`IOTX (${lang.t("fee")})`}</span>

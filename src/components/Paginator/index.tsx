@@ -1,8 +1,9 @@
-import React, { forwardRef } from "react";
-import { Box, Button, Icon, BoxProps, Center } from "@chakra-ui/react";
+import React, { forwardRef, useEffect, useState } from 'react';
+import { Box, Button, Icon, BoxProps, Center, Text, Input, HStack } from '@chakra-ui/react';
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import Pagination from "@choc-ui/paginator";
 import { observer } from 'mobx-react-lite';
+import { useStore } from '@/store/index';
 
 interface PaginatorProps {
   total: number,
@@ -15,12 +16,12 @@ interface PaginatorProps {
 const baseStyles: BoxProps  = {
   bg: "transparent",
   boxSizing: "border-box",
-  minH: "1.5rem",
-  minW: "1.5rem",
-  w: "1.5rem",
-  h: "1.5rem",
+  minH: "6",
+  minW: "6",
+  w: "6",
+  h: "6",
   p: "0",
-  fontSize: "0.875rem",
+  fontSize: "sm",
   fontFamily: "dmSans"
 };
 
@@ -44,12 +45,18 @@ export const Paginator = observer((
     onSizeChange
   }: PaginatorProps) => {
 
+  const { lang } = useStore();
+
+  const [curPage, setCurPage] = useState<number>(defaultPage);
+  const [pageJumper, setPageJumper] = React.useState<string>('');
+  const totalPages = Math.ceil(total / defaultSize);
+
   const PageSizeSelector = forwardRef<HTMLButtonElement>((props, ref) => (
     <Button
       ref={ref}
       {...props}
-      bg="gray.bg3"
-      borderRadius="1"
+      bg="bg.bg3Alpha20"
+      borderRadius="base"
       mx="2"
       px="2"
       h="6"
@@ -67,24 +74,31 @@ export const Paginator = observer((
     }
   };
 
+  const goToPage = (e) => {
+    e.preventDefault();
+    const page = Math.max(0, Math.min(parseInt(pageJumper), totalPages));
+    setCurPage(page);
+    onPageChange(page);
+  };
+
   return (
-    <Box
+    <HStack
       w="full"
       py="4"
     >
       <Pagination
+        current={curPage}
         defaultCurrent={defaultPage}
         defaultPage={defaultPage}
         defaultPageSize={defaultSize}
         total={total}
+        itemRender={itemRender}
         paginationProps={paginationProps}
         baseStyles={baseStyles}
         activeStyles={activeStyles}
         hoverStyles={activeStyles}
         pageNeighbours={1}
         showSizeChanger
-        showQuickJumper
-        itemRender={itemRender}
         onChange={(currentPage, totalPages, pageSize, total) => {
           onPageChange(currentPage)
         }}
@@ -92,6 +106,27 @@ export const Paginator = observer((
           onSizeChange(size)
         }}
       />
-    </Box>
+
+      <HStack
+        as='form'
+        userSelect='none'
+        fontSize='sm'
+        fontFamily='dmSans'
+        color='gray.2'
+        onSubmit={goToPage}
+      >
+        <Text wordBreak='unset'>{lang.t('go_to')}:</Text>
+        <Input
+          w='12'
+          h='6'
+          border='none'
+          bg='bg.bg3Alpha20'
+          borderRadius="base"
+          px='1.5'
+          type='number'
+          onChange={e => setPageJumper(e.target.value)}
+        />
+      </HStack>
+    </HStack>
   );
 });

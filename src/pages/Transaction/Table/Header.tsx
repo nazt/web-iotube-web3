@@ -17,7 +17,7 @@ export const Header = observer(() => {
         <Th flex='1.1'>{lang.t("asset")}</Th>
         <Th flex='1.1' >{lang.t("amount")}</Th>
         <Th flex='1.1'>{lang.t("age")}</Th>
-        <Th flex='1.15' as={Text} textAlign="right">{lang.t("fee")}</Th>
+        <Th flex='1.15' as={Text} textAlign="right">{lang.t("fee.relay")}</Th>
       </Tr>
     </Thead>
   );

@@ -78,6 +78,7 @@ export const Row = observer((props: RowProps) => {
     >
       <Td flex="1.4">
         <Link
+          target='_blank'
           href={
             props.record.toNetwork.name.toLowerCase() === 'iotex'
               ? `${props.record.toNetwork.explorerURL}/action/${props.record.action.txHash}`
@@ -90,6 +91,7 @@ export const Row = observer((props: RowProps) => {
       <Td as={HStack} spacing="2" flex="1.4" border="none">
         <Image src={props.record.fromNetwork.logoUrl} boxSize="5"/>
         <Link
+          target='_blank'
           href={`${props.record.fromNetwork.explorerURL}/address/${props.record.action.sender}`}
         >
           {helper.string.truncate(props.record.action.sender, 12, '...')}
@@ -98,6 +100,7 @@ export const Row = observer((props: RowProps) => {
       <Td as={HStack} spacing="2" flex="1.4" border="none">
         <Image src={props.record.toNetwork.logoUrl} boxSize="5"/>
         <Link
+          target='_blank'
           href={`${props.record.toNetwork.explorerURL}/address/${props.record.action.recipient}`}
         >
           {helper.string.truncate(props.record.action.recipient, 12, '...')}

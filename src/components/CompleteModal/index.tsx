@@ -64,7 +64,7 @@ export const CompleteModal = observer(() => {
             </a>
             <CopyIcon ml={4} w={5} h={5} cursor="pointer" onClick={() => store.onCopyTransactionId()}/>
           </Box>
-          <Text>{lang.t('complete.check_status_comment')} <Link href={`/transaction#${token.currentCrossChain?.chain.name.toLowerCase()}`} textDecoration='underline'
+          <Text>{lang.t('complete.check_status_comment')} <Link href={`/transactions#${token.currentCrossChain?.chain.name.toLowerCase()}`} textDecoration='underline'
                                                              isExternal>{lang.t('view_transactions')}</Link></Text>
           <Box mt={6}>
             <Flex justifyContent="space-between">

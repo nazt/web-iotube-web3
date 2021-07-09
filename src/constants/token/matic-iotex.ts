@@ -68,6 +68,12 @@ export const polygonToIotexTokens = {
       decimals: 18,
       symbol: 'AAVE',
       logoURI: 'https://iotexscan.io/image/token/io14tw8gyn3p8v5fcmvh4c0w8797ryjrlrvnsr6zf.png'
+    }, {
+      address: '0xcFb54a6D2dA14ABeCD231174FC5735B4436965D8',
+      name: 'Cyclone Protocol',
+      decimals: 18,
+      symbol: 'CYC',
+      logoURI: 'https://iotexscan.io/image/token/io1f4acssp65t6s90egjkzpvrdsrjjyysnvxgqjrh.png'
     }
   ]
 };
@@ -140,6 +146,13 @@ export const iotexPolygonTokens = {
       decimals: 18,
       symbol: 'AAVE-matic',
       logoURI: 'https://iotexscan.io/image/token/io14tw8gyn3p8v5fcmvh4c0w8797ryjrlrvnsr6zf.png'
+    },
+    {
+      address: '0x4d7b88403aa2f502bf289584160db01ca442426c',
+      name: 'Cyclone Protocol',
+      decimals: 18,
+      symbol: 'CYC',
+      logoURI: 'https://iotexscan.io/image/token/io1f4acssp65t6s90egjkzpvrdsrjjyysnvxgqjrh.png'
     }
   ]
 };

@@ -21,6 +21,7 @@
   "deposit": "Deposit",
   "approve": "Approve",
   "fee": "Fee",
+  "fee.relay": "Relay Fee",
   "fee.tube": "Tube Fee",
   "fee.network": "Network Fee",
   "relay_to_chain": "Relay to ${chain}",
@@ -117,5 +118,6 @@
   "years": "years",
   "enter_app": "Enter App",
   "view_transactions": "ioTube Explorer >>",
-  "tube_v4": "ioTube v5 only works with Web3 wallets (like Metamask, ioPay mobile)."
+  "tube_v4": "ioTube v5 only works with Web3 wallets (like Metamask, ioPay mobile).",
+  "go_to": "Go to"
 }

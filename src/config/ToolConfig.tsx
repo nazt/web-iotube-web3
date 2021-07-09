@@ -83,7 +83,7 @@ export const ToolConfig = [
   },
   {
     name:'Github',
-    path: 'https://github.com/iotexproject/web-iotube-web3',
+    path: 'https://github.com/iotexproject/web-iotube',
     icon:()=>{
       return (
         <Icon as={AiFillGithub} w={6} h={6}/>

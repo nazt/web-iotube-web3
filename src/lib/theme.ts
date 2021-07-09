@@ -207,7 +207,9 @@ export const theme = extendTheme({
       bg1: '#3F3F44',
       bg1Alpha20: 'rgba(63, 63, 68, 0.2)',
       bg2: '#CDCFD6',
-      bg2Alpha20: 'rgba(205, 207, 214, 0.2)'
+      bg2Alpha20: 'rgba(205, 207, 214, 0.2)',
+      bg3: '#C7CFD6',
+      bg3Alpha20: 'rgba(199, 207, 214, 0.2)'
     }
   },
   space: {

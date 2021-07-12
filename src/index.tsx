@@ -65,6 +65,7 @@ export const App = observer(() => {
                 {ToolConfig.map((item) => (
                   <Route exact path={item.path} key={item.path} component={item.component}/>
                 ))}
+                <Redirect from="*" to="/" />
               </Switch>
             </BodyWrapper>
           </Router>

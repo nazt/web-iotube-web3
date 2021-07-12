@@ -1,5 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { BigNumberState } from '@/store/standard/BigNumberState';
+import { ChainState } from '@/store/lib/ChainState';
 
 export class ActionState {
   key: string;
@@ -7,9 +8,9 @@ export class ActionState {
   status: string;
   recipient: string;
   sender: string;
-  gas: string;
-  gasPrice: string;
   timestamp: string;
+  fromNetwork: ChainState;
+  toNetwork: ChainState;
   token: {
     address: string;
     decimals: number;
@@ -22,17 +23,8 @@ export class ActionState {
   witnesses: string[];
   fee: BigNumberState;
 
-  decodeBase64toHexAddress(content: string): string {
-    return '0x' + this.decodeBase64toHex(content);
-  }
-
-  decodeBase64toHex(content: string):string {
-    return Buffer.from(String(content), 'base64').toString('hex');
-  }
-
   constructor(args: Partial<ActionState>) {
     Object.assign(this, args);
     makeAutoObservable(this);
   }
-
 }

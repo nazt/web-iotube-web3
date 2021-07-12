@@ -5,10 +5,16 @@ import { Center, Image, Table, Tbody, useColorModeValue } from '@chakra-ui/react
 import { Row } from './Row';
 import { Paginator } from '@/components/Paginator';
 import { useStore } from '@/store/index';
+import { ActionListState } from '@/store/lib/ActionListState';
 
-export const TransactionTable = observer(() => {
+interface TableProps{
+  index: number;
+}
+
+export const TransactionTable = observer((props: TableProps) => {
 
   const { record } = useStore();
+  const actionList: ActionListState = record.actionLists[props.index];
 
   const blankBg = useColorModeValue("white", "gray.11");
 
@@ -27,20 +33,20 @@ export const TransactionTable = observer(() => {
     <>
       <Tbody>
         {
-          record.activeTabRecords.actions.map(item => (
-            <Row record={item}/>
+          actionList.actions.map(item => (
+            <Row action={item}/>
           ))
         }
       </Tbody>
       <Paginator
-        total={record.activeTabRecords.count}
-        defaultPage={record.currentPage}
-        defaultSize={record.currentPageSize}
+        total={actionList.count}
+        defaultPage={actionList.currentPage}
+        defaultSize={actionList.currentPageSize}
         onPageChange={(page) => {
-          record.updateList(record.currentPageSize, (page - 1) * record.currentPageSize)
+          record.updateList(props.index, actionList.currentPageSize, (page - 1) * actionList.currentPageSize)
         }}
         onSizeChange={(size) => {
-          record.updateList(size, (record.currentPage - 1) * size)
+          record.updateList(props.index, size, (actionList.currentPage - 1) * size)
         }}
       />
     </>
@@ -50,7 +56,7 @@ export const TransactionTable = observer(() => {
     <Table>
       <Header/>
       {
-        record.activeTabRecords.count <= 0
+        actionList.count <= 0
           ? renderBlank()
           : renderContent()
       }

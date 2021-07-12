@@ -1,10 +1,12 @@
-import { makeAutoObservable, values } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 import { ActionState } from '@/store/lib/ActionState';
 import axios from 'axios';
 import { BigNumberState } from '@/store/standard/BigNumberState';
-import { NETWORK, TOKENS } from '@/constants/token/tokens-all';
+import { TOKENS } from '@/constants/token/tokens-all';
 import BigNumber from 'bignumber.js';
 import { NumberState } from '@/store/standard/base';
+import { ChainState } from '@/store/lib/ChainState';
+import { CashierConfig } from '../../config/CashierConfig';
 
 export class ActionListState {
   requestApi: string;
@@ -15,6 +17,7 @@ export class ActionListState {
   skip: NumberState = new NumberState({value:0});
   actions: ActionState[] = [];
   count: number = 0;
+  networkConfig: ChainState;
   allTokens = {};
 
   constructor(args: Partial<ActionListState>) {
@@ -25,6 +28,14 @@ export class ActionListState {
       const itemLowerCase = item.toLowerCase();
       this.allTokens[itemLowerCase] = Object.values(TOKENS)[i];
     });
+  }
+
+  get currentPage() {
+    return this.skip.value / this.first.value + 1
+  }
+
+  get currentPageSize() {
+    return this.first.value
   }
 
   decodeBase64toHexAddress(content: string): string {
@@ -55,18 +66,22 @@ export class ActionListState {
     if (status && data && data.transfers) {
       this.actions = data.transfers.map((item, i) => {
         let tokenAddress = this.decodeBase64toHexAddress(item.token);
-        let network = NETWORK[this.decodeToHex(item.cashier)];
+        let cashier = this.decodeBase64toHexAddress(item.cashier).toLowerCase();
+        const fromNetwork = CashierConfig[this.key][cashier];
+        const toNetwork = this.networkConfig;
         if (tokenAddress == '0x0000000000000000000000000000000000000000') {
-          tokenAddress = `${tokenAddress}-${network?network:item.key}`
+          tokenAddress = `${tokenAddress}-${fromNetwork.name.toLowerCase()}`
         }
         const token = this.allTokens[tokenAddress.toLowerCase()];
         return {
           ...item,
           ...data.statuses[i],
-          cashier: this.decodeBase64toHexAddress(item.cashier),
+          cashier: cashier,
           sender: this.decodeBase64toHexAddress(item.sender),
           recipient: this.decodeBase64toHexAddress(item.recipient),
           txHash: this.decodeBase64toHexAddress(data.statuses[i].txHash),
+          fromNetwork: fromNetwork,
+          toNetwork: toNetwork,
           status: data.statuses[i].status,
           token: {
             ...token,

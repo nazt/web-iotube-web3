@@ -28,7 +28,7 @@ export const Transaction = observer(() => {
 
   return (
     <Flex px={{ base: 3, md: 10 }} py={{ base: 6, md: 10 }}>
-      <Tabs variant="unstyled" isLazy isFitted index={record.activeTab.value}
+      <Tabs variant="unstyled" isFitted index={record.activeTab.value}
             onChange={(index) => {
               history.push(`${sideBar.activeMenu}#${record.actionLists[index].key}`);
               sideBar.setActiveChildMenu(`#${record.actionLists[index].key}`);
@@ -65,9 +65,9 @@ export const Transaction = observer(() => {
         </TabList>
         <TabPanels overflowX='auto'>
           {
-            record.actionLists.map(() => {
-              return <TabPanel p="0" width='100%' minW='5xl'>
-                <TransactionTable />
+            record.actionLists.map( (item,index) => {
+              return <TabPanel key={index} p="0" width='100%' minW='5xl'>
+                <TransactionTable index={index} />
               </TabPanel>;
             })
           }

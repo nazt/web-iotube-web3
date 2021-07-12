@@ -12,17 +12,12 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { helper } from '@/lib/helper';
-import { ChainState } from '@/store/lib/ChainState';
 import { ActionState } from '@/store/lib/ActionState';
 import { IotexMainnetConfig } from '../../../config/IotexMainnetConfig';
 import { useStore } from '@/store/index';
 
 interface RowProps{
-  record?: {
-    fromNetwork: ChainState
-    toNetwork: ChainState
-    action: ActionState
-  }
+  action: ActionState;
 }
 
 export const Row = observer((props: RowProps) => {
@@ -32,11 +27,12 @@ export const Row = observer((props: RowProps) => {
   const bg = useColorModeValue("white", "bg.bg1Alpha20");
   const textColor = useColorModeValue("gray.4", "white");
   const statusColor = useColorModeValue("darkLightGreen", "lightGreen");
+  const action = props.action;
 
   const renderStatus = () => {
     let color = statusColor;
     let status = lang.t('transaction.status.tips.unknown');
-    switch (props.record.action.status) {
+    switch (action.status) {
       case 'UNKNOWN':
         color = 'red';
         status = lang.t('transaction.status.tips.unknown');
@@ -78,53 +74,52 @@ export const Row = observer((props: RowProps) => {
     >
       <Td flex="1.4">
         <Link
-          target='_blank'
+          isExternal
           href={
-            props.record.toNetwork.name.toLowerCase() === 'iotex'
-              ? `${props.record.toNetwork.explorerURL}/action/${props.record.action.txHash}`
-              : `${props.record.toNetwork.explorerURL}/tx/${props.record.action.txHash}`
+            action.toNetwork.name.toLowerCase() === 'iotex'
+              ? `${action.toNetwork.explorerURL}/action/${action.txHash}`
+              : `${action.toNetwork.explorerURL}/tx/${action.txHash}`
           }
         >
-          {helper.string.truncate(props.record.action.txHash, 12, '...')}
+          {helper.string.truncate(action.txHash, 12, '...')}
         </Link>
       </Td>
       <Td as={HStack} spacing="2" flex="1.4" border="none">
-        <Image src={props.record.fromNetwork.logoUrl} boxSize="5"/>
+        <Image src={action.fromNetwork.logoUrl} boxSize="5"/>
         <Link
-          target='_blank'
-          href={`${props.record.fromNetwork.explorerURL}/address/${props.record.action.sender}`}
+          isExternal
+          href={`${action.fromNetwork.explorerURL}/address/${action.sender}`}
         >
-          {helper.string.truncate(props.record.action.sender, 12, '...')}
+          {helper.string.truncate(action.sender, 12, '...')}
         </Link>
       </Td>
       <Td as={HStack} spacing="2" flex="1.4" border="none">
-        <Image src={props.record.toNetwork.logoUrl} boxSize="5"/>
+        <Image src={action.toNetwork.logoUrl} boxSize="5"/>
         <Link
-          target='_blank'
-          href={`${props.record.toNetwork.explorerURL}/address/${props.record.action.recipient}`}
+          isExternal
+          href={`${action.toNetwork.explorerURL}/address/${action.recipient}`}
         >
-          {helper.string.truncate(props.record.action.recipient, 12, '...')}
+          {helper.string.truncate(action.recipient, 12, '...')}
         </Link>
       </Td>
       <Td flex="1.35">
         {renderStatus()}
       </Td>
       <Td flex="1.1" as={HStack} spacing="2">
-        {
-          props.record.action.token.logoURI
-            ? <Image src={props.record.action.token.logoURI} boxSize="6"/>
+        {action.token.logoURI
+            ? <Image src={action.token.logoURI} boxSize="6"/>
             : null
         }
-        <Text ml="2">{props.record.action.token.symbol}</Text>
+        <Text ml="2">{action.token.symbol}</Text>
       </Td>
       <Td flex="1.1">
-        <Text>{props.record.action.amount.format}</Text>
+        <Text>{action.amount.format}</Text>
       </Td>
       <Td flex="1.1">
-        <Text>{helper.time.translateFn(props.record.action.timestamp)}</Text>
+        <Text>{helper.time.translateFn(action.timestamp)}</Text>
       </Td>
       <Td flex="1.15" as={VStack} alignItems="flex-end" spacing="0">
-        <Text>{`${props.record.action.fee.format} ${IotexMainnetConfig.nativeCurrency.symbol}`}</Text>
+        <Text>{`${action.fee.format} ${IotexMainnetConfig.nativeCurrency.symbol}`}</Text>
       </Td>
     </Tr>
   )

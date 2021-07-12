@@ -202,8 +202,3 @@ export const TOKENS = {
     logoURI: 'https://iotexscan.io/image/token/io1f4acssp65t6s90egjkzpvrdsrjjyysnvxgqjrh.png'
   }
 };
-export const NETWORK = {
-  '0x797f1465796fd89ea7135e76dbc7cdb136bba1ca': 'bsc',
-  '0xa0fd7430852361931b23a31f84374ba3314e1682': 'eth',
-  '0xf72cfb704d49ac7bb7ffa420ae5f084c671a29be': 'matic'
-};

@@ -45,8 +45,8 @@ export const Home = observer(() => {
           </StatGroup>
           <Center>
             <Button onClick={() => {
-              history.push('/deposit');
-              sideBar.setActiveMenu('/deposit');
+              history.push('/tube');
+              sideBar.setActiveMenu('/tube');
             }} my={20} w="20rem" size="lg" variant="green">
               {lang.t('enter_app')}
             </Button>

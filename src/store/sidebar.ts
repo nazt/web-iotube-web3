@@ -5,7 +5,7 @@ import { RootStore } from '@/store/root';
 
 export class SidebarStore {
   isOpen = true;
-  activeMenu = '/deposit';
+  activeMenu = '/tube';
   activeChildMenu = '';
   NAV_SHOW_HEADER = ['/', '/faq'];
   SIDEBAR_NOT_SHOW=['/']

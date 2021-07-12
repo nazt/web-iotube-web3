@@ -27,15 +27,15 @@ export const ToolConfig = [
     isActive:false,
   },
   {
-    name: 'Deposit',
-    path: '/deposit',
+    name: 'Tube',
+    path: '/tube',
     component: Deposit,
     icon:SwapIcon,
     isActive:false
   },
   {
-    name: 'Transactions',
-    path: '/transactions',
+    name: 'Explorer',
+    path: '/explorer',
     component: Transaction,
     icon: TransactionsIcon,
     isActive: false,

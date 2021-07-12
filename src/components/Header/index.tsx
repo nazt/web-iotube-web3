@@ -131,8 +131,8 @@ export const Header = observer(() => {
                       borderRadius='full'
                       size='md'
                       onClick={() => {
-                        history.push('/deposit');
-                        sideBar.setActiveMenu('/deposit');
+                        history.push('/tube');
+                        sideBar.setActiveMenu('/tube');
                       }}
                     >
                       {lang.t('enter_app')}

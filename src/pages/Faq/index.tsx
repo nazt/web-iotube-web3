@@ -9,8 +9,8 @@ export const Faq = observer(() => {
   const { lang, god } = useStore();
 
   return (
-    <Box pt={20}>
-      <Heading mx={10} pb={3} fontSize={'xx-large'}>FAQ</Heading>
+    <Box pt={{ base: 10, md: 20 }}>
+      <Heading mx={{ base: 0, md: 10 }} pb={3} fontSize={{ base: '2xl', md: 'xx-large' }}>FAQ</Heading>
 
       <CollapseView
         title={lang.t('faq.what_is_iotube_bridge')}

@@ -24,12 +24,12 @@ export const Home = observer(() => {
   const textColor = useColorModeValue('darkLightGreen','lightGreen')
   return (
     <Box h={theme.content.height} bgImage={'/images/home_bg.png'}>
-      <Center pt={20}>
-        <Flex flexDirection="column" textAlign="center" >
-          <Icon as={IotubeIcon} color={textColor} w={'2xl'} h={20}/>
-          <Text my={10} color={theme.colors.gray[10]}>{lang.t('info.features')}</Text>
-          <Text fontSize="2xl">{lang.t('info.summary')}<br/>{lang.t('info.summary.next')}</Text>
-          <StatGroup mt={16}>
+      <Center pt={{ base: 10, md: 20 }}>
+        <Flex flexDirection="column" align='center' textAlign='center'>
+          <Icon as={IotubeIcon} color={textColor} w={{ base: '3xs', md: '2xl' }} h={{ base: 16, md: 20 }}/>
+          <Text my={{ base: 5, md: 10 }} color={theme.colors.gray[10]}>{lang.t('info.features')}</Text>
+          <Text fontSize={{ base: 'md', md: '2xl' }}>{lang.t('info.summary')}<br/>{lang.t('info.summary.next')}</Text>
+          <StatGroup mt={{ base: 8, md: 16 }}>
             <Stat>
               <StatNumber fontSize="2xl" color={textColor} fontWeight={100}>4</StatNumber>
               <StatLabel>{lang.t('info.chain')}</StatLabel>
@@ -43,11 +43,11 @@ export const Home = observer(() => {
               <StatLabel>{lang.t('info.total_value_locked')}</StatLabel>
             </Stat>
           </StatGroup>
-          <Center>
+          <Center w='full'>
             <Button onClick={() => {
               history.push('/tube');
               sideBar.setActiveMenu('/tube');
-            }} my={20} w="20rem" size="lg" variant="green">
+            }} my={20} w={{ base: 'full', md: 80 }} size="lg" variant="green">
               {lang.t('enter_app')}
             </Button>
           </Center>

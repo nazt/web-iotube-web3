@@ -1,4 +1,4 @@
-import { Flex, Box, useTheme, Icon, Center, useColorModeValue, Divider, Stack, Text } from '@chakra-ui/react';
+import { Flex, Box, useTheme, Icon, Center, useColorModeValue, Text, useBreakpointValue } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { Collapse } from 'react-collapse';
 import { AddIcon, MinusIcon } from '@chakra-ui/icons';
@@ -14,13 +14,13 @@ export const CollapseView = (props: IComponentProps) => {
   const theme = useTheme();
 
   return (
-    <Box mx={10}
+    <Box mx={{ base: 0, md: 10 }}
          borderBottomWidth={1}
-         py={5}
+         py={{ base: 3, md: 5 }}
     >
       <Flex flexDirection='row'
             color={isOpen ? useColorModeValue(theme.colors.darkLightGreen,theme.colors.lightGreen) : ''}
-            h={theme.faq.collapseHeight}
+            minH={theme.faq.collapseHeight}
             cursor='pointer'>
         <Center mr={6}>
           <Icon as={isOpen ? MinusIcon : AddIcon} onClick={() => setOpen(!isOpen)} color={useColorModeValue(theme.colors.darkLightGreen,theme.colors.lightGreen)} />
@@ -39,13 +39,14 @@ export const CollapseView = (props: IComponentProps) => {
               content: `""`,
               position: 'absolute',
               left: 0,
-              top: 'calc(10%)',
-              height: '80%',
+              top: useBreakpointValue({base: 'calc(3%)', md: 'calc(10%)'}),
+              height: useBreakpointValue({base: '94%', md: '80%'}),
               borderLeftWidth:2 ,
               borderColor:useColorModeValue(theme.colors.darkLightGreen,theme.colors.lightGreen)
             }}
-            px={7}
-            ml={20}
+            pl={7}
+            pr={{ base: 0, md: 7 }}
+            ml={{ base: 0, md: 20 }}
             fontSize={'lg'}
             color={theme.colors.gray[10]}>
             <blockquote>{body}</blockquote>

@@ -153,7 +153,7 @@ export const theme = extendTheme({
     light: '0px 3px 20px 0px #D6D6D680'
   },
   content: {
-    height: 'calc(100vh - 64px)',
+    height: 'calc(100vh - 4.5rem)',
     maxWidthWithIconText:'calc(100%-220px)',
     maxWidthWithIcon:'calc(100%-80px)'
   },

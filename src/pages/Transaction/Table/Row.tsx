@@ -26,6 +26,7 @@ export const Row = observer((props: RowProps) => {
 
   const bg = useColorModeValue("white", "bg.bg1Alpha20");
   const textColor = useColorModeValue("gray.4", "white");
+  const linkColor = useColorModeValue("darkLightGreen", "lightGreen");
   const statusColor = useColorModeValue("darkLightGreen", "lightGreen");
   const action = props.action;
 
@@ -65,6 +66,21 @@ export const Row = observer((props: RowProps) => {
     </Text>
   };
 
+  const renderHash = () => {
+    return action.status !== 'SETTLED'
+      ? <Text color={linkColor}>--</Text>
+      : <Link
+        isExternal
+        href={
+          action.toNetwork.name.toLowerCase() === 'iotex'
+            ? `${action.toNetwork.explorerURL}/action/${action.txHash}`
+            : `${action.toNetwork.explorerURL}/tx/${action.txHash}`
+        }
+      >
+        {helper.string.truncate(action.txHash, 12, '...')}
+      </Link>
+  };
+
   return(
     <Tr
       as={Center}
@@ -73,16 +89,7 @@ export const Row = observer((props: RowProps) => {
       color={textColor}
     >
       <Td flex="1.4">
-        <Link
-          isExternal
-          href={
-            action.toNetwork.name.toLowerCase() === 'iotex'
-              ? `${action.toNetwork.explorerURL}/action/${action.txHash}`
-              : `${action.toNetwork.explorerURL}/tx/${action.txHash}`
-          }
-        >
-          {helper.string.truncate(action.txHash, 12, '...')}
-        </Link>
+        { renderHash() }
       </Td>
       <Td as={HStack} spacing="2" flex="1.4" border="none">
         <Image src={action.fromNetwork.logoUrl} boxSize="5"/>

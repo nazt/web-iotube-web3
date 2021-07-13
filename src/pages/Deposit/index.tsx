@@ -12,12 +12,13 @@ import {
   Icon,
   Button,
   Stack,
+  Textarea,
   useColorModeValue,
   useTheme,
-  Tag
+  Tag, chakra
 } from '@chakra-ui/react';
 import { Text, Center } from '@chakra-ui/layout';
-import { ChevronDownIcon, SmallCloseIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon, CopyIcon, SmallCloseIcon } from '@chakra-ui/icons';
 import { TokenListModal } from '@/components/TokenListModal';
 import { useStore } from '@/store/index';
 import { BigNumberInputState } from '@/store/standard/BigNumberInputState';
@@ -30,6 +31,8 @@ import { CompleteModal } from '@/components/CompleteModal';
 import { toast } from 'react-hot-toast';
 import { ETHProvider } from '@/components/EthProvider';
 import { MaxUint256 } from '@ethersproject/constants';
+import EnterSvg from '../../../public/images/enter.svg';
+import CopyToClipboard from '@/components/CopyToClipboard';
 
 export const Deposit = observer(() => {
   const { god, token, lang, deposit } = useStore();
@@ -128,7 +131,8 @@ export const Deposit = observer(() => {
     <Box bgImage={'/images/home_bg.png'} pt={16}>
       <Center>
         <Box maxW="md" textAlign='center'>
-          <Text color={useColorModeValue(theme.colors.darkLightGreen,theme.colors.lightGreen)}><u>{lang.t('tube_v4')}</u></Text>
+          <Text
+            color={useColorModeValue(theme.colors.darkLightGreen, theme.colors.lightGreen)}><u>{lang.t('tube_v4')}</u></Text>
         </Box>
       </Center>
       <Container
@@ -141,7 +145,7 @@ export const Deposit = observer(() => {
       >
         <ETHProvider/>
         <NetworkHeader/>
-        <FormControl mt={8}>
+        <FormControl mt={6}>
           <Box
             bg={inputBg}
             borderRadius={theme.borderRadius.sm}
@@ -157,6 +161,9 @@ export const Deposit = observer(() => {
               <Input
                 variant="unstyled"
                 placeholder="0.0"
+                fontWeight={500}
+                fontSize='lg'
+                color={useColorModeValue(theme.colors.gray[4], 'white')}
                 type="number"
                 ml={4}
                 mr="8rem"
@@ -166,8 +173,10 @@ export const Deposit = observer(() => {
               />
               <InputRightElement float={'right'} width="12rem" cursor="pointer"
                                  zIndex={0}>
-                <Tag size='sm' variant="solid" bg={theme.colors.darkLightGreen} cursor='pointer' onClick={() => deposit.amount.setValue(deposit.curToken.balance.value)}>{'MAX'}</Tag>
-                <Stack onClick={store.openTokenList} width="100%" direction="row-reverse" maxW="12rem" alignContent="flex-end">
+                <Tag size='sm' variant="solid" bg={theme.colors.darkLightGreen} cursor='pointer'
+                     onClick={() => deposit.amount.setValue(deposit.curToken.balance.value)}>{'MAX'}</Tag>
+                <Stack onClick={store.openTokenList} width="100%" direction="row-reverse" maxW="12rem"
+                       alignContent="flex-end">
                   <Center mr={3}>
                     <Icon as={ChevronDownIcon}/>
                   </Center>
@@ -189,21 +198,37 @@ export const Deposit = observer(() => {
               <Text fontSize="md">Receiver Address</Text>
             </Flex>
             <InputGroup>
-              <Input
+              <Textarea
+                rows={2}
                 variant="unstyled"
+                resize="none"
                 mx={4}
-                py={2}
+                pr={6}
+                fontWeight={500}
+                color={useColorModeValue(theme.colors.gray[4], 'white')}
                 value={deposit.receiverAddress.value}
                 onChange={(e) => deposit.receiverAddress.setValue(e.target.value)}
               />
               {deposit.receiverAddress.value &&
-              <InputRightElement zIndex={0} cursor='pointer' onClick={() => deposit.cleanAddress()} children={<SmallCloseIcon/>}/>}
+              <InputRightElement zIndex={0} cursor='pointer' onClick={() => deposit.cleanAddress()}
+                                 children={<SmallCloseIcon/>}/>}
             </InputGroup>
           </Box>
-          <Center mt={5}>
+          {deposit.receiverAddress.anotherAddress &&
+          <Flex mx={4} h={14} alignItems={'center'}>
+            <chakra.img w='4' h='4' src={EnterSvg}/>
+            <Text
+              mx={2}
+              wordBreak={'break-all'}
+              color={useColorModeValue(theme.colors.gray[6],theme.colors.gray[2])}
+            >
+              {deposit.receiverAddress.anotherAddress}
+            </Text>
+          </Flex>
+          }
+          <Center mt={deposit.receiverAddress.anotherAddress?8:20} mb={2}>
             {!Boolean(god.currentNetwork.account) ? (
               <Button
-                my={10}
                 size="block"
                 variant="green"
                 title={lang.t('connect.wallet')}
@@ -216,7 +241,6 @@ export const Deposit = observer(() => {
               <>
                 {!deposit.state && Boolean(deposit.shouldApprove) ?
                   <Button
-                    my={10}
                     isLoading={store.approveLoading.value}
                     loadingText={store.approveLoadingContent}
                     onClick={store.onCashierApprove}
@@ -230,7 +254,6 @@ export const Deposit = observer(() => {
                     onClick={() => deposit.isOpenConfirmModal.setValue(true)}
                     size="block"
                     variant="black"
-                    my={10}
                     disabled={!!deposit.state}
                   >
                     {deposit.state || lang.t('deposit')}

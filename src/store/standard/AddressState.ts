@@ -28,6 +28,15 @@ export class AddressState {
     }
   }
 
+  get anotherAddress() {
+    if (validateAddress(this.value)) {
+      return fromString(this.value).stringEth();
+    }
+    if (isEthAddress(this.value)) {
+      return fromBytes(Buffer.from(String(this.value).replace(/^0x/, ""), "hex")).string();
+    }
+  }
+
   setValue(value: string) {
     this.value = value;
     this.setLoading(false);

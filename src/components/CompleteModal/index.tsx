@@ -64,7 +64,7 @@ export const CompleteModal = observer(() => {
           <Text mb={2}>{lang.t('complete.your_tx_chain', { chain: token.currentChain.name })} </Text>
           <Box mb={2}>
             <Link href={`${token.currentChain.explorerURL}/tx/${token.actionHash.value}`}
-               target="_blank">
+               isExternal>
               <u>{token.actionHash.value}</u>
             </Link>
             <CopyIcon color={useColorModeValue('darkLightGreen', 'lightGreen')} ml={4} w={5} h={5} cursor="pointer" onClick={() => store.onCopyTransactionId()}/>

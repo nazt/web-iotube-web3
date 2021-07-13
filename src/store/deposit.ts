@@ -38,7 +38,11 @@ export class DepositStore {
       return this.rootStore.lang.t('input.insufficient.depositFee');
     }
 
-    if (isNaN(Number(this.amount.value)) || this.amount.format <= 0 || this.amount.value.comparedTo(this.curToken.balance.value) > 0) {
+    if(isNaN(Number(this.amount.value)) || this.amount.format == null) {
+      return this.rootStore.lang.t('input.amount.enter_value');
+    }
+
+    if (this.amount.format < 0 || this.amount.value.comparedTo(this.curToken.balance.value) > 0) {
       return this.rootStore.lang.t('input.amount.invalid');
     }
     console.log(this.curToken.amountRange);

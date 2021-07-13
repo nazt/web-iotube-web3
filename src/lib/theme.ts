@@ -23,7 +23,7 @@ const Button = {
   variants: {
     'green':(props)=>({
       bg: props.colorMode === 'dark'?'lightGreen':'darkLightGreen',
-      color: 'gray.4'
+      color: 'white'
     }),
     'black': (props) => ({
       bg: props.colorMode === 'dark' ? '#182532' : 'gray.800',
@@ -195,7 +195,9 @@ export const theme = extendTheme({
       8: '#212024',
       9: '#9398A2',
       10: '#8D9399',
-      11:'#c7cfd614'
+      11:'#c7cfd614',
+      700: '#3F3F44',
+      12: '#9F9FA1'
     },
     lightGreen: '#33FF99',
     darkLightGreen:'#21CE99',

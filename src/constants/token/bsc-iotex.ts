@@ -5,6 +5,7 @@ export const bscToIotexTokens = {
   tokens: [
     {
       address: '0x0000000000000000000000000000000000000000',
+      destAddress: '0x97e6c48867fdc391a8dfe9d169ecd005d1d90283',
       name: 'Binance Coin',
       decimals: 18,
       symbol: 'BNB',
@@ -19,6 +20,7 @@ export const bscToIotexTokens = {
     },
     {
       address: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
+      destAddress: '0x84abcb2832be606341a50128aeb1db43aa017449',
       name: 'BUSD',
       decimals: 18,
       symbol: 'BUSD',
@@ -26,6 +28,7 @@ export const bscToIotexTokens = {
     },
     {
       address: '0x810ee35443639348adbbc467b33310d2ab43c168',
+      destAddress: '0x4d7b88403aa2f502bf289584160db01ca442426c',
       name: 'Cyclone Protocol',
       decimals: 18,
       symbol: 'CYC',
@@ -41,6 +44,7 @@ export const iotexBscNetTokens = {
   tokens: [
     {
       address: '0x97e6c48867fdc391a8dfe9d169ecd005d1d90283',
+      destAddress: '0x0000000000000000000000000000000000000000-bsc',
       name: 'Binance Coin',
       decimals: 18,
       symbol: 'BNB-bsc',
@@ -48,6 +52,7 @@ export const iotexBscNetTokens = {
     },
     {
       address: '0x84abcb2832be606341a50128aeb1db43aa017449',
+      destAddress: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
       name: 'ioBUSD',
       decimals: 18,
       symbol: 'BUSD-bsc',
@@ -55,6 +60,7 @@ export const iotexBscNetTokens = {
     },
     {
       address: '0x4d7b88403aa2f502bf289584160db01ca442426c',
+      destAddress: '0x810ee35443639348adbbc467b33310d2ab43c168',
       name: 'Cyclone Protocol',
       decimals: 18,
       symbol: 'CYC',

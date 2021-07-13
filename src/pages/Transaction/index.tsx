@@ -27,7 +27,7 @@ export const Transaction = observer(() => {
   }, [history.location?.hash]);
 
   return (
-    <Flex px={{ base: 3, md: 10 }} py={{ base: 6, md: 10 }}>
+    <Flex px={{ base: 0, md: 10 }} py={{ base: 6, md: 10 }}>
       <Tabs variant="unstyled" isFitted index={record.activeTab.value}
             onChange={(index) => {
               history.push(`${sideBar.activeMenu}#${record.actionLists[index].key}`);

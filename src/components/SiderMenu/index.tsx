@@ -16,7 +16,7 @@ import { useStore } from '@/store/index';
 import { ChildrenMenu, SideItem } from '@/components/SiderMenu/SideItem';
 import {withRouter} from 'react-router-dom'
 import ToggleModeButton from '@/components/SiderMenu/ToggleModeButton';
-export const SiderMenu = withRouter(({history}) => {
+export const SiderMenu = observer(({history}: {history: any}) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const theme = useTheme();
   const { sideBar } = useStore();
@@ -73,7 +73,7 @@ export const SiderMenu = withRouter(({history}) => {
             }
           </Flex>
           <Flex flexDirection={sideBar.isOpen ? 'row' : 'column'}
-                width={'100%'}
+                width={'full'}
                 p={'3'}>
             <ToggleModeButton/>
             {renderToggleButton()}
@@ -89,4 +89,4 @@ export const SiderMenu = withRouter(({history}) => {
   );
 });
 // @ts-ignore
-export default observer(SiderMenu);
+export default withRouter(SiderMenu);

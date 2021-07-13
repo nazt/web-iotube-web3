@@ -18,7 +18,7 @@ import { useHistory } from 'react-router-dom';
 import { ArrowDownIcon } from '@/components/Icon';
 import { observer } from 'mobx-react-lite';
 
-export const SideItem=({menu,activeColor})=>{
+export const SideItem = observer(({ menu, activeColor }: { menu: any, activeColor: string }) => {
   const { sideBar } = useStore();
   const theme = useTheme();
   const history = useHistory();
@@ -32,8 +32,8 @@ export const SideItem=({menu,activeColor})=>{
       _focus={{}}
       fontWeight={400}
       onClick={() => {
-        if (menu._blank){
-          return window.open(menu.path)
+        if (menu._blank) {
+          return window.open(menu.path);
         }
         history.push(menu.path);
         sideBar.setActiveMenu(menu.path);
@@ -45,21 +45,21 @@ export const SideItem=({menu,activeColor})=>{
       mt={30}
       w={'100%'}
     >
-      <Icon as={menu.icon} color={sideBar.activeMenu!==menu.path?theme.colors.gray:activeColor}/>
+      <Icon as={menu.icon} color={sideBar.activeMenu !== menu.path ? theme.colors.gray : activeColor}/>
       {sideBar.isOpen ? <Text marginLeft={'15px'}
-                              color={sideBar.activeMenu===menu.path?activeColor:''}>{menu.name}</Text> : null}
+                              color={sideBar.activeMenu === menu.path ? activeColor : ''}>{menu.name}</Text> : null}
 
     </Button>
-  )
-}
+  );
+});
 
-export const ChildrenMenu = observer(({ menu,activeColor }:{menu:any,activeColor:string}) => {
+export const ChildrenMenu = observer(({ menu, activeColor }: { menu: any, activeColor: string }) => {
   const theme = useTheme();
   const { sideBar } = useStore();
   const history = useHistory();
   const colorMode = useColorMode();
 
-  return(
+  return (
     <Accordion allowToggle mt='8' index={menu.isActive ? 0 : -1}>
       <AccordionItem
         border="none"
@@ -69,7 +69,7 @@ export const ChildrenMenu = observer(({ menu,activeColor }:{menu:any,activeColor
       >
         <AccordionButton
           minH='12'
-          _focus={{ shadow: 'none', }}
+          _focus={{ shadow: 'none' }}
           onClick={() => {
             if (menu.children.length > 0) {
               history.push(`${menu.path}${menu.children[0].path}`);
@@ -79,13 +79,19 @@ export const ChildrenMenu = observer(({ menu,activeColor }:{menu:any,activeColor
           }}
         >
           <Center>
-            <Icon as={menu.icon} color={sideBar.activeMenu!==menu.path?theme.colors.gray:activeColor}/>
+            <Icon as={menu.icon} color={sideBar.activeMenu !== menu.path ? theme.colors.gray : activeColor}/>
             {sideBar.isOpen ? <Text marginLeft={'4'}
                                     color={sideBar.activeMenu === menu.path ? activeColor : ''}>{menu.name}</Text> : null}
-            <ArrowDownIcon color={sideBar.activeMenu !== menu.path ? theme.colors.gray : activeColor} boxSize="5"/>
+            {
+              sideBar.isOpen
+                ? <ArrowDownIcon color={sideBar.activeMenu !== menu.path ? theme.colors.gray : activeColor} boxSize="5"/>
+                : null
+            }
           </Center>
         </AccordionButton>
-        <AccordionPanel>
+        <AccordionPanel
+          display={sideBar.isOpen ? 'block' : 'none'}
+        >
           {
             menu.children.map(item => (
               <HStack
@@ -107,12 +113,13 @@ export const ChildrenMenu = observer(({ menu,activeColor }:{menu:any,activeColor
                   }
                   boxSize='5'
                 />
-                <Text ml='2.5' fontSize='md' color={sideBar.activeChildMenu === item.path ? activeColor: ''}>{item.name}</Text>
+                <Text ml='2.5' fontSize='md'
+                      color={sideBar.activeChildMenu === item.path ? activeColor : ''}>{item.name}</Text>
               </HStack>
             ))
           }
         </AccordionPanel>
       </AccordionItem>
     </Accordion>
-  )
+  );
 });

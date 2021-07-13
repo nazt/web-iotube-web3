@@ -29,7 +29,7 @@ export const Home = observer(() => {
           <Icon as={IotubeIcon} color={textColor} w={{ base: '3xs', md: '2xl' }} h={{ base: 16, md: 20 }}/>
           <Text my={{ base: 5, md: 10 }} color={theme.colors.gray[10]}>{lang.t('info.features')}</Text>
           <Text fontSize={{ base: 'md', md: '2xl' }}>{lang.t('info.summary')}<br/>{lang.t('info.summary.next')}</Text>
-          <StatGroup mt={{ base: 8, md: 16 }}>
+          <StatGroup mt={{ base: 8, md: 16 }} w='full'>
             <Stat>
               <StatNumber fontSize="2xl" color={textColor} fontWeight={100}>4</StatNumber>
               <StatLabel>{lang.t('info.chain')}</StatLabel>

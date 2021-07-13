@@ -226,7 +226,7 @@ export const Deposit = observer(() => {
             </Text>
           </Flex>
           }
-          <Center mt={deposit.receiverAddress.anotherAddress?8:20} mb={2}>
+          <Center mt={deposit.receiverAddress.anotherAddress?6:20} mb={2}>
             {!Boolean(god.currentNetwork.account) ? (
               <Button
                 size="block"

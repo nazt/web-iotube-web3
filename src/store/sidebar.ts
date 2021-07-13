@@ -1,5 +1,5 @@
 import { ToolConfig } from '../config/ToolConfig';
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, override } from 'mobx';
 import { theme } from '@/lib/theme';
 import { RootStore } from '@/store/root';
 

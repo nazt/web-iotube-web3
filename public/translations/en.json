@@ -119,5 +119,9 @@
   "enter_app": "Enter App",
   "view_transactions": "ioTube Explorer >>",
   "tube_v4": "ioTube v5 only works with Web3 wallets (like Metamask, ioPay mobile).",
-  "go_to": "Go to"
+  "go_to": "Go to",
+  "switch_network.header": "Switching to ${network_name}?",
+  "switch_network.confirm.content": "Switching to ${network_name} now. Please confirm on Metamask or browser based wallet. ",
+  "button.yes": "Yes",
+  "button.no": "No"
 }

@@ -31,8 +31,7 @@ import { CompleteModal } from '@/components/CompleteModal';
 import { toast } from 'react-hot-toast';
 import { ETHProvider } from '@/components/EthProvider';
 import { MaxUint256 } from '@ethersproject/constants';
-import EnterSvg from '../../../public/images/enter.svg';
-import CopyToClipboard from '@/components/CopyToClipboard';
+import EnterSvg from '../../../public/images/enter.svg';;
 
 export const Deposit = observer(() => {
   const { god, token, lang, deposit } = useStore();

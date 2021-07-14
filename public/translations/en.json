@@ -123,5 +123,8 @@
   "switch_network.header": "Switching to ${network_name}?",
   "switch_network.confirm.content": "Switching to ${network_name} now. Please confirm on Metamask or browser based wallet. ",
   "button.yes": "Yes",
-  "button.no": "No"
+  "button.no": "No",
+  "account": "Account",
+  "button.logout": "Logout",
+  "view_iotexscan": "View on IoTeXScan"
 }

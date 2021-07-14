@@ -21,6 +21,7 @@ import { CopyIcon } from '@chakra-ui/icons';
 import EnterSvg from '../../../public/images/enter.svg';
 import { NetworkState } from '@/store/lib/NetworkState';
 import CopyToClipboard from '@/components/CopyToClipboard';
+import { IotexMainnetConfig } from '../../config/IotexMainnetConfig';
 
 export const WalletInfo = observer(() => {
   const { god, lang } = useStore();
@@ -57,7 +58,7 @@ export const WalletInfo = observer(() => {
                     bgColor={useColorModeValue(theme.colors.white, theme.colors.bg.bg1)}>
         <Flex justifyContent={'space-between'} alignContent={'flex-start'}>
           <ModalHeader color={useColorModeValue('black', theme.colors.gray['3'])} padding={0}
-                       fontSize={'2xl'}>Logout</ModalHeader>
+                       fontSize={'2xl'}>{lang.t('account')}</ModalHeader>
           <ModalCloseButton position={'relative'} top={'0'} right={'0'} _hover={{}} _focus={{}}/>
         </Flex>
         <CopyToClipboard text={god.currentNetwork.account}>
@@ -84,10 +85,10 @@ export const WalletInfo = observer(() => {
             </Text>
           </CopyToClipboard>
         </Flex>
-        <Link href={`${god.currentChain.explorerURL}/address/${(god.currentNetwork as NetworkState).account}`} mt={5}
-              target='_blank'>View on IoTeXScan</Link>
+        <Link href={`${IotexMainnetConfig.explorerURL}/address/${(god.currentNetwork as NetworkState).account}`} mt={5}
+              isExternal><u>{lang.t('view_iotexscan')}</u></Link>
         <Button onClick={store.logout} size='md' variant={'green'} mt={100}>
-          <Text fontSize={'xl'}>Logout</Text>
+          <Text fontSize={'xl'}>{lang.t('button.logout')}</Text>
         </Button>
       </ModalContent>
     </Modal>

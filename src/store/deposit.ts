@@ -5,6 +5,7 @@ import { AddressState } from '@/store/standard/AddressState';
 import { BigNumberInputState } from '@/store/standard/BigNumberInputState';
 import { TokenState } from '@/store/lib/TokenState';
 import { isAddress as isEthAddress } from '@ethersproject/address';
+import { TOKENS } from '@/constants/token/tokens-all';
 
 export class DepositStore {
   rootStore: RootStore;
@@ -19,6 +20,10 @@ export class DepositStore {
     makeAutoObservable(this, {
       rootStore: false
     });
+  }
+
+  get destToken() {
+    if (this.curToken && this.curToken.destAddress) return TOKENS[this.curToken.destAddress]
   }
 
   get state() {

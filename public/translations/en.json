@@ -126,5 +126,6 @@
   "button.no": "No",
   "account": "Account",
   "button.logout": "Logout",
-  "view_iotexscan": "View on IoTeXScan"
+  "view_iotexscan": "View on IoTeXScan",
+  "free": "Free"
 }

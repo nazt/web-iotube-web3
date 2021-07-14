@@ -51,9 +51,9 @@ export const ConfirmModal = observer((props: PropsType) => {
           <Flex>
             <Text fontSize="3xl" mr={4}>{deposit.amount.format}</Text>
             <Center>
-              <Image borderRadius="full" boxSize={theme.iconSize.md} src={deposit.curToken?.logoURI}
+              <Image borderRadius="full" boxSize={theme.iconSize.md} src={deposit.destToken?.logoURI}
                      fallbackSrc="https://via.placeholder.com/150"/>
-              <Text fontSize="2xl" ml={2}>{deposit.curToken?.symbol}</Text>
+              <Text fontSize="2xl" ml={2}>{deposit.destToken?.symbol}</Text>
             </Center>
           </Flex>
           <Text>on {token.currentCrossChain?.chain.name} </Text>
@@ -62,13 +62,13 @@ export const ConfirmModal = observer((props: PropsType) => {
             <Text mb={2}>{lang.t('fee')}</Text>
             <Flex justifyContent="space-between">
               <Box>{lang.t('fee.tube')}</Box>
-              <Box>0 ({lang.t('fee')})</Box>
+              <Box>0 ({lang.t('free')})</Box>
             </Flex>
             <Flex justifyContent="space-between">
               <Box>{<span>{lang.t('relay_to_chain', { chain: token.currentCrossChain?.chain.name })}</span>}</Box>
               <Box>
                 <span>{token.currentCrossChain?.cashier?.depositFee.format}</span>
-                <span> {`IOTX (${lang.t("fee")})`}</span>
+                <span>{token.currentCrossChain?.cashier?.depositFee.format >0?'':`(${lang.t("free")})`}</span>
               </Box>
             </Flex>
           </Box>

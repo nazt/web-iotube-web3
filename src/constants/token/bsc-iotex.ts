@@ -13,6 +13,7 @@ export const bscToIotexTokens = {
     },
     {
       address: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+      destAddress: '0x97e6c48867fdc391a8dfe9d169ecd005d1d90283',
       name: 'Wrapped BSC',
       decimals: 18,
       symbol: 'WBNB',
@@ -44,7 +45,7 @@ export const iotexBscNetTokens = {
   tokens: [
     {
       address: '0x97e6c48867fdc391a8dfe9d169ecd005d1d90283',
-      destAddress: '0x0000000000000000000000000000000000000000-bsc',
+      destAddress: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
       name: 'Binance Coin',
       decimals: 18,
       symbol: 'BNB-bsc',

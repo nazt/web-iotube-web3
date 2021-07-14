@@ -13,7 +13,7 @@ import {
   ToggleLeftIcon,
 } from '@/components/Icon';
 import { useStore } from '@/store/index';
-import { ChildrenMenu, SideItem } from '@/components/SiderMenu/SideItem';
+import {  SideItem } from '@/components/SiderMenu/SideItem';
 import {withRouter} from 'react-router-dom'
 import ToggleModeButton from '@/components/SiderMenu/ToggleModeButton';
 export const SiderMenu = observer(({history}: {history: any}) => {
@@ -61,11 +61,6 @@ export const SiderMenu = observer(({history}: {history: any}) => {
           >
             {
               activeColor? sideBar.menus.map((menu) => {
-                if (menu.children){
-                  return (
-                    <ChildrenMenu menu={menu} key={menu.name} activeColor={activeColor}/>
-                  )
-                }
                 return (
                   <SideItem menu={menu} key={menu.name} activeColor={activeColor}/>
                 );

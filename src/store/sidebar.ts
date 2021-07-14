@@ -7,7 +7,7 @@ export class SidebarStore {
   isOpen = true;
   activeMenu = '/tube';
   activeChildMenu = '';
-  NAV_SHOW_HEADER = ['/', '/faq'];
+  NAV_SHOW_HEADER = ['/'];
   SIDEBAR_NOT_SHOW=['/']
   constructor(rootStore: RootStore) {
     makeAutoObservable(this);

@@ -124,8 +124,8 @@ export const Header = observer(() => {
               height={'100%'}
             >
               {sideBar.isShowHeadNav ? (
-                  <Flex w={72} justifyContent={'space-between'} display={{ base: 'none', md: 'flex' }}>
-                    <Nav />
+                  <Flex w={72} justifyContent={'flex-end'} display={{ base: 'none', md: 'flex' }}>
+                    {/*<Nav />*/}
                     <Button
                       _hover={{}}
                       display={{ base: 'none', md: 'block' }}

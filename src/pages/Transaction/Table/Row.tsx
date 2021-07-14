@@ -71,11 +71,7 @@ export const Row = observer((props: RowProps) => {
       ? <Text color={linkColor}>--</Text>
       : <Link
         isExternal
-        href={
-          action.toNetwork.name.toLowerCase() === 'iotex'
-            ? `${action.toNetwork.explorerURL}/action/${action.txHash}`
-            : `${action.toNetwork.explorerURL}/tx/${action.txHash}`
-        }
+        href={`${action.toNetwork.explorerURL}/tx/${action.txHash}`}
       >
         {helper.string.truncate(action.txHash, 12, '...')}
       </Link>

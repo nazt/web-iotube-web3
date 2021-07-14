@@ -8,6 +8,8 @@ import { BSCMainnetConfig } from '../config/BSCMainnetConfig';
 import { PolygonMainnetConfig } from '../config/PolygonMainnetConfig';
 import { IotexMainnetConfig } from '../config/IotexMainnetConfig';
 
+const REFRESH_INTERVAL = 3 * 1000 * 60;
+
 export class RecordStore {
   rootStore: RootStore;
   actionLists: ActionListState[];
@@ -47,12 +49,23 @@ export class RecordStore {
         networkConfig: PolygonMainnetConfig
       })
     ];
+
+    this.autoRefresh()
   }
 
   updateList(index, first, skip) {
     this.actionLists[index].first.setValue(first);
     this.actionLists[index].skip.setValue(skip);
     this.actionLists[index].initActions();
+  }
+
+  autoRefresh() {
+    setInterval(() => {
+      const activeActionListState = this.actionLists[this.activeTab.value];
+      if (activeActionListState.currentPage === 1) {
+        activeActionListState.initActions()
+      }
+    }, REFRESH_INTERVAL)
   }
 
 }

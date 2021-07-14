@@ -40,13 +40,13 @@ export const SwitchNetworkDialog = observer((props: PropsType) => {
           </AlertDialogBody>
           <AlertDialogFooter>
             <Button onClick={() => props.onClose()}>
-              {lang.t('button.no')}
+              {lang.t('button.cancel')}
             </Button>
             <Button variant="green" ml={3}
                     onClick={() => {
               props.onConfirm();
             }}>
-              {lang.t('button.yes')}
+              {lang.t('button.switch')}
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>

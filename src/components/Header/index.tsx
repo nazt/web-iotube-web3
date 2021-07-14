@@ -59,43 +59,46 @@ export const Header = observer(() => {
   }, [scrollY]);
 
   const MobileNavContent = (
-    <Flex
-      ref={ref}
-      display={mobileNav.isOpen ? 'flex' : 'none'}
-      position='fixed'
-      top={'0'}
-      right={0}
-      align='center'
-      flexDirection={'column'}
-      h={'100vh'}
-      width={'fix-content'}
-      bgColor={colorMode === 'light' ? theme.sideBar.bg.light : theme.sideBar.bg.dark}
-      px={2}
-      shadow={colorMode === 'light' ? theme.shadows.lightShadow : theme.shadows.darkShadow}
-      zIndex={-1}
-      pt={'4.5rem'}
-    >
-
-      {
-        sideBar.menus.map((menu) => {
-          return (
-            <SideItem menu={menu} key={menu.name} activeColor={activeColor} />
-          );
-        })
-
-      }
-      <Flex justifyContent={'flex-start'} w={'100%'} p={1} mt={30}
+    <Box position={'relative'}>
+      <Flex
+        ref={ref}
+        display={mobileNav.isOpen ? 'flex' : 'none'}
+        position='fixed'
+        top={'0'}
+        right={0}
+        align='center'
+        flexDirection={'column'}
+        h={'100vh'}
+        width={'fix-content'}
+        bgColor={colorMode === 'light' ? theme.sideBar.bg.light : theme.sideBar.bg.dark}
+        px={2}
+        shadow={colorMode === 'light' ? theme.shadows.lightShadow : theme.shadows.darkShadow}
+        zIndex={-1}
+        pt={'4.5rem'}
       >
-        <ToggleModeButton/>
+
+        {
+          sideBar.menus.map((menu) => {
+            return (
+              <SideItem menu={menu} key={menu.name} activeColor={activeColor} />
+            );
+          })
+
+        }
+        <Flex justifyContent={'flex-start'} w={'100%'} p={1} mt={30}
+        >
+          <ToggleModeButton/>
+        </Flex>
+        <Button onClick={store.logout} size='md' mt={100} w={'100%'} bg={theme.colors.gray['11']}>
+          <Text fontSize={'xl'} color={activeColor}>Logout</Text>
+        </Button>
       </Flex>
-      <Button onClick={store.logout} size='md' mt={100} w={'100%'} bg={theme.colors.gray['11']}>
-        <Text fontSize={'xl'} color={activeColor}>Logout</Text>
-      </Button>
-    </Flex>
+    </Box>
   );
   return (
     <Box pos='relative' zIndex='sticky'>
       <chakra.header
+        ref={ref}
         transition='box-shadow 0.2s'
         bg={theme.colors.header.bg}
         w='full'
@@ -161,6 +164,7 @@ export const Header = observer(() => {
                   {god.currentNetwork.account ? helper.string.truncate(god.currentNetwork.account, 12, '...') : null}
                 </Button>
                 <IconButton
+                  ref={ref}
                   aria-label='Open menu'
                   fontSize='lg'
                   color='lightGreen'
@@ -169,15 +173,15 @@ export const Header = observer(() => {
                   _hover={{}}
                   _active={{}}
                   _focus={{}}
-                  ref={ref}
                   onClick={mobileNav.isOpen ? mobileNav.onClose : mobileNav.onOpen}
                 />
               </Flex>
             </Flex>
           </Flex>
-          {MobileNavContent}
         </chakra.div>
       </chakra.header>
+      {MobileNavContent}
+
     </Box>
   );
 });

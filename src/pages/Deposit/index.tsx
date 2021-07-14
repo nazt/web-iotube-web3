@@ -15,7 +15,7 @@ import {
   Textarea,
   useColorModeValue,
   useTheme,
-  Tag, chakra
+  Tag, chakra, Alert, CloseButton
 } from '@chakra-ui/react';
 import { Text, Center } from '@chakra-ui/layout';
 import { ChevronDownIcon, CopyIcon, SmallCloseIcon } from '@chakra-ui/icons';
@@ -48,6 +48,7 @@ export const Deposit = observer(() => {
     approveLoadingContent: lang.t('deposit.approving'),
     confirmIsLoading: new BooleanState(),
     confirmLoadingText: lang.t('button.confirming'),
+    isShowAlert: new BooleanState(),
     showConnector() {
       god.setShowConnecter(true);
     },
@@ -121,6 +122,7 @@ export const Deposit = observer(() => {
     deposit.amount = new BigNumberInputState({});
     store.approveLoading.setValue(false);
     store.confirmIsLoading.setValue(false);
+    store.isShowAlert.setValue(true)
     if (god.currentNetwork.account) {
       token.loadPrivateData();
     }
@@ -129,59 +131,65 @@ export const Deposit = observer(() => {
   return (
     <Box bgImage={'/images/home_bg.png'} pt={16}>
       <Center>
-        <Box maxW="md" textAlign='center'>
+        <Alert
+          display={store.isShowAlert.value?'flex':'none'}
+          maxW='md' textAlign='center'
+          bgColor={useColorModeValue('white', theme.colors.bg.bg1Alpha20)}
+          boxShadow={' 0px 3px 20px rgba(36, 39, 41, 0.502)'}
+          borderRadius={'10px'}>
           <Text
             color={useColorModeValue(theme.colors.darkLightGreen, theme.colors.lightGreen)}><u>{lang.t('tube_v4')}</u></Text>
-        </Box>
+          <CloseButton position='absolute' right='8px' top='8px' onClick={()=>store.isShowAlert.setValue(false)}/>
+        </Alert>
       </Center>
       <Container
-        maxW="md"
-        mt={4}
+        maxW='md'
+        mt={8}
         p={30}
         borderRadius={theme.borderRadius.sm}
         boxShadow={homeShadow}
         bg={home}
       >
-        <ETHProvider/>
-        <NetworkHeader/>
+        <ETHProvider />
+        <NetworkHeader />
         <FormControl mt={6}>
           <Box
             bg={inputBg}
             borderRadius={theme.borderRadius.sm}
             color={inputColor}
           >
-            <Flex borderRadius="md" justify="space-between" px={4} pt={4}>
-              <Text fontSize="md">Token Amount</Text>
+            <Flex borderRadius='md' justify='space-between' px={4} pt={4}>
+              <Text fontSize='md'>Token Amount</Text>
               <Center>
-                {deposit.curToken && <Text fontSize="sm">Balance: {deposit.curToken.balance.format}</Text>}
+                {deposit.curToken && <Text fontSize='sm'>Balance: {deposit.curToken.balance.format}</Text>}
               </Center>
             </Flex>
             <InputGroup>
               <Input
-                variant="unstyled"
-                placeholder="0.0"
+                variant='unstyled'
+                placeholder='0.0'
                 fontWeight={500}
                 fontSize='lg'
                 color={useColorModeValue(theme.colors.gray[4], 'white')}
-                type="number"
+                type='number'
                 ml={4}
-                mr="8rem"
+                mr='8rem'
                 py={2}
-                value={deposit.amount.format}
+                value={deposit.amount.format||""}
                 onChange={(e) => deposit.amount.setFormat(e.target.value)}
               />
-              <InputRightElement float={'right'} width="12rem" cursor="pointer"
+              <InputRightElement float={'right'} width='12rem' cursor='pointer'
                                  zIndex={0}>
-                <Tag size='sm' variant="solid" bg={theme.colors.darkLightGreen} cursor='pointer'
+                <Tag size='sm' variant='solid' bg={theme.colors.darkLightGreen} cursor='pointer'
                      onClick={() => deposit.amount.setValue(deposit.curToken.balance.value)}>{'MAX'}</Tag>
-                <Stack onClick={store.openTokenList} width="100%" direction="row-reverse" maxW="12rem"
-                       alignContent="flex-end">
+                <Stack onClick={store.openTokenList} width='100%' direction='row-reverse' maxW='12rem'
+                       alignContent='flex-end'>
                   <Center mr={3}>
-                    <Icon as={ChevronDownIcon}/>
+                    <Icon as={ChevronDownIcon} />
                   </Center>
                   {deposit.curToken?.symbol && <Text>{deposit.curToken.symbol}</Text>}
-                  <Image borderRadius="full" boxSize={theme.iconSize.md} src={deposit.curToken?.logoURI}
-                         fallbackSrc="https://via.placeholder.com/150"/>
+                  <Image borderRadius='full' boxSize={theme.iconSize.md} src={deposit.curToken?.logoURI}
+                         fallbackSrc='https://via.placeholder.com/150' />
                 </Stack>
               </InputRightElement>
             </InputGroup>
@@ -193,14 +201,14 @@ export const Deposit = observer(() => {
             mt={8}
             color={inputColor}
           >
-            <Flex justify="space-between" px={4} pt={4}>
-              <Text fontSize="md">Receiver Address</Text>
+            <Flex justify='space-between' px={4} pt={4}>
+              <Text fontSize='md'>Receiver Address</Text>
             </Flex>
             <InputGroup>
               <Textarea
                 rows={2}
-                variant="unstyled"
-                resize="none"
+                variant='unstyled'
+                resize='none'
                 mx={4}
                 pr={6}
                 fontWeight={500}
@@ -210,26 +218,26 @@ export const Deposit = observer(() => {
               />
               {deposit.receiverAddress.value &&
               <InputRightElement zIndex={0} cursor='pointer' onClick={() => deposit.cleanAddress()}
-                                 children={<SmallCloseIcon/>}/>}
+                                 children={<SmallCloseIcon />} />}
             </InputGroup>
           </Box>
           {deposit.receiverAddress.anotherAddress &&
           <Flex mx={4} h={14} alignItems={'center'}>
-            <chakra.img w='4' h='4' src={EnterSvg}/>
+            <chakra.img w='4' h='4' src={EnterSvg} />
             <Text
               mx={2}
               wordBreak={'break-all'}
-              color={useColorModeValue(theme.colors.gray[6],theme.colors.gray[2])}
+              color={useColorModeValue(theme.colors.gray[6], theme.colors.gray[2])}
             >
               {deposit.receiverAddress.anotherAddress}
             </Text>
           </Flex>
           }
-          <Center mt={deposit.receiverAddress.anotherAddress?6:20} mb={2}>
+          <Center mt={deposit.receiverAddress.anotherAddress ? 6 : 20} mb={2}>
             {!Boolean(god.currentNetwork.account) ? (
               <Button
-                size="block"
-                variant="green"
+                size='block'
+                variant='green'
                 title={lang.t('connect.wallet')}
                 // leftIcon={<Image size={theme.iconSize.md} src="images/swap.svg"/>}
                 onClick={store.showConnector}
@@ -243,16 +251,16 @@ export const Deposit = observer(() => {
                     isLoading={store.approveLoading.value}
                     loadingText={store.approveLoadingContent}
                     onClick={store.onCashierApprove}
-                    size="block"
-                    variant="black"
+                    size='block'
+                    variant='black'
                     disabled={store.approveLoading.value}
                   >
                     {lang.t('approve')}
                   </Button> :
                   <Button
                     onClick={() => deposit.isOpenConfirmModal.setValue(true)}
-                    size="block"
-                    variant="black"
+                    size='block'
+                    variant='black'
                     disabled={!!deposit.state}
                   >
                     {deposit.state || lang.t('deposit')}
@@ -262,13 +270,13 @@ export const Deposit = observer(() => {
           </Center>
         </FormControl>
         <TokenListModal isOpen={store.isOpenTokenList.value} onClose={() => store.isOpenTokenList.setValue(false)}
-                        onSelect={store.onSelectToken}/>
+                        onSelect={store.onSelectToken} />
         <ConfirmModal
           onConfirm={() => store.onSubmit}
           confirmIsLoading={store.confirmIsLoading.value}
           confirmLoadingText={store.confirmLoadingText}
         />
-        <CompleteModal/>
+        <CompleteModal />
       </Container>
     </Box>
   );

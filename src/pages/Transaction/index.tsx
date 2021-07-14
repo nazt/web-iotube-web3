@@ -46,6 +46,7 @@ export const Transaction = observer(() => {
                 borderRadius="2xl"
                 _selected={tabSelectedStyle}
                 _active={tabSelectedStyle}
+                key={index}
               >
                 <Image
                   srcSet={index == record.activeTab.value ? `/images/arrow_right_active.svg` : `/images/arrow_right.svg`}

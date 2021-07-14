@@ -129,16 +129,17 @@ export const Deposit = observer(() => {
   }, [token.currentCrossChain?.chain, token.currentCrossChain?.tokens[0], token.currentChain.chainId, god.currentNetwork.account]);
 
   return (
-    <Box bgImage={'/images/home_bg.png'} pt={16}>
+    <Box bgImage={'/images/home_bg.png'} pt={10}>
       <Center>
         <Alert
           display={store.isShowAlert.value?'flex':'none'}
           maxW='md' textAlign='center'
           bgColor={useColorModeValue('white', theme.colors.bg.bg1Alpha20)}
-          boxShadow={' 0px 3px 20px rgba(36, 39, 41, 0.502)'}
+          opacity={0.8}
+          boxShadow={homeShadow}
           borderRadius={'10px'}>
           <Text
-            color={useColorModeValue(theme.colors.darkLightGreen, theme.colors.lightGreen)}><u>{lang.t('tube_v4')}</u></Text>
+            color={useColorModeValue(theme.colors.darkLightGreen, theme.colors.lightGreen)}>{lang.t('tube_v4')}</Text>
           <CloseButton position='absolute' right='8px' top='8px' onClick={()=>store.isShowAlert.setValue(false)}/>
         </Alert>
       </Center>

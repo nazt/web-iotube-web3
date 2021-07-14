@@ -3,7 +3,7 @@ import { observer, useLocalStore } from 'mobx-react-lite';
 import { useStore } from '../../store/index';
 import { useWeb3React } from '@web3-react/core';
 import { injected } from '../../lib/web3-react';
-import { Modal, ModalContent, ModalOverlay } from '@chakra-ui/modal';
+import { Modal, ModalOverlay, ModalCloseButton, ModalContent } from '@chakra-ui/modal';
 import { Box, Flex, Text } from '@chakra-ui/layout';
 import { AvatarGroup, Avatar, useColorModeValue, useTheme } from '@chakra-ui/react';
 import { Network } from '@/store/god';
@@ -84,6 +84,7 @@ export const WalletSelecter = observer(() => {
       <ModalOverlay/>
       <ModalContent p={6} borderRadius={theme.radii.xl}
                     bg={useColorModeValue(theme.sideBar.bg.light, theme.sideBar.bg.dark)}>
+        <ModalCloseButton variant='unstyled'/>
         {!god.currentNetwork.account && (
           <Box>
             <Box onClick={store.connectInejct} my={4} cursor='pointer' borderRadius={theme.radii.xl}

@@ -146,7 +146,7 @@ export const Deposit = observer(() => {
       <Container
         maxW='md'
         mt={8}
-        p={30}
+        p={{base:2, md:30}}
         borderRadius={theme.borderRadius.sm}
         boxShadow={homeShadow}
         bg={home}

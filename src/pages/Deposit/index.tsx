@@ -159,7 +159,7 @@ export const Deposit = observer(() => {
             borderRadius={theme.borderRadius.sm}
             color={inputColor}
           >
-            <Flex borderRadius='md' justify='space-between' px={4} pt={4}>
+            <Flex borderRadius='md' justify='space-between' px={{base:2, md:4}} pt={4}>
               <Text fontSize='md'>Token Amount</Text>
               <Center>
                 {deposit.curToken && <Text fontSize='sm'>Balance: {deposit.curToken.balance.format}</Text>}
@@ -173,7 +173,7 @@ export const Deposit = observer(() => {
                 fontSize='lg'
                 color={useColorModeValue(theme.colors.gray[4], 'white')}
                 type='number'
-                ml={4}
+                ml={{base:2, md:4}}
                 mr='8rem'
                 py={2}
                 value={deposit.amount.format||""}
@@ -202,7 +202,7 @@ export const Deposit = observer(() => {
             mt={8}
             color={inputColor}
           >
-            <Flex justify='space-between' px={4} pt={4}>
+            <Flex justify='space-between' px={{base:2, md:4}} pt={4}>
               <Text fontSize='md'>Receiver Address</Text>
             </Flex>
             <InputGroup>
@@ -210,8 +210,8 @@ export const Deposit = observer(() => {
                 rows={2}
                 variant='unstyled'
                 resize='none'
-                mx={4}
-                pr={6}
+                mx={{base:2, md:4}}
+                pr={{base:4, md:6}}
                 fontWeight={500}
                 color={useColorModeValue(theme.colors.gray[4], 'white')}
                 value={deposit.receiverAddress.value}

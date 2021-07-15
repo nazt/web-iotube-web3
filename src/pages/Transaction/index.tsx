@@ -16,7 +16,6 @@ export const Transaction = observer(() => {
   const { record, god, sideBar } = useStore();
 
   useEffect(() => {
-    console.log(history.location.hash);
     if (!!history.location.hash) {
       if (record.tabHashMap[history.location.hash] !== undefined){
         record.activeTab.setValue(record.tabHashMap[history.location.hash]);

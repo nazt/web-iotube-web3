@@ -26,7 +26,7 @@ export const SideItem = observer(({ menu, activeColor }: { menu: any, activeColo
   return (
     <Tooltip label={menu.name} isDisabled={sideBar.isOpen} fontSize={'md'} placement={'right'} bg={theme.colors.bg.bg1}>
 
-      <Accordion allowToggle mt='8'>
+      <Accordion allowToggle mt={{base:4,md:8}}>
         <AccordionItem
           border="none"
           borderRadius='2xl'

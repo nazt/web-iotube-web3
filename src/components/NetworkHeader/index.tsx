@@ -98,11 +98,13 @@ const NetworkHeader = observer((props: ISwitchProps) => {
         <Menu>
           <MenuButton
             as={Button}
-            pl={[5, 3]}
-            pr={[5, 3]}
+            pl={[0, 3]}
+            pr={[3, 3]}
             py={10}
             fontSize={theme.iconSize.md}
             variant={'ghost'}
+            w={'fit-content'}
+            h={'fix-content'}
             rightIcon={<ChevronDownIcon color={theme.colors.gray[9]}/>}>
             <Flex>
               <img width={36} height={36} src={god.currentChain.logoUrl}/>
@@ -127,9 +129,11 @@ const NetworkHeader = observer((props: ISwitchProps) => {
         <Menu>
           <MenuButton
             as={Button}
-            pl={[5, 3]}
-            pr={[5, 3]}
+            pl={[3, 3]}
+            pr={[0, 3]}
             py={10}
+            w={'fit-content'}
+            h={'fix-content'}
             fontSize={theme.iconSize.md}
             variant={'ghost'}
             rightIcon={(Object.values(god.currentChain.crossChain).length > 1) &&

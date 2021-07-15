@@ -66,7 +66,7 @@ export const Header = observer(() => {
         position='fixed'
         top={'0'}
         right={0}
-        align='center'
+        align='flex-start'
         flexDirection={'column'}
         h={'100vh'}
         width={'fix-content'}
@@ -89,7 +89,7 @@ export const Header = observer(() => {
         >
           <ToggleModeButton/>
         </Flex>
-        <Button onClick={store.logout} size='md' mt={100} w={'100%'} bg={theme.colors.gray['11']}>
+        <Button onClick={store.logout} size='md' mt={{base:12,md:100}} w={'100%'} bg={theme.colors.gray['11']}>
           <Text fontSize={'xl'} color={activeColor}>Logout</Text>
         </Button>
       </Flex>
@@ -158,7 +158,7 @@ export const Header = observer(() => {
                   _hover={{}}
                   variant={'unstyled'}
                   color={theme.colors.lightGreen}
-                  display={'flex'}
+                  display={{base:'none',md:'flex'}}
                 >
                   <Image src={'images/icon_vita.png'} mr={2} />
                   {god.currentNetwork.account ? helper.string.truncate(god.currentNetwork.account, 12, '...') : null}

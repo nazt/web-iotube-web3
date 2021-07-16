@@ -68,7 +68,7 @@ export const ConfirmModal = observer((props: PropsType) => {
               <Box>{<span>{lang.t('relay_to_chain', { chain: token.currentCrossChain?.chain.name })}</span>}</Box>
               <Box>
                 <span>{token.currentCrossChain?.cashier?.depositFee.format}</span>
-                <span>{token.currentCrossChain?.cashier?.depositFee.format >0?'':`(${lang.t("free")})`}</span>
+                <span>{token.currentCrossChain?.cashier?.depositFee.format >0?'':` (${lang.t("free")})`}</span>
               </Box>
             </Flex>
           </Box>

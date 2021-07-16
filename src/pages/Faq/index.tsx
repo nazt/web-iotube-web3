@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useStore } from '@/store/index';
 import { CollapseView } from '@/components/CollapseView';
 import { Box, Heading, Link } from '@chakra-ui/react';
@@ -7,7 +7,9 @@ import { Box, Heading, Link } from '@chakra-ui/react';
 
 export const Faq = observer(() => {
   const { lang, god } = useStore();
-
+  useEffect(()=>{
+    window.scroll(0,0)
+  })
   return (
     <Box pt={{ base: 10, md: 20 }}>
       <Heading mx={{ base: 0, md: 10 }} pb={3} fontSize={{ base: '2xl', md: 'xx-large' }}>FAQ</Heading>

@@ -94,8 +94,7 @@ export class ActionListState {
           }),
           fee: new BigNumberState({
             value: new BigNumber(item.fee),
-            loading: false,
-            decimals: token?.decimals
+            loading: false
           })
         } as unknown as ActionState;
       });

@@ -105,22 +105,6 @@ export const Faq = observer(() => {
         }
       />
       <CollapseView
-        title={lang.t('faq.can_i_send_native_iotex_tokens_using_iotube')}
-        body={
-          <>
-            <p>{lang.t('faq.way_to_send_native_token')}</p>
-          </>
-        }
-      />
-      <CollapseView
-        title={lang.t('faq.what_tokens_are_supported_by_iotube')}
-        body={
-          <>
-            <p>{lang.t('faq.supported_tokens')}</p>
-          </>
-        }
-      />
-      <CollapseView
         title={lang.t('faq.what_are_the_fees_using_iotube')}
         body={
           <>

@@ -46,11 +46,11 @@ export const Faq = observer(() => {
             <ul>
               <li>
                 <strong>{lang.t('faq.iotube_work.components.smart_contracts')}</strong>
-                {` ${lang.t('faq.iotube_work.components.smart_contracts.work', { chain: god.currentChain.name })}`}
+                {lang.t('faq.iotube_work.components.smart_contracts.work')}
               </li>
               <li>
                 <strong>{lang.t('faq.iotube_work.components.pool_of_witness')}</strong>
-                {` ${lang.t('faq.iotube_work.components.pool_of_witness.work', { chain: god.currentChain.name })}`}
+                {lang.t('faq.iotube_work.components.pool_of_witness.work')}
               </li>
             </ul>
           </>
@@ -69,14 +69,6 @@ export const Faq = observer(() => {
         body={
           <>
             <p>{lang.t('faq.difference_between_proxy_token_and_original_token')}</p>
-          </>
-        }
-      />
-      <CollapseView
-        title={lang.t('faq.does_the_token_supply_increase_when_using_iotube')}
-        body={
-          <>
-            <p>{lang.t('faq.token_supply_does_not_increase')}</p>
           </>
         }
       />
@@ -109,22 +101,6 @@ export const Faq = observer(() => {
         body={
           <>
             <p>{lang.t('faq.transfer_limit')}</p>
-          </>
-        }
-      />
-      <CollapseView
-        title={lang.t('faq.can_i_send_native_iotex_tokens_using_iotube')}
-        body={
-          <>
-            <p>{lang.t('faq.way_to_send_native_token')}</p>
-          </>
-        }
-      />
-      <CollapseView
-        title={lang.t('faq.what_tokens_are_supported_by_iotube')}
-        body={
-          <>
-            <p>{lang.t('faq.supported_tokens')}</p>
           </>
         }
       />

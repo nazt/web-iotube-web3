@@ -46,11 +46,11 @@ export const Faq = observer(() => {
             <ul>
               <li>
                 <strong>{lang.t('faq.iotube_work.components.smart_contracts')}</strong>
-                {` ${lang.t('faq.iotube_work.components.smart_contracts.work', { chain: god.currentChain.name })}`}
+                {lang.t('faq.iotube_work.components.smart_contracts.work')}
               </li>
               <li>
                 <strong>{lang.t('faq.iotube_work.components.pool_of_witness')}</strong>
-                {` ${lang.t('faq.iotube_work.components.pool_of_witness.work', { chain: god.currentChain.name })}`}
+                {lang.t('faq.iotube_work.components.pool_of_witness.work')}
               </li>
             </ul>
           </>

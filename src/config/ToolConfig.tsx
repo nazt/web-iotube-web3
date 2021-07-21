@@ -1,7 +1,7 @@
 import { Home } from '../pages/Home/index';
 import { Deposit } from '../pages/Deposit/index';
 import { Faq } from '../pages/Faq/index';
-import { FaqIcon, HomeIcon, IotubeIcon, IotubeIconV4, SwapIcon, TransactionsIcon } from '@/components/Icon';
+import { FaqIcon, HomeIcon, DiscordIcon, IotubeIconV4, SwapIcon, TransactionsIcon } from '@/components/Icon';
 import { Transaction } from '../pages/Transaction/index';
 import { AiFillGithub } from 'react-icons/all';
 import React from 'react';
@@ -97,6 +97,14 @@ export const ToolConfig = [
     _blank:true,
     icon:()=>{
       return <Icon as={IotubeIconV4} w={6} h={6}/>
+    }
+  },
+  {
+    name:'Discord',
+    path:'https://discord.gg/jRqqSyGfUD',
+    _blank:true,
+    icon:()=>{
+      return <Icon as={DiscordIcon} w={6} h={6}/>
     }
   },
 ];

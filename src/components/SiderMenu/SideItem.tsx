@@ -44,6 +44,9 @@ export const SideItem = observer(({ menu, activeColor }: { menu: any, activeColo
                 sideBar.setActiveChildMenu(menu.children[0].path);
                 return;
               }
+              if (menu._blank){
+                return window.open(menu.path)
+              }
               history.push(menu.path)
               sideBar.setActiveMenu(menu.path);
             }}

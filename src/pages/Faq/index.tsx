@@ -81,14 +81,6 @@ export const Faq = observer(() => {
         }
       />
       <CollapseView
-        title={lang.t('faq.does_the_token_supply_increase_when_using_iotube')}
-        body={
-          <>
-            <p>{lang.t('faq.token_supply_does_not_increase')}</p>
-          </>
-        }
-      />
-      <CollapseView
         title={lang.t('faq.what_happens_to_my_original_tokens_if_i_sell_the_proxy_token')}
         body={
           <>

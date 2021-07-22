@@ -1,11 +1,12 @@
 import { Home } from '../pages/Home/index';
 import { Deposit } from '../pages/Deposit/index';
 import { Faq } from '../pages/Faq/index';
-import { FaqIcon, HomeIcon, DiscordIcon, IotubeIconV4, SwapIcon, TransactionsIcon } from '@/components/Icon';
+import { FaqIcon, HomeIcon, DiscordIcon, IotubeIconV4, SwapIcon, TransactionsIcon, AssetIcon } from '@/components/Icon';
 import { Transaction } from '../pages/Transaction/index';
 import { AiFillGithub } from 'react-icons/all';
 import React from 'react';
 import { Icon } from '@chakra-ui/react';
+import { TokenList } from '../pages/Token';
 
 class Tool {
   name: string;
@@ -73,6 +74,15 @@ export const ToolConfig = [
         iconInactivatedDark:'/images/chain/polygon_inactivated_dark.svg',
       }
     ]
+  },
+  {
+    name:'Assets',
+    path:'/assets',
+    _blank:false,
+    component:TokenList,
+    icon:()=>{
+      return <Icon as={AssetIcon} w={6} h={6}/>
+    }
   },
   {
     name: 'FAQ',

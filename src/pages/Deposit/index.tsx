@@ -31,7 +31,8 @@ import { CompleteModal } from '@/components/CompleteModal';
 import { toast } from 'react-hot-toast';
 import { ETHProvider } from '@/components/EthProvider';
 import { MaxUint256 } from '@ethersproject/constants';
-import EnterSvg from '../../../public/images/enter.svg';;
+import { parseUnits } from "@ethersproject/units";
+import EnterSvg from '../../../public/images/enter.svg';
 
 export const Deposit = observer(() => {
   const { god, token, lang, deposit } = useStore();
@@ -81,11 +82,9 @@ export const Deposit = observer(() => {
     },
     async onSubmit() {
       const amountVal = deposit.amount.value.toFixed(0);
-      console.log(deposit.amount.value);
-      console.log(deposit.amount.value.toFixed(0));
       let options = { value: token.currentCrossChain?.cashier.depositFee.value.toFixed(0) };
       if (deposit.curToken.isEth()) {
-        options = { value: new BigNumber(amountVal).plus(token.currentCrossChain?.cashier.depositFee.value).toString() };
+        options = { value: deposit.amount.value.plus(token.currentCrossChain?.cashier.depositFee.value).toFixed() };
       }
       let receiverAddress = deposit.receiverAddress.ethAddress;
       let fromAddress = deposit.curToken.address;

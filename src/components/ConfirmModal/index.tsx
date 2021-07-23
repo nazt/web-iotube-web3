@@ -62,13 +62,13 @@ export const ConfirmModal = observer((props: PropsType) => {
             <Text mb={2}>{lang.t('fee')}</Text>
             <Flex justifyContent="space-between">
               <Box>{lang.t('fee.tube')}</Box>
-              <Box>0 ({lang.t('free')})</Box>
+              <Box>0 ({lang.t('fee')})</Box>
             </Flex>
             <Flex justifyContent="space-between">
               <Box>{<span>{lang.t('relay_to_chain', { chain: token.currentCrossChain?.chain.name })}</span>}</Box>
               <Box>
                 <span>{token.currentCrossChain?.cashier?.depositFee.format}</span>
-                <span>{token.currentCrossChain?.cashier?.depositFee.format >0?'':` (${lang.t("free")})`}</span>
+                <span>{token.currentCrossChain?.cashier?.depositFee.format > 0? ' IOTX':` (${lang.t("fee")})`}</span>
               </Box>
             </Flex>
           </Box>

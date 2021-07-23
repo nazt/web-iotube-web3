@@ -70,11 +70,7 @@ const NetworkHeader = observer((props: ISwitchProps) => {
     },
     setChain(val) {
       store.destChain = god.currentNetwork.chain.map[val];
-      if (store.destChain.name !== ETHMainnetConfig.name) {
-        store.confirmDialogOpen.setValue(true);
-      } else {
-        toast(lang.t('change_network_eth_warning'));
-      }
+      store.confirmDialogOpen.setValue(true);
     },
     connectInejct() {
       god.setNetwork(Network.eth);

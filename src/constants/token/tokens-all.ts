@@ -241,7 +241,7 @@ export const TOKENS = {
     symbol: 'PAXG',
     logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/4705.png'
   },
-  '0xcfb54a6d2da14abecd231174fc5735b4436965d8': {
+  '0xcFb54a6D2dA14ABeCD231174FC5735B4436965D8': {
     name: 'Cyclone Protocol',
     decimals: 18,
     symbol: 'CYC',

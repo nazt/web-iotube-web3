@@ -9,18 +9,24 @@ import { BSCMainnetConfig } from '../../config/BSCMainnetConfig';
 import { ETHMainnetConfig } from '../../config/ETHMainnetConfig';
 import { PolygonMainnetConfig } from '../../config/PolygonMainnetConfig';
 import { TokenTable } from './components/TokenTable';
+import { Text } from '@chakra-ui/layout';
+import { useStore } from '@/store/index';
 
 
 export const TokenList = observer(() => {
 
+  const {lang} = useStore()
+
   return (
     <Box w={'70%'} mx={'auto'} mt={10}>
+      <Text fontSize={{base:'1.25rem',md:"1.5rem"}} >{lang.t('asset.title')}</Text>
       <TokenTable
         title={'Ethereum <-> IoTeX'}
         networkConfig={ETHMainnetConfig}
         headers={['On Ethereum','On IoTeX']}
         tokensForIotex={ethTokensForIotex}
         iotexTokensForNetwork={iotexTokensForEth}
+        showSupport
       />
 
       <TokenTable

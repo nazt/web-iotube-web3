@@ -12,10 +12,9 @@ interface TokenTableProps {
   headers: string[];
   tokensForIotex:any;
   iotexTokensForNetwork:any;
-  showSupport?:boolean
 }
 
-export const TokenTable = ({ title, networkConfig, headers,tokensForIotex,iotexTokensForNetwork,showSupport=false }: TokenTableProps) => {
+export const TokenTable = ({ title, networkConfig, headers,tokensForIotex,iotexTokensForNetwork}: TokenTableProps) => {
   const bg = useColorModeValue('white', 'bg.bg1Alpha20');
   const textColor = useColorModeValue('darkLightGreen', 'lightGreen');
   tokensForIotex.tokens.forEach(token=>{
@@ -26,23 +25,11 @@ export const TokenTable = ({ title, networkConfig, headers,tokensForIotex,iotexT
     return iotexTokensForNetwork.tokens.find(t => t.address === address)
   }
 
-  const {lang} = useStore()
-
   return (
     <>
       <Link href={networkConfig.explorerURL} isExternal _hover={{}} variant='black'>
         <Text mt={10} fontSize={'1.25rem'}>{title}</Text>
       </Link>
-      {
-        showSupport?(
-          <Box mt={2}>
-            <Text display={{base:'block',md:'inline'}}>{lang.t('asset.supported')}</Text>
-            <Link href={'https://github.com/iotexproject/ioTube/issues/new/choose'} isExternal _hover={{}}>
-              <Text display={'inline'} ml={{base:0,md:2}} _hover={{}}>{lang.t('asset.start')}</Text>
-            </Link>
-          </Box>
-        ):null
-      }
       <Table mt={5}>
         <Thead>
           <Tr as={Flex} justify='space-between' bg={bg} fontSize={600}>

@@ -6,7 +6,7 @@ import { Transaction } from '../pages/Transaction/index';
 import { AiFillGithub } from 'react-icons/all';
 import React from 'react';
 import { Icon } from '@chakra-ui/react';
-import { TokenList } from '../pages/Token';
+import { TokenList } from '../pages/Asset';
 
 class Tool {
   name: string;

@@ -1,9 +1,10 @@
 import { Flex, Link, Table, Tbody, Td, Th, Thead, Tr, useColorModeValue } from '@chakra-ui/react';
-import { Text } from '@chakra-ui/layout';
+import { Box, Text } from '@chakra-ui/layout';
 import React from 'react';
 import { ChainState } from '@/store/lib/ChainState';
 import { IotexMainnetConfig } from '../../../config/IotexMainnetConfig';
 import { AddressState } from '@/store/standard/AddressState';
+import { useStore } from '@/store/index';
 
 interface TokenTableProps {
   title: string;
@@ -13,7 +14,7 @@ interface TokenTableProps {
   iotexTokensForNetwork:any;
 }
 
-export const TokenTable = ({ title, networkConfig, headers,tokensForIotex,iotexTokensForNetwork }: TokenTableProps) => {
+export const TokenTable = ({ title, networkConfig, headers,tokensForIotex,iotexTokensForNetwork}: TokenTableProps) => {
   const bg = useColorModeValue('white', 'bg.bg1Alpha20');
   const textColor = useColorModeValue('darkLightGreen', 'lightGreen');
   tokensForIotex.tokens.forEach(token=>{
@@ -23,6 +24,7 @@ export const TokenTable = ({ title, networkConfig, headers,tokensForIotex,iotexT
   const getIotexToken=(address)=>{
     return iotexTokensForNetwork.tokens.find(t => t.address === address)
   }
+
   return (
     <>
       <Link href={networkConfig.explorerURL} isExternal _hover={{}} variant='black'>

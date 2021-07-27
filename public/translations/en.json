@@ -125,5 +125,8 @@
   "view_iotexscan": "View on IoTeXScan",
   "free": "Free",
   "button.switch": "Switch",
-  "button.cancel": "Cancel"
+  "button.cancel": "Cancel",
+  "asset.title": "Assets on ioTube",
+  "asset.supported": "Want your supported?",
+  "asset.start": "Start here >>>"
 }

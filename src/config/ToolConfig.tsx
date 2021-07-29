@@ -103,7 +103,7 @@ export const ToolConfig = [
   },
   {
     name:'Tube v4',
-    path:'https://tube.iotex.io/',
+    path:'https://tube-v4.iotex.io/',
     _blank:true,
     icon:()=>{
       return <Icon as={IotubeIconV4} w={6} h={6}/>

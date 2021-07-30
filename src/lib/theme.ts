@@ -263,6 +263,9 @@ export const theme = extendTheme({
         left: 0,
         width: '100%',
         height: '2px'
+      },
+      '.addressToolTip':{
+        color:(props)=>(props.colorMode === 'dark'?'lightGreen':'darkLightGreen')
       }
     }
   },

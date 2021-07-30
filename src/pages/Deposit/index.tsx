@@ -15,10 +15,10 @@ import {
   Textarea,
   useColorModeValue,
   useTheme,
-  Tag, chakra, Alert, CloseButton
+  Tag, chakra, Alert, CloseButton, Popover, PopoverTrigger, PopoverContent, PopoverArrow,PopoverBody
 } from '@chakra-ui/react';
 import { Text, Center } from '@chakra-ui/layout';
-import { ChevronDownIcon, CopyIcon, SmallCloseIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon, CopyIcon, QuestionOutlineIcon, SmallCloseIcon } from '@chakra-ui/icons';
 import { TokenListModal } from '@/components/TokenListModal';
 import { useStore } from '@/store/index';
 import { BigNumberInputState } from '@/store/standard/BigNumberInputState';
@@ -31,8 +31,8 @@ import { CompleteModal } from '@/components/CompleteModal';
 import { toast } from 'react-hot-toast';
 import { ETHProvider } from '@/components/EthProvider';
 import { MaxUint256 } from '@ethersproject/constants';
-import { parseUnits } from "@ethersproject/units";
 import EnterSvg from '../../../public/images/enter.svg';
+import { isAddress as isEthAddress } from '@ethersproject/address';
 
 export const Deposit = observer(() => {
   const { god, token, lang, deposit } = useStore();
@@ -49,6 +49,7 @@ export const Deposit = observer(() => {
     approveLoadingContent: lang.t('deposit.approving'),
     confirmIsLoading: new BooleanState(),
     confirmLoadingText: lang.t('button.confirming'),
+    showAddressToolTip: new BooleanState(),
     isShowAlert: new BooleanState(),
     showConnector() {
       god.setShowConnecter(true);
@@ -113,6 +114,8 @@ export const Deposit = observer(() => {
       }
     }
   }));
+
+
   useEffect(() => {
     if (!deposit.receiverAddress.value.length && god.currentNetwork.account) {
       deposit.receiverAddress.setValue(god.currentNetwork.account);
@@ -121,17 +124,28 @@ export const Deposit = observer(() => {
     deposit.amount = new BigNumberInputState({});
     store.approveLoading.setValue(false);
     store.confirmIsLoading.setValue(false);
-    store.isShowAlert.setValue(true)
+    store.isShowAlert.setValue(true);
+    store.showAddressToolTip.setValue(false);
     if (god.currentNetwork.account) {
       token.loadPrivateData();
     }
   }, [token.currentCrossChain?.chain, token.currentCrossChain?.tokens[0], token.currentChain.chainId, god.currentNetwork.account]);
 
+  const addressToolTip = () => {
+    const learnMore = "<a href='https://docs.iotex.io/basic-concepts/accounts' target='_blank' class='addressToolTip'>Learn More.</a>"
+    return(
+      <Box fontSize={'0.9rem'}  whiteSpace={'pre-line'}>
+        <div dangerouslySetInnerHTML={{__html:lang.t(isEthAddress(deposit.receiverAddress.anotherAddress)?'ethAddress.tooltip':'iotexAddress.tooltip',{keyword:learnMore})}}>
+        </div>
+      </Box>
+    )
+  };
+
   return (
     <Box bgImage={'/images/home_bg.png'} pt={10}>
       <Center>
         <Alert
-          display={store.isShowAlert.value?'flex':'none'}
+          display={store.isShowAlert.value ? 'flex' : 'none'}
           maxW='md' textAlign='center'
           bgColor={useColorModeValue('white', theme.colors.bg.bg1Alpha20)}
           opacity={0.8}
@@ -139,13 +153,13 @@ export const Deposit = observer(() => {
           borderRadius={'10px'}>
           <Text
             color={useColorModeValue(theme.colors.darkLightGreen, theme.colors.lightGreen)}>{lang.t('tube_v4')}</Text>
-          <CloseButton position='absolute' right='8px' top='8px' onClick={()=>store.isShowAlert.setValue(false)}/>
+          <CloseButton position='absolute' right='8px' top='8px' onClick={() => store.isShowAlert.setValue(false)} />
         </Alert>
       </Center>
       <Container
         maxW='md'
         mt={8}
-        p={{base:2, md:30}}
+        p={{ base: 2, md: 30 }}
         borderRadius={theme.borderRadius.sm}
         boxShadow={homeShadow}
         bg={home}
@@ -158,7 +172,7 @@ export const Deposit = observer(() => {
             borderRadius={theme.borderRadius.sm}
             color={inputColor}
           >
-            <Flex borderRadius='md' justify='space-between' px={{base:2, md:4}} pt={4}>
+            <Flex borderRadius='md' justify='space-between' px={{ base: 2, md: 4 }} pt={4}>
               <Text fontSize='md'>Token Amount</Text>
               <Center>
                 {deposit.curToken && <Text fontSize='sm'>Balance: {deposit.curToken.balance.format}</Text>}
@@ -172,10 +186,10 @@ export const Deposit = observer(() => {
                 fontSize='lg'
                 color={useColorModeValue(theme.colors.gray[4], 'white')}
                 type='number'
-                ml={{base:2, md:4}}
+                ml={{ base: 2, md: 4 }}
                 mr='8rem'
                 py={2}
-                value={deposit.amount.format||""}
+                value={deposit.amount.format || ''}
                 onChange={(e) => deposit.amount.setFormat(e.target.value)}
               />
               <InputRightElement float={'right'} width='12rem' cursor='pointer'
@@ -201,7 +215,7 @@ export const Deposit = observer(() => {
             mt={8}
             color={inputColor}
           >
-            <Flex justify='space-between' px={{base:2, md:4}} pt={4}>
+            <Flex justify='space-between' px={{ base: 2, md: 4 }} pt={4}>
               <Text fontSize='md'>Receiver Address</Text>
             </Flex>
             <InputGroup>
@@ -209,8 +223,8 @@ export const Deposit = observer(() => {
                 rows={2}
                 variant='unstyled'
                 resize='none'
-                mx={{base:2, md:4}}
-                pr={{base:4, md:6}}
+                mx={{ base: 2, md: 4 }}
+                pr={{ base: 4, md: 6 }}
                 fontWeight={500}
                 color={useColorModeValue(theme.colors.gray[4], 'white')}
                 value={deposit.receiverAddress.value}
@@ -222,7 +236,7 @@ export const Deposit = observer(() => {
             </InputGroup>
           </Box>
           {deposit.receiverAddress.anotherAddress &&
-          <Flex mx={4} h={14} alignItems={'center'}>
+          <Flex mx={4} h={14} alignItems={'center'} position={'relative'}>
             <chakra.img w='4' h='4' src={EnterSvg} />
             <Text
               mx={2}
@@ -231,6 +245,18 @@ export const Deposit = observer(() => {
             >
               {deposit.receiverAddress.anotherAddress}
             </Text>
+            <Popover trigger={'hover'}>
+              <PopoverTrigger>
+                <Icon as={QuestionOutlineIcon} cursor={'pointer'} />
+              </PopoverTrigger>
+              <PopoverContent>
+                <PopoverArrow />
+                <PopoverBody _focusVisible={{}} _focus={{}}>
+                  {addressToolTip()}
+                </PopoverBody>
+              </PopoverContent>
+
+            </Popover>
           </Flex>
           }
           <Center mt={deposit.receiverAddress.anotherAddress ? 6 : 20} mb={2}>
@@ -280,4 +306,5 @@ export const Deposit = observer(() => {
       </Container>
     </Box>
   );
+
 });

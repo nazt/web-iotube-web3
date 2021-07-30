@@ -125,8 +125,10 @@
   "view_iotexscan": "View on IoTeXScan",
   "free": "Free",
   "button.switch": "Switch",
-  "button.cancel": "Cancel",
   "asset.title": "Assets on ioTube",
   "asset.supported": "Want your supported?",
-  "asset.start": "Start here >>>"
+  "asset.start": "Start here >>>",
+  "button.cancel": "Cancel",
+  "ethAddress.tooltip": "This is your Web3 (0x) wallet based on your private key. ${keyword}",
+  "iotexAddress.tooltip": "This is your IoTeX wallet based on your private key. ${keyword}"
 }

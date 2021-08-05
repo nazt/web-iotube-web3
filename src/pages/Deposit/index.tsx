@@ -15,7 +15,7 @@ import {
   Textarea,
   useColorModeValue,
   useTheme,
-  Tag, chakra, Alert, CloseButton, Popover, PopoverTrigger, PopoverContent, PopoverArrow,PopoverBody
+  Tag, chakra, Alert, CloseButton, Popover, PopoverTrigger, PopoverContent, PopoverArrow, PopoverBody
 } from '@chakra-ui/react';
 import { Text, Center } from '@chakra-ui/layout';
 import { ChevronDownIcon, CopyIcon, QuestionOutlineIcon, SmallCloseIcon } from '@chakra-ui/icons';
@@ -117,9 +117,6 @@ export const Deposit = observer(() => {
 
 
   useEffect(() => {
-    if (!deposit.receiverAddress.value.length && god.currentNetwork.account) {
-      deposit.receiverAddress.setValue(god.currentNetwork.account);
-    }
     deposit.curToken = token.currentCrossChain?.tokens[0];
     deposit.amount = new BigNumberInputState({});
     store.approveLoading.setValue(false);
@@ -132,13 +129,14 @@ export const Deposit = observer(() => {
   }, [token.currentCrossChain?.chain, token.currentCrossChain?.tokens[0], token.currentChain.chainId, god.currentNetwork.account]);
 
   const addressToolTip = () => {
-    const learnMore = "<a href='https://docs.iotex.io/basic-concepts/accounts' target='_blank' class='addressToolTip'>Learn More.</a>"
-    return(
-      <Box fontSize={'0.9rem'}  whiteSpace={'pre-line'}>
-        <div dangerouslySetInnerHTML={{__html:lang.t(isEthAddress(deposit.receiverAddress.anotherAddress)?'ethAddress.tooltip':'iotexAddress.tooltip',{keyword:learnMore})}}>
+    const learnMore = '<a href=\'https://docs.iotex.io/basic-concepts/accounts\' target=\'_blank\' class=\'addressToolTip\'>Learn More.</a>';
+    return (
+      <Box fontSize={'0.9rem'} whiteSpace={'pre-line'}>
+        <div
+          dangerouslySetInnerHTML={{ __html: lang.t(isEthAddress(deposit.receiverAddress.anotherAddress) ? 'ethAddress.tooltip' : 'iotexAddress.tooltip', { keyword: learnMore }) }}>
         </div>
       </Box>
-    )
+    );
   };
 
   return (
@@ -217,6 +215,16 @@ export const Deposit = observer(() => {
           >
             <Flex justify='space-between' px={{ base: 2, md: 4 }} pt={4}>
               <Text fontSize='md'>Receiver Address</Text>
+              {
+                !deposit.receiverAddress.value.length &&
+                god.currentNetwork.account &&
+                <Button
+                  variant={'green'} fontSize={'0.75rem'} minH={6} h={6}
+                  onClick={() => deposit.receiverAddress.setValue(god.currentNetwork.account)}
+                >
+                  {lang.t('my.wallet')}
+                </Button>
+              }
             </Flex>
             <InputGroup>
               <Textarea

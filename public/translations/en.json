@@ -130,5 +130,6 @@
   "asset.start": "Start here >>>",
   "button.cancel": "Cancel",
   "ethAddress.tooltip": "This is your Web3 (0x) wallet based on your private key. ${keyword}",
-  "iotexAddress.tooltip": "This is your IoTeX wallet based on your private key. ${keyword}"
+  "iotexAddress.tooltip": "This is your IoTeX wallet based on your private key. ${keyword}",
+  "my.wallet": "My Wallet"
 }

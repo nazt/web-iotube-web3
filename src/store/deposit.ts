@@ -50,12 +50,12 @@ export class DepositStore {
     if (this.amount.format < 0 || this.amount.value.comparedTo(this.curToken.balance.value) > 0) {
       return this.rootStore.lang.t('input.amount.invalid');
     }
-    console.log(this.curToken.amountRange);
-    if (!this.curToken.isEth() && this.amount.value.gt(this.curToken.amountRange.maxAmount.value)) {
+
+    if (this.amount.value.gt(this.curToken.amountRange.maxAmount.value)) {
       return `Amount must <= ${this.curToken.amountRange.maxAmount.format}`;
     }
 
-    if (!this.curToken.isEth() && this.amount.value.lt(this.curToken.amountRange.minAmount.value)) {
+    if (this.amount.value.lt(this.curToken.amountRange.minAmount.value)) {
       return `Amount must >= ${this.curToken.amountRange.minAmount.format}`;
     }
 

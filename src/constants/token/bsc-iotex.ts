@@ -16,6 +16,7 @@ export const bscToIotexTokens = {
       destAddress: '0x97e6c48867fdc391a8dfe9d169ecd005d1d90283',
       name: 'Wrapped BSC',
       decimals: 18,
+      isWrapped: true,
       symbol: 'WBNB',
       logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1839.png'
     },

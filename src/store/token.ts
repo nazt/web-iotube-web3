@@ -87,9 +87,15 @@ export class TokenStore {
         handler: i.maxAmountStandard
       })),
     ]);
-
+    const wrappedToken = this.currentTokens.filter(i => i.isWrapped);
     this.currentTokens.filter((i) => i.isEth()).map((i) => {
       i.balance = this.god.currentNetwork.chain.current.Coin.balance;
+      if(wrappedToken.length == 1) {
+        i.minAmountMintable = wrappedToken[0].minAmountMintable;
+        i.maxAmountMintable = wrappedToken[0].maxAmountMintable;
+        i.minAmountStandard = wrappedToken[0].minAmountStandard;
+        i.maxAmountStandard = wrappedToken[0].maxAmountStandard;
+      }
     });
     this.loadIotexDepositFee();
   }

@@ -16,6 +16,7 @@ export const polygonToIotexTokens = {
       destAddress: '0x8e66c0d6b70c0b23d39f4b21a1eac52bba8ed89a',
       name: 'Wrapped Matic',
       decimals: 18,
+      isWrapped: true,
       symbol: 'WMatic',
       logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/3890.png'
     },

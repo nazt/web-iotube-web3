@@ -16,6 +16,7 @@ export const ethTokensForIotex = {
       'destAddress': '0x0258866edaf84d6081df17660357ab20a07d0c80',
       'name': 'Wrapped ETH',
       'decimals': 18,
+      'isWrapped': true,
       'symbol': 'WETH',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/2396.png'
     },
@@ -97,6 +98,7 @@ export const iotexTokensForEth = {
       'destAddress': '0x6fb3e0a217407efff7ca062d46c26e5d60a14d69',
       'name': 'Wrapped IOTX',
       'decimals': 18,
+      'isWrapped': true,
       'symbol': 'WIOTX',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/2777.png'
     },

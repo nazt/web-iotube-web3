@@ -15,6 +15,7 @@ export class TokenState {
   destAddress: string;
   logoURI: string;
   chainId: number;
+  isWrapped?: boolean;
   decimals: number = 18;
   network: NetworkState;
   balance: BigNumberState;

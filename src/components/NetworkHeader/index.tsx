@@ -70,7 +70,11 @@ const NetworkHeader = observer((props: ISwitchProps) => {
     },
     setChain(val) {
       store.destChain = god.currentNetwork.chain.map[val];
-      store.confirmDialogOpen.setValue(true);
+      if (god.isConnect) {
+        store.confirmDialogOpen.setValue(true);
+      }else {
+        toast('Please connect wallet first.')
+      }
     },
     connectInejct() {
       god.setNetwork(Network.eth);

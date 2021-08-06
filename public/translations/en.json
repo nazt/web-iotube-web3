@@ -42,7 +42,7 @@
   "witness_confirmation": "Witness confirmations",
   "min": "min",
   "sec": "sec",
-  "may_delay_comment": "* may delay due to ${network} network congestion.",
+  "may_delay_comment": "May delay due to ${network} network congestion.",
   "address_copied": "Address Copied!",
   "transaction_link_copied": "Transaction Link Copied!",
   "info.features": "DECENTRALIZED. MULTI一ASSET. CROSS CHAIN BRIDGE.",
@@ -131,5 +131,6 @@
   "button.cancel": "Cancel",
   "ethAddress.tooltip": "This is your Web3 (0x) wallet based on your private key. ${keyword}",
   "iotexAddress.tooltip": "This is your IoTeX wallet based on your private key. ${keyword}",
-  "my.wallet": "My Wallet"
+  "my.wallet": "My Wallet",
+  "button.okay": "Okay"
 }

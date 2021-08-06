@@ -75,7 +75,7 @@ export const CompleteModal = observer(() => {
           <Box mt={6}>
             <Flex justifyContent="space-between">
               <span style={{color: grayText}}>{lang.t('eta')}</span>
-              <span>~{token.currentChain.name != IotexMainnetConfig.name ? `4 ${lang.t('min')}` : `1 ${lang.t('min')}*`}</span>
+              <span>{`~3 ${lang.t('min')}*`}</span>
             </Flex>
             <Flex justifyContent="space-between">
               <span style={{color: grayText}}>{lang.t('network_confirmations', { network: token.currentChain.name })}</span> :<span>~{token.currentChain.name != IotexMainnetConfig.name ? `3 ${lang.t('min')}` : `5 ${lang.t('sec')}`}</span>
@@ -84,7 +84,7 @@ export const CompleteModal = observer(() => {
               <span style={{color: grayText}}>{lang.t('witness_confirmation')}</span>
               <span>~{token.currentChain.name != IotexMainnetConfig.name ? `7 ${lang.t('sec')}` : `1 ${lang.t('min')}*`}</span>
             </Flex>
-            <div style={{color: grayText}}>{lang.t('may_delay_comment', { network: token.currentChain.name })}</div>
+            <div style={{color: grayText}}>{lang.t('may_delay_comment', { network: token.currentCrossChain?.chain.name })}</div>
           </Box>
         </ModalBody>
         <ModalFooter>
@@ -93,7 +93,7 @@ export const CompleteModal = observer(() => {
             variant="green"
             size="block"
             onClick={() => store.onClose()}>
-            {lang.t('confirm')}
+            {lang.t('button.okay')}
           </Button>
         </ModalFooter>
       </ModalContent>

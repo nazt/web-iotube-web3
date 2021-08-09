@@ -46,7 +46,7 @@ export class TokenState {
   get amountRange() {
     return {
       minAmount: this.minAmountMintable.value.comparedTo(this.minAmountStandard.value) >= 0 ? this.minAmountMintable : this.minAmountStandard,
-      maxAmount: this.maxAmountMintable.value.comparedTo(this.maxAmountStandard.value) >= 0 ? this.maxAmountStandard : this.maxAmountMintable
+      maxAmount: this.maxAmountMintable.value.comparedTo(this.maxAmountStandard.value) >= 0 ? this.maxAmountMintable : this.maxAmountStandard
     };
   }
 

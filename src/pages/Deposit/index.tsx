@@ -33,6 +33,7 @@ import { ETHProvider } from '@/components/EthProvider';
 import { MaxUint256 } from '@ethersproject/constants';
 import EnterSvg from '../../../public/images/enter.svg';
 import { isAddress as isEthAddress } from '@ethersproject/address';
+import { HistoryActionModal } from './components/HistoryActionModal';
 
 export const Deposit = observer(() => {
   const { god, token, lang, deposit } = useStore();
@@ -99,8 +100,10 @@ export const Deposit = observer(() => {
         if (res) {
           token.actionHash.setValue(res.hash);
           deposit.isOpenCompleteModal.setValue(true);
+          deposit.saveAction(res)
         }
         const receipt = await res.wait();
+        deposit.updateAction(receipt)
         console.log('receipt--->', receipt);
       } catch (e) {
         store.confirmIsLoading.setValue(false);
@@ -142,6 +145,7 @@ export const Deposit = observer(() => {
 
   return (
     <Box bgImage={'/images/home_bg.png'} pt={10}>
+      <HistoryActionModal/>
       <Center>
         <Alert
           display={store.isShowAlert.value ? 'flex' : 'none'}

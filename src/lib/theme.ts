@@ -185,6 +185,7 @@ export const theme = extendTheme({
     header: {
       bg: '#2C2D2F'
     },
+
     gray: {
       2: '#999999',
       3: '#cccccc',

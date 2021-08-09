@@ -1,11 +1,12 @@
 import { RootStore } from '@/store/root';
 import { makeAutoObservable } from 'mobx';
-import { BooleanState } from '@/store/standard/base';
+import { BooleanState, StringState } from '@/store/standard/base';
 import { AddressState } from '@/store/standard/AddressState';
 import { BigNumberInputState } from '@/store/standard/BigNumberInputState';
 import { TokenState } from '@/store/lib/TokenState';
 import { isAddress as isEthAddress } from '@ethersproject/address';
 import { TOKENS } from '@/constants/token/tokens-all';
+import { StorageState } from '@/store/standard/StorageState';
 
 export class DepositStore {
   rootStore: RootStore;
@@ -14,7 +15,8 @@ export class DepositStore {
   receiverAddress: AddressState = new AddressState();
   amount: BigNumberInputState = new BigNumberInputState({});
   curToken: TokenState | null = null;
-
+  historyActions:StorageState<Record<string, any>> = new StorageState({key:'localstorage_history_actions'})
+  actionState:StringState =  new StringState()
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
     makeAutoObservable(this, {
@@ -74,5 +76,41 @@ export class DepositStore {
 
   cleanAddress() {
     this.receiverAddress.setValue('');
+  }
+
+  saveAction(res) {
+    let actions = this.historyActions.value;
+    const detail = {
+      summary: `Deposit ${this.amount.format} ${this.curToken?.symbol} to ${this.amount.format} ${this.destToken?.symbol} on ${this.rootStore.token.currentCrossChain?.chain.name}`,
+      from: res.from,
+      addedTime: Date.parse(new Date().toString())
+    }
+    console.log(actions,res.chainId)
+    if (actions && actions[res.chainId]) {
+      actions[res.chainId][res.hash] = detail
+    } else {
+      actions = {
+        [res.chainId]: {
+          [res.hash]: detail
+        }
+      }
+    }
+    this.historyActions.save(actions)
+    this.actionState.setValue('saved')
+  }
+
+  updateAction(receipt){
+    const historyActions = this.historyActions.value
+    const current = historyActions&&historyActions[this.rootStore.god.currentChain.chainId]&&historyActions[this.rootStore.god.currentChain.chainId][receipt.transactionHash];
+    if (current){
+      current.receipt = receipt;
+      this.historyActions.save(historyActions)
+      this.actionState.setValue('updated')
+    }
+  }
+
+  get curChainHistoryActions(){
+    console.log(this.historyActions.value)
+    return (this.historyActions.value&&this.historyActions.value[this.rootStore.god.currentChain.chainId])||{}
   }
 }

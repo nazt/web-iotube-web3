@@ -33,7 +33,7 @@
   "button.waiting": "Waiting",
   "button.confirming": "Confirming",
   "complete.broadcast_transaction_successfully": "Action submitted successfully",
-  "complete.tx_broadcast_network": "After 12 confirmations of ${network} network and 2/3 + 1 confirmations from witnesses, ${amount} ${token} will be minted and sent to your address:",
+  "complete.tx_broadcast_network": "After 1 confirmations of ${network} network and 2/3 + 1 confirmations from witnesses, ${amount} ${token} will be minted and sent to your address:",
   "complete.your_tx_chain": "Your ${chain} TX hash",
   "complete.check_status_comment": "You can check the status right now in",
   "eta": "ETA",

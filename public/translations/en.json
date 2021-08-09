@@ -5,7 +5,7 @@
   "address.copied": "The address is copied.",
   "invalid.input": "Invalid Input",
   "submit": "Submit",
-  "input.insufficient.depositFee": "Insufficient balance for fee",
+  "input.insufficient.depositFee": "Need ${fee} IOTX for fee",
   "input.wallet.not_connected": "Wallet is not connected",
   "input.token.unselected": "Please select token",
   "input.cashier.invalid": "Invalid cashier contract address",

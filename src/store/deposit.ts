@@ -41,7 +41,7 @@ export class DepositStore {
     }
 
     if (this.rootStore.token.currentCrossChain?.cashier.depositFee.value.comparedTo(this.rootStore.god.currentNetwork.chain.current.Coin.balance.value) > 0) {
-      return this.rootStore.lang.t('input.insufficient.depositFee');
+      return this.rootStore.lang.t('input.insufficient.depositFee',{fee:this.rootStore.token.currentCrossChain?.cashier.depositFee.format});
     }
 
     if(isNaN(Number(this.amount.value)) || this.amount.format == null) {

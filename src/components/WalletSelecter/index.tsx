@@ -2,28 +2,43 @@ import React from 'react';
 import { observer, useLocalStore } from 'mobx-react-lite';
 import { useStore } from '../../store/index';
 import { useWeb3React } from '@web3-react/core';
-import { injected } from '../../lib/web3-react';
+import { injected } from '@/lib/web3-react';
 import { Modal, ModalOverlay, ModalCloseButton, ModalContent } from '@chakra-ui/modal';
 import { Box, Flex, Text } from '@chakra-ui/layout';
-import { AvatarGroup, Avatar, useColorModeValue, useTheme } from '@chakra-ui/react';
+import {
+  AvatarGroup,
+  Avatar,
+  useColorModeValue,
+  useTheme,
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  CloseButton
+} from '@chakra-ui/react';
 import { Network } from '@/store/god';
 import { useEffect } from 'react';
+import { BooleanState, StringState } from '@/store/standard/base';
 
 export const WalletSelecter = observer(() => {
   const { god } = useStore();
-  const { active, error, activate } = useWeb3React();
+  let { active, error, activate } = useWeb3React();
   const theme = useTheme();
-
   const store = useLocalStore(() => ({
     get visible() {
       return god.eth.connector.showConnector;
     },
+    showAlert: new BooleanState(),
+    errorMessage:new StringState(),
     close() {
       god.eth.connector.showConnector = false;
     },
+    handleError(error){
+      this.showAlert.setValue(true);
+      this.errorMessage.setValue(error.message)
+    },
     connectInejct() {
       god.setNetwork(Network.eth);
-      activate(injected);
+      activate(injected, this.handleError);
       god.eth.connector.latestProvider.save('inject');
     }
   }));
@@ -52,6 +67,9 @@ export const WalletSelecter = observer(() => {
           ethereum.removeListener('accountsChanged', handleAccountsChanged);
         }
       };
+    }
+    if (error){
+      store.handleError(error)
     }
   }, [active, error, activate]);
 
@@ -110,6 +128,10 @@ export const WalletSelecter = observer(() => {
             </Box>
           </Box>
         )}
+        {store.showAlert.value&&(<Alert status='warning'>
+          <AlertIcon />
+          <AlertDescription fontSize={'0.75rem'}>{store.errorMessage.value}</AlertDescription>
+        </Alert>)}
       </ModalContent>
     </Modal>
   );

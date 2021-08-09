@@ -27,6 +27,7 @@ export class DepositStore {
   }
 
   get state() {
+
     if (!this.rootStore.god.currentNetwork.account) {
       return this.rootStore.lang.t('input.wallet.not_connected');
     }

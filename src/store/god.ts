@@ -13,6 +13,8 @@ import { iotexMainCrossChain, IotexMainnetConfig } from '../config/IotexMainnetC
 import { bscMainCrossChain, BSCMainnetConfig } from '../config/BSCMainnetConfig';
 import { polygonMainCrossChain, PolygonMainnetConfig } from '../config/PolygonMainnetConfig';
 import { ETHKovanConfig, ethKovenCrossChain } from '../config/ETHKovanConfig';
+import { ethers } from 'ethers';
+import { Contract } from 'ethers-multicall';
 
 export enum Network {
   eth = 'eth',
@@ -31,6 +33,11 @@ export class GodStore {
       polygon: EthNetworkConfig,
     }
   });
+
+  etherMap: { [key: string]: ethers.providers.JsonRpcProvider } = {
+    eth: new ethers.providers.InfuraProvider("mainnet"),
+    iotex: new ethers.providers.JsonRpcProvider(IotexMainnetConfig.rpcUrl),
+  };
 
   updateTicker = new NumberState();
 

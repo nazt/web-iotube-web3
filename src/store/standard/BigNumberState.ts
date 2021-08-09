@@ -3,7 +3,7 @@ import { makeAutoObservable } from 'mobx';
 import { helper } from '@/lib/helper';
 
 export class BigNumberState {
-  value = new BigNumber(0);
+  value: BigNumber = new BigNumber(0);
   loading: boolean;
   decimals = 18;
   fixed = 6;

@@ -34,11 +34,8 @@ export class ChainState {
   init() {
     this.Coin.network = this.network;
 
-    //TO-DO this.crossChain here is not init yet. Please refer to god.ts line:47
     _.each(this.crossChain, (v, k) => {
-      console.log(v);
       _.each(v.tokens, (token) => {
-        console.log(token);
         token.network = this.network;
       });
     });

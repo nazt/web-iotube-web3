@@ -4,7 +4,11 @@ import { NumberState, StringState } from './standard/base';
 import { CrossChain } from '../../type';
 import { TokenState } from '@/store/lib/TokenState';
 import { IotexMainnetConfig } from '../config/IotexMainnetConfig';
-import { BigNumber } from 'ethers';
+import { Contract } from 'ethers';
+import erc20Abi from '@/constants/abi/erc20.json';
+import { ETHMainnetConfig } from '../config/ETHMainnetConfig';
+import BigNumber from 'bignumber.js';
+import { SafeAddressConfig } from '../config/SafeAddressConfig';
 
 
 export class TokenStore {
@@ -85,12 +89,12 @@ export class TokenStore {
         method: 'maxAmount',
         params: [i.address],
         handler: i.maxAmountStandard
-      })),
+      }))
     ]);
     const wrappedToken = this.currentTokens.filter(i => i.isWrapped);
     this.currentTokens.filter((i) => i.isEth()).map((i) => {
       i.balance = this.god.currentNetwork.chain.current.Coin.balance;
-      if(wrappedToken.length == 1) {
+      if (wrappedToken.length == 1) {
         i.minAmountMintable = wrappedToken[0].minAmountMintable;
         i.maxAmountMintable = wrappedToken[0].maxAmountMintable;
         i.minAmountStandard = wrappedToken[0].minAmountStandard;
@@ -98,6 +102,7 @@ export class TokenStore {
       }
     });
     this.loadIotexDepositFee();
+    this.loadERC20SafeBalanceForCoinRange();
   }
 
   async loadIotexDepositFee() {
@@ -108,7 +113,23 @@ export class TokenStore {
           method: 'depositFee',
           handler: i.cashier.depositFee
         })
-      ),
+      )
     ]);
+
+  }
+
+  async loadERC20SafeBalanceForCoinRange() {
+
+    if (this.currentChain.name == IotexMainnetConfig.name && this.currentCrossChain?.chain.name == ETHMainnetConfig.name) {
+      new Contract(SafeAddressConfig.IOTXETokenAddress, erc20Abi, this.rootStore.god.etherMap.eth).balanceOf(SafeAddressConfig.IOTXESafeAddress).then((balance: any) => {
+        this.currentTokens.filter(i => i.address == '0x0000000000000000000000000000000000000000').map(i => i.maxAmountMintable.setValue(new BigNumber(balance.toString())));
+      });
+    }
+
+    if (this.currentChain.name == ETHMainnetConfig.name && this.currentCrossChain?.chain.name == IotexMainnetConfig.name) {
+      new Contract(SafeAddressConfig.WIOTXAddress, erc20Abi, this.rootStore.god.etherMap.iotex).balanceOf(SafeAddressConfig.IOTXSafeAddress).then((balance: any) => {
+        this.currentTokens.filter(i => i.address == SafeAddressConfig.IOTXETokenAddress).map(i => i.maxAmountMintable.setValue(new BigNumber(balance.toString())));
+      });
+    }
   }
 }

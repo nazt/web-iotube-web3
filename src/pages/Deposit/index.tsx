@@ -64,6 +64,7 @@ export const Deposit = observer(() => {
     async onCashierApprove() {
       try {
         store.approveLoading.setValue(true);
+        // @ts-ignore
         const approvedRes = await token.approve(MaxUint256, deposit.curToken);
         if (approvedRes) {
           store.approveLoadingContent = lang.t('button.waiting');

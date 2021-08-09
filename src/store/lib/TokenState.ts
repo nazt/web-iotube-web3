@@ -4,10 +4,11 @@ import { BigNumberState } from '../standard/BigNumberState';
 import { CallParams } from '../../../type';
 import erc20Abi from '@/constants/abi/erc20.json';
 import tokenListAbi from '@/constants/abi/tokenlist.json';
+import BigNumber from 'bignumber.js';
 
 export class TokenState {
   abi = erc20Abi;
-  id = "";
+  id = '';
   tokenListAbi = tokenListAbi;
   name: string;
   symbol: string;
@@ -28,14 +29,15 @@ export class TokenState {
     isApprovingAllowance?: boolean;
     [key: string]: any;
   } = {};
+
   constructor(args: Partial<TokenState>) {
     Object.assign(this, args);
     this.balance = new BigNumberState({ decimals: this.decimals, loading: true });
-    this.allowanceForCashier = new BigNumberState({decimals: this.decimals, loading: false});
-    this.minAmountMintable = new BigNumberState({decimals: this.decimals, loading: false});
-    this.maxAmountMintable = new BigNumberState({decimals: this.decimals, loading: false});
-    this.minAmountStandard = new BigNumberState({decimals: this.decimals, loading: false});
-    this.maxAmountStandard = new BigNumberState({decimals: this.decimals, loading: false});
+    this.allowanceForCashier = new BigNumberState({ decimals: this.decimals, loading: false });
+    this.minAmountMintable = new BigNumberState({ decimals: this.decimals, loading: false });
+    this.maxAmountMintable = new BigNumberState({ decimals: this.decimals, loading: false });
+    this.minAmountStandard = new BigNumberState({ decimals: this.decimals, loading: false });
+    this.maxAmountStandard = new BigNumberState({ decimals: this.decimals, loading: false });
     makeObservable(this, {
       metas: observable
     });
@@ -43,9 +45,9 @@ export class TokenState {
 
   get amountRange() {
     return {
-      minAmount: this.minAmountStandard.format === "0" ? this.minAmountMintable : this.minAmountStandard,
-      maxAmount: this.maxAmountStandard.format === "0" ? this.maxAmountMintable : this.maxAmountStandard
-    }
+      minAmount: this.minAmountMintable.value.comparedTo(this.minAmountStandard.value) >= 0 ? this.minAmountMintable : this.minAmountStandard,
+      maxAmount: this.maxAmountMintable.value.comparedTo(this.maxAmountStandard.value) >= 0 ? this.maxAmountStandard : this.maxAmountMintable
+    };
   }
 
   isEth() {
@@ -55,6 +57,7 @@ export class TokenState {
   transfer(args: Partial<CallParams>) {
     return this.network.execContract(Object.assign({ address: this.address, abi: this.abi, method: 'transfer' }, args));
   }
+
   approve(args: Partial<CallParams>) {
     return this.network.execContract(Object.assign({ address: this.address, abi: this.abi, method: 'approve' }, args));
   }

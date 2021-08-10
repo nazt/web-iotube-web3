@@ -78,7 +78,7 @@ export const CompleteModal = observer(() => {
           <Box mt={6}>
             <Flex justifyContent='space-between'>
               <span style={{ color: grayText }}>{lang.t('eta')}</span>
-              <span>{`~3 ${lang.t('min')}${token.currentCrossChain?.chain.name == ETHMainnetConfig.name && `*`}`}</span>
+              <span>{`~3 ${lang.t('min')}`} {token.currentCrossChain?.chain.name==ETHMainnetConfig.name&&`*`}</span>
             </Flex>
             <Flex justifyContent='space-between'>
               <span
@@ -86,7 +86,7 @@ export const CompleteModal = observer(() => {
             </Flex>
             <Flex justifyContent='space-between'>
               <span style={{ color: grayText }}>{lang.t('witness_confirmation')}</span>
-              <span>~{token.currentChain.name != IotexMainnetConfig.name ? `7 ${lang.t('sec')}` : `1 ${lang.t('min')}${token.currentCrossChain?.chain.name == ETHMainnetConfig.name && `*`}`}</span>
+              <span>~{token.currentChain.name != IotexMainnetConfig.name ? `7 ${lang.t('sec')}` : `1 ${lang.t('min')}`} {token.currentCrossChain?.chain.name == ETHMainnetConfig.name && `*`}</span>
             </Flex>
             {token.currentCrossChain?.chain.name == ETHMainnetConfig.name &&
               <div

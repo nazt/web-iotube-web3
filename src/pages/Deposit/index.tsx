@@ -100,10 +100,10 @@ export const Deposit = observer(() => {
         if (res) {
           token.actionHash.setValue(res.hash);
           deposit.isOpenCompleteModal.setValue(true);
-          deposit.saveAction(res)
+          deposit.saveAction(res);
         }
         const receipt = await res.wait();
-        deposit.updateAction(receipt)
+        deposit.updateAction(receipt);
         console.log('receipt--->', receipt);
       } catch (e) {
         store.confirmIsLoading.setValue(false);
@@ -273,7 +273,11 @@ export const Deposit = observer(() => {
             </Popover>
           </Flex>
           }
-          <Center mt={deposit.receiverAddress.anotherAddress ? 6 : 20} mb={2}>
+          <Box px={3} py={1} mt={5}>
+            <Text fontSize={'0.75rem'}
+                  color={useColorModeValue(theme.colors.darkLightGreen, theme.colors.lightGreen)}>{lang.t('exchange.address.warning')}</Text>
+          </Box>
+          <Center mt={deposit.receiverAddress.anotherAddress ? 6 : 14} mb={2}>
             {!Boolean(god.currentNetwork.account) ? (
               <Button
                 size='block'

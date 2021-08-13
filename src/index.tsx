@@ -13,6 +13,7 @@ import { Toaster } from 'react-hot-toast';
 import { ToolConfig } from './config/ToolConfig';
 import { WalletSelecter } from '@/components/WalletSelecter';
 import SiderMenu from '@/components/SiderMenu';
+import { SwitchNetworkDialog } from '@/components/SwitchNetworkDialog';
 
 const ErrorFallback = ({ error, resetErrorBoundary }) => {
   return (
@@ -53,20 +54,21 @@ export const App = observer(() => {
 
   return (
     <ChakraProvider theme={theme}>
-      <CSSReset/>
+      <CSSReset />
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <Web3ReactProvider getLibrary={getLibrary}>
-          <WalletSelecter/>
-          <Toaster/>
+          <WalletSelecter />
+          <Toaster />
           <Router>
-            <Header/>
-            <SiderMenu/>
+            <Header />
+            <SiderMenu />
+            <SwitchNetworkDialog />
             <BodyWrapper>
               <Switch>
                 {ToolConfig.map((item) => (
-                  <Route exact path={item.path} key={item.path} component={item.component}/>
+                  <Route exact path={item.path} key={item.path} component={item.component} />
                 ))}
-                <Redirect from="*" to="/" />
+                <Redirect from='*' to='/' />
               </Switch>
             </BodyWrapper>
           </Router>

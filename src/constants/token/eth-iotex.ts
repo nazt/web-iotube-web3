@@ -99,7 +99,7 @@ export const iotexTokensForEth = {
       'name': 'Wrapped IOTX',
       'decimals': 18,
       'symbol': 'WIOTX',
-      'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/2777.png'
+      'logoURI': 'https://githubproxy.b-cdn.net/iotexproject/iotex-token-metadata/master/images/io15qr5fzpxsnp7garl4m7k355rafzqn8grrm0grz.png'
     },
     {
       'address': '0xc7b93720f73b037394ce00f954f849ed484a3dea',

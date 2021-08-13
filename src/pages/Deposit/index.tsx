@@ -144,7 +144,7 @@ export const Deposit = observer(() => {
   };
 
   return (
-    <Box bgImage={'/images/home_bg.png'} pt={10}>
+    <Box bgImage={'/images/home_bg.png'} pt={6}>
       <HistoryActionModal/>
       <Center>
         <Alert
@@ -155,13 +155,14 @@ export const Deposit = observer(() => {
           boxShadow={homeShadow}
           borderRadius={'10px'}>
           <Text
-            color={useColorModeValue(theme.colors.darkLightGreen, theme.colors.lightGreen)}>{lang.t('tube_v4')}</Text>
-          <CloseButton position='absolute' right='8px' top='8px' onClick={() => store.isShowAlert.setValue(false)} />
+            fontSize='sm'
+            color={useColorModeValue('darkLightGreen', 'lightGreen')}>{lang.t('tube_v4')}</Text>
+          <CloseButton position='absolute' right={1} top={1} onClick={() => store.isShowAlert.setValue(false)} />
         </Alert>
       </Center>
       <Container
         maxW='md'
-        mt={8}
+        mt={6}
         p={{ base: 2, md: 30 }}
         borderRadius={theme.borderRadius.sm}
         boxShadow={homeShadow}

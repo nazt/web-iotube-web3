@@ -1,12 +1,23 @@
 import { Home } from '../pages/Home/index';
 import { Deposit } from '../pages/Deposit/index';
 import { Faq } from '../pages/Faq/index';
-import { FaqIcon, HomeIcon, DiscordIcon, IotubeIconV4, SwapIcon, TransactionsIcon, AssetIcon } from '@/components/Icon';
+import {
+  FaqIcon,
+  HomeIcon,
+  DiscordIcon,
+  IotubeIconV4,
+  SwapIcon,
+  TransactionsIcon,
+  AssetIcon,
+  TubeIcon
+} from '@/components/Icon';
 import { Transaction } from '../pages/Transaction/index';
 import { AiFillGithub } from 'react-icons/all';
 import React from 'react';
 import { Icon } from '@chakra-ui/react';
+import { SwapCC } from '../pages/SwapCC';
 import { TokenList } from '../pages/Asset';
+
 
 class Tool {
   name: string;
@@ -31,6 +42,13 @@ export const ToolConfig = [
     name: 'Tube',
     path: '/tube',
     component: Deposit,
+    icon:TubeIcon,
+    isActive:false
+  },
+  {
+    name: 'Crosschain IOTX',
+    path: '/ciotx',
+    component: SwapCC,
     icon:SwapIcon,
     isActive:false
   },

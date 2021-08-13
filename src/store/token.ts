@@ -115,6 +115,37 @@ export class TokenStore {
         })
       )
     ]);
+  }
+
+
+  async loadCCSourceToken() {
+    if (!this.currentChain.tokensForCC) return false;
+    await this.currentNetwork.multicall([
+      ...this.currentChain.tokensForCC.map((i) =>
+        i.preMulticall({
+          method: 'allowance',
+          params: [this.currentNetwork.account, this.currentChain.router],
+          handler: i.allowanceForSwap
+        }),
+      ),
+      ...this.currentChain.tokensForCC.map((i) =>
+        i.preMulticall({
+          method: 'balanceOf',
+          params: [this.currentNetwork.account],
+          handler: i.balance
+        }),
+      ),
+      this.currentChain.ccToken.preMulticall({
+        method: 'balanceOf',
+        params: [this.currentNetwork.account],
+        handler: this.currentChain.ccToken.balance
+      }),
+      this.currentChain.ccToken.preMulticall({
+        method: 'allowance',
+        params: [this.currentNetwork.account, this.currentChain.router],
+        handler: this.currentChain.ccToken.allowanceForSwap
+      })
+    ]);
 
   }
 

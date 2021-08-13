@@ -49,52 +49,6 @@ export const ethTokensForKovenIotex = {
   ]
 };
 
-export const iotexTokensForKoven = {
-  'tokens': [
-    {
-      'address': 'io1kwxuxch2y67hdaqp69pfrtuapp7xdxkkxyejr5',
-      'name': 'IoTeX',
-      'decimals': 18,
-      'symbol': 'IOTX',
-      'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/2777.png'
-    },
-    {
-      'address': 'io1jw6eckew7wak75j7vzxldd5ma88n9pxkajecrw',
-      'name': 'Wrapped ETH',
-      'decimals': 18,
-      'symbol': 'ioETH',
-      'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png'
-    }, {
-      'address': 'io1jw6eckew7wak75j7vzxldd5ma88n9pxkajecrw',
-      'name': 'Wrapped ETH',
-      'decimals': 18,
-      'symbol': 'ioETH',
-      'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png'
-    },
-    {
-      'address': 'io1nth44knlehx5nna8ezdpeej5clnj25rgcr7slu',
-      'name': 'Binance USD',
-      'decimals': 18,
-      'symbol': 'ioBUSD',
-      'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/4687.png'
-    },
-    {
-      'address': 'io1cxd42m8j72nmy0mmruww82vnrgukdzuh0m3wm2',
-      'name': 'Paxos Gold',
-      'decimals': 18,
-      'symbol': 'ioPAXG',
-      'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/4705.png'
-    },
-    {
-      'address': 'io1wjjqsevlpxeqsy0tmlgpl2qjagjyd0j6gwvfh3',
-      'name': 'ioWBTC',
-      'decimals': 8,
-      'symbol': 'ioWBTC',
-      'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/3717.png'
-    }
-  ]
-};
-
 
 export const iotexTokensForKovenWeb3 = {
   'cashier': '0xdd3e61cce0d3ea91544063e9f25737258507a1fd',
@@ -107,34 +61,13 @@ export const iotexTokensForKovenWeb3 = {
       'decimals': 18,
       'symbol': 'IOTX',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/2777.png'
+    },
+    {
+      'name': 'Cross Chain IoTeX',
+      'symbol': 'CC-IOTX',
+      'address': '0xB40F662DcAd24DDf0DE0D742aF225dd43fae7d49',
+      'decimals': 18,
+      'logoURI': 'https://iotexscan.io/image/token/io1hp6y4eqr90j7tmul4w2wa8pm7wx462hq0mg4tw.png'
     }
-    // {
-    //   'address': '0x93b59c5b2ef3bb6f525e608df6b69be9cf3284d6',
-    //   'name': 'Wrapped ETH',
-    //   'decimals': 18,
-    //   'symbol': 'ioETH',
-    //   'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png'
-    // },
-    // {
-    //   'address': '0x9aef5ada7fcdcd49cfa7c89a1ce654c7e7255068',
-    //   'name': 'Binance USD',
-    //   'decimals': 18,
-    //   'symbol': 'ioBUSD',
-    //   'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/4687.png'
-    // },
-    // {
-    //   'address': '0xc19b556cf2f2a7b23f7b1f1ce3a9931a39668b97',
-    //   'name': 'Paxos Gold',
-    //   'decimals': 18,
-    //   'symbol': 'ioPAXG',
-    //   'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/4705.png'
-    // },
-    // {
-    //   'address': '0x74a408659f09b20811ebdfd01fa812ea2446be5a',
-    //   'name': 'ioWBTC',
-    //   'decimals': 8,
-    //   'symbol': 'ioWBTC',
-    //   'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/3717.png'
-    // }
   ]
 };

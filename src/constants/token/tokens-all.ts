@@ -246,5 +246,17 @@ export const TOKENS = {
     decimals: 18,
     symbol: 'CYC',
     logoURI: 'https://iotexscan.io/image/token/io1f4acssp65t6s90egjkzpvrdsrjjyysnvxgqjrh.png'
+  },
+  '0x99B2B0eFb56E62E36960c20cD5ca8eC6ABD5557A': {
+    name: 'Crosschain IOTX',
+    decimals: 18,
+    symbol: 'CIOTX',
+    logoURI: '/images/tokens/ctoken_logo.jpeg'
+  },
+  '0x300211Def2a644b036A9bdd3e58159bb2074d388': {
+    name: 'Crosschain IOTX',
+    decimals: 18,
+    symbol: 'CIOTX',
+    logoURI: '/images/tokens/ctoken_logo.jpeg'
   }
 };

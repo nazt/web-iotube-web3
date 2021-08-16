@@ -105,6 +105,7 @@ export const Deposit = observer(() => {
         const receipt = await res.wait();
         deposit.updateAction(receipt);
         console.log('receipt--->', receipt);
+        token.loadPrivateData();
       } catch (e) {
         store.confirmIsLoading.setValue(false);
         console.log(e);

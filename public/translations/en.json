@@ -30,6 +30,7 @@
   "to_iotube_and_mint": "to ioTube and mint",
   "change_network_eth_warning": "Metamask does not allow us switch to Ethereum for you.  Please switch inside Metamask.",
   "deposit.approving": "Approving",
+  "deposit.auto_relay": "Auto Relay",
   "button.waiting": "Waiting",
   "button.confirming": "Confirming",
   "complete.broadcast_transaction_successfully": "Action submitted successfully",

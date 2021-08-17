@@ -13,6 +13,7 @@ import {
   Button,
   Stack,
   Textarea,
+  Switch,
   useColorModeValue,
   useTheme,
   Tag, chakra, Alert, CloseButton, Popover, PopoverTrigger, PopoverContent, PopoverArrow, PopoverBody
@@ -144,7 +145,7 @@ export const Deposit = observer(() => {
   };
 
   return (
-    <Box bgImage={'/images/home_bg.png'} pt={10}>
+    <Box bgImage={'/images/home_bg.png'} pt={10} pos='relative'>
       <HistoryActionModal/>
       <Center>
         <Alert
@@ -272,7 +273,27 @@ export const Deposit = observer(() => {
             </Popover>
           </Flex>
           }
-          <Center mt={deposit.receiverAddress.anotherAddress ? 6 : 20} mb={2}>
+
+          {/*<Stack mt={deposit.receiverAddress.anotherAddress ? 6 : 20} mb={2} direction="column">*/}
+          {/*  */}
+          {/*</Stack>*/}
+
+          <Flex flexDirection="column" mt={deposit.receiverAddress.anotherAddress ? 6 : 20} mb={2}>
+            <Flex justify='space-between'>
+              <Stack direction='row' spacing='2.5' mb='5'>
+                <Text
+                  color={useColorModeValue('gray.6', 'gray.3')}
+                  fontFamily='dmSans'
+                  fontSize='md'
+                >
+                  {lang.t('deposit.auto_relay')}
+                </Text>
+                <Image src='/images/warning.svg' boxSize='6'/>
+              </Stack>
+
+              <Switch size='md' />
+            </Flex>
+
             {!Boolean(god.currentNetwork.account) ? (
               <Button
                 size='block'
@@ -306,7 +327,7 @@ export const Deposit = observer(() => {
                   </Button>}
               </>
             )}
-          </Center>
+          </Flex>
         </FormControl>
         <TokenListModal isOpen={store.isOpenTokenList.value} onClose={() => store.isOpenTokenList.setValue(false)}
                         onSelect={store.onSelectToken} />
@@ -317,6 +338,30 @@ export const Deposit = observer(() => {
         />
         <CompleteModal />
       </Container>
+      <Center >
+        <Alert
+          display={store.isShowAlert.value ? 'flex' : 'none'}
+          maxW='3xl'
+          minH='20'
+          textAlign='center'
+          bgColor={useColorModeValue('white', theme.colors.bg.bg1Alpha20)}
+          borderRadius='2xl'
+          px='2.5'
+          pl='12'
+          pr='5'
+        >
+          <Text
+            color={useColorModeValue('gray.4', 'white')}
+            fontSize='lg'
+          >
+            {lang.t('transaction_link_copied')}
+          </Text>
+          <Button>
+
+          </Button>
+          <CloseButton position='absolute' right='8px' top='8px' onClick={() => store.isShowAlert.setValue(false)} />
+        </Alert>
+      </Center>
     </Box>
   );
 

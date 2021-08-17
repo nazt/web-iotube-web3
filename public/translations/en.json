@@ -32,6 +32,7 @@
   "change_network_eth_warning": "Metamask does not allow us switch to Ethereum for you.  Please switch inside Metamask.",
   "deposit.approving": "Approving",
   "deposit.auto_relay": "Auto Relay",
+  "deposit.withdraw": "Withdraw",
   "button.waiting": "Waiting",
   "button.confirming": "Confirming",
   "complete.broadcast_transaction_successfully": "Action submitted successfully",

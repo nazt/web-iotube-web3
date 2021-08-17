@@ -53,6 +53,7 @@ export const Deposit = observer(() => {
     confirmLoadingText: lang.t('button.confirming'),
     showAddressToolTip: new BooleanState(),
     isShowAlert: new BooleanState(),
+    isShowWithdraw: new BooleanState(),
     showConnector() {
       god.setShowConnecter(true);
     },
@@ -128,6 +129,7 @@ export const Deposit = observer(() => {
     store.approveLoading.setValue(false);
     store.confirmIsLoading.setValue(false);
     store.isShowAlert.setValue(true);
+    store.isShowWithdraw.setValue(true);
     store.showAddressToolTip.setValue(false);
     if (god.currentNetwork.account) {
       token.loadPrivateData();
@@ -146,7 +148,7 @@ export const Deposit = observer(() => {
   };
 
   return (
-    <Box bgImage={'/images/home_bg.png'} pt={10}>
+    <Box as={Flex} flexDir='column' bgImage={'/images/home_bg.png'} pt={10} h='100%'>
       <HistoryActionModal/>
       <Center>
         <Alert
@@ -276,10 +278,6 @@ export const Deposit = observer(() => {
           </Flex>
           }
 
-          {/*<Stack mt={deposit.receiverAddress.anotherAddress ? 6 : 20} mb={2} direction="column">*/}
-          {/*  */}
-          {/*</Stack>*/}
-
           <Box px={3} py={1} mt={5}>
             <Text fontSize={'0.75rem'}
                   color={useColorModeValue(theme.colors.darkLightGreen, theme.colors.lightGreen)}>{lang.t('exchange.address.warning')}</Text>
@@ -345,28 +343,39 @@ export const Deposit = observer(() => {
         />
         <CompleteModal />
       </Container>
-      <Center >
+      <Center mt='5' height='36' flex='1'>
         <Alert
-          display={store.isShowAlert.value ? 'flex' : 'none'}
+          as={Flex}
+          display={store.isShowWithdraw.value ? 'flex' : 'none'}
           maxW='3xl'
-          minH='20'
-          textAlign='center'
           bgColor={useColorModeValue('white', theme.colors.bg.bg1Alpha20)}
           borderRadius='2xl'
           px='2.5'
-          pl='12'
           pr='5'
+          mt='auto'
         >
           <Text
             color={useColorModeValue('gray.4', 'white')}
             fontSize='lg'
+            flex='1'
+            textAlign='left'
+            mr='5'
+            ml='8'
           >
             {lang.t('transaction_link_copied')}
           </Text>
-          <Button>
-
+          <Button
+            w='36'
+            h='12'
+            bg={useColorModeValue('darkLightGreen', 'lightGreen')}
+            color='white'
+            fontSize='lg'
+            borderRadius='2xl'
+            mr='10'
+          >
+            {lang.t('deposit.withdraw')}
           </Button>
-          <CloseButton position='absolute' right='8px' top='8px' onClick={() => store.isShowAlert.setValue(false)} />
+          <CloseButton position='absolute' right='8px' top='8px' onClick={() => store.isShowWithdraw.setValue(false)} />
         </Alert>
       </Center>
     </Box>

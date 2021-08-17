@@ -40,6 +40,7 @@ const BodyWrapper = observer(({ children }) => {
       maxWidth={{
         md: sideBar.isOpen ? theme.content.maxWidthWithIconText : theme.content.maxWidthWithIcon
       }}
+      h='100vh'
     >
       {children}
     </Box>

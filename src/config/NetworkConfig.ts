@@ -7,6 +7,7 @@ import { BSCTestnetConfig } from './BSCTestnetConfig';
 import { IotexNetworkState } from '../store/lib/IotexNetworkState';
 import { IotexMainnetConfig } from './IotexMainnetConfig';
 import { PolygonMainnetConfig } from './PolygonMainnetConfig';
+import { IotexTestnetConfig } from './IotexTestnetConfig';
 
 export const EthNetworkConfig = new EthNetworkState({
   allowChains: [BSCMainnetConfig.chainId, ETHMainnetConfig.chainId, IotexMainnetConfig.chainId, PolygonMainnetConfig.chainId],
@@ -23,6 +24,7 @@ export const EthNetworkConfig = new EthNetworkState({
       [BSCMainnetConfig.chainId]: BSCMainnetConfig,
       [BSCTestnetConfig.chainId]: BSCTestnetConfig,
       [IotexMainnetConfig.chainId]: IotexMainnetConfig,
+      [IotexTestnetConfig.chainId]: IotexTestnetConfig,
       [PolygonMainnetConfig.chainId]: PolygonMainnetConfig,
     }
   })

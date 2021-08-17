@@ -20,6 +20,9 @@ export class ChainState {
     blockPerSeconds: number;
     multicallAddr?: string;
   };
+  tokensForCC?: TokenState[];
+  ccToken?: TokenState;
+  router?: string;
 
   crossChain: {
     [key: number]: Partial<CrossChain>;
@@ -33,7 +36,6 @@ export class ChainState {
   }
   init() {
     this.Coin.network = this.network;
-
     _.each(this.crossChain, (v, k) => {
       _.each(v.tokens, (token) => {
         token.network = this.network;

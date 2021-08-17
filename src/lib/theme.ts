@@ -23,7 +23,14 @@ const Button = {
   variants: {
     'green':(props)=>({
       bg: props.colorMode === 'dark'?'lightGreen':'darkLightGreen',
-      color: 'white'
+      color: 'white',
+      _hover: {
+        opacity: 0.8,
+        _disabled: {
+          bg: props.colorMode === 'dark'?'lightGreen':'darkLightGreen',
+          opacity: 0.5
+        }
+      }
     }),
     'black': (props) => ({
       bg: props.colorMode === 'dark' ? '#182532' : 'gray.800',
@@ -34,6 +41,18 @@ const Button = {
           background: 'gray'
         }
       }
+    }),
+    'opacity-primary': (props) => ({
+      bg: props.colorMode === 'dark'?'#3E524D':'#EBFFF5',
+      minHeight: '20px',
+      paddingY: '4px',
+      color: props.colorMode === 'dark'?'lightGreen':'darkLightGreen'
+    }),
+    'opacity': (props) => ({
+      bg: props.colorMode === 'dark'?'#c7cfd614':'#F9F9F9',
+      minHeight: '20px',
+      paddingY: '4px',
+      opacity: 0.4
     })
   },
   // The default size and variant values
@@ -159,7 +178,7 @@ export const theme = extendTheme({
   },
   sideBar: {
     none: '0px',
-    width: '220px',
+    width: '240px',
     widthWithOutText:'80px',
     bg: {
       light: 'white',

@@ -4,7 +4,6 @@ import { BigNumberState } from '../standard/BigNumberState';
 import { CallParams } from '../../../type';
 import erc20Abi from '@/constants/abi/erc20.json';
 import tokenListAbi from '@/constants/abi/tokenlist.json';
-import BigNumber from 'bignumber.js';
 
 export class TokenState {
   abi = erc20Abi;
@@ -21,6 +20,7 @@ export class TokenState {
   network: NetworkState;
   balance: BigNumberState;
   allowanceForCashier: BigNumberState;
+  allowanceForSwap: BigNumberState;
   minAmountMintable: BigNumberState;
   maxAmountMintable: BigNumberState;
   minAmountStandard: BigNumberState;
@@ -33,11 +33,19 @@ export class TokenState {
   constructor(args: Partial<TokenState>) {
     Object.assign(this, args);
     this.balance = new BigNumberState({ decimals: this.decimals, loading: true });
+    this.allowanceForCashier = new BigNumberState({decimals: this.decimals, loading: false});
+    this.minAmountMintable = new BigNumberState({decimals: this.decimals, loading: false});
+    this.maxAmountMintable = new BigNumberState({decimals: this.decimals, loading: false});
+    this.minAmountStandard = new BigNumberState({decimals: this.decimals, loading: false});
+    this.maxAmountStandard = new BigNumberState({decimals: this.decimals, loading: false});
+
     this.allowanceForCashier = new BigNumberState({ decimals: this.decimals, loading: false });
+    this.allowanceForSwap = new BigNumberState({decimals: this.decimals, loading: false});
     this.minAmountMintable = new BigNumberState({ decimals: this.decimals, loading: false });
     this.maxAmountMintable = new BigNumberState({ decimals: this.decimals, loading: false });
     this.minAmountStandard = new BigNumberState({ decimals: this.decimals, loading: false });
     this.maxAmountStandard = new BigNumberState({ decimals: this.decimals, loading: false });
+
     makeObservable(this, {
       metas: observable
     });

@@ -9,6 +9,7 @@
   "input.wallet.not_connected": "Wallet is not connected",
   "input.token.unselected": "Please select token",
   "input.cashier.invalid": "Invalid cashier contract address",
+  "input.swap.invalid": "Invalid swap contract address",
   "input.token.invalid": "Invalid token contract",
   "input.amount.invalid": "Invalid amount",
   "input.amount.enter_value": "Enter amount",
@@ -126,6 +127,9 @@
   "view_iotexscan": "View on IoTeXScan",
   "free": "Free",
   "button.switch": "Switch",
+  "button.cancel": "Cancel",
+  "ccToken.swap.confirm": "Confirm Swap",
+  "button.swap": "Swap",
   "asset.title": "Assets on ioTube",
   "asset.supported": "Want your supported?",
   "asset.start": "Start here >>>",
@@ -133,5 +137,9 @@
   "ethAddress.tooltip": "This is your Web3 (0x) wallet based on your private key. ${keyword}",
   "iotexAddress.tooltip": "This is your IoTeX wallet based on your private key. ${keyword}",
   "my.wallet": "My Wallet",
-  "button.okay": "Okay"
+  "button.okay": "Okay",
+  "exchange.address.warning": "Warning: Do not use exchange addresses or contract addresses. You may lose your tokens.",
+  "swap.ctoken.title": "CIOTX Swap",
+  "swap.ctoken.description": "Crosschain IOTX (CIOTX) is a wrapped IOTX that can be bridged to any networks via iotube. You can swap IOTX/WIOTX/CIOTX at 1:1 ratio anytime on IoTeX network. This product is still beta. CIOTX is only available on IoTeX and Polygon networks. Please use at your own risk.",
+  "swap.ctoken.not_support": "CIOTX swap is only available on IoTeX network. Please switch to IoTeX network to continue."
 }

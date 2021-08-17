@@ -25,10 +25,26 @@ export const IotexMainnetConfig = new ChainState({
     name: 'IOTX',
     symbol: 'IOTX',
     decimals: 18,
-    logoURI: 'https://githubproxy.b-cdn.net/iotexproject/iotex-token-metadata/master/images/io15qr5fzpxsnp7garl4m7k355rafzqn8grrm0grz.png',
+    logoURI: '/images/chain/iotex.svg',
+  }),
+  router: "0x0F814827f651bCBf4971975F6eb55B2b6C5BCb4F",
+  tokensForCC: [new TokenState({
+    'address': '0xa00744882684c3e4747faefd68d283ea44099d03',
+    'name': 'Wrapped IOTX',
+    'decimals': 18,
+    'symbol': 'WIOTX',
+    'logoURI': 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io15qr5fzpxsnp7garl4m7k355rafzqn8grrm0grz.png'
+  })],
+  ccToken: new TokenState({
+    name: 'Crosschain IOTX',
+    symbol: 'CIOTX',
+    address: '0x99B2B0eFb56E62E36960c20cD5ca8eC6ABD5557A',
+    decimals: 18,
+    logoURI: '/images/tokens/ctoken_logo.jpeg'
   }),
   Coin: new TokenState({
     symbol: 'IOTX',
+    address: '0x0000000000000000000000000000000000000000',
     decimals: 18
   }),
   crossChain: {}

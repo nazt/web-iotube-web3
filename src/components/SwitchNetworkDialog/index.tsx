@@ -12,39 +12,32 @@ import {
   AlertDialogFooter
 } from '@chakra-ui/react';
 
-interface PropsType {
-  onConfirm: Function;
-  isOpen: boolean;
-  onClose: Function;
-  destChain?: string;
-}
-
-export const SwitchNetworkDialog = observer((props: PropsType) => {
-  const { lang } = useStore();
+export const SwitchNetworkDialog = observer(() => {
+  const { god, lang } = useStore();
 
   return (
     <>
       <AlertDialog
         motionPreset="slideInBottom"
-        onClose={() => props.onClose()}
-        isOpen={props.isOpen}
+        onClose={() => god.confirmDialogClose()}
+        isOpen={god.confirmDialogOpen.value}
         isCentered
         leastDestructiveRef={null}>
         <AlertDialogOverlay/>
 
         <AlertDialogContent>
-          <AlertDialogHeader>{lang.t('switch_network.header', {network_name: props.destChain})}</AlertDialogHeader>
+          <AlertDialogHeader>{lang.t('switch_network.header', {network_name: god.destChain?.name})}</AlertDialogHeader>
           <AlertDialogCloseButton/>
           <AlertDialogBody>
-            {lang.t('switch_network.confirm.content',{network_name: props.destChain})}
+            {lang.t('switch_network.confirm.content',{network_name: god.destChain?.name})}
           </AlertDialogBody>
           <AlertDialogFooter>
-            <Button onClick={() => props.onClose()}>
+            <Button onClick={() => god.confirmDialogClose()}>
               {lang.t('button.cancel')}
             </Button>
             <Button variant="green" ml={3}
                     onClick={() => {
-              props.onConfirm();
+                      god.onConfirm();
             }}>
               {lang.t('button.switch')}
             </Button>

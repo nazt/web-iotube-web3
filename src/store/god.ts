@@ -6,15 +6,15 @@ import { ChainState } from './lib/ChainState';
 import { EthNetworkState } from './lib/EthNetworkState';
 import { IotexNetworkState } from './lib/IotexNetworkState';
 import { RootStore } from './root';
-import { NumberState } from './standard/base';
+import { BooleanState, NumberState } from './standard/base';
 import { _ } from '@/lib/lodash';
 import { ethCrossChain, ETHMainnetConfig } from '../config/ETHMainnetConfig';
 import { iotexMainCrossChain, IotexMainnetConfig } from '../config/IotexMainnetConfig';
 import { bscMainCrossChain, BSCMainnetConfig } from '../config/BSCMainnetConfig';
 import { polygonMainCrossChain, PolygonMainnetConfig } from '../config/PolygonMainnetConfig';
-import { ETHKovanConfig, ethKovenCrossChain } from '../config/ETHKovanConfig';
+import { IotexTestnetConfig, iotexTestnetCrossChain } from '../config/IotexTestnetConfig';
+import { metamaskUtils } from '@/lib/metaskUtils';
 import { ethers } from 'ethers';
-import { Contract } from 'ethers-multicall';
 
 export enum Network {
   eth = 'eth',
@@ -41,6 +41,9 @@ export class GodStore {
 
   updateTicker = new NumberState();
 
+  confirmDialogOpen = new BooleanState({});
+  destChain = null;
+
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
     makeAutoObservable(this, {
@@ -57,6 +60,7 @@ export class GodStore {
     IotexMainnetConfig.crossChain = iotexMainCrossChain(EthNetworkConfig);
     BSCMainnetConfig.crossChain = bscMainCrossChain(EthNetworkConfig);
     // ETHKovanConfig.crossChain = ethKovenCrossChain(EthNetworkConfig);
+    // IotexTestnetConfig.crossChain = iotexTestnetCrossChain(EthNetworkConfig);
     PolygonMainnetConfig.crossChain = polygonMainCrossChain(EthNetworkConfig);
     // IotexTestnetConfig.crossChain = iotexTestnetCrossChain(EthNetworkConfig);
   }
@@ -114,5 +118,32 @@ export class GodStore {
   setShowConnecter(value: boolean) {
     // this.currentNetwork.connector.showConnector = value;
     this.eth.connector.showConnector = value;
+  }
+
+  get networks() {
+    return [BSCMainnetConfig, ETHMainnetConfig, IotexMainnetConfig, PolygonMainnetConfig];
+  }
+
+  setDestChain(val) {
+    this.destChain = this.currentNetwork.chain.map[val];
+    this.confirmDialogOpen.setValue(true);
+  }
+
+  confirmDialogClose() {
+    this.confirmDialogOpen.setValue(false);
+  }
+  async onConfirm() {
+    await metamaskUtils.setupNetwork({
+      chainId: this.destChain.chainId,
+      blockExplorerUrls: [this.destChain.explorerURL],
+      chainName: this.destChain.name,
+      nativeCurrency: {
+        decimals: this.destChain.Coin.decimals || 18,
+        name: this.destChain.Coin.symbol,
+        symbol: this.destChain.Coin.symbol
+      },
+      rpcUrls: [this.destChain.rpcUrl]
+    });
+    this.confirmDialogClose();
   }
 }

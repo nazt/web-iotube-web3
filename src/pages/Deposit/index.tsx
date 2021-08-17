@@ -101,11 +101,12 @@ export const Deposit = observer(() => {
         if (res) {
           token.actionHash.setValue(res.hash);
           deposit.isOpenCompleteModal.setValue(true);
-          deposit.saveAction(res)
+          deposit.saveAction(res);
         }
         const receipt = await res.wait();
-        deposit.updateAction(receipt)
+        deposit.updateAction(receipt);
         console.log('receipt--->', receipt);
+        token.loadPrivateData();
       } catch (e) {
         store.confirmIsLoading.setValue(false);
         console.log(e);
@@ -145,7 +146,7 @@ export const Deposit = observer(() => {
   };
 
   return (
-    <Box bgImage={'/images/home_bg.png'} pt={10} pos='relative'>
+    <Box bgImage={'/images/home_bg.png'} pt={10}>
       <HistoryActionModal/>
       <Center>
         <Alert
@@ -156,13 +157,14 @@ export const Deposit = observer(() => {
           boxShadow={homeShadow}
           borderRadius={'10px'}>
           <Text
-            color={useColorModeValue(theme.colors.darkLightGreen, theme.colors.lightGreen)}>{lang.t('tube_v4')}</Text>
-          <CloseButton position='absolute' right='8px' top='8px' onClick={() => store.isShowAlert.setValue(false)} />
+            fontSize='sm'
+            color={useColorModeValue('darkLightGreen', 'lightGreen')}>{lang.t('tube_v4')}</Text>
+          <CloseButton position='absolute' right={1} top={1} onClick={() => store.isShowAlert.setValue(false)} />
         </Alert>
       </Center>
       <Container
         maxW='md'
-        mt={8}
+        mt={6}
         p={{ base: 2, md: 30 }}
         borderRadius={theme.borderRadius.sm}
         boxShadow={homeShadow}
@@ -278,7 +280,12 @@ export const Deposit = observer(() => {
           {/*  */}
           {/*</Stack>*/}
 
-          <Flex flexDirection="column" mt={deposit.receiverAddress.anotherAddress ? 6 : 20} mb={2}>
+          <Box px={3} py={1} mt={5}>
+            <Text fontSize={'0.75rem'}
+                  color={useColorModeValue(theme.colors.darkLightGreen, theme.colors.lightGreen)}>{lang.t('exchange.address.warning')}</Text>
+          </Box>
+
+          <Flex flexDirection="column" mt={deposit.receiverAddress.anotherAddress ? 6 : 14} mb={2}>
             <Flex justify='space-between'>
               <Stack direction='row' spacing='2.5' mb='5'>
                 <Text

@@ -102,7 +102,6 @@ export const Header = observer(() => {
         transition='box-shadow 0.2s'
         bg={theme.colors.header.bg}
         w='full'
-        overflowY='hidden'
         pos='fixed'
       >
         <chakra.div h={theme.header.height} mx={6}>

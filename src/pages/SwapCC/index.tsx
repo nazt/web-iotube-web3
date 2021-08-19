@@ -144,7 +144,7 @@ export const SwapCC = observer(() => {
           });
         }
         store.confirmIsLoading.setValue(false);
-        token.loadCCSourceToken();
+        god.updateTicker.setValue(god.updateTicker.value + 1);
         store.amount = new BigNumberInputState({ value: new BigNumber(0) });
       } catch (e) {
         store.confirmIsLoading.setValue(false);
@@ -159,6 +159,13 @@ export const SwapCC = observer(() => {
     }
   }));
 
+
+  useEffect(() => {
+    if (god.currentNetwork.account) {
+      god.currentNetwork.loadBalance();
+      token.loadCCSourceToken();
+    }
+  }, [god.updateTicker.value]);
 
   useEffect(() => {
     store.hasCCToken = !!god.currentChain.ccToken;

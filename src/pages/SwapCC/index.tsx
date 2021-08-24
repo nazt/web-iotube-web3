@@ -18,6 +18,7 @@ import { MaxUint256 } from '@ethersproject/constants';
 import { toast } from 'react-hot-toast';
 import './index.scss';
 import { CCRouterState } from '@/store/lib/CCRouterState';
+import { TokenState } from '@/store/lib/TokenState';
 
 export const SwapCC = observer(() => {
   const { god, token, lang } = useStore();
@@ -43,6 +44,14 @@ export const SwapCC = observer(() => {
       this.amount = new BigNumberInputState({ value: new BigNumber(0) });
       this.curToken = token;
       this.curToken.network = god.currentNetwork;
+    },
+    maxCurTokenValue() {
+      if (store.curToken?.symbol != 'WIOTX') {
+        let maxAmount = store.curToken?.balance.value.minus(new BigNumber(10 ** store.curToken?.balance.decimals));
+        store.amount.setValue(maxAmount < 0 ? new BigNumber(0) : maxAmount);
+      } else {
+        store.amount.setValue(store.curToken?.balance.value);
+      }
     },
     get shouldApprove() {
       if (this.isCCToken) {
@@ -144,7 +153,7 @@ export const SwapCC = observer(() => {
           });
         }
         store.confirmIsLoading.setValue(false);
-        token.loadCCSourceToken();
+        god.updateTicker.setValue(god.updateTicker.value + 1);
         store.amount = new BigNumberInputState({ value: new BigNumber(0) });
       } catch (e) {
         store.confirmIsLoading.setValue(false);
@@ -159,6 +168,13 @@ export const SwapCC = observer(() => {
     }
   }));
 
+
+  useEffect(() => {
+    if (god.currentNetwork.account) {
+      god.currentNetwork.loadBalance();
+      token.loadCCSourceToken();
+    }
+  }, [god.updateTicker.value]);
 
   useEffect(() => {
     store.hasCCToken = !!god.currentChain.ccToken;
@@ -245,7 +261,7 @@ export const SwapCC = observer(() => {
                     <InputRightElement float={'right'} mr={{ base: 2, md: 4 }} cursor='pointer'
                                        zIndex={0}>
                       <Tag size='sm' variant='solid' bg={theme.colors.darkLightGreen} cursor='pointer'
-                           onClick={() => store.amount.setValue(store.curToken?.balance.value)}
+                           onClick={() => store.maxCurTokenValue()}
                       >{'MAX'}</Tag>
                     </InputRightElement>
                     }

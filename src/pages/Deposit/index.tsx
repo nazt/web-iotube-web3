@@ -108,7 +108,7 @@ export const Deposit = observer(() => {
         const receipt = await res.wait();
         deposit.updateAction(receipt);
         console.log('receipt--->', receipt);
-        token.loadPrivateData();
+        god.updateTicker.setValue(god.updateTicker.value + 1);
       } catch (e) {
         store.confirmIsLoading.setValue(false);
         console.log(e);
@@ -123,6 +123,12 @@ export const Deposit = observer(() => {
     }
   }));
 
+  useEffect(() => {
+    if (god.currentNetwork.account) {
+      god.currentNetwork.loadBalance();
+      token.loadPrivateData();
+    }
+  }, [god.updateTicker.value]);
 
   useEffect(() => {
     deposit.curToken = token.currentCrossChain?.tokens[0];

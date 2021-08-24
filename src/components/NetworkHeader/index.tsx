@@ -43,22 +43,20 @@ const NetworkHeader = observer((props: ISwitchProps) => {
   const headerColor = useColorModeValue(theme.colors.gray[4], theme.colors.gray[3]);
   const store = useLocalObservable(() => ({
     tipsVisible: false,
-    confirmDialogOpen: new BooleanState({}),
     confirmDialogClose() {
-      store.confirmDialogOpen.setValue(false);
+      god.confirmDialogOpen.setValue(false);
     },
-    destChain: null,
     async onConfirm() {
       await metamaskUtils.setupNetwork({
-        chainId: store.destChain.chainId,
-        blockExplorerUrls: [store.destChain.explorerURL],
-        chainName: store.destChain.name,
+        chainId: god.destChain.chainId,
+        blockExplorerUrls: [god.destChain.explorerURL],
+        chainName: god.destChain.name,
         nativeCurrency: {
-          decimals: store.destChain.Coin.decimals || 18,
-          name: store.destChain.Coin.symbol,
-          symbol: store.destChain.Coin.symbol
+          decimals: god.destChain.Coin.decimals || 18,
+          name: god.destChain.Coin.symbol,
+          symbol: god.destChain.Coin.symbol
         },
-        rpcUrls: [store.destChain.rpcUrl]
+        rpcUrls: [god.destChain.rpcUrl]
       });
       store.confirmDialogClose();
     },
@@ -69,9 +67,9 @@ const NetworkHeader = observer((props: ISwitchProps) => {
       return [BSCMainnetConfig, ETHMainnetConfig, IotexMainnetConfig, PolygonMainnetConfig];
     },
     setChain(val) {
-      store.destChain = god.currentNetwork.chain.map[val];
+      god.destChain = god.currentNetwork.chain.map[val];
       if (god.isConnect) {
-        store.confirmDialogOpen.setValue(true);
+        god.confirmDialogOpen.setValue(true);
       }else {
         toast('Please connect wallet first.')
       }

@@ -30,6 +30,7 @@ export const IotexTestnetConfig = new ChainState({
     blockPerSeconds: 5,
     multicallAddr: '0xe980c6BC4ff99e3E8431b680a58344B8e0170bE0'
   },
+  tubeRouter: '0x76ed9B8D38325320a593e3ec8c945fa6dEE62161',
   router: "0x2c33B099Cf571339eA349fEe61fB523E8fE13229",
   tokensForCC: [new TokenState({
     'address': '0xB38Dc362eA26bD76F401D14291af9D087c669ad6',

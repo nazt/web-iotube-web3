@@ -96,6 +96,9 @@ export const Deposit = observer(() => {
       let fromAddress = deposit.curToken.address;
       try {
         store.confirmIsLoading.setValue(true);
+
+        const resp = await deposit.depositTo(['', fromAddress, receiverAddress, amountVal, ''], options);
+
         let res = await token.depositTo([fromAddress, receiverAddress, amountVal], options);
         deposit.isOpenConfirmModal.setValue(false);
         store.confirmIsLoading.setValue(false);
@@ -120,6 +123,9 @@ export const Deposit = observer(() => {
           toast.error(e.data.message);
         }
       }
+    },
+    withdraw() {
+
     }
   }));
 
@@ -304,8 +310,10 @@ export const Deposit = observer(() => {
               </Stack>
 
               <Switch
-                _checked={{
-                  background: 'darkLightGreen'
+                _css={{
+                   '&[data-checked]': {
+                     background: 'darkLightGreen'
+                   }
                 }}
                 size='md'
                 isChecked={deposit.isAutoRelay.value}
@@ -361,7 +369,7 @@ export const Deposit = observer(() => {
       <Center mt='5' height='36' flex='1'>
         <Alert
           as={Flex}
-          display={store.isShowWithdraw.value ? 'flex' : 'none'}
+          display={deposit.isAutoRelay.value ? 'flex' : 'none'}
           maxW='3xl'
           bgColor={useColorModeValue('white', theme.colors.bg.bg1Alpha20)}
           borderRadius='2xl'
@@ -386,14 +394,11 @@ export const Deposit = observer(() => {
             color='white'
             fontSize='lg'
             borderRadius='2xl'
-            mr='10'
-            onClick={() => {
-              deposit.withdraw()
-            }}
+            mr='6'
+            onClick={store.withdraw}
           >
             {lang.t('deposit.withdraw')}
           </Button>
-          <CloseButton position='absolute' right='8px' top='8px' onClick={() => store.isShowWithdraw.setValue(false)} />
         </Alert>
       </Center>
     </Box>

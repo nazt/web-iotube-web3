@@ -8,6 +8,7 @@ import { isAddress as isEthAddress } from '@ethersproject/address';
 import { TOKENS } from '@/constants/token/tokens-all';
 import { StorageState } from '@/store/standard/StorageState';
 import { TubeState } from '@/store/lib/TubeState';
+import { TubeRouterState } from '@/store/lib/TubeRouterState';
 
 export class DepositStore {
   rootStore: RootStore;
@@ -18,6 +19,7 @@ export class DepositStore {
   amount: BigNumberInputState = new BigNumberInputState({});
   _curToken: TokenState | null = null;
   tubeState: TubeState | null = null;
+  tubeRouterState: TubeRouterState | null = null;
   historyActions:StorageState<Record<string, any>> = new StorageState({key:'localstorage_history_actions'})
   actionState:StringState =  new StringState()
   constructor(rootStore: RootStore) {
@@ -34,6 +36,10 @@ export class DepositStore {
   set curToken(token: TokenState) {
     this._curToken = token;
     this.tubeState = new TubeState({
+      address: token.address,
+      network: token.network
+    });
+    this.tubeRouterState = new TubeRouterState({
       address: token.address,
       network: token.network
     })
@@ -129,8 +135,15 @@ export class DepositStore {
     return (this.historyActions.value&&this.historyActions.value[this.rootStore.god.currentChain.chainId])||{}
   }
 
-  async withdraw() {
-    // const res = await this.tubeState.withdraw();
-    // console.log('pause -->', res);
+  async withdraw(args, opts) {
+    return await this.tubeState.withdraw({ params: args, options: opts });
+  }
+
+  async depositTo(args, opts) {
+    if (this.isAutoRelay.value) {
+      return await this.tubeState.depositTo({ params: args, options: opts })
+    } else {
+      return await this.tubeRouterState.depositTo({ params: args, options: opts })
+    }
   }
 }

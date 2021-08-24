@@ -35,6 +35,7 @@ import { MaxUint256 } from '@ethersproject/constants';
 import EnterSvg from '../../../public/images/enter.svg';
 import { isAddress as isEthAddress } from '@ethersproject/address';
 import { HistoryActionModal } from './components/HistoryActionModal';
+import { TubeState } from '@/store/lib/TubeState';
 
 export const Deposit = observer(() => {
   const { god, token, lang, deposit } = useStore();
@@ -296,7 +297,15 @@ export const Deposit = observer(() => {
                 <Image src='/images/warning.svg' boxSize='6'/>
               </Stack>
 
-              <Switch size='md' />
+              <Switch
+                _checked={{
+                  background: 'darkLightGreen'
+                }}
+                size='md'
+                isChecked={deposit.isAutoRelay.value}
+                onChange={() => {
+                  deposit.isAutoRelay.setValue(!deposit.isAutoRelay.value);
+                }}/>
             </Flex>
 
             {!Boolean(god.currentNetwork.account) ? (
@@ -372,6 +381,9 @@ export const Deposit = observer(() => {
             fontSize='lg'
             borderRadius='2xl'
             mr='10'
+            onClick={() => {
+              deposit.withdraw()
+            }}
           >
             {lang.t('deposit.withdraw')}
           </Button>

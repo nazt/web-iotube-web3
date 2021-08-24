@@ -7,14 +7,17 @@ import { TokenState } from '@/store/lib/TokenState';
 import { isAddress as isEthAddress } from '@ethersproject/address';
 import { TOKENS } from '@/constants/token/tokens-all';
 import { StorageState } from '@/store/standard/StorageState';
+import { TubeState } from '@/store/lib/TubeState';
 
 export class DepositStore {
   rootStore: RootStore;
   isOpenCompleteModal: BooleanState = new BooleanState();
   isOpenConfirmModal: BooleanState = new BooleanState();
+  isAutoRelay: BooleanState = new BooleanState();
   receiverAddress: AddressState = new AddressState();
   amount: BigNumberInputState = new BigNumberInputState({});
-  curToken: TokenState | null = null;
+  _curToken: TokenState | null = null;
+  tubeState: TubeState | null = null;
   historyActions:StorageState<Record<string, any>> = new StorageState({key:'localstorage_history_actions'})
   actionState:StringState =  new StringState()
   constructor(rootStore: RootStore) {
@@ -22,6 +25,18 @@ export class DepositStore {
     makeAutoObservable(this, {
       rootStore: false
     });
+  }
+
+  get curToken(): TokenState {
+    return this._curToken
+  }
+
+  set curToken(token: TokenState) {
+    this._curToken = token;
+    this.tubeState = new TubeState({
+      address: token.address,
+      network: token.network
+    })
   }
 
   get destToken() {
@@ -112,5 +127,10 @@ export class DepositStore {
   get curChainHistoryActions(){
     console.log(this.historyActions.value)
     return (this.historyActions.value&&this.historyActions.value[this.rootStore.god.currentChain.chainId])||{}
+  }
+
+  async withdraw() {
+    // const res = await this.tubeState.withdraw();
+    // console.log('pause -->', res);
   }
 }

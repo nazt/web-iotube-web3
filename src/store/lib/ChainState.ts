@@ -23,6 +23,7 @@ export class ChainState {
   tokensForCC?: TokenState[];
   ccToken?: TokenState;
   router?: string;
+  tubeRouter?: string;
 
   crossChain: {
     [key: number]: Partial<CrossChain>;

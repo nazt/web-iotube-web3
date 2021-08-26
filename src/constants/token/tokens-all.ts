@@ -258,5 +258,11 @@ export const TOKENS = {
     decimals: 18,
     symbol: 'CIOTX',
     logoURI: '/images/tokens/ctoken_logo.jpeg'
+  },
+  '0x2aaF50869739e317AB80A57Bf87cAA35F5b60598': {
+    name: 'Crosschain IOTX',
+    decimals: 18,
+    symbol: 'CIOTX',
+    logoURI: '/images/tokens/ctoken_logo.jpeg'
   }
 };

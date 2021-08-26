@@ -35,6 +35,14 @@ export const bscToIotexTokens = {
       decimals: 18,
       symbol: 'CYC',
       logoURI: 'https://iotexscan.io/image/token/io1f4acssp65t6s90egjkzpvrdsrjjyysnvxgqjrh.png'
+    },
+    {
+      address: '0x2aaF50869739e317AB80A57Bf87cAA35F5b60598',
+      destAddress: '0x99B2B0eFb56E62E36960c20cD5ca8eC6ABD5557A',
+      name: 'Crosschain IOTX',
+      decimals: 18,
+      symbol: 'CIOTX',
+      logoURI: '/images/tokens/ctoken_logo.jpeg'
     }
   ]
 };
@@ -67,6 +75,14 @@ export const iotexBscNetTokens = {
       decimals: 18,
       symbol: 'CYC',
       logoURI: 'https://iotexscan.io/image/token/io1f4acssp65t6s90egjkzpvrdsrjjyysnvxgqjrh.png'
+    },
+    {
+      address: '0x99B2B0eFb56E62E36960c20cD5ca8eC6ABD5557A',
+      destAddress: '0x2aaF50869739e317AB80A57Bf87cAA35F5b60598',
+      name: 'Crosschain IOTX',
+      decimals: 18,
+      symbol: 'CIOTX',
+      logoURI: '/images/tokens/ctoken_logo.jpeg'
     }
   ]
 };

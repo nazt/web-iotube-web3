@@ -66,7 +66,7 @@ export const WithdrawModal = observer((props: PropsType) => {
       <ModalOverlay/>
       <ModalContent borderRadius={theme.borderRadius.sm}>
         <ModalHeader
-          color='gray.6'
+          color={useColorModeValue('gray.6', 'gray.2')}
           fontWeight='500'
           fontSize='xl'
         >{lang.t('deposit.withdraw')}</ModalHeader>

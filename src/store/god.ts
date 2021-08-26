@@ -121,7 +121,7 @@ export class GodStore {
   }
 
   get networks() {
-    return [BSCMainnetConfig, ETHMainnetConfig, IotexMainnetConfig, PolygonMainnetConfig];
+    return [BSCMainnetConfig, ETHMainnetConfig, IotexMainnetConfig, PolygonMainnetConfig, IotexTestnetConfig];
   }
 
   setDestChain(val) {

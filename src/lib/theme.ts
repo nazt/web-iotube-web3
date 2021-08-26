@@ -232,6 +232,14 @@ export const theme = extendTheme({
       bg2Alpha20: 'rgba(205, 207, 214, 0.2)',
       bg3: '#C7CFD6',
       bg3Alpha20: 'rgba(199, 207, 214, 0.2)'
+    },
+    switch: {
+      dark: {
+        500: '#21CE99'
+      },
+      light: {
+        200: '#33FF99'
+      }
     }
   },
   space: {

@@ -311,11 +311,7 @@ export const Deposit = observer(() => {
               </Stack>
 
               <Switch
-                _css={{
-                   '&[data-checked]': {
-                     background: 'darkLightGreen'
-                   }
-                }}
+                colorScheme={useColorModeValue('switch.dark', 'switch.light')}
                 size='md'
                 isChecked={deposit.isAutoRelay.value}
                 onChange={() => {

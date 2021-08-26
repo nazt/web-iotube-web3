@@ -4,6 +4,9 @@ import { IotexMainnetConfig } from './IotexMainnetConfig';
 import { polygonToIotexTokens } from '@/constants/token/matic-iotex';
 import { CashierState } from '@/store/lib/CashierState';
 import { TokenListState } from '@/store/lib/TokenListState';
+import { TubeState } from '@/store/lib/TubeState';
+import { TubeRouterState } from '@/store/lib/TubeRouterState';
+import { IotexTestnetConfig } from './IotexTestnetConfig';
 
 export const PolygonMainnetConfig = new ChainState({
   name: 'Polygon',

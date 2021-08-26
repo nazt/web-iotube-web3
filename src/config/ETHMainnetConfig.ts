@@ -5,6 +5,9 @@ import { ethTokensForIotex, iotexTokensForEth } from '@/constants/token/eth-iote
 import { IotexMainnetConfig } from './IotexMainnetConfig';
 import { CashierState } from '@/store/lib/CashierState';
 import { TokenListState } from '@/store/lib/TokenListState';
+import { TubeState } from '@/store/lib/TubeState';
+import { TubeRouterState } from '@/store/lib/TubeRouterState';
+import { IotexTestnetConfig } from './IotexTestnetConfig';
 
 export const ETHMainnetConfig = new ChainState({
   name: 'ETH',

@@ -14,12 +14,11 @@ export class DepositStore {
   rootStore: RootStore;
   isOpenCompleteModal: BooleanState = new BooleanState();
   isOpenConfirmModal: BooleanState = new BooleanState();
+  isOpenWithdrawModal: BooleanState = new BooleanState();
   isAutoRelay: BooleanState = new BooleanState();
   receiverAddress: AddressState = new AddressState();
   amount: BigNumberInputState = new BigNumberInputState({});
-  _curToken: TokenState | null = null;
-  tubeState: TubeState | null = null;
-  tubeRouterState: TubeRouterState | null = null;
+  curToken: TokenState | null = null;
   historyActions:StorageState<Record<string, any>> = new StorageState({key:'localstorage_history_actions'})
   actionState:StringState =  new StringState()
   constructor(rootStore: RootStore) {
@@ -27,22 +26,6 @@ export class DepositStore {
     makeAutoObservable(this, {
       rootStore: false
     });
-  }
-
-  get curToken(): TokenState {
-    return this._curToken
-  }
-
-  set curToken(token: TokenState) {
-    this._curToken = token;
-    this.tubeState = new TubeState({
-      address: token.address,
-      network: token.network
-    });
-    this.tubeRouterState = new TubeRouterState({
-      address: token.address,
-      network: token.network
-    })
   }
 
   get destToken() {
@@ -136,14 +119,14 @@ export class DepositStore {
   }
 
   async withdraw(args, opts) {
-    return await this.tubeState.withdraw({ params: args, options: opts });
+    return await this.rootStore.token.currentCrossChain.tube.withdraw({ params: args, options: opts });
   }
 
   async depositTo(args, opts) {
     if (this.isAutoRelay.value) {
-      return await this.tubeState.depositTo({ params: args, options: opts })
+      return await this.rootStore.token.currentCrossChain.tube.depositTo({ params: args, options: opts })
     } else {
-      return await this.tubeRouterState.depositTo({ params: args, options: opts })
+      return await this.rootStore.token.currentCrossChain.tubeRouter.depositTo({ params: args, options: opts })
     }
   }
 }

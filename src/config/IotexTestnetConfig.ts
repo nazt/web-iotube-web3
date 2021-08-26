@@ -6,6 +6,8 @@ import {
 import { CashierState } from '@/store/lib/CashierState';
 import { TokenListState } from '@/store/lib/TokenListState';
 import { ETHKovanConfig } from './ETHKovanConfig';
+import { TubeRouterState } from '@/store/lib/TubeRouterState';
+import { TubeState } from '@/store/lib/TubeState';
 
 export const IotexTestnetConfig = new ChainState({
   name: 'IoTeX Test',
@@ -30,7 +32,8 @@ export const IotexTestnetConfig = new ChainState({
     blockPerSeconds: 5,
     multicallAddr: '0xe980c6BC4ff99e3E8431b680a58344B8e0170bE0'
   },
-  tubeRouter: '0x76ed9B8D38325320a593e3ec8c945fa6dEE62161',
+  tubeAddress: '0x76cCD44d2A2A84Ba7F2375DAC448E2eF85de14a9',
+  tubeRouterAddress: '0x76ed9B8D38325320a593e3ec8c945fa6dEE62161',
   router: "0x2c33B099Cf571339eA349fEe61fB523E8fE13229",
   tokensForCC: [new TokenState({
     'address': '0xB38Dc362eA26bD76F401D14291af9D087c669ad6',
@@ -69,6 +72,14 @@ export const iotexTestnetCrossChain = (network) => {
         const token = new TokenState(i);
         token.network = network;
         return token;
+      }),
+      tubeRouter: new TubeRouterState({
+        address: IotexTestnetConfig.tubeRouterAddress,
+        network: network
+      }),
+      tube: new TubeState({
+        address: IotexTestnetConfig.tubeAddress,
+        network: network
       })
     }
   };

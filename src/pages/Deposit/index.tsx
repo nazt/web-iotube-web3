@@ -36,6 +36,7 @@ import EnterSvg from '../../../public/images/enter.svg';
 import { isAddress as isEthAddress } from '@ethersproject/address';
 import { HistoryActionModal } from './components/HistoryActionModal';
 import { TubeState } from '@/store/lib/TubeState';
+import { WithdrawModal } from '@/components/WithdrawModel';
 
 export const Deposit = observer(() => {
   const { god, token, lang, deposit } = useStore();
@@ -97,9 +98,9 @@ export const Deposit = observer(() => {
       try {
         store.confirmIsLoading.setValue(true);
 
-        const resp = await deposit.depositTo(['', fromAddress, receiverAddress, amountVal, ''], options);
+        const res = await deposit.depositTo([token.currentNetwork.currentChain.chainId, fromAddress,
+          receiverAddress, amountVal], options);
 
-        let res = await token.depositTo([fromAddress, receiverAddress, amountVal], options);
         deposit.isOpenConfirmModal.setValue(false);
         store.confirmIsLoading.setValue(false);
         console.log('res--->', res);
@@ -125,7 +126,7 @@ export const Deposit = observer(() => {
       }
     },
     withdraw() {
-
+      // deposit.withdraw()
     }
   }));
 
@@ -365,11 +366,13 @@ export const Deposit = observer(() => {
           confirmLoadingText={store.confirmLoadingText}
         />
         <CompleteModal />
+
+        <WithdrawModal onConfirm={store.withdraw} confirmLoadingText={""} confirmIsLoading={false}/>
       </Container>
       <Center mt='5' height='36' flex='1'>
         <Alert
           as={Flex}
-          display={deposit.isAutoRelay.value ? 'flex' : 'none'}
+          display='flex'
           maxW='3xl'
           bgColor={useColorModeValue('white', theme.colors.bg.bg1Alpha20)}
           borderRadius='2xl'
@@ -390,12 +393,11 @@ export const Deposit = observer(() => {
           <Button
             w='36'
             h='12'
-            bg={useColorModeValue('darkLightGreen', 'lightGreen')}
-            color='white'
             fontSize='lg'
             borderRadius='2xl'
             mr='6'
-            onClick={store.withdraw}
+            variant="green"
+            onClick={() => {deposit.isOpenWithdrawModal.setValue(true)}}
           >
             {lang.t('deposit.withdraw')}
           </Button>

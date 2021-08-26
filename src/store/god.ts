@@ -12,9 +12,10 @@ import { ethCrossChain, ETHMainnetConfig } from '../config/ETHMainnetConfig';
 import { iotexMainCrossChain, IotexMainnetConfig } from '../config/IotexMainnetConfig';
 import { bscMainCrossChain, BSCMainnetConfig } from '../config/BSCMainnetConfig';
 import { polygonMainCrossChain, PolygonMainnetConfig } from '../config/PolygonMainnetConfig';
-import { IotexTestnetConfig, iotexTestnetCrossChain } from '../config/IotexTestnetConfig';
 import { metamaskUtils } from '@/lib/metaskUtils';
 import { ethers } from 'ethers';
+import { IotexTestnetConfig, iotexTestnetCrossChain } from '../config/IotexTestnetConfig';
+import { ETHKovanConfig, ethKovenCrossChain } from '../config/ETHKovanConfig';
 
 export enum Network {
   eth = 'eth',
@@ -54,15 +55,14 @@ export class GodStore {
     BSCMainnetConfig.init();
     PolygonMainnetConfig.init();
     IotexMainnetConfig.init();
-    // IotexTestnetConfig.init();
+    IotexTestnetConfig.init();
 
     ETHMainnetConfig.crossChain = ethCrossChain(EthNetworkConfig);
     IotexMainnetConfig.crossChain = iotexMainCrossChain(EthNetworkConfig);
     BSCMainnetConfig.crossChain = bscMainCrossChain(EthNetworkConfig);
     // ETHKovanConfig.crossChain = ethKovenCrossChain(EthNetworkConfig);
-    // IotexTestnetConfig.crossChain = iotexTestnetCrossChain(EthNetworkConfig);
     PolygonMainnetConfig.crossChain = polygonMainCrossChain(EthNetworkConfig);
-    // IotexTestnetConfig.crossChain = iotexTestnetCrossChain(EthNetworkConfig);
+    IotexTestnetConfig.crossChain = iotexTestnetCrossChain(EthNetworkConfig);
   }
   get isIotxNetork() {
     return this.network.currentId.value == Network.iotex;

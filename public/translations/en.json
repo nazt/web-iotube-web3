@@ -33,6 +33,8 @@
   "deposit.approving": "Approving",
   "deposit.auto_relay": "Auto Relay",
   "deposit.withdraw": "Withdraw",
+  "deposit.modal.withdraw_to_address": "Withdraw to address",
+  "deposit.modal.select_network": "Select the network",
   "button.waiting": "Waiting",
   "button.confirming": "Confirming",
   "complete.broadcast_transaction_successfully": "Action submitted successfully",

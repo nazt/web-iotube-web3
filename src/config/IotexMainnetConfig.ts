@@ -8,6 +8,9 @@ import { BSCMainnetConfig } from './BSCMainnetConfig';
 import { TokenListState } from '@/store/lib/TokenListState';
 import { PolygonMainnetConfig } from './PolygonMainnetConfig';
 import { iotexPolygonTokens } from '@/constants/token/matic-iotex';
+import { TubeState } from '@/store/lib/TubeState';
+import { TubeRouterState } from '@/store/lib/TubeRouterState';
+import { IotexTestnetConfig } from './IotexTestnetConfig';
 
 export const IotexMainnetConfig = new ChainState({
   name: 'IoTeX',

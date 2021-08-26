@@ -4,6 +4,8 @@ import { TokenState } from './TokenState';
 import { CrossChain } from '../../../type';
 import { _ } from '@/lib/lodash';
 import { MappingState } from '../standard/MappingState';
+import { TubeState } from '@/store/lib/TubeState';
+import { TubeRouterState } from '@/store/lib/TubeRouterState';
 
 export class ChainState {
   name: string;
@@ -23,7 +25,8 @@ export class ChainState {
   tokensForCC?: TokenState[];
   ccToken?: TokenState;
   router?: string;
-  tubeRouter?: string;
+  tubeRouterAddress?: string;
+  tubeAddress?: string;
 
   crossChain: {
     [key: number]: Partial<CrossChain>;

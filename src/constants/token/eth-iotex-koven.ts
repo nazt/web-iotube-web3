@@ -65,7 +65,7 @@ export const iotexTokensForKovenWeb3 = {
     {
       'name': 'Cross Chain IoTeX',
       'symbol': 'CC-IOTX',
-      'address': '0xB40F662DcAd24DDf0DE0D742aF225dd43fae7d49',
+      'address': '0xB1Dfe7EbcC50962e76455A4200A9BC1038B4FC79',
       'decimals': 18,
       'logoURI': 'https://iotexscan.io/image/token/io1hp6y4eqr90j7tmul4w2wa8pm7wx462hq0mg4tw.png'
     }

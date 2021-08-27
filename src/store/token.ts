@@ -67,29 +67,29 @@ export class TokenStore {
       ),
       ...this.currentTokens.filter((i) => !i.isEth()).map((i) => i.preMulticall({
         method: 'allowance',
-        params: [this.currentNetwork.account, this.currentCrossChain.cashier.address],
+        params: [this.currentNetwork.account, this.currentNetwork.currentChain.tubeAddress],
         handler: i.allowanceForCashier
       })),
-      ...this.currentTokens.filter((i) => !i.isEth()).map((i) => this.currentCrossChain.tokenList.preMulticallMintable({
-        method: 'minAmount',
-        params: [i.address],
-        handler: i.minAmountMintable
-      })),
-      ...this.currentTokens.filter((i) => !i.isEth()).map((i) => this.currentCrossChain.tokenList.preMulticallMintable({
-        method: 'maxAmount',
-        params: [i.address],
-        handler: i.maxAmountMintable
-      })),
-      ...this.currentTokens.filter((i) => !i.isEth()).map((i) => this.currentCrossChain.tokenList.preMulticallStandard({
-        method: 'minAmount',
-        params: [i.address],
-        handler: i.minAmountStandard
-      })),
-      ...this.currentTokens.filter((i) => !i.isEth()).map((i) => this.currentCrossChain.tokenList.preMulticallStandard({
-        method: 'maxAmount',
-        params: [i.address],
-        handler: i.maxAmountStandard
-      }))
+      // ...this.currentTokens.filter((i) => !i.isEth()).map((i) => this.currentCrossChain.tokenList.preMulticallMintable({
+      //   method: 'minAmount',
+      //   params: [i.address],
+      //   handler: i.minAmountMintable
+      // })),
+      // ...this.currentTokens.filter((i) => !i.isEth()).map((i) => this.currentCrossChain.tokenList.preMulticallMintable({
+      //   method: 'maxAmount',
+      //   params: [i.address],
+      //   handler: i.maxAmountMintable
+      // })),
+      // ...this.currentTokens.filter((i) => !i.isEth()).map((i) => this.currentCrossChain.tokenList.preMulticallStandard({
+      //   method: 'minAmount',
+      //   params: [i.address],
+      //   handler: i.minAmountStandard
+      // })),
+      // ...this.currentTokens.filter((i) => !i.isEth()).map((i) => this.currentCrossChain.tokenList.preMulticallStandard({
+      //   method: 'maxAmount',
+      //   params: [i.address],
+      //   handler: i.maxAmountStandard
+      // }))
     ]);
     const wrappedToken = this.currentTokens.filter(i => i.isWrapped);
     this.currentTokens.filter((i) => i.isEth()).map((i) => {

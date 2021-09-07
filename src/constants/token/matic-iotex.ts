@@ -79,11 +79,11 @@ export const polygonToIotexTokens = {
       symbol: 'AAVE-matic',
       logoURI: 'https://iotexscan.io/image/token/io14tw8gyn3p8v5fcmvh4c0w8797ryjrlrvnsr6zf.png'
     }, {
-      address: '0xcFb54a6D2dA14ABeCD231174FC5735B4436965D8',
+      address: '0x76cD98a81b80f9373463b70cFfFf9c4b4Fd92062',
       destAddress: '0x4d7b88403aa2f502bf289584160db01ca442426c',
       name: 'Cyclone Protocol',
       decimals: 18,
-      symbol: 'CYC-matic',
+      symbol: 'CYC',
       logoURI: 'https://iotexscan.io/image/token/io1f4acssp65t6s90egjkzpvrdsrjjyysnvxgqjrh.png'
     },
     {
@@ -177,7 +177,7 @@ export const iotexPolygonTokens = {
     },
     {
       address: '0x4d7b88403aa2f502bf289584160db01ca442426c',
-      destAddress: '0xcFb54a6D2dA14ABeCD231174FC5735B4436965D8',
+      destAddress: '0x76cD98a81b80f9373463b70cFfFf9c4b4Fd92062',
       name: 'Cyclone Protocol',
       decimals: 18,
       symbol: 'CYC',

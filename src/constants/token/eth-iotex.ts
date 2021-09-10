@@ -71,7 +71,7 @@ export const ethTokensForIotex = {
     // {
     //   'address': 'tokenB address',
     //   'destAddress': 'tokenA address',
-    //   'name': 'token on ETH to IOTX',
+    //   'name': 'token on ETH to IOTEX',
     //   'decimals': 18,
     //   'symbol': 'tokenB',
     //   'logoURI': 'tokenB logo'
@@ -149,7 +149,7 @@ export const iotexTokensForEth = {
     // {
     //   'address': 'tokenA address',
     //   'destAddress': 'tokenB address',
-    //   'name': 'token on IOTX to ETH',
+    //   'name': 'token on IOTEX to ETH',
     //   'decimals': 18,
     //   'symbol': 'tokenA',
     //   'logoURI': 'tokenA logo'

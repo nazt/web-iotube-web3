@@ -67,7 +67,15 @@ export const ethTokensForIotex = {
       'decimals': 18,
       'symbol': 'PAXG',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/4705.png'
-    }
+    },
+    // {
+    //   'address': 'tokenB address',
+    //   'destAddress': 'tokenA address',
+    //   'name': 'token on ETH to IOTX',
+    //   'decimals': 18,
+    //   'symbol': 'tokenB',
+    //   'logoURI': 'tokenB logo'
+    // }
   ]
 };
 
@@ -137,7 +145,15 @@ export const iotexTokensForEth = {
       'decimals': 18,
       'symbol': 'ioPAXG',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/4705.png'
-    }
+    },
+    // {
+    //   'address': 'tokenA address',
+    //   'destAddress': 'tokenB address',
+    //   'name': 'token on IOTX to ETH',
+    //   'decimals': 18,
+    //   'symbol': 'tokenA',
+    //   'logoURI': 'tokenA logo'
+    // }
   ]
 };
 

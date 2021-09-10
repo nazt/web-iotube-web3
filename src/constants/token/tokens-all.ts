@@ -264,5 +264,17 @@ export const TOKENS = {
     decimals: 18,
     symbol: 'CIOTX',
     logoURI: '/images/tokens/ctoken_logo.jpeg'
-  }
+  },
+  // '[tokenB address]': {
+  //   'name': 'token on ETH to IOTX',
+  //   'decimals': 18,
+  //   'symbol': 'tokenB',
+  //   'logoURI': 'tokenB logo'
+  // },
+  // '[tokenA address]': {
+  //   'name': 'token on IOTX to ETH',
+  //   'decimals': 18,
+  //   'symbol': 'tokenA',
+  //   'logoURI': 'tokenA logo'
+  // }
 };

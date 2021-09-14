@@ -130,7 +130,7 @@
   "ccToken.swap.confirm": "Confirm Swap",
   "button.swap": "Swap",
   "asset.title": "Assets on ioTube",
-  "asset.supported": "Want your supported?",
+  "asset.supported": "Get your token supported?",
   "asset.start": "Start here >>>",
   "button.cancel": "Cancel",
   "ethAddress.tooltip": "This is your Web3 (0x) wallet based on your private key. ${keyword}",

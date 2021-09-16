@@ -5,6 +5,8 @@ import { ethTokensForIotex, iotexTokensForEth } from '@/constants/token/eth-iote
 import { IotexMainnetConfig } from './IotexMainnetConfig';
 import { CashierState } from '@/store/lib/CashierState';
 import { TokenListState } from '@/store/lib/TokenListState';
+import { ethCCSwapPairs } from '@/constants/ccToken/eth-pairs';
+import { CCTokenState } from '@/store/lib/CCTokenState';
 
 export const ETHMainnetConfig = new ChainState({
   name: 'ETH',
@@ -18,7 +20,7 @@ export const ETHMainnetConfig = new ChainState({
     name: 'ETH',
     symbol: 'ETH',
     decimals: 18,
-    logoURI: 'https://exchange.pancakeswap.finance/images/coins/0x2170ed0880ac9a755fd29b2688956bd959f933f8.png',
+    logoURI: ''
   }),
   Coin: new TokenState({
     symbol: 'ETH',
@@ -28,6 +30,7 @@ export const ETHMainnetConfig = new ChainState({
     blockPerSeconds: 13,
     multicallAddr: '0xeefba1e63905ef1d7acba5a8513c70307c1ce441'
   },
+  ccSwapTokensPairs: {},
   crossChain: {}
 });
 
@@ -44,13 +47,13 @@ export const ethCrossChain = (network) => {
         standardAddress: ethTokensForIotex.standardTokenList,
         network: network
       }),
-      tokens: ethTokensForIotex.tokens.map((i) => {
+      tokens: ethTokensForIotex.tokens.map(i => {
         const token = new TokenState(i);
         token.network = network;
         return token;
       })
     }
-  }
+  };
 };
 
 

@@ -27,7 +27,8 @@ export const BSCMainnetConfig = new ChainState({
     blockPerSeconds: 3,
     multicallAddr: '0x1Ee38d535d541c55C9dae27B12edf090C608E6Fb'
   },
-  crossChain: {}
+  crossChain: {},
+  ccSwapTokensPairs: {}
 });
 
 

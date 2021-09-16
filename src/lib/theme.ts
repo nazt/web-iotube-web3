@@ -178,7 +178,7 @@ export const theme = extendTheme({
   },
   sideBar: {
     none: '0px',
-    width: '240px',
+    width: '245px',
     widthWithOutText:'80px',
     bg: {
       light: 'white',

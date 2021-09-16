@@ -138,7 +138,7 @@
   "my.wallet": "My Wallet",
   "button.okay": "Okay",
   "exchange.address.warning": "Warning: Do not use exchange addresses or contract addresses. You may lose your tokens.",
-  "swap.ctoken.title": "CIOTX Swap",
-  "swap.ctoken.description": "Crosschain IOTX (CIOTX) is a wrapped IOTX that can be bridged to any networks via iotube. You can swap IOTX/WIOTX/CIOTX at 1:1 ratio anytime on IoTeX network. This product is still beta. CIOTX is only available on IoTeX and Polygon networks. Please use at your own risk.",
-  "swap.ctoken.not_support": "CIOTX swap is only available on IoTeX network. Please switch to IoTeX network to continue."
+  "swap.ctoken.title": "Crosschain Token",
+  "swap.ctoken.description": "Crosschain Tokens, such as CIOTX, is a wrapped token that can be bridged to any networks via iotube. You can wrap or unwrap a token at 1:1 ratio anytime. Please switch to different networks to see different tokens. This product is still beta.",
+  "swap.ctoken.not_support": "CTokens are available on IoTeX and Ethereum networks. Please switch to IoTeX or Etheruem to continue."
 }

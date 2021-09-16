@@ -1,7 +1,7 @@
 import { NetworkState } from './lib/NetworkState';
 import { makeAutoObservable } from 'mobx';
 import { MappingState } from './standard/MappingState';
-import { EthNetworkConfig } from '../config/NetworkConfig';
+import { ccTokenFactory, EthNetworkConfig } from '../config/NetworkConfig';
 import { ChainState } from './lib/ChainState';
 import { EthNetworkState } from './lib/EthNetworkState';
 import { IotexNetworkState } from './lib/IotexNetworkState';
@@ -15,6 +15,9 @@ import { polygonMainCrossChain, PolygonMainnetConfig } from '../config/PolygonMa
 import { IotexTestnetConfig, iotexTestnetCrossChain } from '../config/IotexTestnetConfig';
 import { metamaskUtils } from '@/lib/metaskUtils';
 import { ethers } from 'ethers';
+import { ethCCSwapPairs } from '@/constants/ccToken/eth-pairs';
+import { iotexCCSwapPairs } from '@/constants/ccToken/iotex-pairs';
+import { iotexTestnetCCSwapPairs } from '@/constants/ccToken/iotex-test-pairs';
 
 export enum Network {
   eth = 'eth',
@@ -63,6 +66,10 @@ export class GodStore {
     // IotexTestnetConfig.crossChain = iotexTestnetCrossChain(EthNetworkConfig);
     PolygonMainnetConfig.crossChain = polygonMainCrossChain(EthNetworkConfig);
     // IotexTestnetConfig.crossChain = iotexTestnetCrossChain(EthNetworkConfig);
+
+    ETHMainnetConfig.ccSwapTokensPairs = ccTokenFactory(ethCCSwapPairs, EthNetworkConfig);
+    IotexMainnetConfig.ccSwapTokensPairs = ccTokenFactory(iotexCCSwapPairs,EthNetworkConfig);
+    IotexTestnetConfig.ccSwapTokensPairs = ccTokenFactory(iotexTestnetCCSwapPairs,EthNetworkConfig);
   }
   get isIotxNetork() {
     return this.network.currentId.value == Network.iotex;

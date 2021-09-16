@@ -27,7 +27,8 @@ export const PolygonMainnetConfig = new ChainState({
     blockPerSeconds: 3,
     multicallAddr: '0xa0FD7430852361931b23a31F84374BA3314e1682'
   },
-  crossChain: {}
+  crossChain: {},
+  ccSwapTokensPairs: {}
 });
 
 

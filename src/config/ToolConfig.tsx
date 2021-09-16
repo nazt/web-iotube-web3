@@ -46,7 +46,7 @@ export const ToolConfig = [
     isActive:false
   },
   {
-    name: 'Crosschain IOTX',
+    name: 'Crosschain Token',
     path: '/ciotx',
     component: SwapCC,
     icon:SwapIcon,

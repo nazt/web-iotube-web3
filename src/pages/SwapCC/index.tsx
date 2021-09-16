@@ -18,7 +18,8 @@ import { MaxUint256 } from '@ethersproject/constants';
 import { toast } from 'react-hot-toast';
 import './index.scss';
 import { CCRouterState } from '@/store/lib/CCRouterState';
-import { TokenState } from '@/store/lib/TokenState';
+import { IotexMainnetConfig } from '../../config/IotexMainnetConfig';
+import { IotexTestnetConfig } from '../../config/IotexTestnetConfig';
 
 export const SwapCC = observer(() => {
   const { god, token, lang } = useStore();
@@ -29,10 +30,13 @@ export const SwapCC = observer(() => {
   const inputColor = useColorModeValue(theme.colors.gray[6], theme.colors.gray[2]);
 
   const store = useLocalStore(() => ({
+    isIotexNetwork: false,
     hasCCToken: false,
     routerProvider: null,
     amount: new BigNumberInputState({ value: new BigNumber(0) }),
     curToken: null,
+    curWToken: null,
+    curCCToken: null,
     curTokenIndex: new NumberState({ value: 0 }),
     approveLoading: new BooleanState(),
     approveLoadingContent: lang.t('deposit.approving'),
@@ -46,7 +50,8 @@ export const SwapCC = observer(() => {
       this.curToken.network = god.currentNetwork;
     },
     maxCurTokenValue() {
-      if (store.curToken?.symbol != 'WIOTX') {
+      // iotx coin amount
+      if (store.curToken?.symbol == IotexMainnetConfig.nativeCurrency.symbol) {
         let maxAmount = store.curToken?.balance.value.minus(new BigNumber(10 ** store.curToken?.balance.decimals));
         store.amount.setValue(maxAmount < 0 ? new BigNumber(0) : maxAmount);
       } else {
@@ -54,13 +59,15 @@ export const SwapCC = observer(() => {
       }
     },
     get shouldApprove() {
-      if (this.isCCToken) {
-        return this.amount?.value.comparedTo(god.currentNetwork.currentChain.ccToken?.allowanceForSwap.value) > 0;
+      if (this.isCCToken) return false;
+
+      if (this.isCCToken && store.isIotexNetwork && store.curToken.isEth()) {
+        return this.amount?.value.comparedTo(this.curCCToken.allowanceForSwap.value) > 0;
       }
       if (!this.curToken || this.curToken.isEth()) return false;
-      console.log('allowance for swap ---->', this.curToken.allowanceForSwap.format);
       return this.amount?.value.comparedTo(this.curToken.allowanceForSwap.value) > 0;
     },
+
     get state() {
       if (!god.currentNetwork.account) {
         return lang.t('input.wallet.not_connected');
@@ -70,15 +77,15 @@ export const SwapCC = observer(() => {
         return lang.t('input.token.unselected');
       }
 
-      if (!this.routerProvider.address) {
+      if (!this.routerProvider?.address && store.isIotexNetwork) {
         return lang.t('input.swap.invalid');
       }
 
-      if (isNaN(Number(store.amount.value)) || store.amount.format == null) {
+      if (isNaN(Number(store.amount.value)) || store.amount.format == null || store.amount.format == 0) {
         return lang.t('input.amount.enter_value');
       }
-      console.log(store.amount);
-      let balanceValue = this.isCCToken ? god.currentChain.ccToken?.balance.value : this.curToken.balance.value;
+
+      let balanceValue = this.isCCToken ? this.curCCToken?.balance.value : this.curToken.balance.value;
       if (this.amount.format < 0 || store.amount.value.comparedTo(balanceValue) > 0) {
         return lang.t('input.amount.invalid');
       }
@@ -87,32 +94,26 @@ export const SwapCC = observer(() => {
     async onSwapApprove() {
       try {
         store.approveLoading.setValue(true);
-        store.curToken.network = god.currentNetwork;
         let approvedRes;
-        if (store.isCCToken) {
-          let ccToken = god.currentNetwork.currentChain.ccToken;
-          ccToken.network = god.currentNetwork;
-          console.log(god.currentNetwork.currentChain.ccToken);
-          approvedRes = await ccToken?.approve({ params: [god.currentChain.router, MaxUint256] });
+        if (store.isIotexNetwork && store.curToken.name == 'IOTX') {
+          approvedRes = await store.curToken?.approve({ params: [god.currentChain.ccSwapRouter, MaxUint256] });
         } else {
-          approvedRes = await store.curToken.approve({ params: [god.currentChain.router, MaxUint256] });
+          approvedRes = await store.curToken?.approve({ params: [store.curCCToken.address, MaxUint256] });
         }
         if (approvedRes) {
           store.approveLoadingContent = lang.t('button.waiting');
         }
         const receipt = await approvedRes.wait();
-        console.log(`approve receipt:`, receipt);
         if (receipt.status == 1) {
           if (store.isCCToken) {
             // @ts-ignore
             god.currentNetwork.currentChain.ccToken?.allowanceForSwap.setValue(new BigNumber(MaxUint256));
           } else {
             // @ts-ignore
-            store.curToken.allowanceForSwap.setValue(new BigNumber(MaxUint256));
+            store.curToken?.allowanceForSwap.setValue(new BigNumber(MaxUint256));
           }
           store.approveLoading.setValue(false);
         }
-        console.log('allowance Swap new ---->', store.curToken.allowanceForSwap.format);
       } catch (e) {
         toast.error(`tokenContract.approve error ${e.message}`);
         store.approveLoading.setValue(false);
@@ -130,21 +131,19 @@ export const SwapCC = observer(() => {
               options: { value: amountVal }
             });
           } else {
-            res = await store.routerProvider.swapWrappedCoinForCrosschainCoin({ params: [amountVal] });
+            res = await store.curCCToken.deposit({ params: [amountVal] });
           }
         } else {
           if (this.curToken.isEth()) {
             res = await store.routerProvider.swapCrosschainCoinForCoin({ params: [amountVal] });
           } else {
-            res = await store.routerProvider.swapCrosschainCoinForWrappedCoin({ params: [amountVal] });
+            res = await store.curCCToken.withdraw({ params: [amountVal] });
           }
         }
-        console.log('res--->', res);
         if (res) {
           token.actionHash.setValue(res.hash);
         }
         const receipt = await res.wait();
-        console.log('receipt--->', receipt);
         if (receipt.status == 1) {
           toast.success(`Your action hash: ${res.hash} sent successfully`, {
             style: {
@@ -177,21 +176,30 @@ export const SwapCC = observer(() => {
   }, [god.updateTicker.value]);
 
   useEffect(() => {
-    store.hasCCToken = !!god.currentChain.ccToken;
+    store.isIotexNetwork = [IotexMainnetConfig.chainId, IotexTestnetConfig.chainId].includes(god.currentChain.chainId);
+    store.hasCCToken = !!god.currentChain.ccSwapTokensPairs.wTokens;
+    if (!store.hasCCToken) return;
     if (god.currentNetwork.account) {
-      store.curToken = god.currentNetwork.chain.current.Coin;
+      store.curWToken = god.currentChain.ccSwapTokensPairs?.wTokens[0];
+      store.curCCToken = god.currentChain.ccSwapTokensPairs?.ccTokens[0];
       token.loadCCSourceToken();
     }
-    store.routerProvider = new CCRouterState({
-      network: god.currentNetwork,
-      address: god.currentNetwork.currentChain.router
-    });
-    console.log(store.hasCCToken);
+    if ([IotexTestnetConfig.chainId, IotexMainnetConfig.chainId].includes(god.currentChain.chainId)) {
+      store.routerProvider = new CCRouterState({
+        network: god.currentNetwork,
+        address: god.currentNetwork.currentChain.ccSwapRouter
+      });
+      store.curTokenIndex.setValue(0);
+      store.curToken = god.currentNetwork.chain.current.Coin;
+    } else {
+      store.curTokenIndex.setValue(1);
+      store.curToken = god.currentChain.ccSwapTokensPairs?.wTokens[0];
+    }
   }, [god.currentNetwork, token.currentChain.chainId, god.currentNetwork.account, god.currentNetwork.chain.current.Coin.balance]);
 
   return (
     <Box h={theme.content.height} bgImage={'/images/home_bg.png'} pt={10} px={{ base: 2 }}>
-      <ETHProvider/>
+      <ETHProvider />
       <Container
         maxW='container.md'
         mt={8}
@@ -202,12 +210,12 @@ export const SwapCC = observer(() => {
         bg={home}
         position='relative'
       >
-        <Box position='absolute' left={-4} top={-4}>
-          <Image borderRadius="full" boxSize={12} src={'/images/tokens/ctoken_logo.jpeg'}/>
-        </Box>
+        {/*<Box position='absolute' left={-4} top={-4}>*/}
+        {/*  <Image borderRadius='full' boxSize={12} src={'/images/tokens/ctoken_logo.jpeg'} />*/}
+        {/*</Box>*/}
         <HStack>
           <Text fontWeight='500' fontSize='md'>{lang.t('swap.ctoken.title')}</Text>
-          <Tag size='sm' key='sm' variant="solid" colorScheme="teal">
+          <Tag size='sm' key='sm' variant='solid' colorScheme='teal'>
             Beta
           </Tag>
         </HStack>
@@ -217,20 +225,20 @@ export const SwapCC = observer(() => {
             <Flex my={8}>
               <Box width='45%' className={`transition_box ${store.isCCToken ? 'transformer' : 'before'}`}>
                 <HStack spacing={2}>
+                  {store.isIotexNetwork &&
                   <Button variant={store.curTokenIndex.value == 0 ? 'opacity-primary' : 'opacity'}
                           onClick={() => store.setCurSourceToken(0, god.currentNetwork.chain.current.Coin)}>
                     <Image borderRadius='full' mr='2'
                            boxSize={theme.iconSize.md}
-                           src={god.currentChain.nativeCurrency.logoURI}/>{god.currentChain.nativeCurrency.symbol}
-                  </Button>
-                  {!!god.currentChain.tokensForCC &&
-                  <Button variant={store.curTokenIndex.value == 0 ? 'opacity' : 'opacity-primary'}
-                          onClick={() => store.setCurSourceToken(1, god.currentChain.tokensForCC[0])}>
-                    <Image borderRadius='full' mr='2'
-                           src={god.currentChain.tokensForCC[0].logoURI}
-                           boxSize={theme.iconSize.md}/>{god.currentChain.tokensForCC[0].symbol}
+                           src={god.currentChain.nativeCurrency.logoURI} />{god.currentChain.nativeCurrency.symbol}
                   </Button>
                   }
+                  <Button variant={store.curTokenIndex.value == 0 ? 'opacity' : 'opacity-primary'}
+                          onClick={() => store.setCurSourceToken(1, store.curWToken)}>
+                    <Image borderRadius='full' mr='2'
+                           src={store.curWToken?.logoURI}
+                           boxSize={theme.iconSize.md} />{store.curWToken?.symbol}
+                  </Button>
                 </HStack>
                 <Box
                   bg={inputBg}
@@ -269,18 +277,18 @@ export const SwapCC = observer(() => {
                 </Box>
               </Box>
 
-              <Spacer/>
+              <Spacer />
 
               <Center w={50} cursor='pointer' onClick={() => store.isCCToken = !store.isCCToken}>
-                <Image mt={14} src={'images/icon_arrow_r_green.svg'}/>
+                <Image mt={14} src={'images/icon_arrow_r_green.svg'} />
               </Center>
 
-              <Spacer/>
-              {god.currentChain.ccToken &&
+              <Spacer />
+              {store.curCCToken &&
               <Box width='45%' className={`transition_box ${store.isCCToken ? 'transformer' : 'before'}`}>
                 <Button variant='opacity-primary'>
                   <Image borderRadius='full' mr='2' boxSize={theme.iconSize.md}
-                         src={god.currentChain.ccToken.logoURI}/>{god.currentChain.ccToken.symbol}</Button>
+                         src={store.curCCToken?.logoURI} />{store.curCCToken.symbol}</Button>
                 <Box
                   bg={inputBg}
                   borderRadius={theme.borderRadius.sm}
@@ -289,7 +297,7 @@ export const SwapCC = observer(() => {
                   <Flex borderRadius='md' justify='space-between' px={{ base: 2, md: 4 }} pt={4} mt={4}>
                     <Text fontSize='md'>{store.isCCToken ? 'From' : 'To'}</Text>
                     <Center>
-                      <Text fontSize='sm'>Balance: {god.currentChain.ccToken?.balance.format}</Text>
+                      <Text fontSize='sm'>Balance: {store.curCCToken?.balance?.format}</Text>
                     </Center>
                   </Flex>
                   <Box>
@@ -312,7 +320,7 @@ export const SwapCC = observer(() => {
                                          mr={{ base: 2, md: 4 }} cursor='pointer'
                                          zIndex={0}>
                         <Tag size='sm' variant='solid' bg={theme.colors.darkLightGreen} cursor='pointer'
-                             onClick={() => store.amount.setValue(god.currentChain.ccToken?.balance.value)}
+                             onClick={() => store.amount.setValue(store.curCCToken?.balance.value)}
                         >{'MAX'}</Tag>
                       </InputRightElement>
                       }

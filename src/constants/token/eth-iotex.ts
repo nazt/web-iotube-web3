@@ -67,6 +67,14 @@ export const ethTokensForIotex = {
       'decimals': 18,
       'symbol': 'PAXG',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/4705.png'
+    },
+    {
+      'address': '0xD227c3e4f3F8dE94180269eF9DC221a6efc1F4C4',
+      'destAddress': '0x3FE04320885e6124231254c802004871be681218',
+      'name': 'Crosschain MCN.VENTURES',
+      'decimals': 18,
+      'symbol': 'CMCN',
+      'logoURI': '/images/tokens/token_mcn-c.svg'
     }
   ]
 };
@@ -137,6 +145,14 @@ export const iotexTokensForEth = {
       'decimals': 18,
       'symbol': 'ioPAXG',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/4705.png'
+    },
+    {
+      'address': '0x3FE04320885e6124231254c802004871be681218',
+      'destAddress': '0xD227c3e4f3F8dE94180269eF9DC221a6efc1F4C4',
+      'name': 'MCN.VENTURES',
+      'decimals': 18,
+      'symbol': 'MCN',
+      'logoURI': 'https://mcn.ventures/asset/mcn-logo-white-bg-200.png'
     }
   ]
 };

@@ -1,9 +1,8 @@
 import { makeAutoObservable } from 'mobx';
 import { NetworkState } from './NetworkState';
 import { TokenState } from './TokenState';
-import { CrossChain } from '../../../type';
+import { CCSwapTokensPairs, CrossChain } from '../../../type';
 import { _ } from '@/lib/lodash';
-import { MappingState } from '../standard/MappingState';
 
 export class ChainState {
   name: string;
@@ -21,9 +20,8 @@ export class ChainState {
     blockPerSeconds: number;
     multicallAddr?: string;
   };
-  tokensForCC?: TokenState[];
-  ccToken?: TokenState;
-  router?: string;
+  ccSwapRouter?: string;
+  ccSwapTokensPairs: Partial<CCSwapTokensPairs>;
 
   crossChain: {
     [key: number]: Partial<CrossChain>;

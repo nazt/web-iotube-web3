@@ -9,6 +9,7 @@ import erc20Abi from '@/constants/abi/erc20.json';
 import { ETHMainnetConfig } from '../config/ETHMainnetConfig';
 import BigNumber from 'bignumber.js';
 import { SafeAddressConfig } from '../config/SafeAddressConfig';
+import { IotexTestnetConfig } from '../config/IotexTestnetConfig';
 
 
 export class TokenStore {
@@ -119,34 +120,42 @@ export class TokenStore {
 
 
   async loadCCSourceToken() {
-    if (!this.currentChain.tokensForCC) return false;
+    if (!this.currentChain.ccSwapTokensPairs) return false;
     await this.currentNetwork.multicall([
-      ...this.currentChain.tokensForCC.map((i) =>
-        i.preMulticall({
-          method: 'allowance',
-          params: [this.currentNetwork.account, this.currentChain.router],
-          handler: i.allowanceForSwap
-        }),
-      ),
-      ...this.currentChain.tokensForCC.map((i) =>
+      ...this.currentChain.ccSwapTokensPairs.ccTokens.map((i) =>
         i.preMulticall({
           method: 'balanceOf',
           params: [this.currentNetwork.account],
           handler: i.balance
         }),
       ),
-      this.currentChain.ccToken.preMulticall({
-        method: 'balanceOf',
-        params: [this.currentNetwork.account],
-        handler: this.currentChain.ccToken.balance
-      }),
-      this.currentChain.ccToken.preMulticall({
-        method: 'allowance',
-        params: [this.currentNetwork.account, this.currentChain.router],
-        handler: this.currentChain.ccToken.allowanceForSwap
-      })
+      ...this.currentChain.ccSwapTokensPairs.wTokens.map((i) =>
+        i.preMulticall({
+          method: 'balanceOf',
+          params: [this.currentNetwork.account],
+          handler: i.balance
+        }),
+      ),
+      ...this.currentChain.ccSwapTokensPairs.wTokens.map((item, i) =>
+        item.preMulticall({
+          method: 'allowance',
+          params: [this.currentNetwork.account, this.currentChain.ccSwapTokensPairs.ccTokens[i].address],
+          handler: item.allowanceForSwap
+        }),
+      )
     ]);
 
+    if ([IotexTestnetConfig.chainId, IotexMainnetConfig.chainId].includes(this.currentChain.chainId)) {
+      await this.currentNetwork.multicall([
+        ...this.currentChain.ccSwapTokensPairs.ccTokens.map((item, i) =>
+          item.preMulticall({
+            method: 'allowance',
+            params: [this.currentNetwork.account, this.currentChain.ccSwapRouter],
+            handler: item.allowanceForSwap
+          }),
+        ),
+      ]);
+    }
   }
 
   async loadERC20SafeBalanceForCoinRange() {

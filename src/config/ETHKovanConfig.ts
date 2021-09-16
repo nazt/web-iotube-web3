@@ -31,7 +31,8 @@ export const ETHKovanConfig = new ChainState({
     blockPerSeconds: 13,
     multicallAddr: '0x2cc8688c5f75e365aaeeb4ea8d6a480405a48d2a'
   },
-  crossChain: {}
+  crossChain: {},
+  ccSwapTokensPairs: {}
 });
 
 export const ethKovenCrossChain = (network) => {

@@ -53,6 +53,7 @@ export const CompleteModal = observer(() => {
         <ModalCloseButton />
         <ModalBody>
           <Text>{lang.t('complete.tx_broadcast_network', {
+            confirmationTimes: god.currentNetwork.currentChain.confirmationTimes,
             network: god.currentNetwork.currentChain.name,
             amount: deposit.amount.format,
             token: deposit.curToken?.symbol

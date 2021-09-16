@@ -15,6 +15,7 @@ export class ChainState {
   explorerName: string;
   explorerURL: string;
   Coin: TokenState;
+  confirmationTimes: number = 12;
   nativeCurrency: TokenState;
   info: {
     blockPerSeconds: number;

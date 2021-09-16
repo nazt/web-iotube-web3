@@ -27,6 +27,7 @@ export const IotexMainnetConfig = new ChainState({
     decimals: 18,
     logoURI: '/images/chain/iotex.svg',
   }),
+  confirmationTimes: 1,
   router: "0x0F814827f651bCBf4971975F6eb55B2b6C5BCb4F",
   tokensForCC: [new TokenState({
     'address': '0xa00744882684c3e4747faefd68d283ea44099d03',

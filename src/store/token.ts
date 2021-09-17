@@ -48,12 +48,8 @@ export class TokenStore {
   }
 
   async depositTo(args, opts) {
-    if (this.curToken.router) {
-      const cashierRouter = new CashierRouterState({
-        address: polygonToIotexTokens.cashier,
-        network: this.curToken.network
-      });
-      return await cashierRouter.depositTo({ params: args, options: opts });
+    if (this.curToken.cTokenAddress) {
+      return await this.currentCrossChain.cashierCCRouter.depositTo({ params: args, options: opts });
     }
     if (!this.currentCrossChain.cashier.address) return;
     return await this.currentCrossChain.cashier.depositTo({ params: args, options: opts });
@@ -61,8 +57,10 @@ export class TokenStore {
 
   async approve(amountVal: BigNumber, curToken: TokenState) {
     if (!this.god.currentNetwork.account) return;
-    if (this.curToken.router) {
-      return await curToken.approve({ params: [this.curToken.router, amountVal] })
+    if (this.curToken.cTokenAddress) {
+       await curToken.approve({ params: [this.curToken.cTokenAddress, amountVal] })
+       const cToken = new TokenState({address: this.curToken.cTokenAddress, ...this.curToken});
+       return await cToken.approve({ params: [this.currentCrossChain.cashier.address, amountVal] });
     }
     return await curToken.approve({ params: [this.currentCrossChain.cashier.address, amountVal] });
   }

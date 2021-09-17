@@ -3,6 +3,7 @@ import { CashierState } from './src/store/lib/CashierState';
 import { TokenState } from './src/store/lib/TokenState';
 import { TokenListState } from '@/store/lib/TokenListState';
 import { CCTokenState } from '@/store/lib/CCTokenState';
+import { CashierRouterState } from '@/store/lib/CashierRouterState';
 export interface CallParams<P = any[]> {
   address: string;
   abi: any;
@@ -18,6 +19,7 @@ export interface CallParams<P = any[]> {
 }
 
 export interface CrossChain {
+  cashierCCRouter?: CashierRouterState;
   chain: ChainState;
   cashier: CashierState;
   tokenList: TokenListState;

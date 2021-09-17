@@ -7,6 +7,7 @@ import { CashierState } from '@/store/lib/CashierState';
 import { TokenListState } from '@/store/lib/TokenListState';
 import { ethCCSwapPairs } from '@/constants/ccToken/eth-pairs';
 import { CCTokenState } from '@/store/lib/CCTokenState';
+import { CashierRouterState } from '@/store/lib/CashierRouterState';
 
 export const ETHMainnetConfig = new ChainState({
   name: 'ETH',
@@ -38,6 +39,10 @@ export const ethCrossChain = (network) => {
   return {
     [IotexMainnetConfig.chainId]: {
       chain: IotexMainnetConfig,
+      cashierCCRouter: new CashierRouterState({
+        address: ethTokensForIotex.cashier,
+        network: network
+      }),
       cashier: new CashierState({
         address: ethTokensForIotex.cashier,
         network: network

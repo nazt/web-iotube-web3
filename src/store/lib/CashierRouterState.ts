@@ -28,10 +28,6 @@ export class CashierRouterState {
     }, args));
   }
 
-  transfer(args: Partial<CallParams>) {
-    return this.network.execContract(Object.assign({ address: this.address, abi: this.abi, method: 'transfer' }, args));
-  }
-
   preMulticall(args: Partial<CallParams>) {
     return Object.assign({ address: this.address, abi: this.abi }, args);
   }

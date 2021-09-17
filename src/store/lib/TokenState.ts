@@ -13,6 +13,9 @@ export class TokenState {
   symbol: string;
   address: string;
   destAddress: string;
+  // router -> crosschain token -> cross
+  router?: string;
+  cTokenAddress?: string;
   logoURI: string;
   chainId: number;
   isWrapped?: boolean;

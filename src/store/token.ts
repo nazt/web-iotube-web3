@@ -10,6 +10,8 @@ import { ETHMainnetConfig } from '../config/ETHMainnetConfig';
 import BigNumber from 'bignumber.js';
 import { SafeAddressConfig } from '../config/SafeAddressConfig';
 import { IotexTestnetConfig } from '../config/IotexTestnetConfig';
+import { CashierRouterState } from '@/store/lib/CashierRouterState';
+import { polygonToIotexTokens } from '@/constants/token/matic-iotex';
 
 
 export class TokenStore {
@@ -46,12 +48,22 @@ export class TokenStore {
   }
 
   async depositTo(args, opts) {
+    if (this.curToken.router) {
+      const cashierRouter = new CashierRouterState({
+        address: polygonToIotexTokens.cashier,
+        network: this.curToken.network
+      });
+      return await cashierRouter.depositTo({ params: args, options: opts });
+    }
     if (!this.currentCrossChain.cashier.address) return;
     return await this.currentCrossChain.cashier.depositTo({ params: args, options: opts });
   }
 
   async approve(amountVal: BigNumber, curToken: TokenState) {
     if (!this.god.currentNetwork.account) return;
+    if (this.curToken.router) {
+      return await curToken.approve({ params: [this.curToken.router, amountVal] })
+    }
     return await curToken.approve({ params: [this.currentCrossChain.cashier.address, amountVal] });
   }
 
@@ -66,29 +78,54 @@ export class TokenStore {
           handler: i.balance
         })
       ),
-      ...this.currentTokens.filter((i) => !i.isEth()).map((i) => i.preMulticall({
+      ...this.currentTokens.filter((i) => !i.isEth() || !i.router).map((i) => i.preMulticall({
         method: 'allowance',
         params: [this.currentNetwork.account, this.currentCrossChain.cashier.address],
         handler: i.allowanceForCashier
       })),
-      ...this.currentTokens.filter((i) => !i.isEth()).map((i) => this.currentCrossChain.tokenList.preMulticallMintable({
+      ...this.currentTokens.filter((i) => i.router).map((i) => i.preMulticall({
+        method: 'allowance',
+        params: [this.currentNetwork.account, i.router],
+        handler: i.allowanceForCashier
+      })),
+      ...this.currentTokens.filter((i) => !i.isEth() || !i.router).map((i) => this.currentCrossChain.tokenList.preMulticallMintable({
         method: 'minAmount',
         params: [i.address],
         handler: i.minAmountMintable
       })),
-      ...this.currentTokens.filter((i) => !i.isEth()).map((i) => this.currentCrossChain.tokenList.preMulticallMintable({
+      ...this.currentTokens.filter((i) => !i.isEth() || !i.router).map((i) => this.currentCrossChain.tokenList.preMulticallMintable({
         method: 'maxAmount',
         params: [i.address],
         handler: i.maxAmountMintable
       })),
-      ...this.currentTokens.filter((i) => !i.isEth()).map((i) => this.currentCrossChain.tokenList.preMulticallStandard({
+      ...this.currentTokens.filter((i) => !i.isEth() || !i.router).map((i) => this.currentCrossChain.tokenList.preMulticallStandard({
         method: 'minAmount',
         params: [i.address],
         handler: i.minAmountStandard
       })),
-      ...this.currentTokens.filter((i) => !i.isEth()).map((i) => this.currentCrossChain.tokenList.preMulticallStandard({
+      ...this.currentTokens.filter((i) => !i.isEth() || !i.router).map((i) => this.currentCrossChain.tokenList.preMulticallStandard({
         method: 'maxAmount',
         params: [i.address],
+        handler: i.maxAmountStandard
+      })),
+      ...this.currentTokens.filter((i) => i.router).map((i) => this.currentCrossChain.tokenList.preMulticallMintable({
+        method: 'minAmount',
+        params: [i.cTokenAddress],
+        handler: i.minAmountMintable
+      })),
+      ...this.currentTokens.filter((i) => i.router).map((i) => this.currentCrossChain.tokenList.preMulticallMintable({
+        method: 'maxAmount',
+        params: [i.cTokenAddress],
+        handler: i.maxAmountMintable
+      })),
+      ...this.currentTokens.filter((i) => i.router).map((i) => this.currentCrossChain.tokenList.preMulticallStandard({
+        method: 'minAmount',
+        params: [i.cTokenAddress],
+        handler: i.minAmountStandard
+      })),
+      ...this.currentTokens.filter((i) => i.router).map((i) => this.currentCrossChain.tokenList.preMulticallStandard({
+        method: 'maxAmount',
+        params: [i.cTokenAddress],
         handler: i.maxAmountStandard
       }))
     ]);

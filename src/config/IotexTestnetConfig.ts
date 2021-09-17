@@ -4,6 +4,8 @@ import { iotexTokensForKovenWeb3 } from '@/constants/token/eth-iotex-koven';
 import { CashierState } from '@/store/lib/CashierState';
 import { TokenListState } from '@/store/lib/TokenListState';
 import { ETHKovanConfig } from './ETHKovanConfig';
+import { polygonToIotexTokens } from '@/constants/token/matic-iotex';
+import { CashierRouterState } from '@/store/lib/CashierRouterState';
 
 export const IotexTestnetConfig = new ChainState({
   name: 'IoTeX Test',

@@ -28,6 +28,19 @@ export class CashierRouterState {
     }, args));
   }
 
+  approveCrosschainToken(args: Partial<CallParams<[string, string, string]>>) {
+    console.log(Object.assign({
+      address: this.address,
+      abi: this.abi,
+      method: 'approveCrosschainToken'
+    }, args));
+    return this.network.execContract(Object.assign({
+      address: this.address,
+      abi: this.abi,
+      method: 'approveCrosschainToken'
+    }, args));
+  }
+
   preMulticall(args: Partial<CallParams>) {
     return Object.assign({ address: this.address, abi: this.abi }, args);
   }

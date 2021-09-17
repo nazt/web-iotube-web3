@@ -58,9 +58,10 @@ export class TokenStore {
   async approve(amountVal: BigNumber, curToken: TokenState) {
     if (!this.god.currentNetwork.account) return;
     if (this.curToken.cTokenAddress) {
-       await curToken.approve({ params: [this.curToken.cTokenAddress, amountVal] })
-       const cToken = new TokenState({address: this.curToken.cTokenAddress, ...this.curToken});
-       return await cToken.approve({ params: [this.currentCrossChain.cashier.address, amountVal] });
+      return await this.currentCrossChain.cashierCCRouter.approveCrosschainToken({ params: [curToken.cTokenAddress]});
+       // await curToken.approve({ params: [this.curToken.cTokenAddress, amountVal] })
+       // const cToken = new TokenState({address: this.curToken.cTokenAddress, ...this.curToken});
+       // return await cToken.approve({ params: [this.currentCrossChain.cashier.address, amountVal] });
     }
     return await curToken.approve({ params: [this.currentCrossChain.cashier.address, amountVal] });
   }

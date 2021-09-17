@@ -78,7 +78,6 @@ export const ethTokensForIotex = {
     },
     {
       'address': '0xd91e9a0fef7c0fa4ebdaf4d0acf55888949a2a9b',
-      'router': '',
       'cTokenAddress': '0xD227c3e4f3F8dE94180269eF9DC221a6efc1F4C4',
       'destAddress': '0x3FE04320885e6124231254c802004871be681218',
       'name': 'MCN.VENTURES',

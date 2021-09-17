@@ -265,6 +265,42 @@ export const TOKENS = {
     symbol: 'CIOTX',
     logoURI: '/images/tokens/ctoken_logo.jpeg'
   },
+  '0x6fbCdc1169B5130C59E72E51Ed68A84841C98cd1': {
+    name: 'Tether USDT',
+    decimals: 6,
+    symbol: 'ioUSDT',
+    logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/825.png'
+  },
+  '0xdAC17F958D2ee523a2206206994597C13D831ec7': {
+    name: 'Tether USDT',
+    decimals: 6,
+    symbol: 'USDT',
+    logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/825.png'
+  },
+  '0x3B2bf2b523f54C4E454F08Aa286D03115aFF326c': {
+    name: 'USD Coin',
+    decimals: 6,
+    symbol: 'ioUSDC',
+    logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png'
+  },
+  '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48': {
+    name: 'USD Coin',
+    decimals: 6,
+    symbol: 'USDC',
+    logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png'
+  },
+  '0x1CbAd85Aa66Ff3C12dc84C5881886EEB29C1bb9b': {
+    name: 'DAI',
+    decimals: 18,
+    symbol: 'ioDAI',
+    logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/4943.png'
+  },
+  '0x6b175474e89094c44da98b954eedeac495271d0f': {
+    name: 'DAI',
+    decimals: 18,
+    symbol: 'DAI',
+    logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/4943.png'
+  },
   '0x3FE04320885e6124231254c802004871be681218': {
     name: 'MCN.VENTURES',
     decimals: 18,

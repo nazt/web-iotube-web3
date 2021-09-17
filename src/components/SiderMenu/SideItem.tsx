@@ -26,44 +26,46 @@ export const SideItem = observer(({ menu, activeColor }: { menu: any, activeColo
   return (
     <Tooltip label={menu.name} isDisabled={sideBar.isOpen} fontSize={'md'} placement={'right'} bg={theme.colors.bg.bg1}>
 
-      <Accordion allowToggle mt={{base:4,md:8}}>
+      <Accordion allowToggle mt={{ base: 0, md: 4 }}>
         <AccordionItem
-          border="none"
+          border='none'
           borderRadius='2xl'
+          py={0.5}
           bg={menu.isActive ? theme.colors.sideBar.itemActive : 'none'}
           _hover={{ bg: theme.colors.sideBar.itemActive }}
         >
           <AccordionButton
-            justifyContent={sideBar.isOpen?'flex-start':'center'}
-            minH='12'
+            justifyContent={sideBar.isOpen ? 'flex-start' : 'center'}
+            minH={{ base: 12, md: 12 }}
             _focus={{ shadow: 'none' }}
             onClick={() => {
-              if (menu.children&&menu.children.length > 0) {
+              if (menu.children && menu.children.length > 0) {
                 history.push(`${menu.path}${menu.children[0].path}`);
                 sideBar.setActiveMenu(menu.path);
                 sideBar.setActiveChildMenu(menu.children[0].path);
                 return;
               }
-              if (menu._blank){
-                return window.open(menu.path)
+              if (menu._blank) {
+                return window.open(menu.path);
               }
-              history.push(menu.path)
+              history.push(menu.path);
               sideBar.setActiveMenu(menu.path);
             }}
           >
             <Center>
-              <Icon as={menu.icon} color={sideBar.activeMenu !== menu.path ? theme.colors.gray : activeColor}/>
+              <Icon as={menu.icon} color={sideBar.activeMenu !== menu.path ? theme.colors.gray : activeColor} />
               {sideBar.isOpen ? <Text marginLeft={'4'}
                                       color={sideBar.activeMenu === menu.path ? activeColor : ''}>{menu.name}</Text> : null}
               {
-                sideBar.isOpen&&menu.children
-                  ? <AccordionIcon mx={5} color={sideBar.activeMenu !== menu.path ? theme.colors.gray : activeColor} boxSize="5"/>
+                sideBar.isOpen && menu.children
+                  ? <AccordionIcon mx={5} color={sideBar.activeMenu !== menu.path ? theme.colors.gray : activeColor}
+                                   boxSize='5' />
                   : null
               }
             </Center>
           </AccordionButton>
           {
-            menu.children?(
+            menu.children ? (
               <AccordionPanel
                 display={sideBar.isOpen ? 'block' : 'none'}
               >
@@ -71,9 +73,9 @@ export const SideItem = observer(({ menu, activeColor }: { menu: any, activeColo
                   menu.children.map(item => (
                     <HStack
                       key={item.name}
-                      ml="10"
-                      my="3"
-                      cursor="pointer"
+                      ml='10'
+                      my='3'
+                      cursor='pointer'
                       onClick={() => {
                         history.push(`${menu.path}${item.path}`);
                         sideBar.setActiveMenu(menu.path);
@@ -94,7 +96,7 @@ export const SideItem = observer(({ menu, activeColor }: { menu: any, activeColo
                   ))
                 }
               </AccordionPanel>
-            ):null
+            ) : null
           }
         </AccordionItem>
       </Accordion>

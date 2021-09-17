@@ -30,7 +30,7 @@ export const Header = observer(() => {
 
   const handleClickOutside = (event) => {
     if (ref.current && !ref.current.contains(event.target)) {
-      mobileNav.isOpen?mobileNav.onClose():null;
+      mobileNav.isOpen ? mobileNav.onClose() : null;
     }
   };
 
@@ -74,7 +74,7 @@ export const Header = observer(() => {
         px={2}
         shadow={colorMode === 'light' ? theme.shadows.lightShadow : theme.shadows.darkShadow}
         zIndex={-1}
-        pt={'4.5rem'}
+        pt={20}
       >
 
         {
@@ -85,13 +85,14 @@ export const Header = observer(() => {
           })
 
         }
-        <Flex justifyContent={'flex-start'} w={'100%'} p={1} mt={30}
+        <HStack justifyContent={'flex-start'} w={'100%'}
         >
-          <ToggleModeButton/>
-        </Flex>
-        <Button onClick={store.logout} size='md' mt={{base:12,md:100}} w={'100%'} bg={theme.colors.gray['11']}>
-          <Text fontSize={'xl'} color={activeColor}>Logout</Text>
-        </Button>
+          <ToggleModeButton />
+          <Button  onClick={store.logout} size='xs' mt={{ base: 0, md: 100 }} width='70%' bg={theme.colors.gray['11']}>
+            <Text fontSize={'md'} color={activeColor}>Logout</Text>
+          </Button>
+        </HStack>
+
       </Flex>
     </Box>
   );
@@ -157,7 +158,7 @@ export const Header = observer(() => {
                   _hover={{}}
                   variant={'unstyled'}
                   color={theme.colors.lightGreen}
-                  display={{base:'none',md:'flex'}}
+                  display={{ base: 'none', md: 'flex' }}
                 >
                   <Image src={'images/icon_vita.png'} mr={2} />
                   {god.currentNetwork.account ? helper.string.truncate(god.currentNetwork.account, 12, '...') : null}

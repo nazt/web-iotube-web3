@@ -34,6 +34,8 @@ import { MaxUint256 } from '@ethersproject/constants';
 import EnterSvg from '../../../public/images/enter.svg';
 import { isAddress as isEthAddress } from '@ethersproject/address';
 import { HistoryActionModal } from './components/HistoryActionModal';
+import { IotexMainnetConfig } from '../../config/IotexMainnetConfig';
+import { IotexTestnetConfig } from '../../config/IotexTestnetConfig';
 
 export const Deposit = observer(() => {
   const { god, token, lang, deposit } = useStore();
@@ -256,7 +258,7 @@ export const Deposit = observer(() => {
                                  children={<SmallCloseIcon />} />}
             </InputGroup>
           </Box>
-          {deposit.receiverAddress.anotherAddress &&
+          {deposit.receiverAddress.anotherAddress && ![IotexMainnetConfig.chainId, IotexTestnetConfig.chainId].includes(god.currentChain.chainId) &&
           <Flex mx={4} h={14} alignItems={'center'} position={'relative'}>
             <chakra.img w='4' h='4' src={EnterSvg} />
             <Text

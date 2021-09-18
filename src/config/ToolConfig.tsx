@@ -112,7 +112,7 @@ export const ToolConfig = [
   },
   {
     name: 'Docs',
-    path: 'https://app.gitbook.com/@iotex/s/docs-iotube-org/deployment-1/crosschain-tokens',
+    path: 'https://docs.iotube.org',
     _blank: true,
     icon: () => {
       return <Icon as={CgFileDocument} w={6} h={6} />;

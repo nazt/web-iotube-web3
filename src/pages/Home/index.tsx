@@ -18,14 +18,20 @@ import { IotubeIcon } from '@/components/Icon';
 import { metamaskUtils } from '@/lib/metaskUtils';
 import { IotexMainnetConfig } from '../../config/IotexMainnetConfig';
 import { BooleanState } from '@/store/standard/base';
+import { bscToIotexTokens } from '@/constants/token/bsc-iotex';
+import { ethTokensForIotex } from '@/constants/token/eth-iotex';
+import { polygonToIotexTokens } from '@/constants/token/matic-iotex';
 
 export const Home = observer(() => {
   const { lang, sideBar } = useStore();
   const history = useHistory();
   const theme = useTheme();
   const textColor = useColorModeValue('darkLightGreen', 'lightGreen');
+
   const store = useLocalObservable(() => ({
     addNetworkLoading: new BooleanState(),
+    // @ts-ignore
+    totalAssetsNums: bscToIotexTokens.tokens.concat(ethTokensForIotex.tokens).concat(polygonToIotexTokens.tokens).length,
     goTube() {
       history.push('/tube');
       sideBar.setActiveMenu('/tube');
@@ -60,7 +66,7 @@ export const Home = observer(() => {
               <StatLabel>{lang.t('info.chain')}</StatLabel>
             </Stat>
             <Stat>
-              <StatNumber fontSize='2xl' color={textColor} fontWeight={100}>22</StatNumber>
+              <StatNumber fontSize='2xl' color={textColor} fontWeight={100}>{store.totalAssetsNums}</StatNumber>
               <StatLabel>{lang.t('info.assets')}</StatLabel>
             </Stat>
             <Stat>

@@ -2,8 +2,6 @@ import { observer, useLocalObservable } from 'mobx-react-lite';
 import React from 'react';
 import { useStore } from '@/store/index';
 import {
-  Grid,
-  GridItem,
   Box,
   Center,
   Flex,
@@ -28,7 +26,7 @@ export const Home = observer(() => {
   const textColor = useColorModeValue('darkLightGreen', 'lightGreen');
   const store = useLocalObservable(() => ({
     addNetworkLoading: new BooleanState(),
-    goTube(){
+    goTube() {
       history.push('/tube');
       sideBar.setActiveMenu('/tube');
     },
@@ -70,19 +68,21 @@ export const Home = observer(() => {
               <StatLabel>{lang.t('info.total_value_locked')}</StatLabel>
             </Stat>
           </StatGroup>
-          <Center>
-            <HStack w='full' spacing={{ base: 2, md: 6 }} my={20}>
-              <Button onClick={() => store.goTube()}  w={{ base: 36, md: 60 }} size='lg' variant='green'>
+          <Center mt={{base: 10, md: 20}}>
+            <HStack w='full' spacing={{ base: 2, md: 6 }}>
+              <Button onClick={() => store.goTube()} w={{ base: 40, md: 60 }} size='lg' variant='green'>
                 {lang.t('enter_app')}
-              </Button>
-              <Button onClick={() => store.onConfirm()}
-                      isLoading={store.addNetworkLoading.value}
-                      loadingText={lang.t('button.waiting')}
-                      w={{ base: 52, md: 60 }} size='lg' variant='green-border'>
-                {lang.t('home.button.add_iotex_net')}
               </Button>
             </HStack>
           </Center>
+          <Center my={8}>
+            <Text as='ins' cursor='pointer' color={useColorModeValue('darkLightGreen', 'lightGreen')}
+                  onClick={() => store.onConfirm()}
+                  w={{ base: 52, md: 60 }} size='lg' variant='green-border'>
+              {lang.t('home.button.add_iotex_net')}
+            </Text>
+          </Center>
+
         </Flex>
       </Center>
     </Box>

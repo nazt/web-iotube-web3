@@ -1,14 +1,14 @@
 import { makeAutoObservable } from 'mobx';
 import { NetworkState } from './NetworkState';
 import { CallParams } from '../../../type';
-import cashierAbi from '../../constants/abi/cashierAbi.json';
+import cashierRouterAbi from '../../constants/abi/ccCashierRouterAbi.json';
 import { BigNumberState } from '@/store/standard/BigNumberState';
 
 export class CashierRouterState {
   address: Partial<string>;
   network: NetworkState;
   depositFee: BigNumberState = new BigNumberState({decimals: 18, loading: false});
-  // abi = cashierRouterAbi;
+  abi = cashierRouterAbi;
 
   constructor(args: Partial<CashierRouterState>) {
     Object.assign(this, args);

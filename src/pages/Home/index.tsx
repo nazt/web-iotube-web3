@@ -84,7 +84,7 @@ export const Home = observer(() => {
           <Center my={8}>
             <Text as='ins' cursor='pointer' color={useColorModeValue('darkLightGreen', 'lightGreen')}
                   onClick={() => store.onConfirm()}
-                  w={{ base: 52, md: 60 }} size='lg' variant='green-border'>
+                  size='lg' variant='green-border'>
               {lang.t('home.button.add_iotex_net')}
             </Text>
           </Center>

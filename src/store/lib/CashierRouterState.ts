@@ -28,7 +28,7 @@ export class CashierRouterState {
     }, args));
   }
 
-  approveCrosschainToken(args: Partial<CallParams<[string, string, string]>>) {
+  approveCrosschainToken(args: Partial<CallParams<[string]>>) {
     console.log(Object.assign({
       address: this.address,
       abi: this.abi,

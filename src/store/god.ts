@@ -18,6 +18,7 @@ import { ethers } from 'ethers';
 import { ethCCSwapPairs } from '@/constants/ccToken/eth-pairs';
 import { iotexCCSwapPairs } from '@/constants/ccToken/iotex-pairs';
 import { iotexTestnetCCSwapPairs } from '@/constants/ccToken/iotex-test-pairs';
+import { ETHKovanConfig, ethKovenCrossChain } from '../config/ETHKovanConfig';
 
 export enum Network {
   eth = 'eth',
@@ -52,23 +53,25 @@ export class GodStore {
     makeAutoObservable(this, {
       rootStore: false
     });
-    // EthNetworkConfig.god = this;
-    EthNetworkConfig.init();
-    BSCMainnetConfig.init();
-    PolygonMainnetConfig.init();
-    IotexMainnetConfig.init();
-    // IotexTestnetConfig.init();
+    // Eth/BSC/Polygon/iotex Main
+    // EthNetworkConfig.init();
+    // BSCMainnetConfig.init();
+    // PolygonMainnetConfig.init();
+    // IotexMainnetConfig.init();
+    //
+    // ETHMainnetConfig.crossChain = ethCrossChain(EthNetworkConfig);
+    // IotexMainnetConfig.crossChain = iotexMainCrossChain(EthNetworkConfig);
+    // BSCMainnetConfig.crossChain = bscMainCrossChain(EthNetworkConfig);
+    // PolygonMainnetConfig.crossChain = polygonMainCrossChain(EthNetworkConfig);
+    //
+    // ETHMainnetConfig.ccSwapTokensPairs = ccTokenFactory(ethCCSwapPairs, EthNetworkConfig);
+    // IotexMainnetConfig.ccSwapTokensPairs = ccTokenFactory(iotexCCSwapPairs,EthNetworkConfig);
 
-    ETHMainnetConfig.crossChain = ethCrossChain(EthNetworkConfig);
-    IotexMainnetConfig.crossChain = iotexMainCrossChain(EthNetworkConfig);
-    BSCMainnetConfig.crossChain = bscMainCrossChain(EthNetworkConfig);
-    // ETHKovanConfig.crossChain = ethKovenCrossChain(EthNetworkConfig);
-    // IotexTestnetConfig.crossChain = iotexTestnetCrossChain(EthNetworkConfig);
-    PolygonMainnetConfig.crossChain = polygonMainCrossChain(EthNetworkConfig);
-    // IotexTestnetConfig.crossChain = iotexTestnetCrossChain(EthNetworkConfig);
-
-    ETHMainnetConfig.ccSwapTokensPairs = ccTokenFactory(ethCCSwapPairs, EthNetworkConfig);
-    IotexMainnetConfig.ccSwapTokensPairs = ccTokenFactory(iotexCCSwapPairs,EthNetworkConfig);
+    // for test net
+    IotexTestnetConfig.init();
+    ETHKovanConfig.init();
+    ETHKovanConfig.crossChain = ethKovenCrossChain(EthNetworkConfig);
+    IotexTestnetConfig.crossChain = iotexTestnetCrossChain(EthNetworkConfig);
     IotexTestnetConfig.ccSwapTokensPairs = ccTokenFactory(iotexTestnetCCSwapPairs,EthNetworkConfig);
   }
   get isIotxNetork() {

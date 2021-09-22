@@ -7,6 +7,8 @@ import { ethTokensForKovenIotex, iotexTokensForKovenWeb3 } from '@/constants/tok
 import { CashierState } from '@/store/lib/CashierState';
 import { IotexTestnetConfig } from './IotexTestnetConfig';
 import { TokenListState } from '@/store/lib/TokenListState';
+import { CashierRouterState } from '@/store/lib/CashierRouterState';
+import { ethTokensForIotex } from '@/constants/token/eth-iotex';
 
 export const ETHKovanConfig = new ChainState({
   name: 'ETH',
@@ -58,6 +60,10 @@ export const ethKovenCrossChain = (network) => {
       chain: IotexTestnetConfig,
       cashier: new CashierState({
         address: ethTokensForKovenIotex.cashier,
+        network: network
+      }),
+      cashierCCRouter: new CashierRouterState({
+        address: '0x4a545561d3CaAd4C38382aa8307c584e92fDE84b',
         network: network
       }),
       tokenList: new TokenListState({

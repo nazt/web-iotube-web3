@@ -4,18 +4,10 @@ export const ethTokensForKovenIotex = {
   'standardTokenList':'0x92a9a7E1119d8890aeE5096CA5ddef8E677a25F7',
   'tokens': [
     {
-      'address': '0x6fb3e0a217407efff7ca062d46c26e5d60a14d69',
-      'name': 'IoTeX',
-      'decimals': 18,
-      'symbol': 'IOTX-E',
-      'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/2777.png'
-    },
-    {
       'address': '0x0000000000000000000000000000000000000000',
       'name': 'ETH',
       'decimals': 18,
       'symbol': 'ETH',
-      'isETH': true,
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png'
     },
     {
@@ -24,27 +16,6 @@ export const ethTokensForKovenIotex = {
       'decimals': 18,
       'symbol': 'WETH',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/2396.png'
-    },
-    {
-      'address': '0x5A965982973C60e2D8E67F2e7A08997c5B49A19E',
-      'name': 'Binance USD',
-      'decimals': 18,
-      'symbol': 'BUSD',
-      'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/4687.png'
-    },
-    {
-      'address': '0x8a257b7892b59c251a6b21531cec21b043f54bd3',
-      'name': 'Paxos Gold',
-      'decimals': 18,
-      'symbol': 'PAXG',
-      'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/4705.png'
-    },
-    {
-      'address': '0x8a9386ea901631e2683b9d11450d481bfd4879b2',
-      'name': 'Wrapped BTC',
-      'decimals': 8,
-      'symbol': 'WBTC',
-      'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/3717.png'
     }
   ]
 };

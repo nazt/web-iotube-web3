@@ -30,6 +30,8 @@ import { toast } from 'react-hot-toast';
 import { theme } from '@/lib/theme';
 import { BooleanState } from '@/store/standard/base';
 import { SwitchNetworkDialog } from '@/components/SwitchNetworkDialog';
+import { ETHKovanConfig } from '../../config/ETHKovanConfig';
+import { IotexTestnetConfig } from '../../config/IotexTestnetConfig';
 
 interface ISwitchProps {
   tokens?: Array<TokenState>;
@@ -64,7 +66,9 @@ const NetworkHeader = observer((props: ISwitchProps) => {
       store.setChain(token.currentCrossChain.chain.chainId);
     },
     get networks() {
-      return [BSCMainnetConfig, ETHMainnetConfig, IotexMainnetConfig, PolygonMainnetConfig];
+      //for test
+      return [ETHKovanConfig, IotexTestnetConfig];
+      // return [BSCMainnetConfig, ETHMainnetConfig, IotexMainnetConfig, PolygonMainnetConfig];
     },
     setChain(val) {
       god.destChain = god.currentNetwork.chain.map[val];

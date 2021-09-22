@@ -12,7 +12,9 @@ import { TokenState } from '@/store/lib/TokenState';
 import { CCTokenState } from '@/store/lib/CCTokenState';
 
 export const EthNetworkConfig = new EthNetworkState({
-  allowChains: [BSCMainnetConfig.chainId, ETHMainnetConfig.chainId, IotexMainnetConfig.chainId, PolygonMainnetConfig.chainId],
+  // allowChains: [BSCMainnetConfig.chainId, ETHMainnetConfig.chainId, IotexMainnetConfig.chainId, PolygonMainnetConfig.chainId],
+  // kovan - testnet config
+  allowChains: [ETHKovanConfig.chainId, IotexTestnetConfig.chainId],
   info: {
     token: {
       tokenExample: '0x0000000000000000000000000000000000000000'

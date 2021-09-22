@@ -59,11 +59,10 @@ export const SwapCC = observer(() => {
       }
     },
     get shouldApprove() {
-      if (this.isCCToken) return false;
-
       if (this.isCCToken && store.isIotexNetwork && store.curToken.isEth()) {
         return this.amount?.value.comparedTo(this.curCCToken.allowanceForSwap.value) > 0;
       }
+      if (this.isCCToken) return false;
       if (!this.curToken || this.curToken.isEth()) return false;
       return this.amount?.value.comparedTo(this.curToken.allowanceForSwap.value) > 0;
     },
@@ -95,8 +94,8 @@ export const SwapCC = observer(() => {
       try {
         store.approveLoading.setValue(true);
         let approvedRes;
-        if (store.isIotexNetwork && store.curToken.name == 'IOTX') {
-          approvedRes = await store.curToken?.approve({ params: [god.currentChain.ccSwapRouter, MaxUint256] });
+        if (this.isCCToken && store.isIotexNetwork && store.curToken.isEth()) {
+          approvedRes = await store.curCCToken?.approve({ params: [god.currentChain.ccSwapRouter, MaxUint256] });
         } else {
           approvedRes = await store.curToken?.approve({ params: [store.curCCToken.address, MaxUint256] });
         }
@@ -107,7 +106,7 @@ export const SwapCC = observer(() => {
         if (receipt.status == 1) {
           if (store.isCCToken) {
             // @ts-ignore
-            god.currentNetwork.currentChain.ccToken?.allowanceForSwap.setValue(new BigNumber(MaxUint256));
+            store.curCCToken?.allowanceForSwap.setValue(new BigNumber(MaxUint256));
           } else {
             // @ts-ignore
             store.curToken?.allowanceForSwap.setValue(new BigNumber(MaxUint256));

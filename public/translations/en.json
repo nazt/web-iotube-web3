@@ -28,7 +28,7 @@
   "relay_to_chain": "Relay to ${chain}",
   "confirm": "Confirm",
   "you_are_going_to_deposit": "You are going to deposit",
-  "to_iotube_and_mint": "to ioTube and mint",
+  "to_iotube_and_mint": "to ioTube and receive",
   "change_network_eth_warning": "Metamask does not allow us switch to Ethereum for you.  Please switch inside Metamask.",
   "deposit.approving": "Approving",
   "button.waiting": "Waiting",

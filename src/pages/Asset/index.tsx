@@ -11,6 +11,7 @@ import { PolygonMainnetConfig } from '../../config/PolygonMainnetConfig';
 import { TokenTable } from './components/TokenTable';
 import { Text } from '@chakra-ui/layout';
 import { useStore } from '@/store/index';
+import { ETHProvider } from '@/components/EthProvider';
 
 
 export const TokenList = observer(() => {
@@ -18,8 +19,9 @@ export const TokenList = observer(() => {
   const {lang} = useStore()
 
   return (
-    <Box w={'70%'} mx={'auto'} mt={10}>
-      <Text fontSize={{base:'1.25rem',md:"1.5rem"}} >{lang.t('asset.title')}</Text>
+    <Box w={{base: '100%', md: '70%'}} mx={'auto'} overflow='hidden' mt={10}>
+      <ETHProvider />
+      <Text fontSize={{base:'1rem',md:"1.5rem"}} >{lang.t('asset.title')}</Text>
       <Box mt={2}>
         <Text display={{base:'block',md:'inline'}}>{lang.t('asset.supported')}</Text>
         <Link href={'https://github.com/iotexproject/ioTube/issues/new/choose'} isExternal _hover={{}}>

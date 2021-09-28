@@ -42,7 +42,7 @@ export const bscToIotexTokens = {
       name: 'Crosschain IOTX',
       decimals: 18,
       symbol: 'CIOTX',
-      logoURI: '/images/tokens/ctoken_logo.jpeg'
+      logoURI: 'https://iotube.b-cdn.net/web-iotube-web3/main/public/images/tokens/ctoken_logo.jpeg'
     }
   ]
 };
@@ -82,7 +82,7 @@ export const iotexBscNetTokens = {
       name: 'Crosschain IOTX',
       decimals: 18,
       symbol: 'CIOTX',
-      logoURI: '/images/tokens/ctoken_logo.jpeg'
+      logoURI: 'https://iotube.b-cdn.net/web-iotube-web3/main/public/images/tokens/ctoken_logo.jpeg'
     }
   ]
 };

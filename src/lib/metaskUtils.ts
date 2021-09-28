@@ -1,24 +1,6 @@
 import { TokenState } from '@/store/lib/TokenState';
 
 export const metamaskUtils = {
-  registerToken: async (tokenAddress: string, tokenSymbol: string, tokenDecimals: number, tokenImage: string) => {
-    //@ts-ignore
-
-    const tokenAdded = await window.ethereum.request({
-      method: 'wallet_watchAsset',
-      params: {
-        type: 'ERC20',
-        options: {
-          address: tokenAddress,
-          symbol: tokenSymbol,
-          decimals: tokenDecimals,
-          image: tokenImage
-        }
-      }
-    });
-
-    return tokenAdded;
-  },
   setupNetwork: async ({
      chainId,
      chainName,

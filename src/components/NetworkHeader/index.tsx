@@ -28,8 +28,6 @@ import { useWeb3React } from '@web3-react/core';
 import { Network } from '@/store/god';
 import { toast } from 'react-hot-toast';
 import { theme } from '@/lib/theme';
-import { BooleanState } from '@/store/standard/base';
-import { SwitchNetworkDialog } from '@/components/SwitchNetworkDialog';
 
 interface ISwitchProps {
   tokens?: Array<TokenState>;
@@ -87,7 +85,6 @@ const NetworkHeader = observer((props: ISwitchProps) => {
 
   return (
     <>
-      <SwitchNetworkDialog />
       <Flex>
         <Menu>
           <MenuButton

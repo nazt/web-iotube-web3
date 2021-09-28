@@ -251,19 +251,19 @@ export const TOKENS = {
     name: 'Crosschain IOTX',
     decimals: 18,
     symbol: 'CIOTX',
-    logoURI: '/images/tokens/ctoken_logo.jpeg'
+    logoURI: 'https://iotube.b-cdn.net/web-iotube-web3/main/public/images/tokens/ctoken_logo.jpeg'
   },
   '0x300211Def2a644b036A9bdd3e58159bb2074d388': {
     name: 'Crosschain IOTX',
     decimals: 18,
     symbol: 'CIOTX',
-    logoURI: '/images/tokens/ctoken_logo.jpeg'
+    logoURI: 'https://iotube.b-cdn.net/web-iotube-web3/main/public/images/tokens/ctoken_logo.jpeg'
   },
   '0x2aaF50869739e317AB80A57Bf87cAA35F5b60598': {
     name: 'Crosschain IOTX',
     decimals: 18,
     symbol: 'CIOTX',
-    logoURI: '/images/tokens/ctoken_logo.jpeg'
+    logoURI: 'https://iotube.b-cdn.net/web-iotube-web3/main/public/images/tokens/ctoken_logo.jpeg'
   },
   '0x6fbCdc1169B5130C59E72E51Ed68A84841C98cd1': {
     name: 'Tether USDT',
@@ -317,6 +317,6 @@ export const TOKENS = {
     name: 'Crosschain MCN.VENTURES',
     decimals: 18,
     symbol: 'CMCN',
-    logoURI: '/images/tokens/token_mcn-c.svg'
+    logoURI: 'https://iotube.b-cdn.net/web-iotube-web3/main/public/images/tokens/token_mcn-c.svg'
   }
 };

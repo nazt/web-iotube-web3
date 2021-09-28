@@ -98,7 +98,7 @@ export const ethTokensForIotex = {
       'name': 'Crosschain MCN.VENTURES',
       'decimals': 18,
       'symbol': 'CMCN',
-      'logoURI': '/images/tokens/token_mcn-c.svg'
+      'logoURI': 'https://iotube.b-cdn.net/web-iotube-web3/main/public/images/tokens/token_mcn-c.svg'
     }
   ]
 };

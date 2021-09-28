@@ -67,7 +67,7 @@ export const iotexTokensForKovenWeb3 = {
       'symbol': 'CC-IOTX',
       'address': '0xB40F662DcAd24DDf0DE0D742aF225dd43fae7d49',
       'decimals': 18,
-      'logoURI': 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io1hp6y4eqr90j7tmul4w2wa8pm7wx462hq0mg4tw.png'
+      'logoURI': 'https://iotexscan.io/image/token/io1hp6y4eqr90j7tmul4w2wa8pm7wx462hq0mg4tw.png'
     }
   ]
 };

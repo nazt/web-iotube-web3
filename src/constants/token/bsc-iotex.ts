@@ -34,7 +34,7 @@ export const bscToIotexTokens = {
       name: 'Cyclone Protocol',
       decimals: 18,
       symbol: 'CYC',
-      logoURI: 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io1f4acssp65t6s90egjkzpvrdsrjjyysnvxgqjrh.png'
+      logoURI: 'https://iotexscan.io/image/token/io1f4acssp65t6s90egjkzpvrdsrjjyysnvxgqjrh.png'
     },
     {
       address: '0x2aaF50869739e317AB80A57Bf87cAA35F5b60598',
@@ -57,15 +57,15 @@ export const iotexBscNetTokens = {
       destAddress: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
       name: 'Binance Coin',
       decimals: 18,
-      symbol: 'BNB',
+      symbol: 'BNB-bsc',
       logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/7192.png'
     },
     {
       address: '0x84abcb2832be606341a50128aeb1db43aa017449',
       destAddress: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
-      name: 'Binance USD',
+      name: 'ioBUSD',
       decimals: 18,
-      symbol: 'BUSD_b',
+      symbol: 'BUSD-bsc',
       logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/4687.png'
     },
     {
@@ -74,7 +74,7 @@ export const iotexBscNetTokens = {
       name: 'Cyclone Protocol',
       decimals: 18,
       symbol: 'CYC',
-      logoURI: 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io1f4acssp65t6s90egjkzpvrdsrjjyysnvxgqjrh.png'
+      logoURI: 'https://iotexscan.io/image/token/io1f4acssp65t6s90egjkzpvrdsrjjyysnvxgqjrh.png'
     },
     {
       address: '0x99B2B0eFb56E62E36960c20cD5ca8eC6ABD5557A',

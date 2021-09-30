@@ -6,7 +6,7 @@ export const iotexCCSwapPairs = {
     symbol: 'WIOTX',
     logoURI: 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io15qr5fzpxsnp7garl4m7k355rafzqn8grrm0grz.png'
   }, {
-    address: '0xa00744882684c3e4747faefd68d283ea44099d03',
+    address: '0x490CfbF9b9C43633DdD1968d062996227ef438A9',
     name: 'iMAGIC Token',
     decimals: 18,
     symbol: 'iMAGIC',

@@ -64,13 +64,14 @@ export const SwapCC = observer(() => {
       this.curTokenPairIndex.setValue(index);
     },
     setCurCCToken(ctoken: CCTokenState, index: number) {
+      this.amount = new BigNumberInputState({ value: new BigNumber(0) });
       this.curCCToken = ctoken;
       this.curWToken = god.currentChain.ccSwapTokensPairs.wTokens[index];
       this.curTokenPairIndex.setValue(index);
       if (index != 0) {
         this.curTokenIndex.setValue(1);
-        this.curToken = this.curWToken;
       }
+      this.curToken = this.curWToken;
     },
     setCurSourceToken(n, token: TokenState) {
       if (this.curTokenIndex.value == n) {

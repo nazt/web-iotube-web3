@@ -21,6 +21,11 @@ import { CCRouterState } from '@/store/lib/CCRouterState';
 import { IotexMainnetConfig } from '../../config/IotexMainnetConfig';
 import { IotexTestnetConfig } from '../../config/IotexTestnetConfig';
 import { CompleteModal } from './component/CompleteModal';
+import { CCTokenListModal } from './component/CCTokenListModal';
+import { WTokenListModal } from './component/WTokenListModal';
+import { TokenState } from '@/store/lib/TokenState';
+import { ChevronDownIcon } from '@chakra-ui/icons';
+import { CCTokenState } from '@/store/lib/CCTokenState';
 
 export const SwapCC = observer(() => {
   const { god, token, lang } = useStore();
@@ -46,14 +51,41 @@ export const SwapCC = observer(() => {
     isCCToken: false,
     completeModalOpen: new BooleanState(),
     actionHash: new StringState({ value: '' }),
+    isOpenWTokensList: new BooleanState(),
+    isOpenCCTokenList: new BooleanState(),
     toggleCompleteModal() {
       store.completeModalOpen.setValue(!store.completeModalOpen.value);
     },
-    setCurSourceToken(n, token) {
-      this.curTokenIndex.setValue(n);
-      this.amount = new BigNumberInputState({ value: new BigNumber(0) });
+    curTokenPairIndex: new NumberState(),
+    setCurTokenPair(token: TokenState, index: number) {
+      this.curWToken = token;
       this.curToken = token;
-      this.curToken.network = god.currentNetwork;
+      this.curCCToken = god.currentChain.ccSwapTokensPairs.ccTokens[index];
+      this.curTokenPairIndex.setValue(index);
+    },
+    setCurCCToken(ctoken: CCTokenState, index: number) {
+      this.curCCToken = ctoken;
+      this.curWToken = god.currentChain.ccSwapTokensPairs.wTokens[index];
+      this.curTokenPairIndex.setValue(index);
+      if (index != 0) {
+        this.curTokenIndex.setValue(1);
+        this.curToken = this.curWToken;
+      }
+    },
+    setCurSourceToken(n, token: TokenState) {
+      if (this.curTokenIndex.value == n) {
+        this.isOpenWTokensList.setValue(true);
+      }else {
+        this.curTokenIndex.setValue(n);
+        this.amount = new BigNumberInputState({ value: new BigNumber(0) });
+        this.curToken = token;
+      }
+
+      if (this.curTokenIndex.value == 0) {
+        this.curCCToken = god.currentChain.ccSwapTokensPairs.ccTokens[0];
+      } else {
+        this.curCCToken = god.currentChain.ccSwapTokensPairs.ccTokens[this.curTokenPairIndex.value];
+      }
     },
     maxCurTokenValue() {
       // iotx coin amount
@@ -236,6 +268,7 @@ export const SwapCC = observer(() => {
                     <Image borderRadius='full' mr='2'
                            src={store.curWToken?.logoURI}
                            boxSize={theme.iconSize.md} />{store.curWToken?.symbol}
+                    <Icon as={ChevronDownIcon} />
                   </Button>
                 </HStack>
                 <Box
@@ -284,9 +317,11 @@ export const SwapCC = observer(() => {
               <Spacer />
               {store.curCCToken &&
               <Box width='45%' className={`transition_box ${store.isCCToken ? 'transformer' : 'before'}`}>
-                <Button variant='opacity-primary'>
+                <Button variant='opacity-primary' onClick={() => store.isOpenCCTokenList.setValue(true)}>
                   <Image borderRadius='full' mr='2' boxSize={theme.iconSize.md}
-                         src={store.curCCToken?.logoURI} />{store.curCCToken.symbol}</Button>
+                         src={store.curCCToken?.logoURI} />{store.curCCToken.symbol}
+                  <Icon as={ChevronDownIcon} />
+                </Button>
                 <Box
                   bg={inputBg}
                   borderRadius={theme.borderRadius.sm}
@@ -355,6 +390,10 @@ export const SwapCC = observer(() => {
           <Box my={8} fontSize='sm'>{lang.t('swap.ctoken.not_support')}</Box>
         }
       </Container>
+      <WTokenListModal isOpen={store.isOpenWTokensList.value} onClose={() => store.isOpenWTokensList.setValue(false)}
+                        onSelect={store.setCurTokenPair} />
+      <CCTokenListModal isOpen={store.isOpenCCTokenList.value} onClose={() => store.isOpenCCTokenList.setValue(false)}
+                      onSelect={store.setCurCCToken} />
       {store.hasCCToken &&
       <CompleteModal
         isOpen={store.completeModalOpen}

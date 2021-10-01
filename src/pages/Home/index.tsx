@@ -70,7 +70,7 @@ export const Home = observer(() => {
               <StatLabel>{lang.t('info.assets')}</StatLabel>
             </Stat>
             <Stat>
-              <StatNumber fontSize='2xl' color={textColor} fontWeight={100}>$50,000,000+</StatNumber>
+              <StatNumber fontSize='2xl' color={textColor} fontWeight={100}>$60,000,000+</StatNumber>
               <StatLabel>{lang.t('info.total_value_locked')}</StatLabel>
             </Stat>
           </StatGroup>

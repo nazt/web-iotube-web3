@@ -31,7 +31,9 @@ export const IotexMainnetConfig = new ChainState({
   Coin: new TokenState({
     symbol: 'IOTX',
     address: '0x0000000000000000000000000000000000000000',
-    decimals: 18
+    decimals: 18,
+    logoURI: '/images/chain/iotex.svg',
+    destAddress:'0x99B2B0eFb56E62E36960c20cD5ca8eC6ABD5557A'
   }),
   crossChain: {},
   ccSwapRouter: "0x0F814827f651bCBf4971975F6eb55B2b6C5BCb4F",

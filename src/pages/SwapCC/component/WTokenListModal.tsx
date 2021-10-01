@@ -29,7 +29,7 @@ export const WTokenListModal = observer((props: PropsType) => {
     keyword: new StringState(),
     get tokens() {
       if (!god.currentChain.ccSwapTokensPairs?.wTokens) return [];
-      return god.currentChain.ccSwapTokensPairs?.wTokens
+      return god.currentChain.ccSwapTokensPairs?.wTokens.concat(god.currentChain.Coin)
         .filter((i) => i.symbol.toLowerCase().includes(store.keyword.value.toLowerCase()))
         .sort((a, b) => b.balance.value.comparedTo(a.balance.value));
     },

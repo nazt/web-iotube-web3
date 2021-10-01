@@ -152,8 +152,8 @@ export class TokenStore {
             method: 'allowance',
             params: [this.currentNetwork.account, this.currentChain.ccSwapRouter],
             handler: item.allowanceForSwap
-          }),
-        ),
+          })
+        )
       ]);
     }
   }

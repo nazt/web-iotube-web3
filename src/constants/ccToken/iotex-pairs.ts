@@ -21,14 +21,14 @@ export const iotexCCSwapPairs = {
     symbol: 'CIOTX',
     address: '0x99B2B0eFb56E62E36960c20cD5ca8eC6ABD5557A',
     decimals: 18,
-    logoURI: '/images/tokens/ctoken_logo.jpeg',
+    logoURI: 'https://iotube.org/images/tokens/ctoken_logo.jpeg',
     destAddress: '0x0000000000000000000000000000000000000000',
   }, {
     address: '0xc1932AC6f0aD660bE341B5C980E44df31a30f528',
     name: 'Cross Chain iMAGIC',
     decimals: 18,
     symbol: 'CiMAGIC',
-    logoURI: '/images/tokens/token_imagic-c.png',
+    logoURI: 'https://iotube.org/images/tokens/token_imagic-c.png',
     destAddress: '0x490CfbF9b9C43633DdD1968d062996227ef438A9',
   }]
 };

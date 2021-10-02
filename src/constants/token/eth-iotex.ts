@@ -204,6 +204,14 @@ export const iotexTokensForEth = {
       'decimals': 18,
       'symbol': 'MCN',
       'logoURI': 'https://mcn.ventures/asset/mcn-logo-white-bg-200.png'
+    },
+    {
+      address: '0x490CfbF9b9C43633DdD1968d062996227ef438A9',
+      name: 'iMAGIC Token',
+      decimals: 18,
+      symbol: 'iMAGIC',
+      logoURI: 'https://raw.githubusercontent.com/magiclandfinance/logo/master/logo.png',
+      destAddress: '0xc1932AC6f0aD660bE341B5C980E44df31a30f528'
     }
   ]
 };

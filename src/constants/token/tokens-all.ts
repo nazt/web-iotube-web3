@@ -318,5 +318,17 @@ export const TOKENS = {
     decimals: 18,
     symbol: 'CMCN',
     logoURI: 'https://iotube.b-cdn.net/web-iotube-web3/main/public/images/tokens/token_mcn-c.svg'
+  },
+  '0x490CfbF9b9C43633DdD1968d062996227ef438A9': {
+    name: 'iMAGIC Token',
+    decimals: 18,
+    symbol: 'iMAGIC',
+    logoURI: 'https://raw.githubusercontent.com/magiclandfinance/logo/master/logo.png'
+  },
+  '0xb0Ed1F44833C6b2Afa39a6a85ff62C8ad96F5275': {
+    name: 'iMAGIC Token',
+    decimals: 18,
+    symbol: 'iMAGIC',
+    logoURI: 'https://raw.githubusercontent.com/magiclandfinance/logo/master/logo.png'
   }
 };

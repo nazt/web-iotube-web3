@@ -11,10 +11,17 @@ export const ethTokensForKovenIotex = {
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png'
     },
     {
-      'address': '0xa1c74a9a3e59ffe9bee7b85cd6e91c0751289ebd',
+      'address': '0xd0A1E359811322d97991E03f863a0C30C2cF029C',
       'name': 'Wrapped ETH',
       'decimals': 18,
       'symbol': 'WETH',
+      'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/2396.png'
+    },
+    {
+      'address': '0xB1Dfe7EbcC50962e76455A4200A9BC1038B4FC79',
+      'name': 'CC Wrappend Token',
+      'decimals': 18,
+      'symbol': 'CCWETH',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/2396.png'
     }
   ]

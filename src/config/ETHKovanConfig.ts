@@ -63,7 +63,7 @@ export const ethKovenCrossChain = (network) => {
         network: network
       }),
       cashierCCRouter: new CashierRouterState({
-        address: '0x4a545561d3CaAd4C38382aa8307c584e92fDE84b',
+        address: '0xC5E3961c635CAC93d0d43A1cDB2505E82B0de1D8',
         network: network
       }),
       tokenList: new TokenListState({

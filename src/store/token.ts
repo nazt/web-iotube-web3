@@ -57,7 +57,7 @@ export class TokenStore {
 
   async approve(amountVal: BigNumber, curToken: TokenState) {
     if (!this.god.currentNetwork.account) return;
-    if (this.curToken.cTokenAddress) {
+    if (curToken.cTokenAddress) {
       return await this.currentCrossChain.cashierCCRouter.approveCrosschainToken({ params: [curToken.cTokenAddress]});
     }
     return await curToken.approve({ params: [this.currentCrossChain.cashier.address, amountVal] });

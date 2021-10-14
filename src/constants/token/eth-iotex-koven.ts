@@ -12,6 +12,7 @@ export const ethTokensForKovenIotex = {
     },
     {
       'address': '0xd0A1E359811322d97991E03f863a0C30C2cF029C',
+      'cTokenAddress': '0xB1Dfe7EbcC50962e76455A4200A9BC1038B4FC79',
       'name': 'Wrapped ETH',
       'decimals': 18,
       'symbol': 'WETH',

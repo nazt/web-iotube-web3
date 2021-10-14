@@ -59,7 +59,9 @@ export const Deposit = observer(() => {
       store.isOpenTokenList.setValue(true);
     },
     onSelectToken(t: TokenState) {
+      console.log(t);
       deposit.curToken = t;
+      token.curToken = t;
       deposit.amount.setDecimals(t.decimals);
     },
     async onCashierApprove() {

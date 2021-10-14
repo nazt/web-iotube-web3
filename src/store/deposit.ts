@@ -54,9 +54,9 @@ export class DepositStore {
       return this.rootStore.lang.t('input.amount.invalid');
     }
 
-    if (this.amount.value.gt(this.curToken.amountRange.maxAmount.value)) {
-      return `Amount must <= ${this.curToken.amountRange.maxAmount.format}`;
-    }
+    // if (this.amount.value.gt(this.curToken.amountRange.maxAmount.value)) {
+    //   return `Amount must <= ${this.curToken.amountRange.maxAmount.format}`;
+    // }
 
     if (this.amount.value.lt(this.curToken.amountRange.minAmount.value)) {
       return `Amount must >= ${this.curToken.amountRange.minAmount.format}`;

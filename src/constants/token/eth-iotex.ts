@@ -42,7 +42,7 @@ export const ethTokensForIotex = {
       'name': 'Cyclone Protocol',
       'decimals': 18,
       'symbol': 'CYC',
-      'logoURI': 'https://iotexscan.io/image/token/io1f4acssp65t6s90egjkzpvrdsrjjyysnvxgqjrh.png'
+      'logoURI': 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io1f4acssp65t6s90egjkzpvrdsrjjyysnvxgqjrh.png'
     },
     {
       'address': '0x4Fabb145d64652a948d72533023f6E7A623C7C53',
@@ -98,7 +98,7 @@ export const ethTokensForIotex = {
       'name': 'Crosschain MCN.VENTURES',
       'decimals': 18,
       'symbol': 'CMCN',
-      'logoURI': 'https://iotube.b-cdn.net/web-iotube-web3/main/public/images/tokens/token_mcn-c.svg'
+      'logoURI': 'https://g.iotube.org/web-iotube-web3/main/public/images/tokens/token_mcn-c.svg'
     }
   ]
 };
@@ -120,9 +120,9 @@ export const iotexTokensForEth = {
     {
       'address': '0x0258866edaf84d6081df17660357ab20a07d0c80',
       'destAddress': '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
-      'name': 'ioETH',
+      'name': 'Wrapped Ether',
       'decimals': 18,
-      'symbol': 'ioETH',
+      'symbol': 'ETH',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png'
     },
     {
@@ -136,9 +136,9 @@ export const iotexTokensForEth = {
     {
       'address': '0xc7b93720f73b037394ce00f954f849ed484a3dea',
       'destAddress': '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599',
-      'name': 'ioWBTC',
+      'name': 'Wrapped BTC',
       'decimals': 8,
-      'symbol': 'ioWBTC',
+      'symbol': 'WBTC',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/3717.png'
     },
     {
@@ -147,14 +147,14 @@ export const iotexTokensForEth = {
       'name': 'Cyclone Protocol',
       'decimals': 18,
       'symbol': 'CYC',
-      'logoURI': 'https://iotexscan.io/image/token/io1f4acssp65t6s90egjkzpvrdsrjjyysnvxgqjrh.png'
+      'logoURI': 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io1f4acssp65t6s90egjkzpvrdsrjjyysnvxgqjrh.png'
     },
     {
       'address': '0xacee9b11cd4b3f57e58880277ac72c8c41abe4e4',
       'destAddress': '0x4Fabb145d64652a948d72533023f6E7A623C7C53',
       'name': 'Binance USD',
       'decimals': 18,
-      'symbol': 'ioBUSD',
+      'symbol': 'BUSD',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/4687.png'
     },
     {
@@ -162,7 +162,7 @@ export const iotexTokensForEth = {
       'destAddress': '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
       'name': 'UNISWAP',
       'decimals': 18,
-      'symbol': 'ioUNI',
+      'symbol': 'UNI',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/7083.png'
     },
     {
@@ -170,7 +170,7 @@ export const iotexTokensForEth = {
       'destAddress': '0x45804880de22913dafe09f4980848ece6ecbaf78',
       'name': 'Paxos Gold',
       'decimals': 18,
-      'symbol': 'ioPAXG',
+      'symbol': 'PAXG',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/4705.png'
     },
     {
@@ -178,7 +178,7 @@ export const iotexTokensForEth = {
       'destAddress': '0xdAC17F958D2ee523a2206206994597C13D831ec7',
       'name': 'Tether USDT',
       'decimals': 6,
-      'symbol': 'ioUSDT',
+      'symbol': 'USDT',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/825.png'
     },
     {
@@ -186,7 +186,7 @@ export const iotexTokensForEth = {
       'destAddress': '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
       'name': 'USD Coin',
       'decimals': 6,
-      'symbol': 'ioUSDC',
+      'symbol': 'USDC',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png'
     },
     {
@@ -194,7 +194,7 @@ export const iotexTokensForEth = {
       'destAddress': '0x6b175474e89094c44da98b954eedeac495271d0f',
       'name': 'DAI',
       'decimals': 18,
-      'symbol': 'ioDAI',
+      'symbol': 'DAI',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/4943.png'
     },
     {

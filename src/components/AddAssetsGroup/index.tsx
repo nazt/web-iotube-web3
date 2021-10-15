@@ -45,6 +45,7 @@ export const AddAssetsGroup = observer((props: AssetsProps) => {
         tokenDecimals: god.addAssetToken.decimals,
         tokenImage: god.addAssetToken.logoURI
       });
+      god.addAssetToken = null;
     }
   }, [god.currentChain.chainId, god.addAssetToken]);
 

@@ -14,6 +14,8 @@ export class TokenState {
   address: string;
   destAddress: string;
   logoURI: string;
+  quickSwap?: string;
+  quickSwapFrom?: string;
   chainId: number;
   isWrapped?: boolean;
   decimals: number = 18;

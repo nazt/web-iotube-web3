@@ -39,6 +39,8 @@ export const bscToIotexTokens = {
     {
       address: '0x2aaF50869739e317AB80A57Bf87cAA35F5b60598',
       destAddress: '0x99B2B0eFb56E62E36960c20cD5ca8eC6ABD5557A',
+      quickSwap: 'https://pancakeswap.finance/swap?outputCurrency=0x2aaf50869739e317ab80a57bf87caa35f5b60598&inputCurrency=0x9678E42ceBEb63F23197D726B29b1CB20d0064E5',
+      quickSwapFrom: "IOTX",
       name: 'Crosschain IOTX',
       decimals: 18,
       symbol: 'CIOTX',

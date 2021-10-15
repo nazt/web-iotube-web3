@@ -142,5 +142,6 @@
   "swap.ctoken.description": "Crosschain Tokens, such as CIOTX, is a wrapped token that can be bridged to any networks via iotube. You can wrap or unwrap a token at 1:1 ratio anytime. Please switch to different networks to see different tokens. This product is still beta.",
   "swap.ctoken.not_support": "CTokens are available on IoTeX and Ethereum networks. Please switch to IoTeX or Etheruem to continue.",
   "home.button.add_iotex_net": "Add/Switch to IoTeX Network",
-  "button.add_token_metamask": "Add ${token} to METAMASK"
+  "button.add_token_metamask": "Add ${token} to METAMASK",
+  "token.quick_swap": "Swap ${tokenA}/${tokenB}"
 }

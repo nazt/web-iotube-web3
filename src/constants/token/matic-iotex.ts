@@ -50,15 +50,14 @@ export const polygonToIotexTokens = {
       decimals: 6,
       symbol: 'USDT',
       logoURI: 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io18ndhcj88pwz5a5h68yhzz6r4q8vykwhugq45ns.png'
-    },
-    {
-      address: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
-      destAddress: '0xc04da3a99d17135857bb937d2fbb321d3b6c6a81',
-      name: 'USD Coin',
-      decimals: 6,
-      symbol: 'USDC',
-      logoURI: 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io1cpx682vazuf4s4amjd7jlwejr5akc65plgmdru.png'
     }, {
+    //   address: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
+    //   destAddress: '0xc04da3a99d17135857bb937d2fbb321d3b6c6a81',
+    //   name: 'USD Coin',
+    //   decimals: 6,
+    //   symbol: 'USDC',
+    //   logoURI: 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io1cpx682vazuf4s4amjd7jlwejr5akc65plgmdru.png'
+    // }, {
       address: '0x0b3F868E0BE5597D5DB7fEB59E1CADBb0fdDa50a',
       destAddress: '0x295ebb8c782e186bcb70d9a8124053043d1adf5c',
       name: 'SushiToken',
@@ -143,14 +142,14 @@ export const iotexPolygonTokens = {
       symbol: 'USDT_m',
       logoURI: 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io18ndhcj88pwz5a5h68yhzz6r4q8vykwhugq45ns.png'
     },
-    {
-      address: '0xc04da3a99d17135857bb937d2fbb321d3b6c6a81',
-      destAddress: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
-      name: 'USD Coin',
-      decimals: 6,
-      symbol: 'USDC_m',
-      logoURI: 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io1cpx682vazuf4s4amjd7jlwejr5akc65plgmdru.png'
-    },
+    // {
+    //   address: '0xc04da3a99d17135857bb937d2fbb321d3b6c6a81',
+    //   destAddress: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
+    //   name: 'USD Coin',
+    //   decimals: 6,
+    //   symbol: 'USDC_m',
+    //   logoURI: 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io1cpx682vazuf4s4amjd7jlwejr5akc65plgmdru.png'
+    // },
     {
       address: '0x295ebb8c782e186bcb70d9a8124053043d1adf5c',
       destAddress: '0x0b3F868E0BE5597D5DB7fEB59E1CADBb0fdDa50a',

@@ -84,14 +84,14 @@ export const ethTokensForIotex = {
       'symbol': 'USDC',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png'
     },
-    {
-      'address': '0x6b175474e89094c44da98b954eedeac495271d0f',
-      'destAddress': '0x1CbAd85Aa66Ff3C12dc84C5881886EEB29C1bb9b',
-      'name': 'DAI',
-      'decimals': 18,
-      'symbol': 'DAI',
-      'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/4943.png'
-    },
+    // {
+    //   'address': '0x6b175474e89094c44da98b954eedeac495271d0f',
+    //   'destAddress': '0x1CbAd85Aa66Ff3C12dc84C5881886EEB29C1bb9b',
+    //   'name': 'DAI',
+    //   'decimals': 18,
+    //   'symbol': 'DAI',
+    //   'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/4943.png'
+    // },
     {
       'address': '0xD227c3e4f3F8dE94180269eF9DC221a6efc1F4C4',
       'destAddress': '0x3FE04320885e6124231254c802004871be681218',
@@ -189,14 +189,14 @@ export const iotexTokensForEth = {
       'symbol': 'USDC',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png'
     },
-    {
-      'address': '0x1CbAd85Aa66Ff3C12dc84C5881886EEB29C1bb9b',
-      'destAddress': '0x6b175474e89094c44da98b954eedeac495271d0f',
-      'name': 'DAI',
-      'decimals': 18,
-      'symbol': 'DAI',
-      'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/4943.png'
-    },
+    // {
+    //   'address': '0x1CbAd85Aa66Ff3C12dc84C5881886EEB29C1bb9b',
+    //   'destAddress': '0x6b175474e89094c44da98b954eedeac495271d0f',
+    //   'name': 'DAI',
+    //   'decimals': 18,
+    //   'symbol': 'DAI',
+    //   'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/4943.png'
+    // },
     {
       'address': '0x3FE04320885e6124231254c802004871be681218',
       'destAddress': '0xD227c3e4f3F8dE94180269eF9DC221a6efc1F4C4',

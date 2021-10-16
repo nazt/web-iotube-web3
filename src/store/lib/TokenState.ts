@@ -18,6 +18,7 @@ export class TokenState {
   quickSwapFrom?: string;
   chainId: number;
   isWrapped?: boolean;
+  isMaintained?: boolean = false;
   decimals: number = 18;
   network: NetworkState;
   balance: BigNumberState;

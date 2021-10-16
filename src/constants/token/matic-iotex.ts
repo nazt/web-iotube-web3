@@ -48,6 +48,7 @@ export const polygonToIotexTokens = {
       destAddress: '0x3cdb7c48e70b854ed2fa392e21687501d84b3afc',
       name: 'Tether USD',
       decimals: 6,
+      isMaintained: true,
       symbol: 'USDT',
       logoURI: 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io18ndhcj88pwz5a5h68yhzz6r4q8vykwhugq45ns.png'
     }, {
@@ -139,6 +140,7 @@ export const iotexPolygonTokens = {
       destAddress: '0xc2132D05D31c914a87C6611C10748AEb04B58e8F',
       name: 'Tether USD',
       decimals: 6,
+      isMaintained: true,
       symbol: 'USDT_m',
       logoURI: 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io18ndhcj88pwz5a5h68yhzz6r4q8vykwhugq45ns.png'
     },

@@ -73,6 +73,7 @@ export const ethTokensForIotex = {
       'destAddress': '0x6fbCdc1169B5130C59E72E51Ed68A84841C98cd1',
       'name': 'Tether USDT',
       'decimals': 6,
+      "isMaintained": true,
       'symbol': 'USDT',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/825.png'
     },
@@ -178,6 +179,7 @@ export const iotexTokensForEth = {
       'destAddress': '0xdAC17F958D2ee523a2206206994597C13D831ec7',
       'name': 'Tether USDT',
       'decimals': 6,
+      "isMaintained": true,
       'symbol': 'USDT',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/825.png'
     },

@@ -15,10 +15,20 @@ import {
   Textarea,
   useColorModeValue,
   useTheme,
-  Tag, chakra, Alert, CloseButton, Popover, PopoverTrigger, PopoverContent, PopoverArrow, PopoverBody
+  Tag,
+  chakra,
+  Alert,
+  CloseButton,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverArrow,
+  PopoverBody,
+  AlertIcon,
+  AlertDescription, AlertTitle
 } from '@chakra-ui/react';
 import { Text, Center } from '@chakra-ui/layout';
-import { ChevronDownIcon, CopyIcon, QuestionOutlineIcon, SmallCloseIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon, CopyIcon, InfoIcon, QuestionOutlineIcon, SmallCloseIcon } from '@chakra-ui/icons';
 import { TokenListModal } from '@/components/TokenListModal';
 import { useStore } from '@/store/index';
 import { BigNumberInputState } from '@/store/standard/BigNumberInputState';
@@ -157,16 +167,15 @@ export const Deposit = observer(() => {
       <HistoryActionModal/>
       <Center>
         <Alert
+          status="warning"
           display={store.isShowAlert.value ? 'flex' : 'none'}
-          maxW='md' textAlign='center'
-          bgColor={useColorModeValue('white', theme.colors.bg.bg1Alpha20)}
+          maxW='md'
           opacity={0.8}
           boxShadow={homeShadow}
           borderRadius={'10px'}>
-          <Text
-            fontSize='sm'
-            color={useColorModeValue('darkLightGreen', 'lightGreen')}>{lang.t('tube_v4')}</Text>
-          <CloseButton position='absolute' right={1} top={1} onClick={() => store.isShowAlert.setValue(false)} />
+          <AlertIcon />
+          <Text fontSize='sm'>{lang.t('maintainnance_mode')}</Text>
+          <CloseButton position="absolute" right="8px" top="8px" onClick={() => store.isShowAlert.setValue(false)}/>
         </Alert>
       </Center>
       <Container

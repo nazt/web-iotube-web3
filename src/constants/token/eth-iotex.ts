@@ -131,7 +131,7 @@ export const iotexTokensForEth = {
       'name': 'Wrapped IOTX',
       'decimals': 18,
       'symbol': 'WIOTX',
-      'logoURI': 'https://githubproxy.b-cdn.net/iotexproject/iotex-token-metadata/master/images/io15qr5fzpxsnp7garl4m7k355rafzqn8grrm0grz.png'
+      'logoURI': 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io15qr5fzpxsnp7garl4m7k355rafzqn8grrm0grz.png'
     },
     {
       'address': '0xc7b93720f73b037394ce00f954f849ed484a3dea',
@@ -203,7 +203,7 @@ export const iotexTokensForEth = {
       'name': 'MCN.VENTURES',
       'decimals': 18,
       'symbol': 'MCN',
-      'logoURI': 'https://mcn.ventures/asset/mcn-logo-white-bg-200.png'
+      'logoURI': 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io18lsyxgygtesjggcj2nyqyqzgwxlxsysc9lgmg8.png'
     }
   ]
 };

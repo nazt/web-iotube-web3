@@ -23,7 +23,7 @@ export const TOKENS = {
     name: 'IoTeX',
     decimals: 18,
     symbol: 'IoTeX',
-    logoURI: 'https://githubproxy.b-cdn.net/iotexproject/iotex-token-metadata/master/images/io15qr5fzpxsnp7garl4m7k355rafzqn8grrm0grz.png'
+    logoURI: 'https://githubproxy.iotex.io/iotexproject/iotex-token-metadata/master/images/io15qr5fzpxsnp7garl4m7k355rafzqn8grrm0grz.png'
   },
   '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c': {
     name: 'Wrapped BSC',

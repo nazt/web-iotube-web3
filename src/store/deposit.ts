@@ -29,7 +29,7 @@ export class DepositStore {
   }
 
   get state() {
-    return "Under Maintainance..."
+    return "Under maintenance..."
 
     if (!this.rootStore.god.currentNetwork.account) {
       return this.rootStore.lang.t('input.wallet.not_connected');

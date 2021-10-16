@@ -144,5 +144,5 @@
   "home.button.add_iotex_net": "Add/Switch to IoTeX Network",
   "button.add_token_metamask": "Add ${token} to METAMASK",
   "token.quick_swap": "Swap ${tokenA}/${tokenB}",
-  "maintainnance_mode": "ioTube is under maintainance now. The estimated time is 12 hrs."
+  "maintainnance_mode": "ioTube is under maintenance now. The estimated time is 12 hrs."
 }

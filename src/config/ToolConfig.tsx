@@ -9,7 +9,7 @@ import {
   SwapIcon,
   TransactionsIcon,
   AssetIcon,
-  TubeIcon
+  TubeIcon, WalletIcon
 } from '@/components/Icon';
 import { Transaction } from '../pages/Transaction/index';
 import { AiFillGithub, CgFileDocument } from 'react-icons/all';
@@ -18,6 +18,7 @@ import { Icon } from '@chakra-ui/react';
 import { SwapCC } from '../pages/SwapCC';
 import { TokenList } from '../pages/Asset';
 import { AiFillTwitterCircle } from 'react-icons/ai';
+import { Wallets } from '../pages/wallets';
 
 
 class Tool {
@@ -51,6 +52,13 @@ export const ToolConfig = [
     path: '/ciotx',
     component: SwapCC,
     icon: SwapIcon,
+    isActive: false
+  },
+  {
+    name: 'Wallet',
+    path: '/wallet',
+    component: Wallets,
+    icon: WalletIcon,
     isActive: false
   },
   {

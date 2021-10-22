@@ -86,9 +86,9 @@ export const HomeIcon = (props) => (
 export const TubeIcon = (props) => (
   <Icon viewBox='0 0 24 24' width='6' height='6'>
     <svg viewBox='0 0 24 24' fill='none' {...props}>
-      <path fill-rule='evenodd' clip-rule='evenodd' fill='currentColor'
+      <path fillRule='evenodd' clipRule='evenodd' fill='currentColor'
             d='M10.3457 18C14.764 18 18.3457 14.4183 18.3457 10C18.3457 5.58172 14.764 2 10.3457 2C5.92742 2 2.3457 5.58172 2.3457 10C2.3457 14.4183 5.92742 18 10.3457 18ZM10.3457 20C15.8686 20 20.3457 15.5228 20.3457 10C20.3457 4.47715 15.8686 0 10.3457 0C4.82286 0 0.345703 4.47715 0.345703 10C0.345703 15.5228 4.82286 20 10.3457 20Z' />
-      <path fill-rule='evenodd' clip-rule='evenodd' fill='currentColor'
+      <path fillRule='evenodd' clipRule='evenodd' fill='currentColor'
             d='M10.3457 11C10.898 11 11.3457 10.5523 11.3457 10C11.3457 9.44772 10.898 9 10.3457 9C9.79342 9 9.3457 9.44772 9.3457 10C9.3457 10.5523 9.79342 11 10.3457 11ZM10.3457 13C12.0026 13 13.3457 11.6569 13.3457 10C13.3457 8.34315 12.0026 7 10.3457 7C8.68885 7 7.3457 8.34315 7.3457 10C7.3457 11.6569 8.68885 13 10.3457 13Z' />
     </svg>
   </Icon>
@@ -292,6 +292,16 @@ export const AssetIcon = (props) => (
       <path
         d='M20.3457 8.5C20.3457 9.53859 19.6528 10.6408 18.1882 11.5358C16.7408 12.4203 14.6776 13 12.3457 13C10.0138 13 7.95061 12.4203 6.50319 11.5358C5.03861 10.6408 4.3457 9.53859 4.3457 8.5C4.3457 7.46141 5.03861 6.35921 6.50319 5.46419C7.95061 4.57966 10.0138 4 12.3457 4C14.6776 4 16.7408 4.57966 18.1882 5.46419C19.6528 6.35921 20.3457 7.46141 20.3457 8.5Z'
         stroke='currentColor' strokeWidth='2' />
+    </svg>
+  </Icon>
+);
+
+export const WalletIcon = (props) => (
+  <Icon viewBox='0 0 48 48' width='6' height='6'>
+    <svg viewBox="0 0 24 24" fill="none" {...props}>
+      <path d="M6 4H18C19.1046 4 20 4.89543 20 6V18C20 19.1046 19.1046 20 18 20H6C4.89543 20 4 19.1046 4 18V6C4 4.89543 4.89543 4 6 4Z" stroke="currentColor" strokeWidth="2"/>
+      <path d="M17 10H20V14H17C15.8954 14 15 13.1046 15 12C15 10.8954 15.8954 10 17 10Z" stroke="currentColor" strokeWidth="2"/>
+      <line x1="7" y1="8" x2="12" y2="8" stroke="currentColor" strokeWidth="2"/>
     </svg>
   </Icon>
 );

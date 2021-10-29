@@ -5,11 +5,11 @@ import { TokenState } from '@/store/lib/TokenState';
 import { Contract, ethers } from 'ethers';
 import erc20Abi from '@/constants/abi/erc20.json';
 import BigNumber from 'bignumber.js';
+import { IotexMainnetConfig } from '../config/IotexMainnetConfig';
 
 export class WalletsStore {
   rootStore: RootStore;
-  // iotexBabelProvider = new ethers.providers.JsonRpcProvider("https://babel-api.mainnet.iotex.io/");
-  iotexBabelProvider = new ethers.providers.JsonRpcProvider("https://babel-151-read.onrender.com");
+  iotexBabelProvider = new ethers.providers.JsonRpcProvider(IotexMainnetConfig.rpcUrl);
   iotexBabelSigner = this.iotexBabelProvider.getSigner()
 
   constructor(rootStore: RootStore) {

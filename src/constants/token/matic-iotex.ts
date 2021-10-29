@@ -48,17 +48,16 @@ export const polygonToIotexTokens = {
       destAddress: '0x3cdb7c48e70b854ed2fa392e21687501d84b3afc',
       name: 'Tether USD',
       decimals: 6,
-      isMaintained: true,
       symbol: 'USDT',
       logoURI: 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io18ndhcj88pwz5a5h68yhzz6r4q8vykwhugq45ns.png'
     }, {
-    //   address: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
-    //   destAddress: '0xc04da3a99d17135857bb937d2fbb321d3b6c6a81',
-    //   name: 'USD Coin',
-    //   decimals: 6,
-    //   symbol: 'USDC',
-    //   logoURI: 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io1cpx682vazuf4s4amjd7jlwejr5akc65plgmdru.png'
-    // }, {
+      address: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
+      destAddress: '0xc04da3a99d17135857bb937d2fbb321d3b6c6a81',
+      name: 'USD Coin',
+      decimals: 6,
+      symbol: 'USDC',
+      logoURI: 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io1cpx682vazuf4s4amjd7jlwejr5akc65plgmdru.png'
+    }, {
       address: '0x0b3F868E0BE5597D5DB7fEB59E1CADBb0fdDa50a',
       destAddress: '0x295ebb8c782e186bcb70d9a8124053043d1adf5c',
       name: 'SushiToken',
@@ -140,18 +139,17 @@ export const iotexPolygonTokens = {
       destAddress: '0xc2132D05D31c914a87C6611C10748AEb04B58e8F',
       name: 'Tether USD',
       decimals: 6,
-      isMaintained: true,
       symbol: 'USDT_m',
       logoURI: 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io18ndhcj88pwz5a5h68yhzz6r4q8vykwhugq45ns.png'
     },
-    // {
-    //   address: '0xc04da3a99d17135857bb937d2fbb321d3b6c6a81',
-    //   destAddress: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
-    //   name: 'USD Coin',
-    //   decimals: 6,
-    //   symbol: 'USDC_m',
-    //   logoURI: 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io1cpx682vazuf4s4amjd7jlwejr5akc65plgmdru.png'
-    // },
+    {
+      address: '0xc04da3a99d17135857bb937d2fbb321d3b6c6a81',
+      destAddress: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
+      name: 'USD Coin',
+      decimals: 6,
+      symbol: 'USDC_m',
+      logoURI: 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io1cpx682vazuf4s4amjd7jlwejr5akc65plgmdru.png'
+    },
     {
       address: '0x295ebb8c782e186bcb70d9a8124053043d1adf5c',
       destAddress: '0x0b3F868E0BE5597D5DB7fEB59E1CADBb0fdDa50a',

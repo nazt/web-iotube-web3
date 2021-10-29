@@ -54,7 +54,7 @@ export const TransactionTable = observer((props: TableProps) => {
 
   return (
     <Table>
-      <Header/>
+      <Header />
       {
         actionList.count <= 0
           ? renderBlank()

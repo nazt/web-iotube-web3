@@ -88,19 +88,19 @@ export const Row = observer((props: RowProps) => {
         { renderHash() }
       </Td>
       <Td as={HStack} spacing="2" flex="1.4" border="none">
-        <Image src={action.fromNetwork.logoUrl} boxSize="5"/>
+        <Image src={action.fromNetwork?.logoUrl} boxSize="5"/>
         <Link
           isExternal
-          href={`${action.fromNetwork.explorerURL}/address/${action.sender}`}
+          href={`${action.fromNetwork?.explorerURL}/address/${action.sender}`}
         >
           {helper.string.truncate(action.sender, 12, '...')}
         </Link>
       </Td>
       <Td as={HStack} spacing="2" flex="1.4" border="none">
-        <Image src={action.toNetwork.logoUrl} boxSize="5"/>
+        <Image src={action.toNetwork?.logoUrl} boxSize="5"/>
         <Link
           isExternal
-          href={`${action.toNetwork.explorerURL}/address/${action.recipient}`}
+          href={`${action.toNetwork?.explorerURL}/address/${action.recipient}`}
         >
           {helper.string.truncate(action.recipient, 12, '...')}
         </Link>

@@ -178,8 +178,8 @@ export const SearchSelectPopover = observer((props: SearchFiledProps) =>
                   <InputRightElement onClick={() => store.onClear()} children={<CloseIcon color="green.500" />} />
                 </InputGroup>
                 <List spacing={5} padding={4} maxH="500px" overflowY="scroll">
-                  {store.tokens.map((i) => (
-                    <ListItem key={i.address} cursor="pointer" display="flex" alignItems="center" justifyContent="space-between" onClick={() =>  {store.onSelect(i.address); onClose();}}>
+                  {store.tokens.map((i, item) => (
+                    <ListItem key={`${record.activeTab.value}-${item}`} cursor="pointer" display="flex" alignItems="center" justifyContent="space-between" onClick={() =>  {store.onSelect(i.address); onClose();}}>
                       <Box display="flex" alignItems="center">
                         <Image borderRadius='full' boxSize='24px' src={i.logoURI} mr='4'
                                fallbackSrc="https://via.placeholder.com/150" />

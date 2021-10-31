@@ -91,6 +91,22 @@
     },
     {
       "chainId": 4689,
+      "address": "0x42C9255D5e522e83B16ea11a3BA04c2D3AfCA079",
+      "name": "BSC Tether USD",
+      "decimals": 18,
+      "symbol": "USDT_b",
+      "logoURI": "https://bscscan.com/token/images/busdt_32.png"
+    },
+    {
+      "chainId": 4689,
+      "address": "0x037346E5a5722957Ac2cAb6ceb8c74fC18Cea91D",
+      "name": "BSC USD Coin",
+      "decimals": 18,
+      "symbol": "USDC_b",
+      "logoURI": "https://bscscan.com/token/images/centre-usdc_28.png"
+    },
+    {
+      "chainId": 4689,
       "address": "0x8e66c0d6b70c0b23d39f4b21a1eac52bba8ed89a",
       "name": "Wrapped Matic",
       "decimals": 18,

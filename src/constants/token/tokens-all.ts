@@ -324,5 +324,29 @@ export const TOKENS = {
     decimals: 18,
     symbol: 'CMCN',
     logoURI: 'https://g.iotube.org/web-iotube-web3/main/public/images/tokens/token_mcn-c.svg'
+  },
+  '0x42C9255D5e522e83B16ea11a3BA04c2D3AfCA079': {
+    name: 'BSC Tether USD',
+    decimals: 18,
+    symbol: 'USDT_b',
+    logoURI: 'https://bscscan.com/token/images/busdt_32.png'
+  },
+  '0x55d398326f99059ff775485246999027b3197955': {
+    name: 'Tether USD',
+    decimals: 18,
+    symbol: 'USDT',
+    logoURI: 'https://bscscan.com/token/images/busdt_32.png'
+  },
+  '0x037346E5a5722957Ac2cAb6ceb8c74fC18Cea91D':{
+    name: 'BSC USD Coin',
+    decimals: 18,
+    symbol: 'USDC_b',
+    logoURI: 'https://bscscan.com/token/images/centre-usdc_28.png'
+  },
+  '0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d':{
+    name: 'USD Coin',
+    decimals: 18,
+    symbol: 'USDC',
+    logoURI: 'https://bscscan.com/token/images/centre-usdc_28.png'
   }
 };

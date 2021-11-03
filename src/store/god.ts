@@ -47,6 +47,7 @@ export class GodStore {
 
   confirmDialogOpen = new BooleanState({});
   destChain = null;
+  addAssetToken = null;
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer, useLocalStore } from 'mobx-react-lite';
-import { useStore } from '../../store/index';
+import { useStore } from '@/store/index';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 import { useEffect } from 'react';
@@ -8,8 +8,7 @@ import toast from 'react-hot-toast';
 import { ETHMainnetConfig } from '../../config/ETHMainnetConfig';
 import { Provider as MulticallProvider } from 'ethers-multicall';
 import { injected } from '@/lib/web3-react';
-import { eventBus } from '../../lib/event';
-import { _ } from '@/lib/lodash';
+import { eventBus } from '@/lib/event';
 import { BSCMainnetConfig } from '../../config/BSCMainnetConfig';
 import { IotexTestnetConfig } from '../../config/IotexTestnetConfig';
 import { Network } from '@/store/god';

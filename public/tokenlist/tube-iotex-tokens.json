@@ -1,0 +1,181 @@
+{
+  "name": "ioTube IoTeX Token List",
+  "timestamp": "2021-09-18T09:56:23Z",
+  "version": {
+    "major": 0,
+    "minor": 1,
+    "patch": 0
+  },
+  "tags": {},
+  "logoURI": "https://iotube.org/images/iotube_logo.png",
+  "keywords": ["tube", "default"],
+  "tokens": [
+    {
+      "chainId": 4689,
+      "address": "0x0258866edaf84d6081df17660357ab20a07d0c80",
+      "name": "Wrapped Ether",
+      "decimals": 18,
+      "symbol": "ETH",
+      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"
+    },
+    {
+      "chainId": 4689,
+      "address": "0xc7b93720f73b037394ce00f954f849ed484a3dea",
+      "name": "Wrapped BTC",
+      "decimals": 8,
+      "symbol": "WBTC",
+      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/3717.png"
+    },
+    {
+      "chainId": 4689,
+      "address": "0xacee9b11cd4b3f57e58880277ac72c8c41abe4e4",
+      "name": "Binance USD",
+      "decimals": 18,
+      "symbol": "BUSD",
+      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/4687.png"
+    },
+    {
+      "chainId": 4689,
+      "address": "0xedeefaca6a1581fe2349cdfc3083d4efa8188e55",
+      "name": "UNISWAP",
+      "decimals": 18,
+      "symbol": "UNI",
+      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/7083.png"
+    },
+    {
+      "chainId": 4689,
+      "address": "0x2a6003e4b618ff3457a4a2080d028b0249b51c80",
+      "name": "Paxos Gold",
+      "decimals": 18,
+      "symbol": "PAXG",
+      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/4705.png"
+    },
+    {
+      "chainId": 4689,
+      "address": "0x6fbCdc1169B5130C59E72E51Ed68A84841C98cd1",
+      "name": "Tether USDT",
+      "decimals": 6,
+      "symbol": "USDT",
+      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"
+    },
+    {
+      "chainId": 4689,
+      "address": "0x3B2bf2b523f54C4E454F08Aa286D03115aFF326c",
+      "name": "USD Coin",
+      "decimals": 6,
+      "symbol": "USDC",
+      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png"
+    },
+    {
+      "address": "0x1CbAd85Aa66Ff3C12dc84C5881886EEB29C1bb9b",
+      "name": "Dai Stablecoin",
+      "decimals": 18,
+      "symbol": "DAI",
+      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/4943.png"
+    },
+    {
+      "chainId": 4689,
+      "address": "0x97e6c48867fdc391a8dfe9d169ecd005d1d90283",
+      "name": "Binance Coin",
+      "decimals": 18,
+      "symbol": "BNB",
+      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/7192.png"
+    },
+    {
+      "chainId": 4689,
+      "address": "0x84abcb2832be606341a50128aeb1db43aa017449",
+      "name": "Binance USD",
+      "decimals": 18,
+      "symbol": "BUSD_b",
+      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/4687.png"
+    },
+    {
+      "chainId": 4689,
+      "address": "0x42C9255D5e522e83B16ea11a3BA04c2D3AfCA079",
+      "name": "BSC Tether USD",
+      "decimals": 18,
+      "symbol": "USDT_b",
+      "logoURI": "https://iotexproject.iotex.io/iotex-token-metadata/master/images/io1gtyj2h272ghg8vtw5ydrhgzv95a0egre4zemtf.png"
+    },
+    {
+      "chainId": 4689,
+      "address": "0x037346E5a5722957Ac2cAb6ceb8c74fC18Cea91D",
+      "name": "BSC USD Coin",
+      "decimals": 18,
+      "symbol": "USDC_b",
+      "logoURI": "https://iotexproject.iotex.io/iotex-token-metadata/master/images/io1qde5ded9wg540tpv4dkwhrr5lsvva2ga3hf6ry.png"
+    },
+    {
+      "chainId": 4689,
+      "address": "0x8e66c0d6b70c0b23d39f4b21a1eac52bba8ed89a",
+      "name": "Wrapped Matic",
+      "decimals": 18,
+      "symbol": "Matic",
+      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/3890.png"
+    },
+    {
+      "chainId": 4689,
+      "address": "0x653656f84381e8a359a268f3002621bbb14c62f8",
+      "name": "Wrapped Ether",
+      "decimals": 18,
+      "symbol": "WETH_m",
+      "logoURI": "https://iotexproject.iotex.io/iotex-token-metadata/master/images/io1v5m9d7zrs852xkdzdresqf3phwc5cchc5crylc.png"
+    },
+    {
+      "chainId": 4689,
+      "address": "0x7f0ad63c902c67b1fa1b1102b0daffb889f5d5cb",
+      "name": "Wrapped BTC",
+      "decimals": 8,
+      "symbol": "WBTC_m",
+      "logoURI": "https://iotexproject.iotex.io/iotex-token-metadata/master/images/io10u9dv0ys93nmr7smzyptpkhlhzylt4wtqzrvld.png"
+    },
+    {
+      "chainId": 4689,
+      "address": "0x62a9d987cbf4c45a550deed5b57b200d7a319632",
+      "name": "DAI Stablecoin",
+      "decimals": 18,
+      "symbol": "DAI_m",
+      "logoURI": "https://iotexproject.iotex.io/iotex-token-metadata/master/images/io1v25anp7t7nz954gdam2m27eqp4arr93jly4maa.png"
+    },
+    {
+      "chainId": 4689,
+      "address": "0x3cdb7c48e70b854ed2fa392e21687501d84b3afc",
+      "name": "Tether USD",
+      "decimals": 6,
+      "symbol": "USDT_m",
+      "logoURI": "https://iotexproject.iotex.io/iotex-token-metadata/master/images/io18ndhcj88pwz5a5h68yhzz6r4q8vykwhugq45ns.png"
+    },
+    {
+      "chainId": 4689,
+      "address": "0xc04da3a99d17135857bb937d2fbb321d3b6c6a81",
+      "name": "USD Coin",
+      "decimals": 6,
+      "symbol": "USDC_m",
+      "logoURI": "https://iotexproject.iotex.io/iotex-token-metadata/master/images/io1cpx682vazuf4s4amjd7jlwejr5akc65plgmdru.png"
+    },
+    {
+      "chainId": 4689,
+      "address": "0x295ebb8c782e186bcb70d9a8124053043d1adf5c",
+      "name": "SushiToken",
+      "decimals": 18,
+      "symbol": "Sushi_m",
+      "logoURI": "https://iotexproject.iotex.io/iotex-token-metadata/master/images/io1990thrrc9cvxhjmsmx5pysznqs734h6uhxfxkq.png"
+    },
+    {
+      "chainId": 4689,
+      "address": "0xe46ba98a87dca989725e9a2389975c0bbbb8f985",
+      "name": "Quickswap",
+      "decimals": 18,
+      "symbol": "QUICK",
+      "logoURI": "https://iotexproject.iotex.io/iotex-token-metadata/master/images/io1u346nz58mj5cjuj7ng3cn96upwam37v9axtju2.png"
+    },
+    {
+      "chainId": 4689,
+      "address": "0xaadc74127109d944e36cbd70f71fc5f0c921fc6c",
+      "name": "Aave Token",
+      "decimals": 18,
+      "symbol": "AAVE_m",
+      "logoURI": "https://iotexproject.iotex.io/iotex-token-metadata/master/images/io14tw8gyn3p8v5fcmvh4c0w8797ryjrlrvnsr6zf.png"
+    }
+  ]
+}

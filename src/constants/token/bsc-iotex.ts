@@ -34,15 +34,33 @@ export const bscToIotexTokens = {
       name: 'Cyclone Protocol',
       decimals: 18,
       symbol: 'CYC',
-      logoURI: 'https://iotexscan.io/image/token/io1f4acssp65t6s90egjkzpvrdsrjjyysnvxgqjrh.png'
+      logoURI: 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io1f4acssp65t6s90egjkzpvrdsrjjyysnvxgqjrh.png'
     },
     {
       address: '0x2aaF50869739e317AB80A57Bf87cAA35F5b60598',
       destAddress: '0x99B2B0eFb56E62E36960c20cD5ca8eC6ABD5557A',
+      quickSwap: 'https://pancakeswap.finance/swap?outputCurrency=0x2aaf50869739e317ab80a57bf87caa35f5b60598&inputCurrency=0x9678E42ceBEb63F23197D726B29b1CB20d0064E5',
+      quickSwapFrom: "IOTX",
       name: 'Crosschain IOTX',
       decimals: 18,
       symbol: 'CIOTX',
-      logoURI: '/images/tokens/ctoken_logo.jpeg'
+      logoURI: 'https://g.iotube.org/web-iotube-web3/main/public/images/tokens/ctoken_logo.jpeg'
+    },
+    {
+      address: '0x55d398326f99059ff775485246999027b3197955',
+      destAddress: '0x42C9255D5e522e83B16ea11a3BA04c2D3AfCA079',
+      name: 'Tether USD',
+      decimals: 18,
+      symbol: 'USDT',
+      logoURI: 'https://bscscan.com/token/images/busdt_32.png'
+    },
+    {
+      address: '0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d',
+      destAddress: '0x037346E5a5722957Ac2cAb6ceb8c74fC18Cea91D',
+      name: 'USD Coin',
+      decimals: 18,
+      symbol: 'USDC',
+      logoURI: 'https://bscscan.com/token/images/centre-usdc_28.png'
     }
   ]
 };
@@ -57,15 +75,15 @@ export const iotexBscNetTokens = {
       destAddress: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
       name: 'Binance Coin',
       decimals: 18,
-      symbol: 'BNB-bsc',
+      symbol: 'BNB',
       logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/7192.png'
     },
     {
       address: '0x84abcb2832be606341a50128aeb1db43aa017449',
       destAddress: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
-      name: 'ioBUSD',
+      name: 'Binance USD',
       decimals: 18,
-      symbol: 'BUSD-bsc',
+      symbol: 'BUSD_b',
       logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/4687.png'
     },
     {
@@ -74,7 +92,7 @@ export const iotexBscNetTokens = {
       name: 'Cyclone Protocol',
       decimals: 18,
       symbol: 'CYC',
-      logoURI: 'https://iotexscan.io/image/token/io1f4acssp65t6s90egjkzpvrdsrjjyysnvxgqjrh.png'
+      logoURI: 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io1f4acssp65t6s90egjkzpvrdsrjjyysnvxgqjrh.png'
     },
     {
       address: '0x99B2B0eFb56E62E36960c20cD5ca8eC6ABD5557A',
@@ -82,7 +100,23 @@ export const iotexBscNetTokens = {
       name: 'Crosschain IOTX',
       decimals: 18,
       symbol: 'CIOTX',
-      logoURI: '/images/tokens/ctoken_logo.jpeg'
+      logoURI: 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io1nxetpma4de3wx6tqcgxdtj5wc64a24t64dc76s.png'
+    },
+    {
+      address: '0x42C9255D5e522e83B16ea11a3BA04c2D3AfCA079',
+      destAddress: '0x55d398326f99059ff775485246999027b3197955',
+      name: 'BSC Tether USD',
+      decimals: 18,
+      symbol: 'USDT_b',
+      logoURI: 'https://bscscan.com/token/images/busdt_32.png'
+    },
+    {
+      address: '0x037346E5a5722957Ac2cAb6ceb8c74fC18Cea91D',
+      destAddress: '0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d',
+      name: 'BSC USD Coin',
+      decimals: 18,
+      symbol: 'USDC_b',
+      logoURI: 'https://bscscan.com/token/images/centre-usdc_28.png'
     }
   ]
 };

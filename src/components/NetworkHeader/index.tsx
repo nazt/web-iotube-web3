@@ -33,6 +33,7 @@ import { SwitchNetworkDialog } from '@/components/SwitchNetworkDialog';
 import { ETHKovanConfig } from '../../config/ETHKovanConfig';
 import { IotexTestnetConfig } from '../../config/IotexTestnetConfig';
 
+
 interface ISwitchProps {
   tokens?: Array<TokenState>;
 }
@@ -91,7 +92,6 @@ const NetworkHeader = observer((props: ISwitchProps) => {
 
   return (
     <>
-      <SwitchNetworkDialog />
       <Flex>
         <Menu>
           <MenuButton

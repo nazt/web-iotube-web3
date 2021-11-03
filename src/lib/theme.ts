@@ -32,6 +32,19 @@ const Button = {
         }
       }
     }),
+    'green-border':(props)=>({
+      bg: props.colorMode === 'dark'?'gray.8':'white',
+      color: props.colorMode === 'dark'?'lightGreen':'darkLightGreen',
+      border: '2px',
+      borderColor: props.colorMode === 'dark'?'lightGreen':'darkLightGreen',
+      _hover: {
+        opacity: 0.8,
+        _disabled: {
+          bg: props.colorMode === 'dark'?'lightGreen':'darkLightGreen',
+          opacity: 0.5
+        }
+      }
+    }),
     'black': (props) => ({
       bg: props.colorMode === 'dark' ? '#182532' : 'gray.800',
       color: 'gray.100',

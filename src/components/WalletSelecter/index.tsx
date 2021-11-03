@@ -110,7 +110,7 @@ export const WalletSelecter = observer(() => {
                  _hover={{ opacity: '0.8' }}>
               <Flex>
                 <Flex direction='column'>
-                  <Text fontSize='lg' fontWeight='500'>Broswer
+                  <Text fontSize='lg' fontWeight='500'>Browser
                     Wallet</Text>
                   <Text mt={1} color={theme.colors.gray[2]} fontSize='xs'
                         fontWeight='500'>({names})</Text>

@@ -4,21 +4,26 @@ import axios from 'axios';
 import { BigNumberState } from '@/store/standard/BigNumberState';
 import { TOKENS } from '@/constants/token/tokens-all';
 import BigNumber from 'bignumber.js';
-import { NumberState } from '@/store/standard/base';
+import { NumberState, StringState } from '@/store/standard/base';
 import { ChainState } from '@/store/lib/ChainState';
 import { CashierConfig } from '../../config/CashierConfig';
+import { TokenState } from '@/store/lib/TokenState';
 
 export class ActionListState {
   requestApi: string;
   key: string;
   chainId: number;
   name: string;
+  tokensOnNetwork: any;
   first: NumberState = new NumberState({value:10});
   skip: NumberState = new NumberState({value:0});
   actions: ActionState[] = [];
   count: number = 0;
   networkConfig: ChainState;
   allTokens = {};
+  sender: StringState = new StringState();
+  recipient: StringState = new StringState();
+  token: StringState = new StringState();
 
   constructor(args: Partial<ActionListState>) {
     Object.assign(this, args);
@@ -46,11 +51,18 @@ export class ActionListState {
     return Buffer.from(String(content), 'base64').toString('hex');
   }
 
+  encodeHexAddresstoBase64(content: string): string {
+    return Buffer.from(String(content.split('0x')[1]), 'hex').toString('base64');
+  }
+
   async initActions() {
     console.log('ActionStore::initAction');
     const { status, data } = await axios.post(
       this.requestApi,
       {
+        sender: this.encodeHexAddresstoBase64(this.sender.value),
+        recipient: this.encodeHexAddresstoBase64(this.recipient.value),
+        token: this.encodeHexAddresstoBase64(this.token.value),
         first: this.first.value,
         skip: this.skip.value
       },

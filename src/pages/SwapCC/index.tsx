@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { useStore } from '@/store/index';
 import { ETHProvider } from '@/components/EthProvider';
-import { BooleanState, NumberState } from '@/store/standard/base';
+import { BooleanState, NumberState, StringState } from '@/store/standard/base';
 import BigNumber from 'bignumber.js';
 import { BigNumberInputState } from '@/store/standard/BigNumberInputState';
 import { MaxUint256 } from '@ethersproject/constants';
@@ -20,6 +20,7 @@ import './index.scss';
 import { CCRouterState } from '@/store/lib/CCRouterState';
 import { IotexMainnetConfig } from '../../config/IotexMainnetConfig';
 import { IotexTestnetConfig } from '../../config/IotexTestnetConfig';
+import { CompleteModal } from './component/CompleteModal';
 
 export const SwapCC = observer(() => {
   const { god, token, lang } = useStore();
@@ -43,6 +44,11 @@ export const SwapCC = observer(() => {
     confirmIsLoading: new BooleanState(),
     confirmLoadingText: lang.t('button.confirming'),
     isCCToken: false,
+    completeModalOpen: new BooleanState(),
+    actionHash: new StringState({ value: '' }),
+    toggleCompleteModal() {
+      store.completeModalOpen.setValue(!store.completeModalOpen.value);
+    },
     setCurSourceToken(n, token) {
       this.curTokenIndex.setValue(n);
       this.amount = new BigNumberInputState({ value: new BigNumber(0) });
@@ -59,11 +65,10 @@ export const SwapCC = observer(() => {
       }
     },
     get shouldApprove() {
-      if (this.isCCToken) return false;
-
       if (this.isCCToken && store.isIotexNetwork && store.curToken.isEth()) {
         return this.amount?.value.comparedTo(this.curCCToken.allowanceForSwap.value) > 0;
       }
+      if (this.isCCToken) return false;
       if (!this.curToken || this.curToken.isEth()) return false;
       return this.amount?.value.comparedTo(this.curToken.allowanceForSwap.value) > 0;
     },
@@ -95,8 +100,8 @@ export const SwapCC = observer(() => {
       try {
         store.approveLoading.setValue(true);
         let approvedRes;
-        if (store.isIotexNetwork && store.curToken.name == 'IOTX') {
-          approvedRes = await store.curToken?.approve({ params: [god.currentChain.ccSwapRouter, MaxUint256] });
+        if (this.isCCToken && store.isIotexNetwork && store.curToken.isEth()) {
+          approvedRes = await store.curCCToken?.approve({ params: [god.currentChain.ccSwapRouter, MaxUint256] });
         } else {
           approvedRes = await store.curToken?.approve({ params: [store.curCCToken.address, MaxUint256] });
         }
@@ -107,7 +112,7 @@ export const SwapCC = observer(() => {
         if (receipt.status == 1) {
           if (store.isCCToken) {
             // @ts-ignore
-            god.currentNetwork.currentChain.ccToken?.allowanceForSwap.setValue(new BigNumber(MaxUint256));
+            store.curCCToken?.allowanceForSwap.setValue(new BigNumber(MaxUint256));
           } else {
             // @ts-ignore
             store.curToken?.allowanceForSwap.setValue(new BigNumber(MaxUint256));
@@ -141,15 +146,11 @@ export const SwapCC = observer(() => {
           }
         }
         if (res) {
-          token.actionHash.setValue(res.hash);
+          store.actionHash.setValue(res.hash);
         }
         const receipt = await res.wait();
         if (receipt.status == 1) {
-          toast.success(`Your action hash: ${res.hash} sent successfully`, {
-            style: {
-              minWidth: '500px'
-            }
-          });
+          store.completeModalOpen.setValue(true);
         }
         store.confirmIsLoading.setValue(false);
         god.updateTicker.setValue(god.updateTicker.value + 1);
@@ -210,9 +211,6 @@ export const SwapCC = observer(() => {
         bg={home}
         position='relative'
       >
-        {/*<Box position='absolute' left={-4} top={-4}>*/}
-        {/*  <Image borderRadius='full' boxSize={12} src={'/images/tokens/ctoken_logo.jpeg'} />*/}
-        {/*</Box>*/}
         <HStack>
           <Text fontWeight='500' fontSize='md'>{lang.t('swap.ctoken.title')}</Text>
           <Tag size='sm' key='sm' variant='solid' colorScheme='teal'>
@@ -357,6 +355,14 @@ export const SwapCC = observer(() => {
           <Box my={8} fontSize='sm'>{lang.t('swap.ctoken.not_support')}</Box>
         }
       </Container>
+      {store.hasCCToken &&
+      <CompleteModal
+        isOpen={store.completeModalOpen}
+        onClose={() => store.toggleCompleteModal()}
+        actionHash={store.actionHash}
+        token={store.isCCToken ? (store.curToken.isEth() ? null : store.curToken) : store.curCCToken}
+      />
+      }
     </Box>
   );
 });

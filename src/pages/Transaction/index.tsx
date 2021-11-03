@@ -5,6 +5,7 @@ import { useStore } from '@/store/index';
 import { TransactionTable } from './Table/index';
 import { useHistory } from 'react-router-dom';
 import { helper } from '@/lib/helper';
+import { Searcher } from './Table/Searcher';
 
 const tabSelectedStyle = {
   bg: 'sideBar.itemActive',
@@ -68,6 +69,7 @@ export const Transaction = observer(() => {
           {
             record.actionLists.map( (item,index) => {
               return <TabPanel key={index} p="0" width='100%' minW='5xl'>
+                <Searcher index={index} />
                 <TransactionTable index={index} />
               </TabPanel>;
             })

@@ -17,8 +17,11 @@ export class TokenState {
   router?: string;
   cTokenAddress?: string;
   logoURI: string;
+  quickSwap?: string;
+  quickSwapFrom?: string;
   chainId: number;
   isWrapped?: boolean;
+  isMaintained?: boolean = false;
   decimals: number = 18;
   network: NetworkState;
   balance: BigNumberState;

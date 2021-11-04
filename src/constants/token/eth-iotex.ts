@@ -21,6 +21,14 @@ export const ethTokensForIotex = {
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/2396.png'
     },
     {
+      address: '0x300211Def2a644b036A9bdd3e58159bb2074d388',
+      destAddress: '0x99B2B0eFb56E62E36960c20cD5ca8eC6ABD5557A',
+      name: 'Crosschain IOTX',
+      decimals: 18,
+      symbol: 'CIOTX',
+      logoURI: 'https://g.iotube.org/web-iotube-web3/main/public/images/tokens/ctoken_logo.jpeg'
+    },
+    {
       'address': '0x6fb3e0a217407efff7ca062d46c26e5d60a14d69',
       'destAddress': '0xa00744882684c3e4747faefd68d283ea44099d03',
       'name': 'IoTeX Network',
@@ -110,13 +118,12 @@ export const iotexTokensForEth = {
   standardTokenList: '0x59caeb8dc448df0e070b803062cfd9351ad39390',
   tokens: [
     {
-      'address': '0x0000000000000000000000000000000000000000',
-      'destAddress': '0x6fb3e0a217407efff7ca062d46c26e5d60a14d69',
-      'name': 'IoTeX Network',
-      'decimals': 18,
-      'isMaintained': true,
-      'symbol': 'IOTX',
-      'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/2777.png'
+      address: '0x99B2B0eFb56E62E36960c20cD5ca8eC6ABD5557A',
+      destAddress: '0x300211Def2a644b036A9bdd3e58159bb2074d388',
+      name: 'Crosschain IOTX',
+      decimals: 18,
+      symbol: 'CIOTX',
+      logoURI: 'https://g.iotube.org/web-iotube-web3/main/public/images/tokens/ctoken_logo.jpeg'
     },
     {
       'address': '0x0258866edaf84d6081df17660357ab20a07d0c80',
@@ -206,6 +213,15 @@ export const iotexTokensForEth = {
       'decimals': 18,
       'symbol': 'MCN',
       'logoURI': 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io18lsyxgygtesjggcj2nyqyqzgwxlxsysc9lgmg8.png'
+    },
+    {
+      'address': '0x0000000000000000000000000000000000000000',
+      'destAddress': '0x6fb3e0a217407efff7ca062d46c26e5d60a14d69',
+      'name': 'IoTeX Network',
+      'decimals': 18,
+      'isMaintained': true,
+      'symbol': 'IOTX',
+      'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/2777.png'
     }
   ]
 };

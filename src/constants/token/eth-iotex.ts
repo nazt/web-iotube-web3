@@ -130,6 +130,7 @@ export const iotexTokensForEth = {
       'address': '0xa00744882684c3e4747faefd68d283ea44099d03',
       'destAddress': '0x6fb3e0a217407efff7ca062d46c26e5d60a14d69',
       'name': 'Wrapped IOTX',
+      'isMaintained': true,
       'decimals': 18,
       'symbol': 'WIOTX',
       'logoURI': 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io15qr5fzpxsnp7garl4m7k355rafzqn8grrm0grz.png'

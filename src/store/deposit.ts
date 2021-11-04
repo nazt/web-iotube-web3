@@ -46,6 +46,10 @@ export class DepositStore {
       return this.rootStore.lang.t('input.insufficient.depositFee',{fee:this.rootStore.token.currentCrossChain?.cashier.depositFee.format});
     }
 
+    if(this.curToken.isEth() && (this.rootStore.token.currentCrossChain?.cashier.depositFee.value.plus(this.amount.value)).comparedTo(this.rootStore.god.currentNetwork.chain.current.Coin.balance.value) > 0) {
+      return this.rootStore.lang.t('input.balance.insufficient',{symbol: this.curToken.symbol});
+    }
+
     if(isNaN(Number(this.amount.value)) || this.amount.format == null) {
       return this.rootStore.lang.t('input.amount.enter_value');
     }

@@ -36,6 +36,7 @@ import { isAddress as isEthAddress } from '@ethersproject/address';
 import { HistoryActionModal } from './components/HistoryActionModal';
 import { IotexMainnetConfig } from '../../config/IotexMainnetConfig';
 import { IotexTestnetConfig } from '../../config/IotexTestnetConfig';
+import { ETHMainnetConfig } from '../../config/ETHMainnetConfig';
 
 export const Deposit = observer(() => {
   const { god, token, lang, deposit } = useStore();
@@ -165,7 +166,7 @@ export const Deposit = observer(() => {
           boxShadow={homeShadow}
           borderRadius={'10px'}>
           <Text
-            fontSize='sm'>{`Swapping IOTX token from IoTeX to Ethereum is temporarily paused due to lack of IOTX-ERC20 (IOTX-E) liquidity.`}</Text>
+            fontSize='sm'>{token.currentCrossChain?.chain.chainId == ETHMainnetConfig.chainId?`Swapping IOTX from IoTeX to Ethereum is temporarily paused due to lack of IOTX-E (ERC20) liquidity.`: lang.t('tube_v4')}</Text>
           <CloseButton position='absolute' right={1} top={1} onClick={() => store.isShowAlert.setValue(false)} />
         </Alert>
       </Center>

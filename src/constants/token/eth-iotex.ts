@@ -134,15 +134,6 @@ export const iotexTokensForEth = {
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png'
     },
     {
-      'address': '0xa00744882684c3e4747faefd68d283ea44099d03',
-      'destAddress': '0x6fb3e0a217407efff7ca062d46c26e5d60a14d69',
-      'name': 'Wrapped IOTX',
-      'isMaintained': true,
-      'decimals': 18,
-      'symbol': 'WIOTX',
-      'logoURI': 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io15qr5fzpxsnp7garl4m7k355rafzqn8grrm0grz.png'
-    },
-    {
       'address': '0xc7b93720f73b037394ce00f954f849ed484a3dea',
       'destAddress': '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599',
       'name': 'Wrapped BTC',
@@ -213,6 +204,15 @@ export const iotexTokensForEth = {
       'decimals': 18,
       'symbol': 'MCN',
       'logoURI': 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io18lsyxgygtesjggcj2nyqyqzgwxlxsysc9lgmg8.png'
+    },
+    {
+      'address': '0xa00744882684c3e4747faefd68d283ea44099d03',
+      'destAddress': '0x6fb3e0a217407efff7ca062d46c26e5d60a14d69',
+      'name': 'Wrapped IOTX',
+      'isMaintained': true,
+      'decimals': 18,
+      'symbol': 'WIOTX',
+      'logoURI': 'https://iotexproject.iotex.io/iotex-token-metadata/master/images/io15qr5fzpxsnp7garl4m7k355rafzqn8grrm0grz.png'
     },
     {
       'address': '0x0000000000000000000000000000000000000000',

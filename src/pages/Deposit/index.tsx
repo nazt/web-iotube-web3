@@ -165,7 +165,7 @@ export const Deposit = observer(() => {
           borderRadius={'10px'}>
           <Text
             fontSize='sm'
-            color={useColorModeValue('darkLightGreen', 'lightGreen')}>{lang.t('tube_v4')}</Text>
+            color={useColorModeValue('darkLightGreen', 'lightGreen')}>{`Swapping IOTX token from IoTeX to Ethereum is temporarily paused due to traffic congestion.`}</Text>
           <CloseButton position='absolute' right={1} top={1} onClick={() => store.isShowAlert.setValue(false)} />
         </Alert>
       </Center>

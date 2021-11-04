@@ -114,6 +114,7 @@ export const iotexTokensForEth = {
       'destAddress': '0x6fb3e0a217407efff7ca062d46c26e5d60a14d69',
       'name': 'IoTeX Network',
       'decimals': 18,
+      'isMaintained': true,
       'symbol': 'IOTX',
       'logoURI': 'https://s2.coinmarketcap.com/static/img/coins/64x64/2777.png'
     },

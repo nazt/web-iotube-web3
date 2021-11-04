@@ -166,7 +166,7 @@ export const Deposit = observer(() => {
           boxShadow={homeShadow}
           borderRadius={'10px'}>
           <Text
-            fontSize='sm'>{token.currentCrossChain?.chain.chainId == ETHMainnetConfig.chainId?`Swapping IOTX from IoTeX to Ethereum is temporarily paused due to lack of IOTX-E (ERC20) liquidity.`: lang.t('tube_v4')}</Text>
+            fontSize='sm'>{token.currentChain?.chainId == IotexMainnetConfig.chainId && token.currentCrossChain?.chain.chainId == ETHMainnetConfig.chainId?`Swapping IOTX from IoTeX to Ethereum is temporarily paused due to lack of IOTX-E (ERC20) liquidity.`: lang.t('tube_v4')}</Text>
           <CloseButton position='absolute' right={1} top={1} onClick={() => store.isShowAlert.setValue(false)} />
         </Alert>
       </Center>

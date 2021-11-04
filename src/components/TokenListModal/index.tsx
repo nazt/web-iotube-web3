@@ -58,7 +58,7 @@ export const TokenListModal = observer((props: PropsType) => {
               <Box display="flex" alignItems="center">
                 <Image borderRadius="full" boxSize="24px" src={i.logoURI} mr="4" fallbackSrc="https://via.placeholder.com/150" />
                 {i.symbol}
-                {i.isMaintained && <Tag isExternal ml={4} colorScheme='orange'><TagLeftIcon boxSize="12px" as={InfoIcon} /> Under Maintenance</Tag>}
+                {i.isMaintained && <Tag isExternal ml={4} colorScheme='orange'><TagLeftIcon boxSize="12px" as={InfoIcon} /> Paused</Tag>}
                 {i.quickSwap && <Link href={i.quickSwap} isExternal ml={4} fontSize='sm'>{lang.t("token.quick_swap", {tokenA: i.quickSwapFrom, tokenB: i.symbol})} <Icon as={ExternalLinkIcon} mb={1}/></Link>}
               </Box>
 

@@ -104,6 +104,8 @@ export const Deposit = observer(() => {
           token.actionHash.setValue(res.hash);
           deposit.isOpenCompleteModal.setValue(true);
           deposit.saveAction(res);
+          deposit.amount = new BigNumberInputState({ value: new BigNumber(0) });
+          deposit.receiverAddress.setValue('');
         }
         const receipt = await res.wait();
         deposit.updateAction(receipt);

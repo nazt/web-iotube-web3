@@ -4,7 +4,7 @@ export const ethCCSwapPairs = {
     name: 'MCN.VENTURES',
     decimals: 18,
     symbol: 'MCN',
-    logoURI: 'https://mcn.ventures/asset/mcn-logo-white-bg-200.png'
+    logoURI: 'https://g.iotube.org/web-iotube-web3/main/public/images/tokens/token_mcn.png'
   }],
   ccTokens: [{
     name: 'Crosschain MCN.VENTURES',

@@ -109,6 +109,7 @@ export const Deposit = observer(() => {
         deposit.updateAction(receipt);
         console.log('receipt--->', receipt);
         god.updateTicker.setValue(god.updateTicker.value + 1);
+        deposit.amount = new BigNumberInputState({ value: new BigNumber(0) });
       } catch (e) {
         store.confirmIsLoading.setValue(false);
         console.log(e);

@@ -20,10 +20,11 @@ export class ActionListState {
   actions: ActionState[] = [];
   count: number = 0;
   networkConfig: ChainState;
-  allTokens = {};
+  allTokens = {};re
   sender: StringState = new StringState();
   recipient: StringState = new StringState();
   token: StringState = new StringState();
+  status: NumberState = new NumberState({value: 100});
 
   constructor(args: Partial<ActionListState>) {
     Object.assign(this, args);
@@ -64,7 +65,8 @@ export class ActionListState {
         recipient: this.encodeHexAddresstoBase64(this.recipient.value),
         token: this.encodeHexAddresstoBase64(this.token.value),
         first: this.first.value,
-        skip: this.skip.value
+        skip: this.skip.value,
+        status: this.status.value != 100? this.status.value: null
       },
 
       {

@@ -31,8 +31,8 @@ export const Row = observer((props: RowProps) => {
   const action = props.action;
 
   const renderStatus = () => {
-    let color = statusColor;
-    let status = lang.t('transaction.status.tips.unknown');
+    let color = 'red';
+    let status = lang.t('transaction.status.tips.failed');
     switch (action.status) {
       case 'UNKNOWN':
         color = 'red';

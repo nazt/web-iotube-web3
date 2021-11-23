@@ -8,7 +8,7 @@ import {
   Th
 } from '@chakra-ui/react';
 import { useStore } from '@/store/index';
-import { SearchInputPopover, SearchSelectPopover } from './Searcher';
+import { SearchInputPopover, SearchSelectPopover, SearchStatusPopover } from './Searcher';
 
 export const Header = observer(() => {
 
@@ -20,7 +20,7 @@ export const Header = observer(() => {
         <Th flex='1.4'>{lang.t('hash')}</Th>
         <Th flex='1.4'>{lang.t('from')} <SearchInputPopover name='sender'/></Th>
         <Th flex='1.4'>{lang.t('to')} <SearchInputPopover name='recipient'/></Th>
-        <Th flex='1.35'>{lang.t('status')}</Th>
+        <Th flex='1.35'>{lang.t('status')}<SearchStatusPopover name='status'/></Th>
         <Th flex='1.1'>{lang.t('asset')} <SearchSelectPopover name='token'/></Th>
         <Th flex='1.1'>{lang.t('amount')}</Th>
         <Th flex='1.1'>{lang.t('age')}</Th>

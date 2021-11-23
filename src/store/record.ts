@@ -13,11 +13,20 @@ import { iotexPolygonTokens, polygonToIotexTokens } from '@/constants/token/mati
 
 const REFRESH_INTERVAL = 3 * 1000 * 60;
 
+class SearchStatusState {
+  id: number;
+  name: string;
+  color: string;
+}
+
 export class RecordStore {
   rootStore: RootStore;
   actionLists: ActionListState[];
-  activeTab: NumberState = new NumberState({value :0});
-  tabHashMap =  {'#iotex': 0, '#eth': 1, '#bsc': 2, '#polygon': 3}
+  activeTab: NumberState = new NumberState({ value: 0 });
+  tabHashMap = { '#iotex': 0, '#eth': 1, '#bsc': 2, '#polygon': 3 };
+  statusMap: {
+    [key: number]: SearchStatusState;
+  };
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
@@ -26,7 +35,8 @@ export class RecordStore {
     });
 
     this.actionLists = [
-      new ActionListState({ name: 'IoTeX',
+      new ActionListState({
+        name: 'IoTeX',
         key: 'iotex',
         chainId: 4689,
         requestApi: publicConfig.IOTEX_ACTIONS_ENDPOINT,
@@ -41,7 +51,8 @@ export class RecordStore {
         networkConfig: ETHMainnetConfig,
         tokensOnNetwork: ethTokensForIotex.tokens
       }),
-      new ActionListState({ name: 'BSC',
+      new ActionListState({
+        name: 'BSC',
         key: 'bsc',
         chainId: 56,
         requestApi: publicConfig.BSC_ACTIONS_ENDPOINT,
@@ -57,8 +68,14 @@ export class RecordStore {
         tokensOnNetwork: polygonToIotexTokens.tokens
       })
     ];
+    this.statusMap = {
+      1: { id: 1, name: this.rootStore.lang.t('transaction.status.tips.created'), color: 'lightGreen' },
+      2: { id: 2, name: this.rootStore.lang.t('transaction.status.tips.submitted'), color: 'blue' },
+      3: { id: 3, name: this.rootStore.lang.t('transaction.status.tips.settled'), color: 'yellow' },
+      4: { id: 4, name: this.rootStore.lang.t('transaction.status.tips.failed'), color: 'red' }
+    };
 
-    this.autoRefresh()
+    this.autoRefresh();
   }
 
   updateList(index, first, skip) {
@@ -74,8 +91,10 @@ export class RecordStore {
     this.actionLists[this.activeTab.value].initActions();
   }
 
+
   clearSearchParam(name) {
-    this.actionLists[this.activeTab.value][name].setValue('');
+    const defaultValue = name == 'status'? 100: '';
+    this.actionLists[this.activeTab.value][name].setValue(defaultValue);
     this.actionLists[this.activeTab.value].first.setValue(10);
     this.actionLists[this.activeTab.value].skip.setValue(0);
     this.actionLists[this.activeTab.value].initActions();
@@ -85,9 +104,9 @@ export class RecordStore {
     setInterval(() => {
       const activeActionListState = this.actionLists[this.activeTab.value];
       if (activeActionListState.currentPage === 1) {
-        activeActionListState.initActions()
+        activeActionListState.initActions();
       }
-    }, REFRESH_INTERVAL)
+    }, REFRESH_INTERVAL);
   }
 
 }
